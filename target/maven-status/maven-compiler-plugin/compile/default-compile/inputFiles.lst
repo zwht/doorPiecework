@@ -1,7 +1,7 @@
 /Users/zhaowei/projects/zw/springTest/src/main/java/com/zw/cf/model/User.java
 /Users/zhaowei/projects/zw/springTest/src/main/java/com/zw/cf/dao/UserDaoInterface.java
-/Users/zhaowei/projects/zw/springTest/src/main/java/com/zw/cf/action/UserAction.java
 /Users/zhaowei/projects/zw/springTest/src/main/java/com/zw/cf/dao/UserDao.java
 /Users/zhaowei/projects/zw/springTest/src/main/java/com/zw/cf/service/UserServiceInterface.java
 /Users/zhaowei/projects/zw/springTest/src/main/java/com/zw/cf/service/UserService.java
 /Users/zhaowei/projects/zw/springTest/src/main/java/com/zw/cf/controller/HelloWorld.java
+/Users/zhaowei/projects/zw/springTest/src/main/java/com/zw/cf/controller/UserCtrl.java

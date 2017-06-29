@@ -1,4 +1,4 @@
-package com.zw.cf.action;
+package com.zw.cf.controller;
 
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserServiceInterface;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Controller("userAction")
 @Scope("prototype")
-public class UserAction {
+public class UserCtrl {
     private User user;
     private UserServiceInterface UserService;
     private String id;

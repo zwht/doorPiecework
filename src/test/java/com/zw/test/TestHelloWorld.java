@@ -1,6 +1,6 @@
 package com.zw.test;
 
-import com.zw.cf.action.UserAction;
+import com.zw.cf.controller.UserCtrl;
 import com.zw.cf.model.User;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
@@ -31,7 +31,7 @@ public class TestHelloWorld {
     }
     @Test
     public void testUser(){
-        UserAction ua=factory.getBean("userAction",UserAction.class);
+        UserCtrl ua=factory.getBean("userAction",UserCtrl.class);
         User u=new User("id999","name3333");
         ua.setUser(u);
         ua.add();

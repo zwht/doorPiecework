@@ -1,6 +1,5 @@
 package com.zw.cf.dao;
 
-import com.sun.javafx.tools.ant.DeployFXTask;
 import com.zw.cf.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -20,9 +19,9 @@ public class UserDao implements UserDaoInterface {
 
     public void add(User user){
 
-        System.out.println("add："+user);
+        //System.out.println("add："+user);
         Date date=new Date();
-        String sql="insert into users() values('"+date.getTime()+"','9999','oooo')";
+        String sql="insert into users() values('ee"+date.getTime()+"','9999','oooo')";
         if(user!=null){
             jdbcTemplate.execute(sql);
             System.out.println("fuck");
