@@ -2,6 +2,7 @@ package com.zw.cf.controller;
 
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserServiceInterface;
+import com.zw.plug.Response;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,10 +46,9 @@ public class UserCtrl {
         //return "app";
     }
     @RequestMapping(value = "/get", method = RequestMethod.GET,consumes = "application/json")
-    public @ResponseBody Object getId(HttpServletRequest request, HttpServletResponse response, User user){
+    public @ResponseBody Response getId(HttpServletRequest request, HttpServletResponse response, User user){
 
-
-        return new User("000","name3333","pppppp");
+        return new Response().success(new User("000","name3333","pppppp"));
     }
     public void delete(){
         UserService.delete(id);

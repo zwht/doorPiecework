@@ -10,7 +10,7 @@
     <!--打开spring的annotation支持-->
     <context:annotation-config></context:annotation-config>
     <!--设置Spring去那些包中找annotation-->
-    <context:component-scan base-package="com.zw.cf"></context:component-scan>
+    <context:component-scan base-package="com.zw"></context:component-scan>
     <!-- 将多个配置文件读取到容器中，交给Spring管理 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
