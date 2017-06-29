@@ -5,8 +5,14 @@ import com.zw.cf.service.UserServiceInterface;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 
@@ -33,9 +39,16 @@ public class UserCtrl {
 
     @RequestMapping("/add")
     public void add(){
-        user=new User("id999","name3333","pppppp");
+        Date date=new Date();
+        user=new User(date.toString(),"name3333","pppppp");
         UserService.add(user);
         //return "app";
+    }
+    @RequestMapping(value = "/get", method = RequestMethod.GET,consumes = "application/json")
+    public @ResponseBody Object getId(HttpServletRequest request, HttpServletResponse response, User user){
+
+
+        return new User("000","name3333","pppppp");
     }
     public void delete(){
         UserService.delete(id);

@@ -49,10 +49,9 @@
     <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
+  <!--欢迎界面-->
   <welcome-file-list>
     <welcome-file>/app.jsp</welcome-file>
   </welcome-file-list>
-
 
 </web-app>

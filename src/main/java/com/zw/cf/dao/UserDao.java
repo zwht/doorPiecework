@@ -19,8 +19,6 @@ public class UserDao implements UserDaoInterface {
 
     public void add(User user){
 
-        //System.out.println("add："+user);
-        Date date=new Date();
         String sql="insert into users(id,userName,passWord) values(?,?,?)";
         if(user!=null){
             jdbcTemplate.update(sql,user.getId(),user.getUserName(),user.getPassWord());
