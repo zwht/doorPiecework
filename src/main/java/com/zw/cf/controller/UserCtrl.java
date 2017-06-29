@@ -4,6 +4,7 @@ import com.zw.cf.model.User;
 import com.zw.cf.service.UserServiceInterface;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Controller("userAction")
 @Scope("prototype")
+@RequestMapping("/user")
 public class UserCtrl {
     private User user;
     private UserServiceInterface UserService;
@@ -29,8 +31,11 @@ public class UserCtrl {
         this.user=user;
     }
 
+    @RequestMapping("/add")
     public void add(){
+        user=new User("id999","name3333","pppppp");
         UserService.add(user);
+        //return "app";
     }
     public void delete(){
         UserService.delete(id);

@@ -8,8 +8,8 @@
                         http://www.springframework.org/schema/context  
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd  
                      ">
-	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.zw.cf.controller" />
+	<!--设置Spring去那些包中找annotation-->
+	<context:component-scan base-package="com.zw.cf.controller"></context:component-scan>
 
 
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置-->

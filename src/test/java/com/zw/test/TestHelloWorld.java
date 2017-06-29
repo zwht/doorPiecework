@@ -32,7 +32,7 @@ public class TestHelloWorld {
     @Test
     public void testUser(){
         UserCtrl ua=factory.getBean("userAction",UserCtrl.class);
-        User u=new User("id999","name3333");
+        User u=new User("id999","name3333","sss");
         ua.setUser(u);
         ua.add();
     }

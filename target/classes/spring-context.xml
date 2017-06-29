@@ -11,6 +11,32 @@
     <context:annotation-config></context:annotation-config>
     <!--设置Spring去那些包中找annotation-->
     <context:component-scan base-package="com.zw.cf"></context:component-scan>
+    <!-- 将多个配置文件读取到容器中，交给Spring管理 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!-- 这里支持多种寻址方式：classpath和file -->
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
 
+    <!-- 定义JdbcTemlate -->
+    <bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
+
+        <!-- 注入连接信息 dataSource//数据源，连接池  常用的： dbcp,c3p0,proxool -->
+
+        <property name="dataSource" ref="dbcp"></property>
+    </bean>
+
+    <!-- 定义dbcp连接池 -->
+    <bean id="dbcp" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="username" value="${username}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="driverClassName" value="${driverClassName}"></property>
+        <property name="url" value="${jdbcUrl}"></property>
+        <!-- 写3个///就可以代替location:3306就是说连接本地数据库 -->
+    </bean>
 
 </beans>

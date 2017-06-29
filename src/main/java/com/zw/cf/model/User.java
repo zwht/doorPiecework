@@ -6,6 +6,7 @@ package com.zw.cf.model;
 public class User {
     private String id;
     private String userName;
+    private String passWord;
 
     public String getId(){
         return this.id;
@@ -23,13 +24,22 @@ public class User {
         this.userName=userName;
     }
 
+    public String getPassWord(){
+        return  this.passWord;
+    }
+
+    public void setPassWord(String passWord){
+        this.passWord=passWord;
+    }
+
     public User(){
 
     }
-    public User(String id,String userName){
+    public User(String id,String userName,String passWord){
         super();
         this.id=id;
         this.userName=userName;
+        this.passWord=passWord;
     }
     @Override
     public String toString(){
