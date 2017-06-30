@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Controller("userAction")
 @Scope("prototype")
-@RequestMapping("/user")
+@RequestMapping("/rest/user")
 public class UserCtrl {
     private User user;
     private UserServiceInterface UserService;
@@ -39,11 +39,11 @@ public class UserCtrl {
     }
 
     @RequestMapping("/add")
-    public void add(){
-        Date date=new Date();
-        user=new User(date.toString(),"name3333","pppppp");
-        UserService.add(user);
-        //return "app";
+    public String add(){
+        //Date date=new Date();
+        //user=new User(date.toString(),"name3333","pppppp");
+        //UserService.add(user);
+        return "app";
     }
     @RequestMapping(value = "/get", method = RequestMethod.GET,consumes = "application/json")
     public @ResponseBody Response getId(HttpServletRequest request, HttpServletResponse response, User user){

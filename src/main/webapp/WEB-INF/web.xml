@@ -51,15 +51,12 @@
   </servlet-mapping>
   <!--欢迎界面-->
   <welcome-file-list>
-    <welcome-file>/app.jsp</welcome-file>
+    <welcome-file>/index.html</welcome-file>
   </welcome-file-list>
 
   <!--　该servlet为tomcat,jetty等容器提供,将静态资源映射从/改为/static/目录，
   如原来访问　http://localhost/foo.css　,现在http://localhost/static/foo.css　-->
   <!-- 不拦截静态文件 -->
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/static/*</url-pattern>
-  </servlet-mapping>
+
 
 </web-app>
