@@ -15,6 +15,7 @@
     <mvc:annotation-driven />
     <!-- 静态资源文件，不会被Spring MVC拦截 -->
     <mvc:resources location="/" mapping="**.html"/>
+    <mvc:resources location="/static/" mapping="/static/**"/>
 
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
