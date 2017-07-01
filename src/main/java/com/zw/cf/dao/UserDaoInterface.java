@@ -8,5 +8,6 @@ import com.zw.cf.model.User;
 public interface UserDaoInterface {
     public void add(User user);
     public void delete(String id);
-    public User load(String id);
+    public User getUserByName(String userName);
+
 }

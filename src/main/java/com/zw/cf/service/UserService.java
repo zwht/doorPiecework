@@ -27,7 +27,9 @@ public class UserService implements UserServiceInterface {
     public void delete(String id){
         userDao.delete(id);
     }
-    public User load(String id){
-        return  userDao.load(id);
+    public User getUserByName(String userName){
+
+
+        return  userDao.getUserByName(userName);
     }
 }
