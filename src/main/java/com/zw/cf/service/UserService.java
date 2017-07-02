@@ -21,8 +21,8 @@ public class UserService implements UserServiceInterface {
         this.userDao=userDao;
     }
 
-    public void add(User user){
-        userDao.add(user);
+    public String add(User user){
+        return userDao.add(user);
     }
     public void delete(String id){
         userDao.delete(id);

@@ -24,14 +24,14 @@ public class UserDao implements UserDaoInterface {
     private JdbcTemplate jdbcTemplate;
 
 
-    public void add(User user){
+    public String add(User user){
 
         String sql="insert into users(id,userName,passWord) values(?,?,?)";
         if(user!=null){
             jdbcTemplate.update(sql,user.getId(),user.getUserName(),user.getPassWord());
-            System.out.println("fuck");
+            return "add";
         }else{
-            throw new NullPointerException();
+            return "error";
         }
     }
 

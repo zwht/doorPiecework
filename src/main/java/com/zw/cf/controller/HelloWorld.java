@@ -14,7 +14,7 @@ public class HelloWorld{
 		UserCtrl userCtrl=new UserCtrl();
 		User u=new User("111111","name3333","s");
 		userCtrl.setUser(u);
-		userCtrl.add();
+		//userCtrl.add();
 
 		return "app1";
 	}

@@ -34,6 +34,6 @@ public class TestHelloWorld {
         UserCtrl ua=factory.getBean("userAction",UserCtrl.class);
         User u=new User("id999","name3333","sss");
         ua.setUser(u);
-        ua.add();
+        //ua.add();
     }
 }

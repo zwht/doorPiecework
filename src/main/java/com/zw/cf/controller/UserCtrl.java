@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 
@@ -36,13 +37,29 @@ public class UserCtrl {
         this.user=user;
     }
 
-    @RequestMapping("/add")
-    public String add(){
-        //Date date=new Date();
-        //user=new User(date.toString(),"name3333","pppppp");
-        //UserService.add(user);
-        return "app";
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public @ResponseBody Response add(HttpServletRequest request){
+        Date date=new Date();
+        String username=request.getParameter("userName");
+        String password=request.getParameter("passWord");
+        User user=UserService.getUserByName(username);
+        System.out.println("==============="+user);
+        System.out.println(user==null);
+        if(user==null){
+            user=new User(date.toString(),username,password);
+            UserService.add(user);
+            return new Response().success("添加成功");
+        }else {
+
+            return new Response().failure("已经有此用户名！");
+        }
     }
+
+
+
+
+
+
     @RequestMapping(value = "/get", method = RequestMethod.GET,consumes = "application/json")
     public @ResponseBody Response getId(HttpServletRequest request, HttpServletResponse response, User user){
 
