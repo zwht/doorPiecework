@@ -10,9 +10,9 @@ $(function () {
         var passvalue=password.val()
         debugger
         $.ajax({
-            type: "POST",
-            url: "/rest/user/add",
-            data: {username:uservalue,password:passvalue},
+            type:"POST",
+            url:"/rest/user/add",
+            data:{userName:uservalue,passWord:passvalue},
             success: function(msg){
                 debugger
             }
