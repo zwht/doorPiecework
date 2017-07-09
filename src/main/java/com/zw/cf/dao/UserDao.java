@@ -64,4 +64,21 @@ public class UserDao implements UserDaoInterface {
 
     }
 
+    public List<User> getUserList(){
+        String sql = "select * from users";
+
+        List<User> userList1 = jdbcTemplate.query(sql,
+                new RowMapper<User>() {
+                    public User mapRow(ResultSet rs, int i) throws SQLException {
+                        User user1 = new User();
+                        user1.setId(rs.getString("id"));
+                        user1.setUserName(rs.getString("username"));
+                        user1.setPassWord(rs.getString("password"));
+                        return user1;
+                    }
+                });
+
+        return userList1;
+    }
+
 }

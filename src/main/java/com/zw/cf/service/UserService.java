@@ -1,10 +1,12 @@
 package com.zw.cf.service;
 
+import com.zw.cf.dao.UserDao;
 import com.zw.cf.dao.UserDaoInterface;
 import com.zw.cf.model.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by zhaowei on 2017/6/24.
@@ -28,8 +30,9 @@ public class UserService implements UserServiceInterface {
         userDao.delete(id);
     }
     public User getUserByName(String userName){
-
-
         return  userDao.getUserByName(userName);
+    }
+    public List<User> getUserList(){
+        return userDao.getUserList();
     }
 }

@@ -60,10 +60,10 @@ public class UserCtrl {
 
 
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET,consumes = "application/json")
-    public @ResponseBody Response getId(HttpServletRequest request, HttpServletResponse response, User user){
+    @RequestMapping(value = "/getUserList", method = RequestMethod.GET,consumes = "application/json")
+    public @ResponseBody List<User> getUserList(HttpServletRequest request, HttpServletResponse response, User user){
 
-        return new Response().success(new User("000","name3333","pppppp"));
+        return UserService.getUserList();
     }
 
     /**登录接口**/
@@ -81,7 +81,7 @@ public class UserCtrl {
         if(user.getPassWord().equals(password)){
             return new Response().success(user);
         }else {
-            return new Response().failure("用户名密码错误！");
+            return new Response().failure("用户名密码错误！很好");
         }
     }
 
