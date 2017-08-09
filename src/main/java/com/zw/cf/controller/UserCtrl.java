@@ -81,7 +81,7 @@ public class UserCtrl {
         if(user.getPassWord().equals(password)){
             return new Response().success(user);
         }else {
-            return new Response().failure("用户名密码错误！很好");
+            return new Response().failure("用户名密码错误！");
         }
     }
 
