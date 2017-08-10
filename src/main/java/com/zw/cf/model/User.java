@@ -1,6 +1,6 @@
 package com.zw.cf.model;
 
-public class User1 {
+public class User {
     private String id;
 
     private String username;

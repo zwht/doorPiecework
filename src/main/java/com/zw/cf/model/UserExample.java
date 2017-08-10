@@ -3,14 +3,14 @@ package com.zw.cf.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User1Example {
+public class UserExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public User1Example() {
+    public UserExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

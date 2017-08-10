@@ -1,8 +1,8 @@
 package com.zw.cf.controller;
 
-import com.zw.cf.dao.User1Mapper;
-import com.zw.cf.model.User1Example;
-import com.zw.cf.model.User1;
+import com.zw.cf.dao.UserMapper;
+import com.zw.cf.model.UserExample;
+import com.zw.cf.model.User;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
@@ -26,22 +25,22 @@ import java.util.List;
 @RequestMapping("/rest/user")
 public class UserCtrl {
     @Autowired
-    User1Mapper user1Mapper;
+    UserMapper userMapper;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public @ResponseBody Response add(HttpServletRequest request){
         Date date=new Date();
         String username=request.getParameter("userName");
         String password=request.getParameter("passWord");
-        User1 user=user1Mapper.selectByUserName(username);
+        User user=userMapper.selectByUserName(username);
         System.out.println("==============="+user);
         System.out.println(user==null);
         if(user==null){
-            user=new User1();
+            user=new User();
             user.setId(date.toString());
             user.setUsername(username);
             user.setPassword(password);
-            int id=user1Mapper.insert(user);
+            int id=userMapper.insert(user);
             return new Response().success("添加成功"+id);
         }else {
 
@@ -51,10 +50,10 @@ public class UserCtrl {
 
 
     @RequestMapping(value = "/getUserList", method = RequestMethod.GET,consumes = "application/json")
-    public @ResponseBody List<User1> getUserList(HttpServletRequest request, HttpServletResponse response){
+    public @ResponseBody List<User> getUserList(HttpServletRequest request, HttpServletResponse response){
 
-        User1Example user1Example=null;
-        return user1Mapper.selectByExample(user1Example);
+        UserExample user1Example=null;
+        return userMapper.selectByExample(user1Example);
     }
 
     /**登录接口**/
@@ -64,7 +63,7 @@ public class UserCtrl {
         String username=request.getParameter("userName");
         String password=request.getParameter("passWord");
 
-        User1 user=user1Mapper.selectByUserName(username);
+        User user=userMapper.selectByUserName(username);
 
 
         if(user.getPassword().equals(password)){
@@ -79,7 +78,7 @@ public class UserCtrl {
     @RequestMapping(value = "/getUser", method = RequestMethod.GET,consumes = "application/json")
     public  @ResponseBody Response selectByPrimaryKey(HttpServletRequest request, HttpServletResponse response){
         String userId=request.getParameter("userId");
-        User1 user1=user1Mapper.selectByPrimaryKey(userId);
+        User user1=userMapper.selectByPrimaryKey(userId);
         return new Response().success(user1);
     }
 }
