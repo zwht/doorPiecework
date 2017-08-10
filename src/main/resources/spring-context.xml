@@ -22,14 +22,6 @@
         </property>
     </bean>
 
-    <!-- 定义JdbcTemlate -->
-    <bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
-
-        <!-- 注入连接信息 dataSource//数据源，连接池  常用的： dbcp,c3p0,proxool -->
-
-        <property name="dataSource" ref="dbcp"></property>
-    </bean>
-
     <!-- 定义dbcp连接池 -->
     <bean id="dbcp" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="username" value="${username}"></property>
@@ -37,6 +29,35 @@
         <property name="driverClassName" value="${driverClassName}"></property>
         <property name="url" value="${jdbcUrl}"></property>
         <!-- 写3个///就可以代替location:3306就是说连接本地数据库 -->
+    </bean>
+
+    <!-- 定义JdbcTemlate -->
+    <bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
+        <!-- 注入连接信息 dataSource//数据源，连接池  常用的： dbcp,c3p0,proxool -->
+        <property name="dataSource" ref="dbcp"></property>
+    </bean>
+
+
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--dataSource属性指定要用到的连接池-->
+        <property name="dataSource" ref="dbcp" />
+
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.zw.cf.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dbcp" />
     </bean>
 
 </beans>

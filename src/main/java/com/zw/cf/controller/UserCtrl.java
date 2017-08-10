@@ -1,8 +1,11 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.dao.User1Mapper;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserServiceInterface;
+import com.zw.cf.model.User1;
 import com.zw.plug.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +30,7 @@ public class UserCtrl {
     private UserServiceInterface UserService;
     private String id;
     private List<String> names;
+
 
     @Resource
     public void setUserService(UserServiceInterface UserService){
@@ -87,5 +91,14 @@ public class UserCtrl {
 
     public void delete(){
         UserService.delete(id);
+    }
+
+    @Autowired
+    User1Mapper user1Mapper;
+    @RequestMapping(value = "/getUser", method = RequestMethod.GET,consumes = "application/json")
+    public  @ResponseBody Response selectByPrimaryKey(HttpServletRequest request, HttpServletResponse response){
+        String id="111111";
+        User1 user1=user1Mapper.selectByPrimaryKey(id);
+        return new Response().success(user1);
     }
 }
