@@ -67,6 +67,9 @@
   <sql id="Base_Column_List">
     id, userName, passWord
   </sql>
+  <select id="selectByUserName" parameterType="java.lang.String" resultType="com.zw.cf.model.User1">
+    select * from  users where userName like #{value}
+  </select>
   <select id="selectByExample" parameterType="com.zw.cf.model.User1Example" resultMap="BaseResultMap">
     select
     <if test="distinct">
