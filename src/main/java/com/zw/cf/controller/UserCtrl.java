@@ -5,6 +5,7 @@ import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.UserExample;
 import com.zw.cf.model.User;
 import com.zw.plug.Response;
+import com.zw.plug.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -86,12 +87,15 @@ public class UserCtrl {
 
 
     @ResponseBody
-    @RequestMapping(value = "/getUser",consumes = "application/json")
+    @RequestMapping(value = "/getUser")
     @ApiOperation(value="根据用户userId获取用户信息",httpMethod="GET",notes="获取用户")
-    public   Response selectByPrimaryKey(
+    public Result<User> selectByPrimaryKey(
             @ApiParam(required=true,value="用户Id",name="userId") @RequestParam String userId
     ){
         User user1=userMapper.selectByPrimaryKey(userId);
-        return new Response().success(user1);
+
+        Result a = new Result();
+        a.setValue(user1);
+        return a;
     }
 }
