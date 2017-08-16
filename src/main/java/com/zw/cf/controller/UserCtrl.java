@@ -93,9 +93,8 @@ public class UserCtrl {
             @ApiParam(required=true,value="用户Id",name="userId") @RequestParam String userId
     ){
         User user1=userMapper.selectByPrimaryKey(userId);
-
-        Result a = new Result();
-        a.setValue(user1);
-        return a;
+        Result result = new Result();
+        result.setValue(user1);
+        return result;
     }
 }
