@@ -10,10 +10,14 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <!--设置Spring去那些包中找annotation-->
-    <context:component-scan base-package="com.zw.cf.controller"></context:component-scan>
+
     <!-- 启用MVC注解 -->
     <mvc:annotation-driven />
+    <!--打开spring的annotation支持-->
+    <context:annotation-config></context:annotation-config>
+    <!--设置Spring去那些包中找annotation-->
+    <context:component-scan base-package="com.zw"></context:component-scan>
+
     <!-- 静态资源文件，不会被Spring MVC拦截 -->
     <mvc:resources location="/" mapping="**.html"/>
     <mvc:resources location="/static/" mapping="/static/**"/>
