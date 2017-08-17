@@ -1,11 +1,16 @@
 package com.zw.cf.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
+import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by zhaowei on 2017/8/17.
@@ -57,6 +62,19 @@ public class UserServiceImpl implements UserService {
         }
 
 
+    }
+
+    public Response getUserList (Integer pageNum,Integer pageSize){
+        Response response=new Response();
+        PageObj pageObj=new PageObj();
+        try {
+            Page page=PageHelper.startPage(pageNum, pageSize);
+            List list = userMapper.selectByExample(null);
+            long count = page.getTotal();
+            return response.success(pageObj.init(pageNum,pageSize,count,list));
+        }catch (Exception e){
+            return response.failure(400, e.getMessage());
+        }
     }
 
 }

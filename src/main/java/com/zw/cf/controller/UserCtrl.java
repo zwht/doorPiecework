@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
+import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -62,11 +63,13 @@ public class UserCtrl {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getUserList", method = RequestMethod.GET)
-    @ApiOperation(value = "获取所有用户列表", httpMethod = "GET", notes = "获取用户", consumes = "application/json")
-    public Response<List<User>> getUserList() {
-        List<User> list = userMapper.selectByExample(null);
-        return new Response().success(list);
+    @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
+    @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户", consumes = "application/json")
+    public Response<PageObj<List<User>>> getUserList(
+            @ApiParam(required = true, value = "当前页面", name = "pageNum") @RequestParam Integer pageNum,
+            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @RequestParam Integer pageSize
+    ) {
+        return userService.getUserList(pageNum,pageSize);
     }
 
 
