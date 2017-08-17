@@ -3,62 +3,51 @@ package com.zw.plug;
 /**
  * Created by zhaowei on 2017/6/29.
  */
-public class Response {
+public class Response<D> {
     private static final String OK = "ok";
     private static final String ERROR = "error";
 
-    private Meta meta;
-    private Object data;
+    private String message;
+    private Integer code;
+    private D data;
 
     public Response success() {
-        this.meta = new Meta(true, OK);
+        meta(true, OK);
         return this;
     }
 
-    public Response success(Object data) {
-        this.meta = new Meta(true, OK);
+    public Response success(D data) {
+        meta(true, OK);
         this.data = data;
         return this;
     }
 
-    public Response failure() {
-        this.meta = new Meta(false, ERROR);
+    public Response failure(Integer code) {
+        meta(false, ERROR);
+        this.code=code;
         return this;
     }
 
-    public Response failure(String message) {
-        this.meta = new Meta(false, message);
+    public Response failure(Integer code,String message) {
+        meta(false, message);
+        this.code=code;
         return this;
     }
 
-    public Meta getMeta() {
-        return meta;
+    public D getData() {
+        return this.data;
+    }
+    public String getMessage() {
+        return this.message;
+    }
+    public Integer getCode() {
+        return this.code;
     }
 
-    public Object getData() {
-        return data;
+    public void meta(boolean success, String message) {
+        this.message = message;
+        this.code=200;
     }
 
-    public class Meta {
 
-        private boolean success;
-        private String message;
-
-        public Meta(boolean success) {
-            this.success = success;
-        }
-
-        public Meta(boolean success, String message) {
-            this.success = success;
-            this.message = message;
-        }
-
-        public boolean isSuccess() {
-            return success;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-    }
 }

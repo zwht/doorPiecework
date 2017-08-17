@@ -2,7 +2,6 @@ package com.zw.cf.controller;
 
 import com.wordnik.swagger.annotations.*;
 import com.zw.cf.dao.UserMapper;
-import com.zw.cf.model.UserExample;
 import com.zw.cf.model.User;
 import com.zw.plug.Response;
 import com.zw.plug.Result;
@@ -53,35 +52,34 @@ public class UserCtrl {
             user.setUsername(userName);
             user.setPassword(passWord);
             int id=userMapper.insert(user);
-            return new Response().success("添加成功"+id);
+            return  new Response().success("添加成功"+id);
         }else {
-
-            return new Response().failure("已经有此用户名！");
+            return new Response().failure(400,"已经有此用户名！");
         }
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getUserList", consumes = "application/json")
-    @ApiOperation(value="获取所有用户列表",httpMethod="GET",notes="获取用户")
-    public  List<User> getUserList(){
-
-        UserExample user1Example=null;
-        return userMapper.selectByExample(user1Example);
+    @RequestMapping(value = "/getUserList")
+    @ApiOperation(value="获取所有用户列表",httpMethod="GET",notes="获取用户",consumes="application/json")
+    public  Response<List<User>> getUserList(){
+        List<User> list=userMapper.selectByExample(null);
+        return  new Response().success(list);
     }
 
 
     @ResponseBody
     @RequestMapping(value = "/login")
     @ApiOperation(value="登录接口",httpMethod="POST",notes="登录")
-    public  Response login(
+    public  Response<User> login(
             @ApiParam(required=true,value="用户名",name="userName") @RequestParam String userName,
             @ApiParam(required=true,value="密码",name="passWord") @RequestParam String passWord
     ){
         User user=userMapper.selectByUserName(userName);
+
         if(user.getPassword().equals(passWord)){
             return new Response().success(user);
         }else {
-            return new Response().failure("用户名密码错误！");
+            return new Response().failure(400,"用户名密码错误！");
         }
     }
 
@@ -89,12 +87,9 @@ public class UserCtrl {
     @ResponseBody
     @RequestMapping(value = "/getUser")
     @ApiOperation(value="根据用户userId获取用户信息",httpMethod="GET",notes="获取用户")
-    public Result<User> selectByPrimaryKey(
+    public Response<User> selectByPrimaryKey(
             @ApiParam(required=true,value="用户Id",name="userId") @RequestParam String userId
     ){
-        User user1=userMapper.selectByPrimaryKey(userId);
-        Result result = new Result();
-        result.setValue(user1);
-        return result;
+        return new Response().success(userMapper.selectByPrimaryKey(userId));
     }
 }
