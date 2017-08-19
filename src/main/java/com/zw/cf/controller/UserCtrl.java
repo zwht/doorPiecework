@@ -1,7 +1,6 @@
 package com.zw.cf.controller;
 
 import com.wordnik.swagger.annotations.*;
-import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
 import com.zw.plug.PageObj;
@@ -14,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-import java.util.Date;
 import java.util.List;
-import java.util.Observable;
 
 
 /**
@@ -29,8 +25,6 @@ import java.util.Observable;
 @RequestMapping("/rest/user")
 
 public class UserCtrl {
-    @Autowired
-    UserMapper userMapper;
     @Autowired
     UserService userService;
 
@@ -46,25 +40,12 @@ public class UserCtrl {
             @ApiParam(required = true, value = "用户名", name = "userName") @RequestParam String userName,
             @ApiParam(required = true, value = "密码", name = "passWord") @RequestParam String passWord
     ) {
-        Date date = new Date();
-        //使用用户名查询是否有相同用户名
-        User user = userMapper.selectByUserName(userName);
-
-        if (user == null) {
-            user = new User();
-            user.setId(date.getTime()+"");
-            user.setUsername(userName);
-            user.setPassword(passWord);
-            int id = userMapper.insert(user);
-            return new Response().success("添加成功" + id);
-        } else {
-            return new Response().failure(400, "已经有此用户名！");
-        }
+        return userService.addUser(userName,passWord);
     }
 
     @ResponseBody
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
-    @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户", consumes = "application/json")
+    @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
     public Response<PageObj<List<User>>> getUserList(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @RequestParam Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @RequestParam Integer pageSize

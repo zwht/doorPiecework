@@ -154,7 +154,12 @@
             <artifactId>pagehelper</artifactId>
             <version>5.0.4</version>
         </dependency>
-
+        <!-- Hibernate Validator 参数校验 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.3.0.Final</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>javaWeb</finalName>

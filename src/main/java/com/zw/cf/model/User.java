@@ -1,10 +1,17 @@
 package com.zw.cf.model;
 
+import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.NotNull;
+
 public class User {
+
     private String id;
 
+    @NotNull
+    @Length(max=3)
     private String username;
-
+    @NotNull
+    @Length(min=4,max=13)
     private String password;
 
     public String getId() {

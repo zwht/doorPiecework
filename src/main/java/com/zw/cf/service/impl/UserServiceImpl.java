@@ -10,7 +10,11 @@ import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.*;
 
 /**
  * Created by zhaowei on 2017/8/17.
@@ -48,13 +52,14 @@ public class UserServiceImpl implements UserService {
                 throw new Exception("密码不能为空!");
             }
 
-            response = this.getUserByName(userName);
+            User user = userMapper.selectByUserName(userName);
 
-            User user = response.getData();
-            if (user != null && user.getPassword().equals(passWord)) {
-                return new Response().success(response);
+            if(user == null){
+                return response.failure(400, "用户名不存在！");
+            }else if (user.getPassword().equals(passWord)) {
+                return response.success(user);
             } else {
-                return new Response().failure(400, "用户名密码错误！");
+                return response.failure(400, "密码错误！");
             }
 
         } catch (Exception e) {
@@ -64,17 +69,48 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public Response getUserList (Integer pageNum,Integer pageSize){
-        Response response=new Response();
-        PageObj pageObj=new PageObj();
+    public Response getUserList(Integer pageNum, Integer pageSize) {
+        Response response = new Response();
+        PageObj pageObj = new PageObj();
         try {
-            Page page=PageHelper.startPage(pageNum, pageSize);
+            Page page = PageHelper.startPage(pageNum, pageSize);
             List list = userMapper.selectByExample(null);
             long count = page.getTotal();
-            return response.success(pageObj.init(pageNum,pageSize,count,list));
-        }catch (Exception e){
+            return response.success(pageObj.init(pageNum, pageSize, count, list));
+        } catch (Exception e) {
             return response.failure(400, e.getMessage());
         }
     }
 
+    public Response addUser(String userName, String passWord) {
+        Response response = new Response();
+        try {
+            Date date = new Date();
+            //使用用户名查询是否有相同用户名
+            User user = userMapper.selectByUserName(userName);
+
+            if (user == null) {
+                User newUser=new User();
+                newUser.setId(date.getTime() + "");
+                newUser.setUsername(userName);
+                newUser.setPassword(passWord);
+
+                ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                Validator validator = factory.getValidator();
+                Set<ConstraintViolation<User>> constraintViolations= validator.validate(newUser);
+
+                if(constraintViolations.size()!=0){
+                    return response.validation(constraintViolations);
+                }else {
+                    userMapper.insert(newUser);
+                    return response.success("添加成功");
+                }
+
+            } else {
+                return response.failure(400, "已经有此用户名！");
+            }
+        } catch (Exception e) {
+            return response.failure(400, "未知错误！");
+        }
+    }
 }
