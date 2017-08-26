@@ -4,9 +4,11 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.User;
+import com.zw.cf.model.UserExample;
 import com.zw.cf.service.UserService;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
+import com.zw.plug.ZwUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,17 +44,17 @@ public class UserServiceImpl implements UserService {
             if (passWord == null || passWord == "") {
                 throw new Exception("密码不能为空!");
             }
+            UserExample userExample=new UserExample();
+            UserExample.Criteria criteria=userExample.createCriteria();
+            criteria.andUsernameEqualTo(userName);
+            //使用用户名查询是否有相同用户名
+            List<User> users = userMapper.selectByExample(userExample);
 
-            User user = userMapper.selectByUserName(userName);
-
-            if(user == null){
+            ZwUtil zwUtil=new ZwUtil();
+            if(users.size() == 0){
                 return response.failure(400, "用户名不存在！");
-            }else if (user.getPassword().equals(passWord)) {
-
-
-
-
-                return response.success(user);
+            }else if (users.get(0).getPassword().equals(zwUtil.EncoderByMd5(passWord))) {
+                return response.success(users.get(0));
             } else {
                 return response.failure(400, "密码错误！");
             }
@@ -81,14 +83,17 @@ public class UserServiceImpl implements UserService {
         Response response = new Response();
         try {
             Date date = new Date();
+            UserExample userExample=new UserExample();
+            UserExample.Criteria criteria=userExample.createCriteria();
+            criteria.andUsernameEqualTo(userName);
             //使用用户名查询是否有相同用户名
-            User user = userMapper.selectByUserName(userName);
-
-            if (user == null) {
+            List<User> users = userMapper.selectByExample(userExample);
+            if (users.size() == 0) {
+                ZwUtil zwUtil=new ZwUtil();
                 User newUser=new User();
                 newUser.setId(date.getTime() + "");
                 newUser.setUsername(userName);
-                newUser.setPassword(passWord);
+                newUser.setPassword(zwUtil.EncoderByMd5(passWord));
 
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();

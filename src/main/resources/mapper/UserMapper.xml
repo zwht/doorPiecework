@@ -5,6 +5,9 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="passWord" jdbcType="VARCHAR" property="password" />
+    <result column="gxId" jdbcType="VARCHAR" property="gxid" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,11 +68,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userName, passWord
+    id, userName, passWord, gxId, type, corporationId
   </sql>
-  <select id="selectByUserName" parameterType="java.lang.String" resultType="com.zw.cf.model.User">
-    select * from  users where userName like #{value}
-  </select>
   <select id="selectByExample" parameterType="com.zw.cf.model.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -101,9 +101,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.User">
-    insert into users (id, userName, passWord
+    insert into users (id, userName, passWord, 
+      gxId, type, corporationId
       )
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{gxid,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{corporationid,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.User">
@@ -118,6 +120,15 @@
       <if test="password != null">
         passWord,
       </if>
+      <if test="gxid != null">
+        gxId,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="corporationid != null">
+        corporationId,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -128,6 +139,15 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gxid != null">
+        #{gxid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="corporationid != null">
+        #{corporationid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -149,6 +169,15 @@
       <if test="record.password != null">
         passWord = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.gxid != null">
+        gxId = #{record.gxid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.corporationid != null">
+        corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -158,7 +187,10 @@
     update users
     set id = #{record.id,jdbcType=VARCHAR},
       userName = #{record.username,jdbcType=VARCHAR},
-      passWord = #{record.password,jdbcType=VARCHAR}
+      passWord = #{record.password,jdbcType=VARCHAR},
+      gxId = #{record.gxid,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      corporationId = #{record.corporationid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -172,13 +204,25 @@
       <if test="password != null">
         passWord = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="gxid != null">
+        gxId = #{gxid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="corporationid != null">
+        corporationId = #{corporationid,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.User">
     update users
     set userName = #{username,jdbcType=VARCHAR},
-      passWord = #{password,jdbcType=VARCHAR}
+      passWord = #{password,jdbcType=VARCHAR},
+      gxId = #{gxid,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      corporationId = #{corporationid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

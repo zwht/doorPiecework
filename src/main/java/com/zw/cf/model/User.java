@@ -1,18 +1,17 @@
 package com.zw.cf.model;
 
-import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotNull;
-
 public class User {
-
     private String id;
 
-    @NotNull
-    @Length(max=3)
     private String username;
-    @NotNull
-    @Length(min=4,max=13)
+
     private String password;
+
+    private String gxid;
+
+    private Integer type;
+
+    private String corporationid;
 
     public String getId() {
         return id;
@@ -36,5 +35,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getGxid() {
+        return gxid;
+    }
+
+    public void setGxid(String gxid) {
+        this.gxid = gxid == null ? null : gxid.trim();
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getCorporationid() {
+        return corporationid;
+    }
+
+    public void setCorporationid(String corporationid) {
+        this.corporationid = corporationid == null ? null : corporationid.trim();
     }
 }
