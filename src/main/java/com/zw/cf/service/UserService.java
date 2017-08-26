@@ -7,7 +7,6 @@ import com.zw.plug.Response;
  */
 public interface UserService {
     Response getUserById(String id);
-    Response getUserByName(String name);
     Response login(String name,String passWord);
     Response getUserList(Integer pageNum,Integer pageSize);
     Response addUser(String name,String passWord);

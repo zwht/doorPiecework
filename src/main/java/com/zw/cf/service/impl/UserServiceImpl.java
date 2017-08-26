@@ -33,15 +33,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public Response getUserByName(String name) {
-        Response response = new Response();
-        try {
-            return response.success(userMapper.selectByUserName(name));
-        } catch (Exception e) {
-            return response.failure(501, e.getMessage());
-        }
-    }
-
     public Response login(String userName, String passWord) {
         Response<User> response = new Response();
         try {
@@ -57,6 +48,10 @@ public class UserServiceImpl implements UserService {
             if(user == null){
                 return response.failure(400, "用户名不存在！");
             }else if (user.getPassword().equals(passWord)) {
+
+
+
+
                 return response.success(user);
             } else {
                 return response.failure(400, "密码错误！");
