@@ -160,6 +160,14 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.3.0.Final</version>
         </dependency>
+        <!-- jwt生成token -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>javaWeb</finalName>

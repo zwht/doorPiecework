@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zw.cf.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.zw.cf.model.User">
+<mapper namespace="com.zw.cf.dao.DoorMapper">
+  <resultMap id="BaseResultMap" type="com.zw.cf.model.Door">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="userName" jdbcType="VARCHAR" property="username" />
-    <result column="passWord" jdbcType="VARCHAR" property="password" />
-    <result column="gxId" jdbcType="VARCHAR" property="gxid" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
     <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
-    <result column="useType" jdbcType="INTEGER" property="usetype" />
-    <result column="tokenTime" jdbcType="TIMESTAMP" property="tokentime" />
-    <result column="token" jdbcType="VARCHAR" property="token" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userName, passWord, gxId, type, corporationId, useType, tokenTime, token
+    id, name, img, startTime, corporationId
   </sql>
-  <select id="selectByExample" parameterType="com.zw.cf.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zw.cf.model.DoorExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from users
+    from door
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,125 +86,85 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from users
+    from door
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from users
+    delete from door
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zw.cf.model.UserExample">
-    delete from users
+  <delete id="deleteByExample" parameterType="com.zw.cf.model.DoorExample">
+    delete from door
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zw.cf.model.User">
-    insert into users (id, userName, passWord, 
-      gxId, type, corporationId, 
-      useType, tokenTime, token
-      )
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gxid,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{corporationid,jdbcType=VARCHAR}, 
-      #{usetype,jdbcType=INTEGER}, #{tokentime,jdbcType=TIMESTAMP}, #{token,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.zw.cf.model.Door">
+    insert into door (id, name, img, 
+      startTime, corporationId)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{corporationid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zw.cf.model.User">
-    insert into users
+  <insert id="insertSelective" parameterType="com.zw.cf.model.Door">
+    insert into door
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        userName,
+      <if test="name != null">
+        name,
       </if>
-      <if test="password != null">
-        passWord,
+      <if test="img != null">
+        img,
       </if>
-      <if test="gxid != null">
-        gxId,
-      </if>
-      <if test="type != null">
-        type,
+      <if test="starttime != null">
+        startTime,
       </if>
       <if test="corporationid != null">
         corporationId,
-      </if>
-      <if test="usetype != null">
-        useType,
-      </if>
-      <if test="tokentime != null">
-        tokenTime,
-      </if>
-      <if test="token != null">
-        token,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
       </if>
-      <if test="gxid != null">
-        #{gxid,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="corporationid != null">
         #{corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="usetype != null">
-        #{usetype,jdbcType=INTEGER},
-      </if>
-      <if test="tokentime != null">
-        #{tokentime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="token != null">
-        #{token,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zw.cf.model.UserExample" resultType="java.lang.Long">
-    select count(*) from users
+  <select id="countByExample" parameterType="com.zw.cf.model.DoorExample" resultType="java.lang.Long">
+    select count(*) from door
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update users
+    update door
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null">
-        userName = #{record.username,jdbcType=VARCHAR},
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        passWord = #{record.password,jdbcType=VARCHAR},
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
       </if>
-      <if test="record.gxid != null">
-        gxId = #{record.gxid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+      <if test="record.starttime != null">
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.corporationid != null">
         corporationId = #{record.corporationid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.usetype != null">
-        useType = #{record.usetype,jdbcType=INTEGER},
-      </if>
-      <if test="record.tokentime != null">
-        tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.token != null">
-        token = #{record.token,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -216,60 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update users
+    update door
     set id = #{record.id,jdbcType=VARCHAR},
-      userName = #{record.username,jdbcType=VARCHAR},
-      passWord = #{record.password,jdbcType=VARCHAR},
-      gxId = #{record.gxid,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
-      corporationId = #{record.corporationid,jdbcType=VARCHAR},
-      useType = #{record.usetype,jdbcType=INTEGER},
-      tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
-      token = #{record.token,jdbcType=VARCHAR}
+      name = #{record.name,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      corporationId = #{record.corporationid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.User">
-    update users
+  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.Door">
+    update door
     <set>
-      <if test="username != null">
-        userName = #{username,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        passWord = #{password,jdbcType=VARCHAR},
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
       </if>
-      <if test="gxid != null">
-        gxId = #{gxid,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
       </if>
       <if test="corporationid != null">
         corporationId = #{corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="usetype != null">
-        useType = #{usetype,jdbcType=INTEGER},
-      </if>
-      <if test="tokentime != null">
-        tokenTime = #{tokentime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="token != null">
-        token = #{token,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.User">
-    update users
-    set userName = #{username,jdbcType=VARCHAR},
-      passWord = #{password,jdbcType=VARCHAR},
-      gxId = #{gxid,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      corporationId = #{corporationid,jdbcType=VARCHAR},
-      useType = #{usetype,jdbcType=INTEGER},
-      tokenTime = #{tokentime,jdbcType=TIMESTAMP},
-      token = #{token,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Door">
+    update door
+    set name = #{name,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      corporationId = #{corporationid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

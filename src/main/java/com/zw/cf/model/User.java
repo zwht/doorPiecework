@@ -1,5 +1,7 @@
 package com.zw.cf.model;
 
+import java.util.Date;
+
 public class User {
     private String id;
 
@@ -12,6 +14,12 @@ public class User {
     private Integer type;
 
     private String corporationid;
+
+    private Integer usetype;
+
+    private Date tokentime;
+
+    private String token;
 
     public String getId() {
         return id;
@@ -59,5 +67,29 @@ public class User {
 
     public void setCorporationid(String corporationid) {
         this.corporationid = corporationid == null ? null : corporationid.trim();
+    }
+
+    public Integer getUsetype() {
+        return usetype;
+    }
+
+    public void setUsetype(Integer usetype) {
+        this.usetype = usetype;
+    }
+
+    public Date getTokentime() {
+        return tokentime;
+    }
+
+    public void setTokentime(Date tokentime) {
+        this.tokentime = tokentime;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token == null ? null : token.trim();
     }
 }

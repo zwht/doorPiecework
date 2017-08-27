@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zw.cf.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.zw.cf.model.User">
+<mapper namespace="com.zw.cf.dao.ProcessMapper">
+  <resultMap id="BaseResultMap" type="com.zw.cf.model.Process">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="userName" jdbcType="VARCHAR" property="username" />
-    <result column="passWord" jdbcType="VARCHAR" property="password" />
     <result column="gxId" jdbcType="VARCHAR" property="gxid" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
     <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
-    <result column="useType" jdbcType="INTEGER" property="usetype" />
-    <result column="tokenTime" jdbcType="TIMESTAMP" property="tokentime" />
-    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,15 +72,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userName, passWord, gxId, type, corporationId, useType, tokenTime, token
+    id, gxId, userId, startTime, endTime, corporationId, type, price, userName, remarks
   </sql>
-  <select id="selectByExample" parameterType="com.zw.cf.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zw.cf.model.ProcessExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from users
+    from process
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,125 +91,134 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from users
+    from process
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from users
+    delete from process
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zw.cf.model.UserExample">
-    delete from users
+  <delete id="deleteByExample" parameterType="com.zw.cf.model.ProcessExample">
+    delete from process
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zw.cf.model.User">
-    insert into users (id, userName, passWord, 
-      gxId, type, corporationId, 
-      useType, tokenTime, token
-      )
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gxid,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{corporationid,jdbcType=VARCHAR}, 
-      #{usetype,jdbcType=INTEGER}, #{tokentime,jdbcType=TIMESTAMP}, #{token,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.zw.cf.model.Process">
+    insert into process (id, gxId, userId, 
+      startTime, endTime, corporationId, 
+      type, price, userName, 
+      remarks)
+    values (#{id,jdbcType=VARCHAR}, #{gxid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{corporationid,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zw.cf.model.User">
-    insert into users
+  <insert id="insertSelective" parameterType="com.zw.cf.model.Process">
+    insert into process
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        userName,
-      </if>
-      <if test="password != null">
-        passWord,
-      </if>
       <if test="gxid != null">
         gxId,
       </if>
-      <if test="type != null">
-        type,
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
       </if>
       <if test="corporationid != null">
         corporationId,
       </if>
-      <if test="usetype != null">
-        useType,
+      <if test="type != null">
+        type,
       </if>
-      <if test="tokentime != null">
-        tokenTime,
+      <if test="price != null">
+        price,
       </if>
-      <if test="token != null">
-        token,
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="remarks != null">
+        remarks,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
       <if test="gxid != null">
         #{gxid,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="corporationid != null">
         #{corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="usetype != null">
-        #{usetype,jdbcType=INTEGER},
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
-      <if test="tokentime != null">
-        #{tokentime,jdbcType=TIMESTAMP},
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
       </if>
-      <if test="token != null">
-        #{token,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zw.cf.model.UserExample" resultType="java.lang.Long">
-    select count(*) from users
+  <select id="countByExample" parameterType="com.zw.cf.model.ProcessExample" resultType="java.lang.Long">
+    select count(*) from process
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update users
+    update process
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null">
-        userName = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null">
-        passWord = #{record.password,jdbcType=VARCHAR},
-      </if>
       <if test="record.gxid != null">
         gxId = #{record.gxid,jdbcType=VARCHAR},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.corporationid != null">
         corporationId = #{record.corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="record.usetype != null">
-        useType = #{record.usetype,jdbcType=INTEGER},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.tokentime != null">
-        tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
       </if>
-      <if test="record.token != null">
-        token = #{record.token,jdbcType=VARCHAR},
+      <if test="record.username != null">
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -216,60 +226,65 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update users
+    update process
     set id = #{record.id,jdbcType=VARCHAR},
-      userName = #{record.username,jdbcType=VARCHAR},
-      passWord = #{record.password,jdbcType=VARCHAR},
       gxId = #{record.gxid,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=VARCHAR},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
       corporationId = #{record.corporationid,jdbcType=VARCHAR},
-      useType = #{record.usetype,jdbcType=INTEGER},
-      tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
-      token = #{record.token,jdbcType=VARCHAR}
+      type = #{record.type,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      userName = #{record.username,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.User">
-    update users
+  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.Process">
+    update process
     <set>
-      <if test="username != null">
-        userName = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        passWord = #{password,jdbcType=VARCHAR},
-      </if>
       <if test="gxid != null">
         gxId = #{gxid,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="corporationid != null">
         corporationId = #{corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="usetype != null">
-        useType = #{usetype,jdbcType=INTEGER},
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="tokentime != null">
-        tokenTime = #{tokentime,jdbcType=TIMESTAMP},
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
       </if>
-      <if test="token != null">
-        token = #{token,jdbcType=VARCHAR},
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.User">
-    update users
-    set userName = #{username,jdbcType=VARCHAR},
-      passWord = #{password,jdbcType=VARCHAR},
-      gxId = #{gxid,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Process">
+    update process
+    set gxId = #{gxid,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
       corporationId = #{corporationid,jdbcType=VARCHAR},
-      useType = #{usetype,jdbcType=INTEGER},
-      tokenTime = #{tokentime,jdbcType=TIMESTAMP},
-      token = #{token,jdbcType=VARCHAR}
+      type = #{type,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      userName = #{username,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

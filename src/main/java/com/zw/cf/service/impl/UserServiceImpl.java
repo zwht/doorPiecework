@@ -6,6 +6,7 @@ import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.User;
 import com.zw.cf.model.UserExample;
 import com.zw.cf.service.UserService;
+import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import com.zw.plug.ZwUtil;
@@ -50,11 +51,21 @@ public class UserServiceImpl implements UserService {
             //使用用户名查询是否有相同用户名
             List<User> users = userMapper.selectByExample(userExample);
 
+
             ZwUtil zwUtil=new ZwUtil();
             if(users.size() == 0){
                 return response.failure(400, "用户名不存在！");
             }else if (users.get(0).getPassword().equals(zwUtil.EncoderByMd5(passWord))) {
-                return response.success(users.get(0));
+                User userOne=users.get(0);
+                long currentTime = System.currentTimeMillis();
+                currentTime +=2*60*60*1000;
+                Date date = new Date(currentTime);
+                userOne.setTokentime(date);
+                userOne.setPassword("");
+
+                String token = JwtUtils.sign(users.get(0), 30L * 24L * 3600L * 1000L);
+                userOne.setToken(token);
+                return response.success(userOne);
             } else {
                 return response.failure(400, "密码错误！");
             }

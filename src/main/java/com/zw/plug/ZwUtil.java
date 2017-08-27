@@ -10,6 +10,12 @@ import java.security.NoSuchAlgorithmException;
  * Created by zhaowei on 2017/8/27.
  */
 public class ZwUtil {
+    /**
+     * 用md5加密字符串
+     * @param str
+     * @return
+     * @throws Exception
+     */
     public String EncoderByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         //确定计算方法
         MessageDigest md5 = MessageDigest.getInstance("MD5");

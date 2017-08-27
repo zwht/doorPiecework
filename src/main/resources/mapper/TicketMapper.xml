@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zw.cf.dao.TicketMapper">
+  <resultMap id="BaseResultMap" type="com.zw.cf.model.Ticket">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="dealersId" jdbcType="VARCHAR" property="dealersid" />
+    <result column="brandId" jdbcType="VARCHAR" property="brandid" />
+    <result column="odd" jdbcType="VARCHAR" property="odd" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="creatTime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="overTime" jdbcType="TIMESTAMP" property="overtime" />
+    <result column="processIds" jdbcType="VARCHAR" property="processids" />
+    <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, dealersId, brandId, odd, address, startTime, endTime, creatTime, overTime, 
+    processIds, corporationId
+  </sql>
+  <select id="selectByExample" parameterType="com.zw.cf.model.TicketExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ticket
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ticket
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ticket
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zw.cf.model.TicketExample">
+    delete from ticket
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zw.cf.model.Ticket">
+    insert into ticket (id, name, dealersId, 
+      brandId, odd, address, 
+      startTime, endTime, creatTime, 
+      overTime, processIds, corporationId
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{dealersid,jdbcType=VARCHAR}, 
+      #{brandid,jdbcType=VARCHAR}, #{odd,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{creattime,jdbcType=TIMESTAMP}, 
+      #{overtime,jdbcType=TIMESTAMP}, #{processids,jdbcType=VARCHAR}, #{corporationid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zw.cf.model.Ticket">
+    insert into ticket
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="dealersid != null">
+        dealersId,
+      </if>
+      <if test="brandid != null">
+        brandId,
+      </if>
+      <if test="odd != null">
+        odd,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+      <if test="creattime != null">
+        creatTime,
+      </if>
+      <if test="overtime != null">
+        overTime,
+      </if>
+      <if test="processids != null">
+        processIds,
+      </if>
+      <if test="corporationid != null">
+        corporationId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dealersid != null">
+        #{dealersid,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null">
+        #{brandid,jdbcType=VARCHAR},
+      </if>
+      <if test="odd != null">
+        #{odd,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creattime != null">
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overtime != null">
+        #{overtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processids != null">
+        #{processids,jdbcType=VARCHAR},
+      </if>
+      <if test="corporationid != null">
+        #{corporationid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zw.cf.model.TicketExample" resultType="java.lang.Long">
+    select count(*) from ticket
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ticket
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealersid != null">
+        dealersId = #{record.dealersid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandid != null">
+        brandId = #{record.brandid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.odd != null">
+        odd = #{record.odd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creattime != null">
+        creatTime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.overtime != null">
+        overTime = #{record.overtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.processids != null">
+        processIds = #{record.processids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporationid != null">
+        corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ticket
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      dealersId = #{record.dealersid,jdbcType=VARCHAR},
+      brandId = #{record.brandid,jdbcType=VARCHAR},
+      odd = #{record.odd,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      creatTime = #{record.creattime,jdbcType=TIMESTAMP},
+      overTime = #{record.overtime,jdbcType=TIMESTAMP},
+      processIds = #{record.processids,jdbcType=VARCHAR},
+      corporationId = #{record.corporationid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.Ticket">
+    update ticket
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dealersid != null">
+        dealersId = #{dealersid,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null">
+        brandId = #{brandid,jdbcType=VARCHAR},
+      </if>
+      <if test="odd != null">
+        odd = #{odd,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creattime != null">
+        creatTime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overtime != null">
+        overTime = #{overtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processids != null">
+        processIds = #{processids,jdbcType=VARCHAR},
+      </if>
+      <if test="corporationid != null">
+        corporationId = #{corporationid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Ticket">
+    update ticket
+    set name = #{name,jdbcType=VARCHAR},
+      dealersId = #{dealersid,jdbcType=VARCHAR},
+      brandId = #{brandid,jdbcType=VARCHAR},
+      odd = #{odd,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      creatTime = #{creattime,jdbcType=TIMESTAMP},
+      overTime = #{overtime,jdbcType=TIMESTAMP},
+      processIds = #{processids,jdbcType=VARCHAR},
+      corporationId = #{corporationid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
