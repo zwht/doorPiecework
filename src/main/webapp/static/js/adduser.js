@@ -3,11 +3,11 @@
  */
 $(function () {
     var username=$(".username");
-    var password=$(".password")
-    var log_btn=$(".log_btn")
+    var password=$(".password");
+    var log_btn=$(".log_btn");
     log_btn.click(function () {
-        var uservalue=username.val()
-        var passvalue=password.val()
+        var uservalue=username.val();
+        var passvalue=password.val();
         debugger
         $.ajax({
             type:"POST",

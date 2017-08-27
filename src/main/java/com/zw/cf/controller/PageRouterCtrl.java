@@ -19,4 +19,10 @@ public class PageRouterCtrl {
         response.setCharacterEncoding("utf-8");
         return "login";
     }
+    @RequestMapping("/userlist")
+    public String userlist(HttpServletResponse response){
+        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+        return "view/userlist";
+    }
 }
