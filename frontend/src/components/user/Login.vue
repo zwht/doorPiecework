@@ -2,6 +2,7 @@
 .LoginCom
   main
     Form(:model="form" ref='form' v-bind:rules="rules")
+      img(v-bind:src="logoImg")
       Form-item(prop="loginName")
         Input(type='text' v-model="form.loginName" placeholder='邮箱' v-on:keydown.enter.native="login")
           div(slot="prepend")
@@ -20,6 +21,7 @@
 import userServer from 'rs/user'
 import session from '@/config/session'
 import md5 from "md5"
+import logoImg from 'asts/images/commons/logo.png'
 //console.log(md5("123456"))
 export default {
 	name: 'LoginCom',
@@ -37,6 +39,7 @@ export default {
       callback();
     }
     return {
+      logoImg:logoImg,
 			title: '',
       save:true,
       loginError:false,
@@ -121,7 +124,7 @@ export default {
   background-color: #f8f8f9;
   main{
     padding-top: 80px;
-    background: url(@logo_url) no-repeat center 15px;
+
     min-width: 240px;
     margin-top: -80px;
   }
