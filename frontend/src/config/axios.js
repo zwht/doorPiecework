@@ -3,12 +3,12 @@ import {Message} from 'iview';
 import session from '@/config/session';
 
 /*添加请求拦截器*/
-window.getToken=false;
 axios.interceptors.request.use(function(request){
 
   let token = session.get('access_token');
+
   /*在发送请求之前做某事*/
-  if(token) request.headers.Authorization=token;
+  if(token)request.headers.Authorization=token;
   request.headers['Content-Type']='application/x-www-form-urlencoded';
   return request;
 },function(error){
@@ -19,7 +19,7 @@ axios.interceptors.request.use(function(request){
 /*添加响应拦截器*/
 axios.interceptors.response.use(function(response){
   /*对响应数据做些事*/
-  if(response.data.msg=="token expire"){
+  if(response.data.code==412){
     alert("token 过期，重新登录");
   }
   return response.data;
