@@ -8,7 +8,7 @@ import village from 'cmpts/pages/Village';
 import credit from 'cmpts/pages/Credit';
 import collection from 'cmpts/pages/Collection';
 import award from 'cmpts/pages/Award';
-import organization from 'cmpts/pages/Organization';
+
 
 import role from 'cmpts/pages/Role';
 import user from 'cmpts/pages/User';
@@ -113,16 +113,6 @@ export default [
     meta: {
       name: "奖补申请审核",
       icon:'ios-rose',
-      menu:true
-    }
-  },
-  {
-    path:'/organization',
-    component:organization,
-    name:"organization",
-    meta: {
-      name: "组织机构管理",
-      icon:'funnel',
       menu:true
     }
   },

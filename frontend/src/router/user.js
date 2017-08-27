@@ -1,11 +1,11 @@
-import Index from '@/components/user/Index'
+import Login from '@/components/user/Login'
 export default [
   {
     path: '/',
     name: "login",
-    component:Index,
+    component:Login,
     meta: {
-      name: "index"
+      name: "login"
     }
   },
   {

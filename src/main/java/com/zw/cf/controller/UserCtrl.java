@@ -22,7 +22,7 @@ import java.util.List;
 @Api("user")
 @Controller("userAction")
 @Scope("prototype")
-@RequestMapping("/rest/user")
+@RequestMapping("/cfmy/user")
 
 public class UserCtrl {
     @Autowired

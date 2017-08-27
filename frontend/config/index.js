@@ -31,11 +31,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/rest':{
+        '/cfmy':{
             target:proxyPath,
             changeOrigin:true,
             pathRewrite:{
-                '^/rest':"/rest"
+                '^/cfmy':"/cfmy"
             }
         }
     },

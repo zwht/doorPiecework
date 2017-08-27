@@ -35,6 +35,7 @@ axios.interceptors.request.use(function(request){
 
   /*在发送请求之前做某事*/
   if(token)request.headers.Authorization=token;
+  request.headers['Content-Type']='application/x-www-form-urlencoded';
   return request;
 },function(error){
   /*请求错误时做些事*/

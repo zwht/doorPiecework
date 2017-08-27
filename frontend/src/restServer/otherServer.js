@@ -2,7 +2,7 @@
  * Created by zhaowei on 2017/8/24.
  */
 import server from '@/config/server';
-let otherServer = server('/city/api/:params1/:params2/:params3/:params4/:params5',{},{
+let otherServer = server('/cfmy/other/:params1/:params2/:params3/:params4/:params5',{},{
   listOrgs:{
     method:'post',
     params:{
