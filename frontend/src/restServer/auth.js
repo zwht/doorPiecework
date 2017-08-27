@@ -1,0 +1,52 @@
+import server from '@/config/server'
+let authServer = server('/knr/auth/:params1/:params2/:params3/:params4/:params5',{},{
+  list:{
+    method:'post',
+    params:{
+      params1:'page'
+    }
+  },
+  addOrUpdate:{
+    method:'post',
+    params:{
+      params1:'user',
+      params2:'addOrUpdate'
+    }
+  },
+  addOrUpdateDevice:{
+    method:'post',
+    params:{
+      params1:'device',
+      params2:'addOrUpdate'
+    }
+  },
+  delete:{
+    method:'post',
+    params:{
+      params1:'user',
+      params2:'delete'
+    }
+  },
+  deleteDevice:{
+    method:'post',
+    params:{
+      params1:'device',
+      params2:'delete'
+    }
+  },
+  transfer:{
+    method:'post',
+    params:{
+      params1:'user',
+      params2:'transfer'
+    }
+  },
+  transferDevice:{
+    method:'post',
+    params:{
+      params1:'device',
+      params2:'transfer'
+    }
+  }
+});
+export default authServer

@@ -3,3 +3,5 @@ node_modules
 .DS_Store
 target
 springTest.iml
+src/main/webapp/static
+src/main/webapp/index.html

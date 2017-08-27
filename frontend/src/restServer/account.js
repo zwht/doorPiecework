@@ -1,0 +1,47 @@
+import server from '@/config/server'
+let accountServer = server('/knr/account/:params1/:params2/:params3/:params4/:params5',{},{
+  login:{
+    method:'post',
+    params:{
+      params1:'login'
+    }
+  },
+  insert:{
+    method:'post',
+    params:{
+      params1:'insert'
+    }
+  },
+  update:{
+    method:'post',
+    params:{
+      params1:'update'
+    }
+  },
+  del:{
+    method:'get',
+    params:{
+      params1:'delete'
+    }
+  },
+  selectById:{
+    method:'get',
+    params:{
+      params1:'selectById'
+    }
+  },
+  selectAll:{
+    method:'get',
+    params:{
+      params1:'selectAll'
+    }
+  },
+  //拿权限
+  token:{
+    method:'get',
+    params:{
+      params1:'role'
+    }
+  }
+});
+export default accountServer

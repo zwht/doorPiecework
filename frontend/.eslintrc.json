@@ -1,0 +1,30 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "plugins": [
+    "html"
+  ],
+  "extends": ["eslint:recommended"],
+  "rules": {
+    // "semi": [2, "always"],
+    // "indent": [0, 4, {
+    //   "SwitchCase": 1
+    // }]
+    // "no-unused-expressions": 0,
+    // "handle-callback-err": [2, "^(err|error)$"],
+    // "no-extra-semi": 2,
+    // "spaced-comment": 0,
+    // "quotes": 0,
+    // "one-var": 0,
+    // "no-empty": "off",
+    // "eol-last": 0,
+    "no-console": "off"
+    // "space-before-function-paren": [0, "always"]
+  }
+}

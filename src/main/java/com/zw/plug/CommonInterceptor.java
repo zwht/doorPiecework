@@ -64,7 +64,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
         }
 
         Response response1=new Response();
-        response1.failure(412, "token失效");
+        response1.failure(412, "没有权限，请登录");
         ObjectMapper objectMapper = new ObjectMapper();
         String userJsonStr = objectMapper.writeValueAsString(response1);
         response.setCharacterEncoding("UTF-8");
