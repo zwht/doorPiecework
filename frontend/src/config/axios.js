@@ -6,35 +6,9 @@ import session from '@/config/session';
 window.getToken=false;
 axios.interceptors.request.use(function(request){
 
-
-  let time=new Date()-1;
-  let token = session.get('token');
-  let tokenTime=session.get("tokenTime");
-
-  if(tokenTime&&tokenTime<time+1000*60*15&&!getToken){
-    getToken=true;
-    axios.post('city/api/admin/user/refreshToken?ad_user_id='+session.get('ad_user_id'), {
-    })
-      .then(function (response) {
-        if(response.code != "1"){
-
-        }else {
-          session.set('token',response.data,"30 minutes");
-          session.set("tokenTime",(new Date()-0)+1000*60*30,"30 minutes");
-        }
-        getToken=false;
-      })
-      .catch(function (error) {
-        getToken=false;
-      });
-  }
-  if(tokenTime&&tokenTime<time){
-    alert("token 过期，重新登录");
-  }
-
-
+  let token = session.get('access_token');
   /*在发送请求之前做某事*/
-  if(token)request.headers.Authorization=token;
+  if(token) request.headers.Authorization=token;
   request.headers['Content-Type']='application/x-www-form-urlencoded';
   return request;
 },function(error){
