@@ -21,6 +21,10 @@ public class User {
 
     private String token;
 
+    private Integer phone;
+
+    private String loginname;
+
     public String getId() {
         return id;
     }
@@ -91,5 +95,21 @@ public class User {
 
     public void setToken(String token) {
         this.token = token == null ? null : token.trim();
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    public String getLoginname() {
+        return loginname;
+    }
+
+    public void setLoginname(String loginname) {
+        this.loginname = loginname == null ? null : loginname.trim();
     }
 }

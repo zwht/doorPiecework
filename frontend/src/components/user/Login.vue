@@ -98,6 +98,7 @@ export default {
             }
             session.set('userName',res.data.userName,"2 hours")
             session.set('access_token',res.data.token,"2 hours");
+            session.set("tokenTime",(new Date()-0)+1000*60*30,"2 hours");
 
             let scope = res.data.roleType;
             this.$store.commit('setScope',scope);

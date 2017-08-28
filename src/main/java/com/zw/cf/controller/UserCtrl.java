@@ -64,6 +64,14 @@ public class UserCtrl {
         return userService.login(userName,passWord);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/refreshToken", method = RequestMethod.POST)
+    @ApiOperation(value = "更新token", httpMethod = "POST", notes = "更新token")
+    public Response<User> login(
+            @ApiParam(required = true, value = "旧token", name = "token") @RequestParam String token) {
+        return userService.refreshToken(token);
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)

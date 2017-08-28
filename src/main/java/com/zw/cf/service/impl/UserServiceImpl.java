@@ -77,6 +77,26 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    public Response refreshToken(String token) {
+        Response<User> response = new Response();
+
+        User user = JwtUtils.unsign(token, User.class);
+        Date newDate=new Date();
+        Date date=user.getTokentime();
+        if(newDate.getTime()<date.getTime()){
+            return response.failure(400,"token过期");
+        }
+        //使用用户名查询是否有相同用户名
+        long currentTime = System.currentTimeMillis();
+        currentTime +=2*60*60*1000;
+        Date date1 = new Date(currentTime);
+        user.setTokentime(date1);
+
+        String newToken = JwtUtils.sign(user, 30L * 24L * 3600L * 1000L);
+        user.setToken(newToken);
+        return response.success(user);
+    }
+
     public Response getUserList(Integer pageNum, Integer pageSize) {
         Response response = new Response();
         PageObj pageObj = new PageObj();

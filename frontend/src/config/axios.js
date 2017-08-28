@@ -3,9 +3,32 @@ import {Message} from 'iview';
 import session from '@/config/session';
 
 /*添加请求拦截器*/
+window.getToken=false;
 axios.interceptors.request.use(function(request){
 
+  let time=new Date()-1;
   let token = session.get('access_token');
+  let tokenTime=session.get("tokenTime");
+
+  if(tokenTime&&tokenTime<time+1000*60*15&&!getToken){
+    getToken=true;
+    axios.post('cfmy/user/refreshToken', {
+      token:session.get('access_token')
+    })
+      .then(function (response) {
+        if(response.code == 200){
+          session.set('access_token',response.data.token,"2 hours");
+          session.set("tokenTime",(new Date()-0)+1000*60*30,"2 hours");
+        }
+        getToken=false;
+      })
+      .catch(function (error) {
+        getToken=false;
+      });
+  }
+  if(tokenTime&&tokenTime<time){
+    alert("token 过期，重新登录");
+  }
 
   /*在发送请求之前做某事*/
   if(token)request.headers.Authorization=token;

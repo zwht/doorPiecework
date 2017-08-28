@@ -8,6 +8,7 @@ import com.zw.plug.Response;
 public interface UserService {
     Response getUserById(String id);
     Response login(String name,String passWord);
+    Response refreshToken(String token);
     Response getUserList(Integer pageNum,Integer pageSize);
     Response addUser(String name,String passWord);
 
