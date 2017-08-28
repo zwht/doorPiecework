@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -67,9 +68,16 @@ public class UserCtrl {
     @ResponseBody
     @RequestMapping(value = "/refreshToken", method = RequestMethod.POST)
     @ApiOperation(value = "更新token", httpMethod = "POST", notes = "更新token")
-    public Response<User> login(
+    public Response<User> login(HttpServletRequest request,
             @ApiParam(required = true, value = "旧token", name = "token") @RequestParam String token) {
-        return userService.refreshToken(token);
+
+        String token1 = request.getHeader("access_token");
+        if(token1==null){
+            token1 = request.getParameter("access_token");
+        }
+
+
+        return userService.refreshToken(token,token1);
     }
 
 
