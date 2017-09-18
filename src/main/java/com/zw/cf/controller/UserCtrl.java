@@ -3,15 +3,13 @@ package com.zw.cf.controller;
 import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
+import com.zw.cf.vo.LoginVo;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -59,10 +57,9 @@ public class UserCtrl {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录接口", httpMethod = "POST", notes = "登录")
     public Response<User> login(
-            @ApiParam(required = true, value = "用户名", name = "userName") @RequestParam String userName,
-            @ApiParam(required = true, value = "密码", name = "passWord") @RequestParam String passWord
+            @ApiParam(required = true, value = "用户名密码", name = "LoginVo") @RequestBody LoginVo loginVo
     ) {
-        return userService.login(userName,passWord);
+        return userService.login(loginVo.getUsername(),loginVo.getPassword());
     }
 
     @ResponseBody
