@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import {Headers, Http} from '@angular/http';
 import {AuthService} from './../../service/AuthService';
 interface Login {
-  username:string,
-  password:string
+  username: string,
+  password: string
 }
 @Component({
   selector: 'app-login',
@@ -17,21 +17,26 @@ export class LoginComponent implements OnInit {
     username: 'zw',
     password: '123456'
   };
-  constructor(private http: Http) {}
-  ngOnInit() {}
-  onLogin(data) {
-    debugger
-    /*var headers = new Headers();
-    headers.append('Content-Type', 'application/json; charset=utf-8');
-    this.http.post('/cfmy/user/login', JSON.stringify(data),
-      {headers: headers})
-      .map(res => res.json())
-      .subscribe(data => {
-          localStorage.setItem('id_token', data.id_token);
-          console.log(data)
-        }, err => console.log(err), () => console.log('Register Complete')
-      );*/
+
+  constructor(private http: Http) {
   }
 
+  ngOnInit() {
+  }
 
+  onLogin(data) {
+    this.http.post('/cfmy/user/login', JSON.stringify(this.login))
+      .map(res => res.json())
+      .subscribe(response => {
+        if (response.code === 200) {
+          localStorage.setItem('token', response.data.token);
+        } else {
+          console.log(data);
+        }
+      }, err => {
+        console.log(err);
+      }, () => {
+        console.log('Register Complete');
+      });
+  }
 }

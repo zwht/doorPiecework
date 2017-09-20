@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Http, Request, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Request, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers} from '@angular/http';
 import 'rxjs/Rx';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class HttpInterceptorService extends Http {
   status = {
@@ -25,44 +25,50 @@ export class HttpInterceptorService extends Http {
     "status.501": "未实现。服务器不识别该请求方法，或者服务器没有能力完成请求。",
     "status.503": "服务不可用。服务器当前不可用(过载或故障)。"
   };
+
   constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
     super(backend, defaultOptions);
   }
-  request(url: string | Request, options ? : RequestOptionsArgs): Observable < Response > {
-    debugger
-    //console.log("before...");
+
+  request(url: string | Request, options ?: RequestOptionsArgs): Observable<Response> {
     //根据不同的生产环境配置http前缀
-    typeof url=='string'? (url='http://192.168.1.205:8099/'+url):(url.url='http://192.168.1.205:8099/'+url.url);
+    //typeof url=='string'? (url='http://192.168.1.205:8099/'+url):(url.url='http://192.168.1.205:8099/'+url.url);
     return this.intercept(super.request(url, options));
   }
-  get(url: string, options ? : RequestOptionsArgs): Observable < Response > {
+
+  get(url: string, options ?: RequestOptionsArgs): Observable<Response> {
     return this.intercept(super.get(url, options));
   }
-  post(url: string, body: string, options ? : RequestOptionsArgs): Observable < Response > {
-    debugger
+
+  post(url: string, body: string, options ?: RequestOptionsArgs): Observable<Response> {
     return this.intercept(super.post(url, body, this.getRequestOptionArgs(options)));
   }
-  put(url: string, body: string, options ? : RequestOptionsArgs): Observable < Response > {
+
+  put(url: string, body: string, options ?: RequestOptionsArgs): Observable<Response> {
     return this.intercept(super.put(url, body, this.getRequestOptionArgs(options)));
   }
-  delete(url: string, options ? : RequestOptionsArgs): Observable < Response > {
+
+  delete(url: string, options ?: RequestOptionsArgs): Observable<Response> {
     return this.intercept(super.put(url, this.getRequestOptionArgs(options)));
   }
-  getRequestOptionArgs(options ? : RequestOptionsArgs): RequestOptionsArgs {
+
+  getRequestOptionArgs(options ?: RequestOptionsArgs): RequestOptionsArgs {
     if (options == null) {
       options = new RequestOptions();
     }
     if (options.headers == null) {
       options.headers = new Headers();
     }
-    options.headers.append('Content-Type', 'application/json');
+    options.headers.append('Content-Type', 'application/json; charset=utf-8');
+    options.headers.append('Authorization', localStorage.getItem('token'));
     return options;
   }
-  intercept(observable: Observable < Response > ): Observable < Response > {
+
+  intercept(observable: Observable<Response>): Observable<Response> {
     //console.log("after...");
     return observable.catch((err, source) => {
-      if (err.status<200 || err.status>=300) {
-        alert('网络错误:'+err.status+' - '+this.status['status.'+err.status]);
+      if (err.status < 200 || err.status >= 300) {
+        alert('网络错误:' + err.status + ' - ' + this.status['status.' + err.status]);
         return Observable.empty();
       } else {
         return Observable.throw(err);
