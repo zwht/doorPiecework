@@ -2,26 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { MenuComponent } from './../main/component/menu/menu.component';
-
-import { ListComponent } from './component/list/list.component';
-
+import {userRoutes,userComponentList} from './user.routes';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot([
-      {
-        path: 'admin',
-        component: MenuComponent,
-        children:[
-          {
-            path: 'user/list',
-            component: ListComponent
-          }
-        ]
-      }
-    ])
+    RouterModule.forChild(userRoutes)
   ],
-  declarations: [MenuComponent,ListComponent]
+  declarations: userComponentList
 })
-export class UserModule { }
+export default class UserModule { }

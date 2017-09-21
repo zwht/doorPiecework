@@ -10,39 +10,23 @@ import 'rxjs/Rx';
 //拦截器代码
 import {HttpInterceptorService} from './core/http/HttpInterceptorService';
 
-import {UserModule} from './../user/user.module';
-
-
-
-
 import {AppComponent} from './component/app/app.component';
-import {LoginComponent} from './component/login/login.component';
-
+import {mainRoutes, mainComponentList} from './main.routes';
 export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
   let service = new HttpInterceptorService(xhrBackend, requestOptions);
   return service;
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent
-  ],
+  declarations: [].concat([AppComponent],mainComponentList),
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     ElModule.forRoot(),
-    UserModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: LoginComponent
-      },
-
-    ])
+    RouterModule.forRoot(mainRoutes)
   ],
-  providers: [ HttpInterceptorService,
+  providers: [HttpInterceptorService,
     {
       provide: Http,
       useFactory: interceptorFactory,

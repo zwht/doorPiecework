@@ -1,19 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import {AuthService} from './../../service/AuthService';
-interface Login {
-  username: string,
-  password: string
-}
+import {LoginVo} from './../../class/vo/LoginVo';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
-  providers: [AuthService]
+  providers: []
 })
 
 export class LoginComponent implements OnInit {
-  public login: Login = {
+  login = {
     username: 'zw',
     password: '123456'
   };
@@ -25,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(data) {
-    this.http.post('/cfmy/user/login', JSON.stringify(this.login))
+    /*this.http.post('/cfmy/user/login', JSON.stringify(this.login))
       .map(res => res.json())
       .subscribe(response => {
         if (response.code === 200) {
@@ -37,6 +33,6 @@ export class LoginComponent implements OnInit {
         console.log(err);
       }, () => {
         console.log('Register Complete');
-      });
+      });*/
   }
 }
