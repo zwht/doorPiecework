@@ -10,7 +10,7 @@ export class MenuComponent implements OnInit {
   constructor(private router:Router) { }
   ngOnInit() {
     this.router.config.forEach(item=>{
-      /*if(item.data&&item.data.menu){
+      if(item.data&&item.data.menu){
         let itemMenu={path:item.path,children:[]};
         if((item as any)._loadedConfig&&(item as any)._loadedConfig.routes){
           (item as any)._loadedConfig.routes.forEach(subItem=>{
@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
           })
         }
         this.menu.push(itemMenu);
-      }*/
+      }
     })
   }
 
