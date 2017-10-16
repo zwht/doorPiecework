@@ -1,5 +1,15 @@
 <div class="menuCpl">
-  menu
+  <div class="header">header</div>
+  <ul class="leftMenu">
+    <li *ngFor="let item of menu let i=index">
+      <span>{{item.name}}</span>
+      <ul class="child">
+        <li *ngFor="let child of item.children let j=index" (click)="goMenu(child)">
+          <span>{{child.name}}</span>
+        </li>
+      </ul>
+    </li>
+  </ul>
   <router-outlet></router-outlet>
 </div>
 

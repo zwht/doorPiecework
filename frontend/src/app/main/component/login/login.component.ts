@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       .subscribe(response => {
         if (response.code === 200) {
           localStorage.setItem('token', response.data.token);
-          this.router.navigate(['/admin/user']);
+          this.router.navigate(['/admin/user/list']);
         } else {
           console.log(data);
         }
