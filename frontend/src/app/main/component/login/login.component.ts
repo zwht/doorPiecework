@@ -2,11 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 import {Router} from '@angular/router';
 import {LoginVo} from './../../class/vo/LoginVo';
+import {HeroService} from './../../service/HeroService';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
-  providers: []
+  providers: [HeroService]
 })
 
 export class LoginComponent implements OnInit {
@@ -15,10 +16,13 @@ export class LoginComponent implements OnInit {
     password: '123456'
   };
 
-  constructor(private http: Http,private router:Router) {
+  constructor(private http: Http,
+              private router:Router,
+              private heroService:HeroService) {
   }
 
   ngOnInit() {
+    console.log(this);
   }
 
   onLogin(data) {
