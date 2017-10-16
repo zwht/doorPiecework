@@ -19,8 +19,10 @@ export class MenuComponent implements OnInit {
           (item as any)._loadedConfig.routes.forEach(subItem => {
             subItem.children.forEach(subSubItem => {
               if (subSubItem.data && subSubItem.data.menu) {
-                itemMenu.children.push({path: item.path + '/' + subSubItem.path,
-                  name: subSubItem.data.name});
+                itemMenu.children.push({
+                  path: item.path + '/' + subSubItem.path,
+                  name: subSubItem.data.name
+                });
               }
             });
           });
@@ -28,8 +30,36 @@ export class MenuComponent implements OnInit {
         this.menu.push(itemMenu);
       }
     });
+    this.setActiveMenu(this.router.url, '/');
   }
-  goMenu(item){
+
+  //设置菜单选中
+  setActiveMenu(url, br) {
+    this.menu.forEach(item => {
+      let isActive = false;
+      item.children.forEach(subItem => {
+        if (br + subItem.path === url) {
+          subItem.active = true;
+          isActive = true;
+        } else {
+          subItem.active = false;
+        }
+      });
+      if (isActive || br + item.path === url) {
+        item.active = true;
+        item.show = true;
+      } else {
+        item.active = false;
+      }
+    });
+  }
+
+  goMenu(item) {
+    this.setActiveMenu(item.path, '');
     this.router.navigate([item.path]);
+  }
+
+  bigMenu(item) {
+    item.show = !item.show;
   }
 }

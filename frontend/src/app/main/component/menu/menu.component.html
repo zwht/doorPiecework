@@ -1,10 +1,14 @@
 <div class="menuCpl">
   <div class="header">header</div>
   <ul class="leftMenu">
-    <li *ngFor="let item of menu let i=index">
-      <span>{{item.name}}</span>
-      <ul class="child">
-        <li *ngFor="let child of item.children let j=index" (click)="goMenu(child)">
+    <li *ngFor="let item of menu let i=index" [ngClass]="{active:item.active,show:item.show}">
+      <span (click)="bigMenu(item)">{{item.name}}
+        <i [ngClass]="{'icon-packup':item.show,'icon-unfold':!item.show}" class="icon iconfont"></i>
+      </span>
+
+      <ul class="child" [ngStyle]="{height:item.show?item.children.length*34+'px':'0'}">
+        <li *ngFor="let child of item.children let j=index" (click)="goMenu(child)"
+        [ngClass]="{active:child.active}">
           <span>{{child.name}}</span>
         </li>
       </ul>
