@@ -1,29 +1,23 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import {InterceptorService} from 'ng2-interceptors';
-import 'rxjs/add/operator/toPromise';
 
 import {LoginVo} from '../class/vo/LoginVo';
+import {Response} from '../class/vo/Response';
 
 
 @Injectable()
 export class AuthService {
-
-  private headers = new Headers({'Content-Type': 'application/json'});
-
-  constructor(private http: InterceptorService) {
+  constructor(private http: Http) {
   }
 
   // 登陆
-  private url_authLogin = 'auth/login';
+  private url_authLogin = '/cfmy/user/login';
 
-  login(account: string, password: string): Promise<LoginVo> {
-
-    console.log("登陆:" + account + "," + password);
+  login(loginVo: LoginVo): Promise<Response<void>> {
     return this.http.post(this.url_authLogin,
-      JSON.stringify({account: account, password: password}))
+      JSON.stringify(loginVo))
       .toPromise()
-      .then(response => response.json().data as LoginVo)
+      .then(response => response.json())
       .catch(this.handleError);
   }
 
@@ -32,7 +26,7 @@ export class AuthService {
 
   logout(userId: string): Promise<void> {
     return this.http.post(this.url_authLogout,
-      JSON.stringify({userId: userId}), {headers: this.headers})
+      JSON.stringify({userId: userId}))
       .toPromise()
       .then(() => null)
       .catch(this.handleError);

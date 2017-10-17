@@ -5,8 +5,6 @@ import {Http, HttpModule, XHRBackend, RequestOptions} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
 
-import 'rxjs/Rx';
-
 //拦截器代码
 import {HttpInterceptorService} from './core/http/HttpInterceptorService';
 

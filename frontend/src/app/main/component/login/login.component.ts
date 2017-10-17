@@ -2,23 +2,20 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 import {Router} from '@angular/router';
 import {LoginVo} from './../../class/vo/LoginVo';
-import {HeroService} from './../../service/HeroService';
+import {AuthService} from './../../service/AuthService';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
-  providers: [HeroService]
+  providers: [AuthService]
 })
 
 export class LoginComponent implements OnInit {
-  login = {
-    username: 'zw',
-    password: '123456'
-  };
+  login = new LoginVo('', '');
 
   constructor(private http: Http,
-              private router:Router,
-              private heroService:HeroService) {
+              private router: Router,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -26,19 +23,14 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(data) {
-    this.http.post('/cfmy/user/login', JSON.stringify(this.login))
-      .map(res => res.json())
-      .subscribe(response => {
+    this.authService.login(this.login)
+      .then(response => {
         if (response.code === 200) {
-          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('token', (response.data as any).token);
           this.router.navigate(['/admin/user/list']);
         } else {
           console.log(data);
         }
-      }, err => {
-        console.log(err);
-      }, () => {
-        console.log('Register Complete');
       });
   }
 }

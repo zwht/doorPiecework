@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Request, RequestOptionsArgs, Response, RequestOptions, ConnectionBackend, Headers} from '@angular/http';
-import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 @Injectable()
 export class HttpInterceptorService extends Http {
   status = {
