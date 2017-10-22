@@ -6,6 +6,7 @@ import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.User;
 import com.zw.cf.model.UserExample;
 import com.zw.cf.service.UserService;
+import com.zw.cf.vo.UserListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
                 long currentTime = System.currentTimeMillis();
                 currentTime +=2*60*60*1000;
                 Date date = new Date(currentTime);
-                userOne.setTokentime(date);
+                    userOne.setTokentime(date);
                 userOne.setPassword("");
 
                 String token = JwtUtils.sign(users.get(0), 30L * 24L * 3600L * 1000L);
@@ -101,12 +102,16 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public Response getUserList(Integer pageNum, Integer pageSize) {
+    public Response getUserList(Integer pageNum, Integer pageSize, UserListFind userListFind) {
         Response response = new Response();
         PageObj pageObj = new PageObj();
+        //条件查询3句话
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andCorporationidEqualTo(userListFind.getCorporationId());
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
-            List list = userMapper.selectByExample(null);
+            List list = userMapper.selectByExample(example);
             long count = page.getTotal();
             return response.success(pageObj.init(pageNum, pageSize, count, list));
         } catch (Exception e) {

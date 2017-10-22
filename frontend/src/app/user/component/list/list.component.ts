@@ -8,6 +8,7 @@ import {UserService} from './../../service/UserService';
   providers: [UserService]
 })
 export class ListComponent implements OnInit {
+  list = [];
 
   constructor(private userService: UserService) {
   }
@@ -17,7 +18,18 @@ export class ListComponent implements OnInit {
   }
 
   getUserList() {
-    //this.userService.getUserList("zw","123456");
+    (this.userService as any).list({
+      pageNum: 1,
+      pageSize: 10
+    }, {})
+      .then(response => {
+        const rep = (response as any);
+        if (rep.code === 200) {
+          this.list = response.data.data;
+        } else {
+          console.log(response);
+        }
+      });
   }
 
 }

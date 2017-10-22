@@ -10,8 +10,16 @@ export class UserService {
   constructor(private http: Http) {
   }
 
-  // 登陆
-  private url_authLogin = '/cfmy/user/login';
+  /**获取用户列表**/
+  private url_authLogin = '/cfmy/user/getUserList';
+
+  public list(obj: Object, obj1: Object): Promise<void> {
+    return this.http.post(this.url_authLogin+'/'+(obj as any).pageNum+'/'+(obj as any).pageSize,
+      JSON.stringify(obj1 ? obj1 : {}))
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('发生错误', error);

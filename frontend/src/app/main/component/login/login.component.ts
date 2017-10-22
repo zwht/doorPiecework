@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
   onLogin(data) {
     this.authService.login(this.login)
       .then(response => {
-        if (response.code === 200) {
-          localStorage.setItem('token', (response.data as any).token);
+        const rep = (response as any);
+        if (rep.code === 200) {
+          localStorage.setItem('token', rep.data.token);
           this.router.navigate(['/admin/user/list']);
         } else {
           console.log(data);

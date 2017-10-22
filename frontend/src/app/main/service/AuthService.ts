@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
+import {Http} from '@angular/http';
 
 import {LoginVo} from '../class/vo/LoginVo';
-import {Response} from '../class/vo/Response';
-
 
 @Injectable()
 export class AuthService {
@@ -12,8 +10,7 @@ export class AuthService {
 
   // 登陆
   private url_authLogin = '/cfmy/user/login';
-
-  login(loginVo: LoginVo): Promise<Response<void>> {
+  login(loginVo: LoginVo): Promise<void> {
     return this.http.post(this.url_authLogin,
       JSON.stringify(loginVo))
       .toPromise()

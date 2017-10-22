@@ -4,6 +4,8 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
 import com.zw.cf.vo.LoginVo;
+import com.zw.cf.vo.UserListFind;
+import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +45,22 @@ public class UserCtrl {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
+    @RequestMapping(value = "/getUserList/{pageNum}/{pageSize}", method = RequestMethod.POST)
     @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
     public Response<PageObj<List<User>>> getUserList(
-            @ApiParam(required = true, value = "当前页面", name = "pageNum") @RequestParam Integer pageNum,
-            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @RequestParam Integer pageSize
+            @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
+            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
+            @ApiParam(required = true, value = "userListFind", name = "userListFind") @RequestBody UserListFind userListFind,
+            HttpServletRequest request
     ) {
-        return userService.getUserList(pageNum,pageSize);
+        String token = request.getHeader("Authorization");
+        if(token==null){
+            token = request.getParameter("Authorization");
+        }
+        User user = JwtUtils.unsign(token, User.class);
+        String corporationid=user.getCorporationid();
+        userListFind.setCorporationId(corporationid);
+        return userService.getUserList(pageNum,pageSize,userListFind);
     }
 
 
