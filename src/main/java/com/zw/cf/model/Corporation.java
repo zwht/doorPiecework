@@ -9,9 +9,7 @@ public class Corporation {
 
     private String logo;
 
-    private Integer phone;
-
-    private String telephone;
+    private String phone;
 
     private String boss;
 
@@ -47,20 +45,12 @@ public class Corporation {
         this.logo = logo == null ? null : logo.trim();
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
-        this.phone = phone;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone == null ? null : telephone.trim();
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getBoss() {

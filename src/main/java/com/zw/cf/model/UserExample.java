@@ -515,63 +515,63 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeIsNull() {
-            addCriterion("useType is null");
+        public Criteria andRolesIsNull() {
+            addCriterion("roles is null");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeIsNotNull() {
-            addCriterion("useType is not null");
+        public Criteria andRolesIsNotNull() {
+            addCriterion("roles is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeEqualTo(Integer value) {
-            addCriterion("useType =", value, "usetype");
+        public Criteria andRolesEqualTo(Integer value) {
+            addCriterion("roles =", value, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeNotEqualTo(Integer value) {
-            addCriterion("useType <>", value, "usetype");
+        public Criteria andRolesNotEqualTo(Integer value) {
+            addCriterion("roles <>", value, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeGreaterThan(Integer value) {
-            addCriterion("useType >", value, "usetype");
+        public Criteria andRolesGreaterThan(Integer value) {
+            addCriterion("roles >", value, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("useType >=", value, "usetype");
+        public Criteria andRolesGreaterThanOrEqualTo(Integer value) {
+            addCriterion("roles >=", value, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeLessThan(Integer value) {
-            addCriterion("useType <", value, "usetype");
+        public Criteria andRolesLessThan(Integer value) {
+            addCriterion("roles <", value, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeLessThanOrEqualTo(Integer value) {
-            addCriterion("useType <=", value, "usetype");
+        public Criteria andRolesLessThanOrEqualTo(Integer value) {
+            addCriterion("roles <=", value, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeIn(List<Integer> values) {
-            addCriterion("useType in", values, "usetype");
+        public Criteria andRolesIn(List<Integer> values) {
+            addCriterion("roles in", values, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeNotIn(List<Integer> values) {
-            addCriterion("useType not in", values, "usetype");
+        public Criteria andRolesNotIn(List<Integer> values) {
+            addCriterion("roles not in", values, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeBetween(Integer value1, Integer value2) {
-            addCriterion("useType between", value1, value2, "usetype");
+        public Criteria andRolesBetween(Integer value1, Integer value2) {
+            addCriterion("roles between", value1, value2, "roles");
             return (Criteria) this;
         }
 
-        public Criteria andUsetypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("useType not between", value1, value2, "usetype");
+        public Criteria andRolesNotBetween(Integer value1, Integer value2) {
+            addCriterion("roles not between", value1, value2, "roles");
             return (Criteria) this;
         }
 

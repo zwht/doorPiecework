@@ -8,7 +8,7 @@
     <result column="gxId" jdbcType="VARCHAR" property="gxid" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
-    <result column="useType" jdbcType="INTEGER" property="usetype" />
+    <result column="roles" jdbcType="INTEGER" property="roles" />
     <result column="tokenTime" jdbcType="TIMESTAMP" property="tokentime" />
     <result column="token" jdbcType="VARCHAR" property="token" />
     <result column="phone" jdbcType="INTEGER" property="phone" />
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userName, passWord, gxId, type, corporationId, useType, tokenTime, token, phone, 
+    id, userName, passWord, gxId, type, corporationId, roles, tokenTime, token, phone, 
     loginName
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.UserExample" resultMap="BaseResultMap">
@@ -109,11 +109,11 @@
   <insert id="insert" parameterType="com.zw.cf.model.User">
     insert into users (id, userName, passWord, 
       gxId, type, corporationId, 
-      useType, tokenTime, token, 
+      roles, tokenTime, token, 
       phone, loginName)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{gxid,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{corporationid,jdbcType=VARCHAR}, 
-      #{usetype,jdbcType=INTEGER}, #{tokentime,jdbcType=TIMESTAMP}, #{token,jdbcType=VARCHAR}, 
+      #{roles,jdbcType=INTEGER}, #{tokentime,jdbcType=TIMESTAMP}, #{token,jdbcType=VARCHAR}, 
       #{phone,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.User">
@@ -137,8 +137,8 @@
       <if test="corporationid != null">
         corporationId,
       </if>
-      <if test="usetype != null">
-        useType,
+      <if test="roles != null">
+        roles,
       </if>
       <if test="tokentime != null">
         tokenTime,
@@ -172,8 +172,8 @@
       <if test="corporationid != null">
         #{corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="usetype != null">
-        #{usetype,jdbcType=INTEGER},
+      <if test="roles != null">
+        #{roles,jdbcType=INTEGER},
       </if>
       <if test="tokentime != null">
         #{tokentime,jdbcType=TIMESTAMP},
@@ -216,8 +216,8 @@
       <if test="record.corporationid != null">
         corporationId = #{record.corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="record.usetype != null">
-        useType = #{record.usetype,jdbcType=INTEGER},
+      <if test="record.roles != null">
+        roles = #{record.roles,jdbcType=INTEGER},
       </if>
       <if test="record.tokentime != null">
         tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
@@ -244,7 +244,7 @@
       gxId = #{record.gxid,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
       corporationId = #{record.corporationid,jdbcType=VARCHAR},
-      useType = #{record.usetype,jdbcType=INTEGER},
+      roles = #{record.roles,jdbcType=INTEGER},
       tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
       token = #{record.token,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=INTEGER},
@@ -271,8 +271,8 @@
       <if test="corporationid != null">
         corporationId = #{corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="usetype != null">
-        useType = #{usetype,jdbcType=INTEGER},
+      <if test="roles != null">
+        roles = #{roles,jdbcType=INTEGER},
       </if>
       <if test="tokentime != null">
         tokenTime = #{tokentime,jdbcType=TIMESTAMP},
@@ -296,7 +296,7 @@
       gxId = #{gxid,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       corporationId = #{corporationid,jdbcType=VARCHAR},
-      useType = #{usetype,jdbcType=INTEGER},
+      roles = #{roles,jdbcType=INTEGER},
       tokenTime = #{tokentime,jdbcType=TIMESTAMP},
       token = #{token,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=INTEGER},

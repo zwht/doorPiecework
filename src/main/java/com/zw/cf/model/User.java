@@ -15,7 +15,7 @@ public class User {
 
     private String corporationid;
 
-    private Integer usetype;
+    private Integer roles;
 
     private Date tokentime;
 
@@ -73,12 +73,12 @@ public class User {
         this.corporationid = corporationid == null ? null : corporationid.trim();
     }
 
-    public Integer getUsetype() {
-        return usetype;
+    public Integer getRoles() {
+        return roles;
     }
 
-    public void setUsetype(Integer usetype) {
-        this.usetype = usetype;
+    public void setRoles(Integer roles) {
+        this.roles = roles;
     }
 
     public Date getTokentime() {

@@ -6,8 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="logo" jdbcType="VARCHAR" property="logo" />
-    <result column="phone" jdbcType="INTEGER" property="phone" />
-    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="boss" jdbcType="VARCHAR" property="boss" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, address, logo, phone, telephone, boss
+    id, name, address, logo, phone, boss
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.CorporationExample" resultMap="BaseResultMap">
     select
@@ -103,11 +102,9 @@
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Corporation">
     insert into corporation (id, name, address, 
-      logo, phone, telephone, 
-      boss)
+      logo, phone, boss)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR}, #{phone,jdbcType=INTEGER}, #{telephone,jdbcType=VARCHAR}, 
-      #{boss,jdbcType=VARCHAR})
+      #{logo,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{boss,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Corporation">
     insert into corporation
@@ -127,9 +124,6 @@
       <if test="phone != null">
         phone,
       </if>
-      <if test="telephone != null">
-        telephone,
-      </if>
       <if test="boss != null">
         boss,
       </if>
@@ -148,10 +142,7 @@
         #{logo,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=INTEGER},
-      </if>
-      <if test="telephone != null">
-        #{telephone,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="boss != null">
         #{boss,jdbcType=VARCHAR},
@@ -180,10 +171,7 @@
         logo = #{record.logo,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=INTEGER},
-      </if>
-      <if test="record.telephone != null">
-        telephone = #{record.telephone,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
       <if test="record.boss != null">
         boss = #{record.boss,jdbcType=VARCHAR},
@@ -199,8 +187,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       logo = #{record.logo,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=INTEGER},
-      telephone = #{record.telephone,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
       boss = #{record.boss,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -219,10 +206,7 @@
         logo = #{logo,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=INTEGER},
-      </if>
-      <if test="telephone != null">
-        telephone = #{telephone,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="boss != null">
         boss = #{boss,jdbcType=VARCHAR},
@@ -235,8 +219,7 @@
     set name = #{name,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       logo = #{logo,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=INTEGER},
-      telephone = #{telephone,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
       boss = #{boss,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
