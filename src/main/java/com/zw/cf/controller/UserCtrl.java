@@ -41,7 +41,7 @@ public class UserCtrl {
             @ApiParam(required = true, value = "用户名", name = "userName") @RequestParam String userName,
             @ApiParam(required = true, value = "密码", name = "passWord") @RequestParam String passWord
     ) {
-        return userService.addUser(userName,passWord);
+        return userService.addUser(userName, passWord);
     }
 
     @ResponseBody
@@ -54,15 +54,14 @@ public class UserCtrl {
             HttpServletRequest request
     ) {
         String token = request.getHeader("Authorization");
-        if(token==null){
+        if (token == null) {
             token = request.getParameter("Authorization");
         }
         User user = JwtUtils.unsign(token, User.class);
-        String corporationid=user.getCorporationid();
+        String corporationid = user.getCorporationid();
         userListFind.setCorporationId(corporationid);
-        return userService.getUserList(pageNum,pageSize,userListFind);
+        return userService.getUserList(pageNum, pageSize, userListFind);
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -70,22 +69,20 @@ public class UserCtrl {
     public Response<User> login(
             @ApiParam(required = true, value = "用户名密码", name = "LoginVo") @RequestBody LoginVo loginVo
     ) {
-        return userService.login(loginVo.getUsername(),loginVo.getPassword());
+        return userService.login(loginVo.getName(), loginVo.getPassword());
     }
 
     @ResponseBody
     @RequestMapping(value = "/refreshToken", method = RequestMethod.POST)
     @ApiOperation(value = "更新token", httpMethod = "POST", notes = "更新token")
     public Response<User> login(HttpServletRequest request,
-            @ApiParam(required = true, value = "旧token", name = "token") @RequestParam String token) {
+                                @ApiParam(required = true, value = "旧token", name = "token") @RequestParam String token) {
 
         String token1 = request.getHeader("access_token");
-        if(token1==null){
+        if (token1 == null) {
             token1 = request.getParameter("access_token");
         }
-
-
-        return userService.refreshToken(token,token1);
+        return userService.refreshToken(token, token1);
     }
 
 

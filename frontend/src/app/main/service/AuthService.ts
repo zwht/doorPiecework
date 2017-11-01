@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
+import HandleError from './../../common/service/HandleError';
 
 import {LoginVo} from '../class/vo/LoginVo';
 
@@ -10,12 +11,13 @@ export class AuthService {
 
   // 登陆
   private url_authLogin = '/cfmy/user/login';
+
   login(loginVo: LoginVo): Promise<void> {
     return this.http.post(this.url_authLogin,
       JSON.stringify(loginVo))
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch(HandleError);
   }
 
   // 注销
@@ -26,11 +28,6 @@ export class AuthService {
       JSON.stringify({userId: userId}))
       .toPromise()
       .then(() => null)
-      .catch(this.handleError);
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('发生错误', error);
-    return Promise.reject(error.message || error);
+      .catch(HandleError);
   }
 }

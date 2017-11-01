@@ -9,21 +9,11 @@ public class User {
 
     private String password;
 
-    private String gxid;
-
-    private Integer type;
-
     private String corporationid;
-
-    private Integer roles;
 
     private Date tokentime;
 
     private String token;
-
-    private Integer phone;
-
-    private String loginname;
 
     public String getId() {
         return id;
@@ -49,36 +39,12 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getGxid() {
-        return gxid;
-    }
-
-    public void setGxid(String gxid) {
-        this.gxid = gxid == null ? null : gxid.trim();
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     public String getCorporationid() {
         return corporationid;
     }
 
     public void setCorporationid(String corporationid) {
         this.corporationid = corporationid == null ? null : corporationid.trim();
-    }
-
-    public Integer getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Integer roles) {
-        this.roles = roles;
     }
 
     public Date getTokentime() {
@@ -95,21 +61,5 @@ public class User {
 
     public void setToken(String token) {
         this.token = token == null ? null : token.trim();
-    }
-
-    public Integer getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Integer phone) {
-        this.phone = phone;
-    }
-
-    public String getLoginname() {
-        return loginname;
-    }
-
-    public void setLoginname(String loginname) {
-        this.loginname = loginname == null ? null : loginname.trim();
     }
 }

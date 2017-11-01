@@ -1,6 +1,6 @@
 import {MenuComponent} from './../main/component/menu/menu.component';
-import {CompanyComponent} from './component/company/company.component';
-import {CompanyAddComponent} from './component/company-add/company-add.component';
+import {CorporationListComponent} from './component/corporation-list/corporation-list.component';
+import {CorporationAddComponent} from './component/corporation-add/corporation-add.component';
 import {ListComponent} from './component/list/list.component';
 import {AddComponent} from './component/add/add.component';
 
@@ -11,7 +11,7 @@ export const userRoutes = [
     children: [
       {
         path: 'company',
-        component: CompanyComponent,
+        component: CorporationListComponent,
         data: {
           name: '企业列表',
           menu: true
@@ -19,7 +19,7 @@ export const userRoutes = [
       },
       {
         path: 'company/add',
-        component: CompanyAddComponent,
+        component: CorporationAddComponent,
         data: {
           name: '添加企业'
         }
@@ -45,8 +45,8 @@ export const userRoutes = [
 
 export const userComponentList = [
   MenuComponent,
-  CompanyComponent,
-  CompanyAddComponent,
+  CorporationListComponent,
+  CorporationAddComponent,
   ListComponent,
   AddComponent
 ];

@@ -5,9 +5,6 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="boss" jdbcType="VARCHAR" property="boss" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, address, logo, phone, boss
+    id, name, address
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.CorporationExample" resultMap="BaseResultMap">
     select
@@ -101,10 +98,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Corporation">
-    insert into corporation (id, name, address, 
-      logo, phone, boss)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{boss,jdbcType=VARCHAR})
+    insert into corporation (id, name, address
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Corporation">
     insert into corporation
@@ -118,15 +115,6 @@
       <if test="address != null">
         address,
       </if>
-      <if test="logo != null">
-        logo,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="boss != null">
-        boss,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -137,15 +125,6 @@
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="logo != null">
-        #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="boss != null">
-        #{boss,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -167,15 +146,6 @@
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.logo != null">
-        logo = #{record.logo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.boss != null">
-        boss = #{record.boss,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -185,10 +155,7 @@
     update corporation
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      logo = #{record.logo,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      boss = #{record.boss,jdbcType=VARCHAR}
+      address = #{record.address,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -202,25 +169,13 @@
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="logo != null">
-        logo = #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="boss != null">
-        boss = #{boss,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Corporation">
     update corporation
     set name = #{name,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      logo = #{logo,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      boss = #{boss,jdbcType=VARCHAR}
+      address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

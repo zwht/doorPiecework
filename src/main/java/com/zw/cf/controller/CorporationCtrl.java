@@ -3,9 +3,8 @@ package com.zw.cf.controller;
 import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.User;
 import com.zw.cf.service.CorporationService;
-import com.zw.cf.service.UserService;
-import com.zw.cf.vo.UserListFind;
-import com.zw.plug.JwtUtils;
+import com.zw.cf.vo.CorporationListFind;
+
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import java.util.List;
 @Controller("corporationAction")
 @Scope("prototype")
 @RequestMapping("/cfmy/corporation")
-public class corporationCtrl {
+public class CorporationCtrl {
 
     @Autowired
     CorporationService corporationService;
@@ -40,27 +39,20 @@ public class corporationCtrl {
             @ApiParam(required = true, value = "用户名", name = "userName") @RequestParam String userName,
             @ApiParam(required = true, value = "密码", name = "passWord") @RequestParam String passWord
     ) {
-        return corporationService.addCorporation(userName,passWord);
+        return corporationService.addCorporation(userName, passWord);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getCorporationList/{pageNum}/{pageSize}", method = RequestMethod.POST)
+    @RequestMapping(value = "/list/{pageNum}/{pageSize}", method = RequestMethod.POST)
     @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
     public Response<PageObj<List<User>>> getUserList(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "userListFind", name = "userListFind") @RequestBody UserListFind userListFind,
-            HttpServletRequest request
+            @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody CorporationListFind corporationListFind
     ) {
-        String token = request.getHeader("Authorization");
-        if(token==null){
-            token = request.getParameter("Authorization");
-        }
-        User user = JwtUtils.unsign(token, User.class);
-        String corporationid=user.getCorporationid();
-        userListFind.setCorporationId(corporationid);
-        return corporationService.getCorporationList(pageNum,pageSize,userListFind);
+        return corporationService.getCorporationList(pageNum, pageSize, corporationListFind);
     }
+
     @ResponseBody
     @RequestMapping(value = "/getCorporation", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")

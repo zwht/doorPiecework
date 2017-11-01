@@ -18,7 +18,7 @@
         </commentGenerator>
         <!-- 配置数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/zwDatabalse?characterEncoding=utf8"
+                        connectionURL="jdbc:mysql://localhost:3306/cfmy?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="zw200813" />
 

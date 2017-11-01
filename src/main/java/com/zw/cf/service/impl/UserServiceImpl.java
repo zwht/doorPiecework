@@ -37,18 +37,18 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public Response login(String userName, String passWord) {
+    public Response login(String name, String password) {
         Response<User> response = new Response();
         try {
-            if (userName == null || userName == "") {
+            if (name == null || name == "") {
                 throw new Exception("用户名不能为空!");
             }
-            if (passWord == null || passWord == "") {
+            if (password == null || password == "") {
                 throw new Exception("密码不能为空!");
             }
             UserExample userExample=new UserExample();
             UserExample.Criteria criteria=userExample.createCriteria();
-            criteria.andUsernameEqualTo(userName);
+            criteria.andUsernameEqualTo(name);
             //使用用户名查询是否有相同用户名
             List<User> users = userMapper.selectByExample(userExample);
 
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
             ZwUtil zwUtil=new ZwUtil();
             if(users.size() == 0){
                 return response.failure(400, "用户名不存在！");
-            }else if (users.get(0).getPassword().equals(zwUtil.EncoderByMd5(passWord))) {
+            }else if (users.get(0).getPassword().equals(zwUtil.EncoderByMd5(password))) {
                 User userOne=users.get(0);
                 long currentTime = System.currentTimeMillis();
                 currentTime +=2*60*60*1000;

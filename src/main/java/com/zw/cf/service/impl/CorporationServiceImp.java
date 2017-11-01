@@ -6,7 +6,7 @@ import com.zw.cf.dao.CorporationMapper;
 import com.zw.cf.model.CorporationExample;
 import com.zw.cf.model.Corporation;
 import com.zw.cf.service.CorporationService;
-import com.zw.cf.vo.UserListFind;
+import com.zw.cf.vo.CorporationListFind;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import com.zw.plug.ZwUtil;
@@ -73,13 +73,14 @@ public class CorporationServiceImp implements CorporationService {
         }
     }
 
-    public Response getCorporationList(Integer pageNum, Integer pageSize, UserListFind userListFind) {
+    public Response getCorporationList(Integer pageNum, Integer pageSize, CorporationListFind corporationListFind) {
         Response response = new Response();
         PageObj pageObj = new PageObj();
         //条件查询3句话
         CorporationExample corporationExample = new CorporationExample();
         CorporationExample.Criteria criteria = corporationExample.createCriteria();
-        criteria.andNameEqualTo(userListFind.getCorporationId());
+        criteria.andNameEqualTo(corporationListFind.getName());
+
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
             List list = corporationMapper.selectByExample(corporationExample);
