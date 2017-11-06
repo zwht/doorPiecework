@@ -38,10 +38,17 @@ public class UserCtrl {
             @ApiResponse(code = 202, message = "(系统错误)", response = String.class)})
 
     public Response add(
-            @ApiParam(required = true, value = "用户名", name = "userName") @RequestParam String userName,
-            @ApiParam(required = true, value = "密码", name = "passWord") @RequestParam String passWord
+            @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody User user,
+            HttpServletRequest request
     ) {
-        return userService.addUser(userName, passWord);
+        String token = request.getHeader("Authorization");
+        if (token == null) {
+            token = request.getParameter("Authorization");
+        }
+        User admin = JwtUtils.unsign(token, User.class);
+        String corporationid = admin.getCorporationid();
+        user.setCorporationid(corporationid);
+        return userService.addUser(user);
     }
 
     @ResponseBody

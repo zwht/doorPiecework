@@ -37,6 +37,13 @@ export class HttpInterceptorService extends Http {
   }
 
   get(url: string, options ?: RequestOptionsArgs): Observable<Response> {
+    if (options == null) {
+      options = new RequestOptions();
+    }
+    if (options.headers == null) {
+      options.headers = new Headers();
+    }
+    options.headers.append('Authorization', localStorage.getItem('token'));
     return this.intercept(super.get(url, options));
   }
 
@@ -59,6 +66,7 @@ export class HttpInterceptorService extends Http {
     if (options.headers == null) {
       options.headers = new Headers();
     }
+
     options.headers.append('Content-Type', 'application/json; charset=utf-8');
     options.headers.append('Authorization', localStorage.getItem('token'));
     return options;

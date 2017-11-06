@@ -1,6 +1,12 @@
 <div>
-  <i class="icon iconfont icon-add"></i>
+  <div class="search">
+    <div (click)="add()">
+      <i class="icon iconfont icon-add"></i>
+      添加用户
+    </div>
+
+  </div>
   <ul>
-    <li *ngFor="let item of list let i=index">{{item.username}}</li>
+    <li *ngFor="let item of list let i=index">{{item.name}}</li>
   </ul>
 </div>

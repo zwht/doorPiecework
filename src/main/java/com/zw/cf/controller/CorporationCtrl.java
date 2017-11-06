@@ -1,6 +1,7 @@
 package com.zw.cf.controller;
 
 import com.wordnik.swagger.annotations.*;
+import com.zw.cf.model.Corporation;
 import com.zw.cf.model.User;
 import com.zw.cf.service.CorporationService;
 import com.zw.cf.vo.CorporationListFind;
@@ -30,16 +31,13 @@ public class CorporationCtrl {
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ApiOperation(value = "添加用户", httpMethod = "POST", notes = "添加用户")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "商品信息"),
-            @ApiResponse(code = 201, message = "(token验证失败)", response = String.class),
-            @ApiResponse(code = 202, message = "(系统错误)", response = String.class)})
+    @ApiOperation(value = "添加公司", httpMethod = "POST", notes = "添加公司")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "添加公司")})
 
     public Response add(
-            @ApiParam(required = true, value = "用户名", name = "userName") @RequestParam String userName,
-            @ApiParam(required = true, value = "密码", name = "passWord") @RequestParam String passWord
+            @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody Corporation corporation
     ) {
-        return corporationService.addCorporation(userName, passWord);
+        return corporationService.addCorporation(corporation);
     }
 
     @ResponseBody
@@ -60,5 +58,14 @@ public class CorporationCtrl {
             @ApiParam(required = true, value = "用户Id", name = "userId") @RequestParam String userId
     ) {
         return corporationService.getCorporationById(userId);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/del", method = RequestMethod.GET)
+    @ApiOperation(value = "根据id删除公司", httpMethod = "GET", notes = "删除公司")
+    public Response<User> del(
+            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
+    ) {
+        return corporationService.del(id);
     }
 }

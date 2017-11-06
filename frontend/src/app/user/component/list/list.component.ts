@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from './../../service/UserService';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -10,11 +10,16 @@ import {UserService} from './../../service/UserService';
 export class ListComponent implements OnInit {
   list = [];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.getUserList();
+  }
+
+  add(item) {
+    this.router.navigate(['/admin/user/add']);
   }
 
   getUserList() {

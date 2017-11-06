@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
             }
             UserExample userExample=new UserExample();
             UserExample.Criteria criteria=userExample.createCriteria();
-            criteria.andUsernameEqualTo(name);
+            criteria.andNameEqualTo(name);
             //使用用户名查询是否有相同用户名
             List<User> users = userMapper.selectByExample(userExample);
 
@@ -119,30 +119,26 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public Response addUser(String userName, String passWord) {
+    public Response addUser(User user) {
         Response response = new Response();
         try {
             Date date = new Date();
             UserExample userExample=new UserExample();
             UserExample.Criteria criteria=userExample.createCriteria();
-            criteria.andUsernameEqualTo(userName);
+            criteria.andNameEqualTo(user.getName());
             //使用用户名查询是否有相同用户名
             List<User> users = userMapper.selectByExample(userExample);
             if (users.size() == 0) {
-                ZwUtil zwUtil=new ZwUtil();
-                User newUser=new User();
-                newUser.setId(date.getTime() + "");
-                newUser.setUsername(userName);
-                newUser.setPassword(zwUtil.EncoderByMd5(passWord));
+                user.setId(date.getTime() + "");
 
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
-                Set<ConstraintViolation<User>> constraintViolations= validator.validate(newUser);
+                Set<ConstraintViolation<User>> constraintViolations= validator.validate(user);
 
                 if(constraintViolations.size()!=0){
                     return response.validation(constraintViolations);
                 }else {
-                    userMapper.insert(newUser);
+                    userMapper.insert(user);
                     return response.success("添加成功");
                 }
 

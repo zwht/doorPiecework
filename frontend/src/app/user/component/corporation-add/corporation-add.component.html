@@ -1,3 +1,14 @@
-<p>
-  corporation-add works!
-</p>
+<div>
+  <div>
+    <label>
+      <span>公司名称：</span>
+      <input [(ngModel)]="component.name" placeholder="请输入密码" type="text" >
+    </label>
+    <label>
+      <span>地址：</span>
+      <input [(ngModel)]="component.address" type="text">
+    </label>
+
+    <button (click)="save()" type="info" style="width: 100%; margin-top: 30px;">保存</button>
+  </div>
+</div>

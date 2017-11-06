@@ -1,5 +1,6 @@
 package com.zw.cf.service;
 
+import com.zw.cf.model.User;
 import com.zw.cf.vo.UserListFind;
 import com.zw.plug.Response;
 
@@ -11,6 +12,6 @@ public interface UserService {
     Response login(String name,String password);
     Response refreshToken(String token,String token1);
     Response getUserList(Integer pageNum, Integer pageSize, UserListFind userListFind);
-    Response addUser(String name,String passWord);
+    Response addUser(User user);
 
 }

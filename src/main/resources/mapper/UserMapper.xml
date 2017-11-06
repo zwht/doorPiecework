@@ -3,8 +3,8 @@
 <mapper namespace="com.zw.cf.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.zw.cf.model.User">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="userName" jdbcType="VARCHAR" property="username" />
-    <result column="passWord" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
     <result column="tokenTime" jdbcType="TIMESTAMP" property="tokentime" />
     <result column="token" jdbcType="VARCHAR" property="token" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userName, passWord, corporationId, tokenTime, token
+    id, name, password, corporationId, tokenTime, token
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.UserExample" resultMap="BaseResultMap">
     select
@@ -101,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.User">
-    insert into users (id, userName, passWord, 
+    insert into users (id, name, password, 
       corporationId, tokenTime, token
       )
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{corporationid,jdbcType=VARCHAR}, #{tokentime,jdbcType=TIMESTAMP}, #{token,jdbcType=VARCHAR}
       )
   </insert>
@@ -114,11 +114,11 @@
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        userName,
+      <if test="name != null">
+        name,
       </if>
       <if test="password != null">
-        passWord,
+        password,
       </if>
       <if test="corporationid != null">
         corporationId,
@@ -134,8 +134,8 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -163,11 +163,11 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null">
-        userName = #{record.username,jdbcType=VARCHAR},
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
-        passWord = #{record.password,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.corporationid != null">
         corporationId = #{record.corporationid,jdbcType=VARCHAR},
@@ -186,8 +186,8 @@
   <update id="updateByExample" parameterType="map">
     update users
     set id = #{record.id,jdbcType=VARCHAR},
-      userName = #{record.username,jdbcType=VARCHAR},
-      passWord = #{record.password,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
       corporationId = #{record.corporationid,jdbcType=VARCHAR},
       tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
       token = #{record.token,jdbcType=VARCHAR}
@@ -198,11 +198,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.User">
     update users
     <set>
-      <if test="username != null">
-        userName = #{username,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        passWord = #{password,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="corporationid != null">
         corporationId = #{corporationid,jdbcType=VARCHAR},
@@ -218,8 +218,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.User">
     update users
-    set userName = #{username,jdbcType=VARCHAR},
-      passWord = #{password,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       corporationId = #{corporationid,jdbcType=VARCHAR},
       tokenTime = #{tokentime,jdbcType=TIMESTAMP},
       token = #{token,jdbcType=VARCHAR}

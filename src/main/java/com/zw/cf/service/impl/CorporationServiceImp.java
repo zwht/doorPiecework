@@ -38,35 +38,30 @@ public class CorporationServiceImp implements CorporationService {
         }
     }
 
-    public Response addCorporation(String userName, String passWord) {
+    public Response addCorporation(Corporation corporation) {
         Response response = new Response();
         try {
             Date date = new Date();
             CorporationExample corporationExample = new CorporationExample();
             CorporationExample.Criteria criteria = corporationExample.createCriteria();
-            criteria.andNameNotEqualTo(userName);
+            criteria.andNameEqualTo(corporation.getName());
             //使用用户名查询是否有相同用户名
-            List<Corporation> users = corporationMapper.selectByExample(corporationExample);
-            if (users.size() == 0) {
-                ZwUtil zwUtil = new ZwUtil();
-                Corporation newUser = new Corporation();
-                newUser.setId(date.getTime() + "");
-                newUser.setName(userName);
-                newUser.setAddress(zwUtil.EncoderByMd5(passWord));
-
+            List<Corporation> corporations = corporationMapper.selectByExample(corporationExample);
+            if (corporations.size() == 0) {
+                corporation.setId(date.getTime() + "");
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
-                Set<ConstraintViolation<Corporation>> constraintViolations = validator.validate(newUser);
+                Set<ConstraintViolation<Corporation>> constraintViolations = validator.validate(corporation);
 
                 if (constraintViolations.size() != 0) {
                     return response.validation(constraintViolations);
                 } else {
-                    corporationMapper.insert(newUser);
+                    corporationMapper.insert(corporation);
                     return response.success("添加成功");
                 }
 
             } else {
-                return response.failure(400, "已经有此用户名！");
+                return response.failure(400, "已经有相同名字公司！");
             }
         } catch (Exception e) {
             return response.failure(400, "未知错误！");
@@ -79,7 +74,10 @@ public class CorporationServiceImp implements CorporationService {
         //条件查询3句话
         CorporationExample corporationExample = new CorporationExample();
         CorporationExample.Criteria criteria = corporationExample.createCriteria();
-        criteria.andNameEqualTo(corporationListFind.getName());
+        String name=corporationListFind.getName();
+        if(name == null || name.equals("")){}else{
+            criteria.andNameEqualTo(name);
+        }
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
@@ -88,6 +86,15 @@ public class CorporationServiceImp implements CorporationService {
             return response.success(pageObj.init(pageNum, pageSize, count, list));
         } catch (Exception e) {
             return response.failure(400, e.getMessage());
+        }
+    }
+
+    public Response del(String id) {
+        Response response = new Response();
+        try {
+            return response.success(corporationMapper.deleteByPrimaryKey(id));
+        } catch (Exception e) {
+            return response.failure(501, e.getMessage());
         }
     }
 }
