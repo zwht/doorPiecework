@@ -31,6 +31,24 @@ export class CorporationService {
       .catch(HandleError);
   }
 
+  // 更新公司
+  public update(corporation: Corporation): Promise<void> {
+    return this.http.post('/cfmy/corporation/update',
+      JSON.stringify(corporation))
+      .toPromise()
+      .then(response => response.json())
+      .catch(HandleError);
+  }
+
+  // 更新状态
+  public updateState(corporation: Corporation): Promise<void> {
+    return this.http.post('/cfmy/corporation/updateState',
+      JSON.stringify(corporation))
+      .toPromise()
+      .then(response => response.json())
+      .catch(HandleError);
+  }
+
   // 删除公司
   public del(id: String): Promise<void> {
     return this.http.get('/cfmy/corporation/del?id=' + id)
@@ -38,4 +56,14 @@ export class CorporationService {
       .then(response => response.json())
       .catch(HandleError);
   }
+
+  // 获取公司
+  public getById(id: String): Promise<void> {
+    return this.http.get('/cfmy/corporation/getById?id=' + id)
+      .toPromise()
+      .then(response => response.json())
+      .catch(HandleError);
+  }
+
+
 }

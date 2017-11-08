@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zw.cf.dao.CorporationMapper">
-  <resultMap id="BaseResultMap" type="com.zw.cf.model.Corporation">
+<mapper namespace="com.zw.cf.dao.CodeMapper">
+  <resultMap id="BaseResultMap" type="com.zw.cf.model.Code">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="boss" jdbcType="VARCHAR" property="boss" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="value" jdbcType="INTEGER" property="value" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, address, state, boss, phone
+    id, value
   </sql>
-  <select id="selectByExample" parameterType="com.zw.cf.model.CorporationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zw.cf.model.CodeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from corporation
+    from code
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,94 +83,56 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from corporation
+    from code
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from corporation
+    delete from code
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zw.cf.model.CorporationExample">
-    delete from corporation
+  <delete id="deleteByExample" parameterType="com.zw.cf.model.CodeExample">
+    delete from code
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zw.cf.model.Corporation">
-    insert into corporation (id, name, address, 
-      state, boss, phone)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{boss,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.zw.cf.model.Code">
+    insert into code (id, value)
+    values (#{id,jdbcType=VARCHAR}, #{value,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.zw.cf.model.Corporation">
-    insert into corporation
+  <insert id="insertSelective" parameterType="com.zw.cf.model.Code">
+    insert into code
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="address != null">
-        address,
-      </if>
-      <if test="state != null">
-        state,
-      </if>
-      <if test="boss != null">
-        boss,
-      </if>
-      <if test="phone != null">
-        phone,
+      <if test="value != null">
+        value,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        #{state,jdbcType=INTEGER},
-      </if>
-      <if test="boss != null">
-        #{boss,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
+      <if test="value != null">
+        #{value,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zw.cf.model.CorporationExample" resultType="java.lang.Long">
-    select count(*) from corporation
+  <select id="countByExample" parameterType="com.zw.cf.model.CodeExample" resultType="java.lang.Long">
+    select count(*) from code
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update corporation
+    update code
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.address != null">
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-      <if test="record.state != null">
-        state = #{record.state,jdbcType=INTEGER},
-      </if>
-      <if test="record.boss != null">
-        boss = #{record.boss,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
+      <if test="record.value != null">
+        value = #{record.value,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -182,45 +140,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update corporation
+    update code
     set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      state = #{record.state,jdbcType=INTEGER},
-      boss = #{record.boss,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR}
+      value = #{record.value,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.Corporation">
-    update corporation
+  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.Code">
+    update code
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        state = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="boss != null">
-        boss = #{boss,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
+      <if test="value != null">
+        value = #{value,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Corporation">
-    update corporation
-    set name = #{name,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
-      boss = #{boss,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Code">
+    update code
+    set value = #{value,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

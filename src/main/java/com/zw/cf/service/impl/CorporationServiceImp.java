@@ -29,7 +29,7 @@ public class CorporationServiceImp implements CorporationService {
     @Autowired
     CorporationMapper corporationMapper;
 
-    public Response getCorporationById(String id) {
+    public Response getById(String id) {
         Response response = new Response();
         try {
             return response.success(corporationMapper.selectByPrimaryKey(id));
@@ -68,14 +68,61 @@ public class CorporationServiceImp implements CorporationService {
         }
     }
 
+    public Response update(Corporation corporation) {
+        Response response = new Response();
+        try {
+            CorporationExample corporationExample = new CorporationExample();
+            CorporationExample.Criteria criteria = corporationExample.createCriteria();
+            criteria.andNameEqualTo(corporation.getName());
+            criteria.andIdNotEqualTo(corporation.getId());
+            //使用用户名查询是否有相同用户名
+            List<Corporation> corporations = corporationMapper.selectByExample(corporationExample);
+            if (corporations.size() == 0) {
+                ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                Validator validator = factory.getValidator();
+                Set<ConstraintViolation<Corporation>> constraintViolations = validator.validate(corporation);
+
+                if (constraintViolations.size() != 0) {
+                    return response.validation(constraintViolations);
+                } else {
+                    CorporationExample example = new CorporationExample();
+                    CorporationExample.Criteria criteria1 = example.createCriteria();
+                    criteria1.andIdEqualTo(corporation.getId());
+                    corporationMapper.updateByExampleSelective(corporation, example);
+                    //corporationMapper.insert(corporation);
+                    return response.success("修改成功");
+                }
+
+            } else {
+                return response.failure(400, "已经有相同名字公司！");
+            }
+        } catch (Exception e) {
+            return response.failure(400, "未知错误！");
+        }
+    }
+
+    public Response updateState(Corporation corporation) {
+        Response response = new Response();
+        try {
+            CorporationExample example = new CorporationExample();
+            CorporationExample.Criteria criteria1 = example.createCriteria();
+            criteria1.andIdEqualTo(corporation.getId());
+            corporationMapper.updateByExampleSelective(corporation, example);
+            return response.success("修改成功");
+        } catch (Exception e) {
+            return response.failure(400, "未知错误！");
+        }
+    }
+
     public Response getCorporationList(Integer pageNum, Integer pageSize, CorporationListFind corporationListFind) {
         Response response = new Response();
         PageObj pageObj = new PageObj();
         //条件查询3句话
         CorporationExample corporationExample = new CorporationExample();
         CorporationExample.Criteria criteria = corporationExample.createCriteria();
-        String name=corporationListFind.getName();
-        if(name == null || name.equals("")){}else{
+        String name = corporationListFind.getName();
+        if (name == null || name.equals("")) {
+        } else {
             criteria.andNameEqualTo(name);
         }
 

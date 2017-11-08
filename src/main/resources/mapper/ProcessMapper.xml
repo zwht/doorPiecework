@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zw.cf.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.zw.cf.model.User">
+<mapper namespace="com.zw.cf.dao.ProcessMapper">
+  <resultMap id="BaseResultMap" type="com.zw.cf.model.Process">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="gxId" jdbcType="VARCHAR" property="gxid" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
     <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
-    <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="loginName" jdbcType="VARCHAR" property="loginname" />
+    <result column="price" jdbcType="INTEGER" property="price" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="roles" jdbcType="VARCHAR" property="roles" />
-    <result column="token" jdbcType="VARCHAR" property="token" />
-    <result column="tokenTime" jdbcType="TIMESTAMP" property="tokentime" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,15 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password, corporationId, state, phone, loginName, type, roles, token, tokenTime
+    id, gxId, userId, corporationId, price, type, startTime, endTime, state
   </sql>
-  <select id="selectByExample" parameterType="com.zw.cf.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zw.cf.model.ProcessExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from users
+    from process
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,143 +90,125 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from users
+    from process
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from users
+    delete from process
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zw.cf.model.UserExample">
-    delete from users
+  <delete id="deleteByExample" parameterType="com.zw.cf.model.ProcessExample">
+    delete from process
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zw.cf.model.User">
-    insert into users (id, name, password, 
-      corporationId, state, phone, 
-      loginName, type, roles, 
-      token, tokenTime)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{corporationid,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
-      #{loginname,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{roles,jdbcType=VARCHAR}, 
-      #{token,jdbcType=VARCHAR}, #{tokentime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.zw.cf.model.Process">
+    insert into process (id, gxId, userId, 
+      corporationId, price, type, 
+      startTime, endTime, state
+      )
+    values (#{id,jdbcType=VARCHAR}, #{gxid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{corporationid,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.zw.cf.model.User">
-    insert into users
+  <insert id="insertSelective" parameterType="com.zw.cf.model.Process">
+    insert into process
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="gxid != null">
+        gxId,
       </if>
-      <if test="password != null">
-        password,
+      <if test="userid != null">
+        userId,
       </if>
       <if test="corporationid != null">
         corporationId,
       </if>
-      <if test="state != null">
-        state,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="loginname != null">
-        loginName,
+      <if test="price != null">
+        price,
       </if>
       <if test="type != null">
         type,
       </if>
-      <if test="roles != null">
-        roles,
+      <if test="starttime != null">
+        startTime,
       </if>
-      <if test="token != null">
-        token,
+      <if test="endtime != null">
+        endTime,
       </if>
-      <if test="tokentime != null">
-        tokenTime,
+      <if test="state != null">
+        state,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="gxid != null">
+        #{gxid,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
       </if>
       <if test="corporationid != null">
         #{corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        #{state,jdbcType=INTEGER},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="loginname != null">
-        #{loginname,jdbcType=VARCHAR},
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="roles != null">
-        #{roles,jdbcType=VARCHAR},
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="token != null">
-        #{token,jdbcType=VARCHAR},
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="tokentime != null">
-        #{tokentime,jdbcType=TIMESTAMP},
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zw.cf.model.UserExample" resultType="java.lang.Long">
-    select count(*) from users
+  <select id="countByExample" parameterType="com.zw.cf.model.ProcessExample" resultType="java.lang.Long">
+    select count(*) from process
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update users
+    update process
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.gxid != null">
+        gxId = #{record.gxid,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=VARCHAR},
       </if>
       <if test="record.corporationid != null">
         corporationId = #{record.corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="record.state != null">
-        state = #{record.state,jdbcType=INTEGER},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.loginname != null">
-        loginName = #{record.loginname,jdbcType=VARCHAR},
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.roles != null">
-        roles = #{record.roles,jdbcType=VARCHAR},
+      <if test="record.starttime != null">
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.token != null">
-        token = #{record.token,jdbcType=VARCHAR},
+      <if test="record.endtime != null">
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.tokentime != null">
-        tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -236,70 +216,60 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update users
+    update process
     set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
+      gxId = #{record.gxid,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=VARCHAR},
       corporationId = #{record.corporationid,jdbcType=VARCHAR},
-      state = #{record.state,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      loginName = #{record.loginname,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
-      roles = #{record.roles,jdbcType=VARCHAR},
-      token = #{record.token,jdbcType=VARCHAR},
-      tokenTime = #{record.tokentime,jdbcType=TIMESTAMP}
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.User">
-    update users
+  <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.Process">
+    update process
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="gxid != null">
+        gxId = #{gxid,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
       </if>
       <if test="corporationid != null">
         corporationId = #{corporationid,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        state = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="loginname != null">
-        loginName = #{loginname,jdbcType=VARCHAR},
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="roles != null">
-        roles = #{roles,jdbcType=VARCHAR},
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="token != null">
-        token = #{token,jdbcType=VARCHAR},
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="tokentime != null">
-        tokenTime = #{tokentime,jdbcType=TIMESTAMP},
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.User">
-    update users
-    set name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Process">
+    update process
+    set gxId = #{gxid,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR},
       corporationId = #{corporationid,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
-      phone = #{phone,jdbcType=VARCHAR},
-      loginName = #{loginname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
-      roles = #{roles,jdbcType=VARCHAR},
-      token = #{token,jdbcType=VARCHAR},
-      tokenTime = #{tokentime,jdbcType=TIMESTAMP}
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

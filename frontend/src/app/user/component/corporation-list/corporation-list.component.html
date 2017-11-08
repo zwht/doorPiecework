@@ -8,7 +8,9 @@
   </div>
   <ul>
     <li *ngFor="let item of list let i=index">{{item.name}}
-    <button (click)="del(item)">删除</button>
+      <button (click)="del(item,0)">禁用</button>
+      <button (click)="del(item,1)">起用</button>
+      <button (click)="add(item)">编辑</button>
     </li>
   </ul>
 </div>

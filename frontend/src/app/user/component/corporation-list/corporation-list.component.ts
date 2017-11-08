@@ -34,15 +34,18 @@ export class CorporationListComponent implements OnInit {
   }
 
   add(item) {
-    this.router.navigate(['/admin/user/company/add']);
+    this.router.navigate(['/admin/user/company/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
-  del(item) {
-    (this.corporationService as any).del(item.id)
+  del(item, k) {
+    (this.corporationService as any).updateState({
+      id: item.id,
+      state: k
+    })
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
-          this.getList();
+          this.router.navigate(['/admin/user/company']);
         } else {
           console.log(response);
         }

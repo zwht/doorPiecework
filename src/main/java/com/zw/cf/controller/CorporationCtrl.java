@@ -33,11 +33,39 @@ public class CorporationCtrl {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加公司", httpMethod = "POST", notes = "添加公司")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "添加公司")})
-
     public Response add(
             @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody Corporation corporation
     ) {
         return corporationService.addCorporation(corporation);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ApiOperation(value = "更新公司", httpMethod = "POST", notes = "更新公司")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "更新公司")})
+    public Response update(
+            @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody Corporation corporation
+    ) {
+        return corporationService.update(corporation);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateState", method = RequestMethod.POST)
+    @ApiOperation(value = "更新状态", httpMethod = "POST", notes = "更新状态")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "更新状态")})
+    public Response updateState(
+            @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody Corporation corporation
+    ) {
+        return corporationService.updateState(corporation);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getById", method = RequestMethod.GET)
+    @ApiOperation(value = "根据id获取公司", httpMethod = "GET", notes = "获取公司")
+    public Response<User> getById(
+            @ApiParam(required = true, value = "Id", name = "Id") @RequestParam String id
+    ) {
+        return corporationService.getById(id);
     }
 
     @ResponseBody
@@ -51,14 +79,7 @@ public class CorporationCtrl {
         return corporationService.getCorporationList(pageNum, pageSize, corporationListFind);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/getCorporation", method = RequestMethod.GET)
-    @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
-    public Response<User> selectByPrimaryKey(
-            @ApiParam(required = true, value = "用户Id", name = "userId") @RequestParam String userId
-    ) {
-        return corporationService.getCorporationById(userId);
-    }
+
 
     @ResponseBody
     @RequestMapping(value = "/del", method = RequestMethod.GET)
@@ -68,4 +89,5 @@ public class CorporationCtrl {
     ) {
         return corporationService.del(id);
     }
+
 }

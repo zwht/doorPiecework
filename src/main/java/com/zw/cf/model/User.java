@@ -11,9 +11,19 @@ public class User {
 
     private String corporationid;
 
-    private Date tokentime;
+    private Integer state;
+
+    private String phone;
+
+    private String loginname;
+
+    private Integer type;
+
+    private String roles;
 
     private String token;
+
+    private Date tokentime;
 
     public String getId() {
         return id;
@@ -47,12 +57,44 @@ public class User {
         this.corporationid = corporationid == null ? null : corporationid.trim();
     }
 
-    public Date getTokentime() {
-        return tokentime;
+    public Integer getState() {
+        return state;
     }
 
-    public void setTokentime(Date tokentime) {
-        this.tokentime = tokentime;
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getLoginname() {
+        return loginname;
+    }
+
+    public void setLoginname(String loginname) {
+        this.loginname = loginname == null ? null : loginname.trim();
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles == null ? null : roles.trim();
     }
 
     public String getToken() {
@@ -61,5 +103,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token == null ? null : token.trim();
+    }
+
+    public Date getTokentime() {
+        return tokentime;
+    }
+
+    public void setTokentime(Date tokentime) {
+        this.tokentime = tokentime;
     }
 }

@@ -6,8 +6,10 @@ import com.zw.plug.Response;
  * Created by zhaowei on 2017/10/23.
  */
 public interface CorporationService {
-    Response getCorporationById(String id);
+    Response getById(String id);
     Response getCorporationList(Integer pageNum, Integer pageSize,CorporationListFind corporationListFind);
     Response addCorporation(Corporation corporation);
+    Response update(Corporation corporation);
+    Response updateState(Corporation corporation);
     Response del(String id);
 }
