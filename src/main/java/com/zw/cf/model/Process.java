@@ -5,19 +5,19 @@ import java.util.Date;
 public class Process {
     private String id;
 
-    private String gxid;
+    private String gxId;
 
-    private String userid;
+    private String userId;
 
-    private String corporationid;
+    private String corporationId;
 
     private Integer price;
 
     private Integer type;
 
-    private Date starttime;
+    private Date startTime;
 
-    private Date endtime;
+    private Date endTime;
 
     private Integer state;
 
@@ -29,28 +29,28 @@ public class Process {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getGxid() {
-        return gxid;
+    public String getGxId() {
+        return gxId;
     }
 
-    public void setGxid(String gxid) {
-        this.gxid = gxid == null ? null : gxid.trim();
+    public void setGxId(String gxId) {
+        this.gxId = gxId == null ? null : gxId.trim();
     }
 
-    public String getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid == null ? null : userid.trim();
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getCorporationid() {
-        return corporationid;
+    public String getCorporationId() {
+        return corporationId;
     }
 
-    public void setCorporationid(String corporationid) {
-        this.corporationid = corporationid == null ? null : corporationid.trim();
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId == null ? null : corporationId.trim();
     }
 
     public Integer getPrice() {
@@ -69,20 +69,20 @@ public class Process {
         this.type = type;
     }
 
-    public Date getStarttime() {
-        return starttime;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setStarttime(Date starttime) {
-        this.starttime = starttime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public Date getEndtime() {
-        return endtime;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEndtime(Date endtime) {
-        this.endtime = endtime;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public Integer getState() {

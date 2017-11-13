@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
                 long currentTime = System.currentTimeMillis();
                 currentTime +=2*60*60*1000;
                 Date date = new Date(currentTime);
-                    userOne.setTokentime(date);
+                    userOne.setTokenTime(date);
                 userOne.setPassword("");
 
                 String token = JwtUtils.sign(users.get(0), 30L * 24L * 3600L * 1000L);
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user = JwtUtils.unsign(token, User.class);
             Date newDate = new Date();
-            Date date = user.getTokentime();
+            Date date = user.getTokenTime();
             if (newDate.getTime() < date.getTime()) {
                 return response.failure(400, "token过期");
             }
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
             long currentTime = System.currentTimeMillis();
             currentTime += 2 * 60 * 60 * 1000;
             Date date1 = new Date(currentTime);
-            user.setTokentime(date1);
+            user.setTokenTime(date1);
 
             String newToken = JwtUtils.sign(user, 30L * 24L * 3600L * 1000L);
             user.setToken(newToken);
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
         //条件查询3句话
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
-        criteria.andCorporationidEqualTo(userListFind.getCorporationId());
+        criteria.andCorporationIdEqualTo(userListFind.getCorporationId());
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
             List list = userMapper.selectByExample(example);
@@ -130,7 +130,8 @@ public class UserServiceImpl implements UserService {
             List<User> users = userMapper.selectByExample(userExample);
             if (users.size() == 0) {
                 user.setId(date.getTime() + "");
-
+                ZwUtil zwUtil=new ZwUtil();
+                user.setPassword(zwUtil.EncoderByMd5(user.getPassword()));
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
                 Set<ConstraintViolation<User>> constraintViolations= validator.validate(user);

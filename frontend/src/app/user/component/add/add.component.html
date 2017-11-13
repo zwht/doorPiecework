@@ -11,6 +11,18 @@
     <span>手机号：</span>
     <input [(ngModel)]="user.phone" placeholder="请输入手机号" type="text">
   </label>
+  <label>
+    <span>登录名：</span>
+    <input [(ngModel)]="user.loginName" placeholder="请输入登录名" type="text">
+  </label>
+  <label>
+    <span>类型：</span>
+    <input [(ngModel)]="user.type" placeholder="请输入类型" type="number">
+  </label>
+  <label>
+    <span>角色：</span>
+    <input [(ngModel)]="user.roles" placeholder="请输入角色" type="text">
+  </label>
 
   <button (click)="save()" type="info" style="width: 100%; margin-top: 30px;">保存</button>
 </div>

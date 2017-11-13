@@ -4,16 +4,16 @@
   <resultMap id="BaseResultMap" type="com.zw.cf.model.Ticket">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="dealersId" jdbcType="VARCHAR" property="dealersid" />
-    <result column="brandId" jdbcType="VARCHAR" property="brandid" />
+    <result column="dealers_id" jdbcType="VARCHAR" property="dealersId" />
+    <result column="brand_id" jdbcType="VARCHAR" property="brandId" />
     <result column="odd" jdbcType="VARCHAR" property="odd" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
-    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
-    <result column="creatTime" jdbcType="TIMESTAMP" property="creattime" />
-    <result column="overTime" jdbcType="TIMESTAMP" property="overtime" />
-    <result column="processIds" jdbcType="VARCHAR" property="processids" />
-    <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+    <result column="over_time" jdbcType="TIMESTAMP" property="overTime" />
+    <result column="process_ids" jdbcType="VARCHAR" property="processIds" />
+    <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -75,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, dealersId, brandId, odd, address, startTime, endTime, creatTime, overTime, 
-    processIds, corporationId, state
+    id, name, dealers_id, brand_id, odd, address, start_time, end_time, creat_time, over_time, 
+    process_ids, corporation_id, state
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.TicketExample" resultMap="BaseResultMap">
     select
@@ -109,15 +109,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Ticket">
-    insert into ticket (id, name, dealersId, 
-      brandId, odd, address, 
-      startTime, endTime, creatTime, 
-      overTime, processIds, corporationId, 
+    insert into ticket (id, name, dealers_id, 
+      brand_id, odd, address, 
+      start_time, end_time, creat_time, 
+      over_time, process_ids, corporation_id, 
       state)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{dealersid,jdbcType=VARCHAR}, 
-      #{brandid,jdbcType=VARCHAR}, #{odd,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{creattime,jdbcType=TIMESTAMP}, 
-      #{overtime,jdbcType=TIMESTAMP}, #{processids,jdbcType=VARCHAR}, #{corporationid,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{dealersId,jdbcType=VARCHAR}, 
+      #{brandId,jdbcType=VARCHAR}, #{odd,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{overTime,jdbcType=TIMESTAMP}, #{processIds,jdbcType=VARCHAR}, #{corporationId,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Ticket">
@@ -129,11 +129,11 @@
       <if test="name != null">
         name,
       </if>
-      <if test="dealersid != null">
-        dealersId,
+      <if test="dealersId != null">
+        dealers_id,
       </if>
-      <if test="brandid != null">
-        brandId,
+      <if test="brandId != null">
+        brand_id,
       </if>
       <if test="odd != null">
         odd,
@@ -141,23 +141,23 @@
       <if test="address != null">
         address,
       </if>
-      <if test="starttime != null">
-        startTime,
+      <if test="startTime != null">
+        start_time,
       </if>
-      <if test="endtime != null">
-        endTime,
+      <if test="endTime != null">
+        end_time,
       </if>
-      <if test="creattime != null">
-        creatTime,
+      <if test="creatTime != null">
+        creat_time,
       </if>
-      <if test="overtime != null">
-        overTime,
+      <if test="overTime != null">
+        over_time,
       </if>
-      <if test="processids != null">
-        processIds,
+      <if test="processIds != null">
+        process_ids,
       </if>
-      <if test="corporationid != null">
-        corporationId,
+      <if test="corporationId != null">
+        corporation_id,
       </if>
       <if test="state != null">
         state,
@@ -170,11 +170,11 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="dealersid != null">
-        #{dealersid,jdbcType=VARCHAR},
+      <if test="dealersId != null">
+        #{dealersId,jdbcType=VARCHAR},
       </if>
-      <if test="brandid != null">
-        #{brandid,jdbcType=VARCHAR},
+      <if test="brandId != null">
+        #{brandId,jdbcType=VARCHAR},
       </if>
       <if test="odd != null">
         #{odd,jdbcType=VARCHAR},
@@ -182,23 +182,23 @@
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="starttime != null">
-        #{starttime,jdbcType=TIMESTAMP},
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endtime != null">
-        #{endtime,jdbcType=TIMESTAMP},
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="creattime != null">
-        #{creattime,jdbcType=TIMESTAMP},
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="overtime != null">
-        #{overtime,jdbcType=TIMESTAMP},
+      <if test="overTime != null">
+        #{overTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="processids != null">
-        #{processids,jdbcType=VARCHAR},
+      <if test="processIds != null">
+        #{processIds,jdbcType=VARCHAR},
       </if>
-      <if test="corporationid != null">
-        #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        #{corporationId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -220,11 +220,11 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.dealersid != null">
-        dealersId = #{record.dealersid,jdbcType=VARCHAR},
+      <if test="record.dealersId != null">
+        dealers_id = #{record.dealersId,jdbcType=VARCHAR},
       </if>
-      <if test="record.brandid != null">
-        brandId = #{record.brandid,jdbcType=VARCHAR},
+      <if test="record.brandId != null">
+        brand_id = #{record.brandId,jdbcType=VARCHAR},
       </if>
       <if test="record.odd != null">
         odd = #{record.odd,jdbcType=VARCHAR},
@@ -232,23 +232,23 @@
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.starttime != null">
-        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.endtime != null">
-        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.creattime != null">
-        creatTime = #{record.creattime,jdbcType=TIMESTAMP},
+      <if test="record.creatTime != null">
+        creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.overtime != null">
-        overTime = #{record.overtime,jdbcType=TIMESTAMP},
+      <if test="record.overTime != null">
+        over_time = #{record.overTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.processids != null">
-        processIds = #{record.processids,jdbcType=VARCHAR},
+      <if test="record.processIds != null">
+        process_ids = #{record.processIds,jdbcType=VARCHAR},
       </if>
-      <if test="record.corporationid != null">
-        corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      <if test="record.corporationId != null">
+        corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       </if>
       <if test="record.state != null">
         state = #{record.state,jdbcType=INTEGER},
@@ -262,16 +262,16 @@
     update ticket
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      dealersId = #{record.dealersid,jdbcType=VARCHAR},
-      brandId = #{record.brandid,jdbcType=VARCHAR},
+      dealers_id = #{record.dealersId,jdbcType=VARCHAR},
+      brand_id = #{record.brandId,jdbcType=VARCHAR},
       odd = #{record.odd,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
-      startTime = #{record.starttime,jdbcType=TIMESTAMP},
-      endTime = #{record.endtime,jdbcType=TIMESTAMP},
-      creatTime = #{record.creattime,jdbcType=TIMESTAMP},
-      overTime = #{record.overtime,jdbcType=TIMESTAMP},
-      processIds = #{record.processids,jdbcType=VARCHAR},
-      corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
+      over_time = #{record.overTime,jdbcType=TIMESTAMP},
+      process_ids = #{record.processIds,jdbcType=VARCHAR},
+      corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -283,11 +283,11 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="dealersid != null">
-        dealersId = #{dealersid,jdbcType=VARCHAR},
+      <if test="dealersId != null">
+        dealers_id = #{dealersId,jdbcType=VARCHAR},
       </if>
-      <if test="brandid != null">
-        brandId = #{brandid,jdbcType=VARCHAR},
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=VARCHAR},
       </if>
       <if test="odd != null">
         odd = #{odd,jdbcType=VARCHAR},
@@ -295,23 +295,23 @@
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="starttime != null">
-        startTime = #{starttime,jdbcType=TIMESTAMP},
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endtime != null">
-        endTime = #{endtime,jdbcType=TIMESTAMP},
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="creattime != null">
-        creatTime = #{creattime,jdbcType=TIMESTAMP},
+      <if test="creatTime != null">
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="overtime != null">
-        overTime = #{overtime,jdbcType=TIMESTAMP},
+      <if test="overTime != null">
+        over_time = #{overTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="processids != null">
-        processIds = #{processids,jdbcType=VARCHAR},
+      <if test="processIds != null">
+        process_ids = #{processIds,jdbcType=VARCHAR},
       </if>
-      <if test="corporationid != null">
-        corporationId = #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        corporation_id = #{corporationId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
@@ -322,16 +322,16 @@
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Ticket">
     update ticket
     set name = #{name,jdbcType=VARCHAR},
-      dealersId = #{dealersid,jdbcType=VARCHAR},
-      brandId = #{brandid,jdbcType=VARCHAR},
+      dealers_id = #{dealersId,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=VARCHAR},
       odd = #{odd,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      startTime = #{starttime,jdbcType=TIMESTAMP},
-      endTime = #{endtime,jdbcType=TIMESTAMP},
-      creatTime = #{creattime,jdbcType=TIMESTAMP},
-      overTime = #{overtime,jdbcType=TIMESTAMP},
-      processIds = #{processids,jdbcType=VARCHAR},
-      corporationId = #{corporationid,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      over_time = #{overTime,jdbcType=TIMESTAMP},
+      process_ids = #{processIds,jdbcType=VARCHAR},
+      corporation_id = #{corporationId,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>

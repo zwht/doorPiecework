@@ -5,7 +5,9 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="price" jdbcType="INTEGER" property="price" />
-    <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
+    <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, type, price, corporationId
+    id, type, price, corporation_id, name, state
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.GxExample" resultMap="BaseResultMap">
     select
@@ -100,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Gx">
     insert into gx (id, type, price, 
-      corporationId)
+      corporation_id, name, state
+      )
     values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
-      #{corporationid,jdbcType=VARCHAR})
+      #{corporationId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Gx">
     insert into gx
@@ -116,8 +120,14 @@
       <if test="price != null">
         price,
       </if>
-      <if test="corporationid != null">
-        corporationId,
+      <if test="corporationId != null">
+        corporation_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="state != null">
+        state,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -130,8 +140,14 @@
       <if test="price != null">
         #{price,jdbcType=INTEGER},
       </if>
-      <if test="corporationid != null">
-        #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        #{corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -153,8 +169,14 @@
       <if test="record.price != null">
         price = #{record.price,jdbcType=INTEGER},
       </if>
-      <if test="record.corporationid != null">
-        corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      <if test="record.corporationId != null">
+        corporation_id = #{record.corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -166,7 +188,9 @@
     set id = #{record.id,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
       price = #{record.price,jdbcType=INTEGER},
-      corporationId = #{record.corporationid,jdbcType=VARCHAR}
+      corporation_id = #{record.corporationId,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,8 +204,14 @@
       <if test="price != null">
         price = #{price,jdbcType=INTEGER},
       </if>
-      <if test="corporationid != null">
-        corporationId = #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        corporation_id = #{corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -190,7 +220,9 @@
     update gx
     set type = #{type,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
-      corporationId = #{corporationid,jdbcType=VARCHAR}
+      corporation_id = #{corporationId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

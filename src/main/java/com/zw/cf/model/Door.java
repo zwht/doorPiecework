@@ -11,11 +11,11 @@ public class Door {
 
     private String gxids;
 
-    private Date createtime;
+    private Date createTime;
 
     private Integer state;
 
-    private byte[] corporationid;
+    private byte[] corporationId;
 
     public String getId() {
         return id;
@@ -49,12 +49,12 @@ public class Door {
         this.gxids = gxids == null ? null : gxids.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getState() {
@@ -65,11 +65,11 @@ public class Door {
         this.state = state;
     }
 
-    public byte[] getCorporationid() {
-        return corporationid;
+    public byte[] getCorporationId() {
+        return corporationId;
     }
 
-    public void setCorporationid(byte[] corporationid) {
-        this.corporationid = corporationid;
+    public void setCorporationId(byte[] corporationId) {
+        this.corporationId = corporationId;
     }
 }

@@ -5,7 +5,7 @@ public class Color {
 
     private String color;
 
-    private String croporationid;
+    private String croporationId;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class Color {
         this.color = color == null ? null : color.trim();
     }
 
-    public String getCroporationid() {
-        return croporationid;
+    public String getCroporationId() {
+        return croporationId;
     }
 
-    public void setCroporationid(String croporationid) {
-        this.croporationid = croporationid == null ? null : croporationid.trim();
+    public void setCroporationId(String croporationId) {
+        this.croporationId = croporationId == null ? null : croporationId.trim();
     }
 }

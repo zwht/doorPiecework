@@ -3,13 +3,13 @@
 <mapper namespace="com.zw.cf.dao.ProcessMapper">
   <resultMap id="BaseResultMap" type="com.zw.cf.model.Process">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="gxId" jdbcType="VARCHAR" property="gxid" />
-    <result column="userId" jdbcType="VARCHAR" property="userid" />
-    <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
+    <result column="gx_id" jdbcType="VARCHAR" property="gxId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
     <result column="price" jdbcType="INTEGER" property="price" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
-    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gxId, userId, corporationId, price, type, startTime, endTime, state
+    id, gx_id, user_id, corporation_id, price, type, start_time, end_time, state
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.ProcessExample" resultMap="BaseResultMap">
     select
@@ -104,13 +104,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Process">
-    insert into process (id, gxId, userId, 
-      corporationId, price, type, 
-      startTime, endTime, state
+    insert into process (id, gx_id, user_id, 
+      corporation_id, price, type, 
+      start_time, end_time, state
       )
-    values (#{id,jdbcType=VARCHAR}, #{gxid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
-      #{corporationid,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
-      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}
+    values (#{id,jdbcType=VARCHAR}, #{gxId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{corporationId,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Process">
@@ -119,14 +119,14 @@
       <if test="id != null">
         id,
       </if>
-      <if test="gxid != null">
-        gxId,
+      <if test="gxId != null">
+        gx_id,
       </if>
-      <if test="userid != null">
-        userId,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="corporationid != null">
-        corporationId,
+      <if test="corporationId != null">
+        corporation_id,
       </if>
       <if test="price != null">
         price,
@@ -134,11 +134,11 @@
       <if test="type != null">
         type,
       </if>
-      <if test="starttime != null">
-        startTime,
+      <if test="startTime != null">
+        start_time,
       </if>
-      <if test="endtime != null">
-        endTime,
+      <if test="endTime != null">
+        end_time,
       </if>
       <if test="state != null">
         state,
@@ -148,14 +148,14 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="gxid != null">
-        #{gxid,jdbcType=VARCHAR},
+      <if test="gxId != null">
+        #{gxId,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null">
-        #{userid,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="corporationid != null">
-        #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        #{corporationId,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         #{price,jdbcType=INTEGER},
@@ -163,11 +163,11 @@
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="starttime != null">
-        #{starttime,jdbcType=TIMESTAMP},
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endtime != null">
-        #{endtime,jdbcType=TIMESTAMP},
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -186,14 +186,14 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.gxid != null">
-        gxId = #{record.gxid,jdbcType=VARCHAR},
+      <if test="record.gxId != null">
+        gx_id = #{record.gxId,jdbcType=VARCHAR},
       </if>
-      <if test="record.userid != null">
-        userId = #{record.userid,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
-      <if test="record.corporationid != null">
-        corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      <if test="record.corporationId != null">
+        corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=INTEGER},
@@ -201,11 +201,11 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.starttime != null">
-        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.endtime != null">
-        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.state != null">
         state = #{record.state,jdbcType=INTEGER},
@@ -218,13 +218,13 @@
   <update id="updateByExample" parameterType="map">
     update process
     set id = #{record.id,jdbcType=VARCHAR},
-      gxId = #{record.gxid,jdbcType=VARCHAR},
-      userId = #{record.userid,jdbcType=VARCHAR},
-      corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      gx_id = #{record.gxId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
-      startTime = #{record.starttime,jdbcType=TIMESTAMP},
-      endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
       state = #{record.state,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -233,14 +233,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.Process">
     update process
     <set>
-      <if test="gxid != null">
-        gxId = #{gxid,jdbcType=VARCHAR},
+      <if test="gxId != null">
+        gx_id = #{gxId,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null">
-        userId = #{userid,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="corporationid != null">
-        corporationId = #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        corporation_id = #{corporationId,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=INTEGER},
@@ -248,11 +248,11 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="starttime != null">
-        startTime = #{starttime,jdbcType=TIMESTAMP},
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endtime != null">
-        endTime = #{endtime,jdbcType=TIMESTAMP},
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
@@ -262,13 +262,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Process">
     update process
-    set gxId = #{gxid,jdbcType=VARCHAR},
-      userId = #{userid,jdbcType=VARCHAR},
-      corporationId = #{corporationid,jdbcType=VARCHAR},
+    set gx_id = #{gxId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      corporation_id = #{corporationId,jdbcType=VARCHAR},
       price = #{price,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
-      startTime = #{starttime,jdbcType=TIMESTAMP},
-      endTime = #{endtime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>

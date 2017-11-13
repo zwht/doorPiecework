@@ -46,8 +46,8 @@ public class UserCtrl {
             token = request.getParameter("Authorization");
         }
         User admin = JwtUtils.unsign(token, User.class);
-        String corporationid = admin.getCorporationid();
-        user.setCorporationid(corporationid);
+        String corporationid = admin.getCorporationId();
+        user.setCorporationId(corporationid);
         return userService.addUser(user);
     }
 
@@ -65,7 +65,7 @@ public class UserCtrl {
             token = request.getParameter("Authorization");
         }
         User user = JwtUtils.unsign(token, User.class);
-        String corporationid = user.getCorporationid();
+        String corporationid = user.getCorporationId();
         userListFind.setCorporationId(corporationid);
         return userService.getUserList(pageNum, pageSize, userListFind);
     }

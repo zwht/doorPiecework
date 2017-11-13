@@ -45,7 +45,7 @@ export class CorporationListComponent implements OnInit {
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
-          this.router.navigate(['/admin/user/company']);
+          this.getList();
         } else {
           console.log(response);
         }

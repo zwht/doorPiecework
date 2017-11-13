@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.zw.cf.model.Color">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="color" jdbcType="VARCHAR" property="color" />
-    <result column="croporationId" jdbcType="VARCHAR" property="croporationid" />
+    <result column="croporation_id" jdbcType="VARCHAR" property="croporationId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, color, croporationId
+    id, color, croporation_id
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.ColorExample" resultMap="BaseResultMap">
     select
@@ -98,9 +98,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Color">
-    insert into color (id, color, croporationId
+    insert into color (id, color, croporation_id
       )
-    values (#{id,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, #{croporationid,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, #{croporationId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Color">
@@ -112,8 +112,8 @@
       <if test="color != null">
         color,
       </if>
-      <if test="croporationid != null">
-        croporationId,
+      <if test="croporationId != null">
+        croporation_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -123,8 +123,8 @@
       <if test="color != null">
         #{color,jdbcType=VARCHAR},
       </if>
-      <if test="croporationid != null">
-        #{croporationid,jdbcType=VARCHAR},
+      <if test="croporationId != null">
+        #{croporationId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -143,8 +143,8 @@
       <if test="record.color != null">
         color = #{record.color,jdbcType=VARCHAR},
       </if>
-      <if test="record.croporationid != null">
-        croporationId = #{record.croporationid,jdbcType=VARCHAR},
+      <if test="record.croporationId != null">
+        croporation_id = #{record.croporationId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -155,7 +155,7 @@
     update color
     set id = #{record.id,jdbcType=INTEGER},
       color = #{record.color,jdbcType=VARCHAR},
-      croporationId = #{record.croporationid,jdbcType=VARCHAR}
+      croporation_id = #{record.croporationId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -166,8 +166,8 @@
       <if test="color != null">
         color = #{color,jdbcType=VARCHAR},
       </if>
-      <if test="croporationid != null">
-        croporationId = #{croporationid,jdbcType=VARCHAR},
+      <if test="croporationId != null">
+        croporation_id = #{croporationId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -175,7 +175,7 @@
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Color">
     update color
     set color = #{color,jdbcType=VARCHAR},
-      croporationId = #{croporationid,jdbcType=VARCHAR}
+      croporation_id = #{croporationId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

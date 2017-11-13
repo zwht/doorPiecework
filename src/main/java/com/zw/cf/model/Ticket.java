@@ -7,25 +7,25 @@ public class Ticket {
 
     private String name;
 
-    private String dealersid;
+    private String dealersId;
 
-    private String brandid;
+    private String brandId;
 
     private String odd;
 
     private String address;
 
-    private Date starttime;
+    private Date startTime;
 
-    private Date endtime;
+    private Date endTime;
 
-    private Date creattime;
+    private Date creatTime;
 
-    private Date overtime;
+    private Date overTime;
 
-    private String processids;
+    private String processIds;
 
-    private String corporationid;
+    private String corporationId;
 
     private Integer state;
 
@@ -45,20 +45,20 @@ public class Ticket {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDealersid() {
-        return dealersid;
+    public String getDealersId() {
+        return dealersId;
     }
 
-    public void setDealersid(String dealersid) {
-        this.dealersid = dealersid == null ? null : dealersid.trim();
+    public void setDealersId(String dealersId) {
+        this.dealersId = dealersId == null ? null : dealersId.trim();
     }
 
-    public String getBrandid() {
-        return brandid;
+    public String getBrandId() {
+        return brandId;
     }
 
-    public void setBrandid(String brandid) {
-        this.brandid = brandid == null ? null : brandid.trim();
+    public void setBrandId(String brandId) {
+        this.brandId = brandId == null ? null : brandId.trim();
     }
 
     public String getOdd() {
@@ -77,52 +77,52 @@ public class Ticket {
         this.address = address == null ? null : address.trim();
     }
 
-    public Date getStarttime() {
-        return starttime;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setStarttime(Date starttime) {
-        this.starttime = starttime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public Date getEndtime() {
-        return endtime;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEndtime(Date endtime) {
-        this.endtime = endtime;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
-    public Date getCreattime() {
-        return creattime;
+    public Date getCreatTime() {
+        return creatTime;
     }
 
-    public void setCreattime(Date creattime) {
-        this.creattime = creattime;
+    public void setCreatTime(Date creatTime) {
+        this.creatTime = creatTime;
     }
 
-    public Date getOvertime() {
-        return overtime;
+    public Date getOverTime() {
+        return overTime;
     }
 
-    public void setOvertime(Date overtime) {
-        this.overtime = overtime;
+    public void setOverTime(Date overTime) {
+        this.overTime = overTime;
     }
 
-    public String getProcessids() {
-        return processids;
+    public String getProcessIds() {
+        return processIds;
     }
 
-    public void setProcessids(String processids) {
-        this.processids = processids == null ? null : processids.trim();
+    public void setProcessIds(String processIds) {
+        this.processIds = processIds == null ? null : processIds.trim();
     }
 
-    public String getCorporationid() {
-        return corporationid;
+    public String getCorporationId() {
+        return corporationId;
     }
 
-    public void setCorporationid(String corporationid) {
-        this.corporationid = corporationid == null ? null : corporationid.trim();
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId == null ? null : corporationId.trim();
     }
 
     public Integer getState() {

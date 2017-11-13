@@ -9,49 +9,49 @@ public class Product {
 
     private String doorid;
 
-    private String processids;
+    private String processIds;
 
     private String img;
 
     private String describe;
 
-    private Date starttime;
+    private Date startTime;
 
-    private Date endtime;
+    private Date endTime;
 
-    private String corporationid;
+    private String corporationId;
 
-    private Integer weightcover;
+    private Integer weightCover;
 
-    private Integer heightcover;
+    private Integer heightCover;
 
-    private Integer depthcover;
+    private Integer depthCover;
 
     private Integer weight;
 
     private Integer height;
 
-    private Integer weightlb;
+    private Integer weightLb;
 
-    private Integer heightlb;
+    private Integer heightLb;
 
-    private Integer weightdb;
+    private Integer weightDb;
 
-    private Integer heightdb;
+    private Integer heightDb;
 
-    private String colorid;
+    private String colorId;
 
-    private String lineid;
+    private String lineId;
 
-    private Integer linesum;
+    private Integer lineSum;
 
     private String productcol;
 
     private Integer type;
 
-    private Boolean ismodule;
+    private Boolean isModule;
 
-    private String moduleid;
+    private String moduleId;
 
     private Integer state;
 
@@ -79,12 +79,12 @@ public class Product {
         this.doorid = doorid == null ? null : doorid.trim();
     }
 
-    public String getProcessids() {
-        return processids;
+    public String getProcessIds() {
+        return processIds;
     }
 
-    public void setProcessids(String processids) {
-        this.processids = processids == null ? null : processids.trim();
+    public void setProcessIds(String processIds) {
+        this.processIds = processIds == null ? null : processIds.trim();
     }
 
     public String getImg() {
@@ -103,52 +103,52 @@ public class Product {
         this.describe = describe == null ? null : describe.trim();
     }
 
-    public Date getStarttime() {
-        return starttime;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setStarttime(Date starttime) {
-        this.starttime = starttime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public Date getEndtime() {
-        return endtime;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEndtime(Date endtime) {
-        this.endtime = endtime;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
-    public String getCorporationid() {
-        return corporationid;
+    public String getCorporationId() {
+        return corporationId;
     }
 
-    public void setCorporationid(String corporationid) {
-        this.corporationid = corporationid == null ? null : corporationid.trim();
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId == null ? null : corporationId.trim();
     }
 
-    public Integer getWeightcover() {
-        return weightcover;
+    public Integer getWeightCover() {
+        return weightCover;
     }
 
-    public void setWeightcover(Integer weightcover) {
-        this.weightcover = weightcover;
+    public void setWeightCover(Integer weightCover) {
+        this.weightCover = weightCover;
     }
 
-    public Integer getHeightcover() {
-        return heightcover;
+    public Integer getHeightCover() {
+        return heightCover;
     }
 
-    public void setHeightcover(Integer heightcover) {
-        this.heightcover = heightcover;
+    public void setHeightCover(Integer heightCover) {
+        this.heightCover = heightCover;
     }
 
-    public Integer getDepthcover() {
-        return depthcover;
+    public Integer getDepthCover() {
+        return depthCover;
     }
 
-    public void setDepthcover(Integer depthcover) {
-        this.depthcover = depthcover;
+    public void setDepthCover(Integer depthCover) {
+        this.depthCover = depthCover;
     }
 
     public Integer getWeight() {
@@ -167,60 +167,60 @@ public class Product {
         this.height = height;
     }
 
-    public Integer getWeightlb() {
-        return weightlb;
+    public Integer getWeightLb() {
+        return weightLb;
     }
 
-    public void setWeightlb(Integer weightlb) {
-        this.weightlb = weightlb;
+    public void setWeightLb(Integer weightLb) {
+        this.weightLb = weightLb;
     }
 
-    public Integer getHeightlb() {
-        return heightlb;
+    public Integer getHeightLb() {
+        return heightLb;
     }
 
-    public void setHeightlb(Integer heightlb) {
-        this.heightlb = heightlb;
+    public void setHeightLb(Integer heightLb) {
+        this.heightLb = heightLb;
     }
 
-    public Integer getWeightdb() {
-        return weightdb;
+    public Integer getWeightDb() {
+        return weightDb;
     }
 
-    public void setWeightdb(Integer weightdb) {
-        this.weightdb = weightdb;
+    public void setWeightDb(Integer weightDb) {
+        this.weightDb = weightDb;
     }
 
-    public Integer getHeightdb() {
-        return heightdb;
+    public Integer getHeightDb() {
+        return heightDb;
     }
 
-    public void setHeightdb(Integer heightdb) {
-        this.heightdb = heightdb;
+    public void setHeightDb(Integer heightDb) {
+        this.heightDb = heightDb;
     }
 
-    public String getColorid() {
-        return colorid;
+    public String getColorId() {
+        return colorId;
     }
 
-    public void setColorid(String colorid) {
-        this.colorid = colorid == null ? null : colorid.trim();
+    public void setColorId(String colorId) {
+        this.colorId = colorId == null ? null : colorId.trim();
     }
 
-    public String getLineid() {
-        return lineid;
+    public String getLineId() {
+        return lineId;
     }
 
-    public void setLineid(String lineid) {
-        this.lineid = lineid == null ? null : lineid.trim();
+    public void setLineId(String lineId) {
+        this.lineId = lineId == null ? null : lineId.trim();
     }
 
-    public Integer getLinesum() {
-        return linesum;
+    public Integer getLineSum() {
+        return lineSum;
     }
 
-    public void setLinesum(Integer linesum) {
-        this.linesum = linesum;
+    public void setLineSum(Integer lineSum) {
+        this.lineSum = lineSum;
     }
 
     public String getProductcol() {
@@ -239,20 +239,20 @@ public class Product {
         this.type = type;
     }
 
-    public Boolean getIsmodule() {
-        return ismodule;
+    public Boolean getIsModule() {
+        return isModule;
     }
 
-    public void setIsmodule(Boolean ismodule) {
-        this.ismodule = ismodule;
+    public void setIsModule(Boolean isModule) {
+        this.isModule = isModule;
     }
 
-    public String getModuleid() {
-        return moduleid;
+    public String getModuleId() {
+        return moduleId;
     }
 
-    public void setModuleid(String moduleid) {
-        this.moduleid = moduleid == null ? null : moduleid.trim();
+    public void setModuleId(String moduleId) {
+        this.moduleId = moduleId == null ? null : moduleId.trim();
     }
 
     public Integer getState() {

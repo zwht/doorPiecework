@@ -234,73 +234,73 @@ public class ColorExample {
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidIsNull() {
-            addCriterion("croporationId is null");
+        public Criteria andCroporationIdIsNull() {
+            addCriterion("croporation_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidIsNotNull() {
-            addCriterion("croporationId is not null");
+        public Criteria andCroporationIdIsNotNull() {
+            addCriterion("croporation_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidEqualTo(String value) {
-            addCriterion("croporationId =", value, "croporationid");
+        public Criteria andCroporationIdEqualTo(String value) {
+            addCriterion("croporation_id =", value, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidNotEqualTo(String value) {
-            addCriterion("croporationId <>", value, "croporationid");
+        public Criteria andCroporationIdNotEqualTo(String value) {
+            addCriterion("croporation_id <>", value, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidGreaterThan(String value) {
-            addCriterion("croporationId >", value, "croporationid");
+        public Criteria andCroporationIdGreaterThan(String value) {
+            addCriterion("croporation_id >", value, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidGreaterThanOrEqualTo(String value) {
-            addCriterion("croporationId >=", value, "croporationid");
+        public Criteria andCroporationIdGreaterThanOrEqualTo(String value) {
+            addCriterion("croporation_id >=", value, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidLessThan(String value) {
-            addCriterion("croporationId <", value, "croporationid");
+        public Criteria andCroporationIdLessThan(String value) {
+            addCriterion("croporation_id <", value, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidLessThanOrEqualTo(String value) {
-            addCriterion("croporationId <=", value, "croporationid");
+        public Criteria andCroporationIdLessThanOrEqualTo(String value) {
+            addCriterion("croporation_id <=", value, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidLike(String value) {
-            addCriterion("croporationId like", value, "croporationid");
+        public Criteria andCroporationIdLike(String value) {
+            addCriterion("croporation_id like", value, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidNotLike(String value) {
-            addCriterion("croporationId not like", value, "croporationid");
+        public Criteria andCroporationIdNotLike(String value) {
+            addCriterion("croporation_id not like", value, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidIn(List<String> values) {
-            addCriterion("croporationId in", values, "croporationid");
+        public Criteria andCroporationIdIn(List<String> values) {
+            addCriterion("croporation_id in", values, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidNotIn(List<String> values) {
-            addCriterion("croporationId not in", values, "croporationid");
+        public Criteria andCroporationIdNotIn(List<String> values) {
+            addCriterion("croporation_id not in", values, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidBetween(String value1, String value2) {
-            addCriterion("croporationId between", value1, value2, "croporationid");
+        public Criteria andCroporationIdBetween(String value1, String value2) {
+            addCriterion("croporation_id between", value1, value2, "croporationId");
             return (Criteria) this;
         }
 
-        public Criteria andCroporationidNotBetween(String value1, String value2) {
-            addCriterion("croporationId not between", value1, value2, "croporationid");
+        public Criteria andCroporationIdNotBetween(String value1, String value2) {
+            addCriterion("croporation_id not between", value1, value2, "croporationId");
             return (Criteria) this;
         }
     }

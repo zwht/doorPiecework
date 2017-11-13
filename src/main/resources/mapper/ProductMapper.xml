@@ -5,28 +5,28 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="doorId" jdbcType="VARCHAR" property="doorid" />
-    <result column="processIds" jdbcType="VARCHAR" property="processids" />
+    <result column="process_ids" jdbcType="VARCHAR" property="processIds" />
     <result column="img" jdbcType="VARCHAR" property="img" />
     <result column="describe" jdbcType="VARCHAR" property="describe" />
-    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
-    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
-    <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
-    <result column="weightCover" jdbcType="INTEGER" property="weightcover" />
-    <result column="heightCover" jdbcType="INTEGER" property="heightcover" />
-    <result column="depthCover" jdbcType="INTEGER" property="depthcover" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
+    <result column="weight_cover" jdbcType="INTEGER" property="weightCover" />
+    <result column="height_cover" jdbcType="INTEGER" property="heightCover" />
+    <result column="depth_cover" jdbcType="INTEGER" property="depthCover" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
     <result column="height" jdbcType="INTEGER" property="height" />
-    <result column="weightLb" jdbcType="INTEGER" property="weightlb" />
-    <result column="heightLb" jdbcType="INTEGER" property="heightlb" />
-    <result column="weightDb" jdbcType="INTEGER" property="weightdb" />
-    <result column="heightDb" jdbcType="INTEGER" property="heightdb" />
-    <result column="colorId" jdbcType="VARCHAR" property="colorid" />
-    <result column="lineId" jdbcType="VARCHAR" property="lineid" />
-    <result column="lineSum" jdbcType="INTEGER" property="linesum" />
+    <result column="weight_lb" jdbcType="INTEGER" property="weightLb" />
+    <result column="height_lb" jdbcType="INTEGER" property="heightLb" />
+    <result column="weight_db" jdbcType="INTEGER" property="weightDb" />
+    <result column="height_db" jdbcType="INTEGER" property="heightDb" />
+    <result column="color_id" jdbcType="VARCHAR" property="colorId" />
+    <result column="line_id" jdbcType="VARCHAR" property="lineId" />
+    <result column="line_sum" jdbcType="INTEGER" property="lineSum" />
     <result column="productcol" jdbcType="VARCHAR" property="productcol" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="isModule" jdbcType="BIT" property="ismodule" />
-    <result column="moduleId" jdbcType="VARCHAR" property="moduleid" />
+    <result column="is_module" jdbcType="BIT" property="isModule" />
+    <result column="module_id" jdbcType="VARCHAR" property="moduleId" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -88,9 +88,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, doorId, processIds, img, describe, startTime, endTime, corporationId, weightCover, 
-    heightCover, depthCover, weight, height, weightLb, heightLb, weightDb, heightDb, 
-    colorId, lineId, lineSum, productcol, type, isModule, moduleId, state
+    id, name, doorId, process_ids, img, describe, start_time, end_time, corporation_id, 
+    weight_cover, height_cover, depth_cover, weight, height, weight_lb, height_lb, weight_db, 
+    height_db, color_id, line_id, line_sum, productcol, type, is_module, module_id, state
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.ProductExample" resultMap="BaseResultMap">
     select
@@ -124,23 +124,23 @@
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Product">
     insert into product (id, name, doorId, 
-      processIds, img, describe, 
-      startTime, endTime, corporationId, 
-      weightCover, heightCover, depthCover, 
-      weight, height, weightLb, 
-      heightLb, weightDb, heightDb, 
-      colorId, lineId, lineSum, 
-      productcol, type, isModule, 
-      moduleId, state)
+      process_ids, img, describe, 
+      start_time, end_time, corporation_id, 
+      weight_cover, height_cover, depth_cover, 
+      weight, height, weight_lb, 
+      height_lb, weight_db, height_db, 
+      color_id, line_id, line_sum, 
+      productcol, type, is_module, 
+      module_id, state)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{doorid,jdbcType=VARCHAR}, 
-      #{processids,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
-      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{corporationid,jdbcType=VARCHAR}, 
-      #{weightcover,jdbcType=INTEGER}, #{heightcover,jdbcType=INTEGER}, #{depthcover,jdbcType=INTEGER}, 
-      #{weight,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{weightlb,jdbcType=INTEGER}, 
-      #{heightlb,jdbcType=INTEGER}, #{weightdb,jdbcType=INTEGER}, #{heightdb,jdbcType=INTEGER}, 
-      #{colorid,jdbcType=VARCHAR}, #{lineid,jdbcType=VARCHAR}, #{linesum,jdbcType=INTEGER}, 
-      #{productcol,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{ismodule,jdbcType=BIT}, 
-      #{moduleid,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER})
+      #{processIds,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{corporationId,jdbcType=VARCHAR}, 
+      #{weightCover,jdbcType=INTEGER}, #{heightCover,jdbcType=INTEGER}, #{depthCover,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{weightLb,jdbcType=INTEGER}, 
+      #{heightLb,jdbcType=INTEGER}, #{weightDb,jdbcType=INTEGER}, #{heightDb,jdbcType=INTEGER}, 
+      #{colorId,jdbcType=VARCHAR}, #{lineId,jdbcType=VARCHAR}, #{lineSum,jdbcType=INTEGER}, 
+      #{productcol,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{isModule,jdbcType=BIT}, 
+      #{moduleId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Product">
     insert into product
@@ -154,8 +154,8 @@
       <if test="doorid != null">
         doorId,
       </if>
-      <if test="processids != null">
-        processIds,
+      <if test="processIds != null">
+        process_ids,
       </if>
       <if test="img != null">
         img,
@@ -163,23 +163,23 @@
       <if test="describe != null">
         describe,
       </if>
-      <if test="starttime != null">
-        startTime,
+      <if test="startTime != null">
+        start_time,
       </if>
-      <if test="endtime != null">
-        endTime,
+      <if test="endTime != null">
+        end_time,
       </if>
-      <if test="corporationid != null">
-        corporationId,
+      <if test="corporationId != null">
+        corporation_id,
       </if>
-      <if test="weightcover != null">
-        weightCover,
+      <if test="weightCover != null">
+        weight_cover,
       </if>
-      <if test="heightcover != null">
-        heightCover,
+      <if test="heightCover != null">
+        height_cover,
       </if>
-      <if test="depthcover != null">
-        depthCover,
+      <if test="depthCover != null">
+        depth_cover,
       </if>
       <if test="weight != null">
         weight,
@@ -187,26 +187,26 @@
       <if test="height != null">
         height,
       </if>
-      <if test="weightlb != null">
-        weightLb,
+      <if test="weightLb != null">
+        weight_lb,
       </if>
-      <if test="heightlb != null">
-        heightLb,
+      <if test="heightLb != null">
+        height_lb,
       </if>
-      <if test="weightdb != null">
-        weightDb,
+      <if test="weightDb != null">
+        weight_db,
       </if>
-      <if test="heightdb != null">
-        heightDb,
+      <if test="heightDb != null">
+        height_db,
       </if>
-      <if test="colorid != null">
-        colorId,
+      <if test="colorId != null">
+        color_id,
       </if>
-      <if test="lineid != null">
-        lineId,
+      <if test="lineId != null">
+        line_id,
       </if>
-      <if test="linesum != null">
-        lineSum,
+      <if test="lineSum != null">
+        line_sum,
       </if>
       <if test="productcol != null">
         productcol,
@@ -214,11 +214,11 @@
       <if test="type != null">
         type,
       </if>
-      <if test="ismodule != null">
-        isModule,
+      <if test="isModule != null">
+        is_module,
       </if>
-      <if test="moduleid != null">
-        moduleId,
+      <if test="moduleId != null">
+        module_id,
       </if>
       <if test="state != null">
         state,
@@ -234,8 +234,8 @@
       <if test="doorid != null">
         #{doorid,jdbcType=VARCHAR},
       </if>
-      <if test="processids != null">
-        #{processids,jdbcType=VARCHAR},
+      <if test="processIds != null">
+        #{processIds,jdbcType=VARCHAR},
       </if>
       <if test="img != null">
         #{img,jdbcType=VARCHAR},
@@ -243,23 +243,23 @@
       <if test="describe != null">
         #{describe,jdbcType=VARCHAR},
       </if>
-      <if test="starttime != null">
-        #{starttime,jdbcType=TIMESTAMP},
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endtime != null">
-        #{endtime,jdbcType=TIMESTAMP},
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="corporationid != null">
-        #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        #{corporationId,jdbcType=VARCHAR},
       </if>
-      <if test="weightcover != null">
-        #{weightcover,jdbcType=INTEGER},
+      <if test="weightCover != null">
+        #{weightCover,jdbcType=INTEGER},
       </if>
-      <if test="heightcover != null">
-        #{heightcover,jdbcType=INTEGER},
+      <if test="heightCover != null">
+        #{heightCover,jdbcType=INTEGER},
       </if>
-      <if test="depthcover != null">
-        #{depthcover,jdbcType=INTEGER},
+      <if test="depthCover != null">
+        #{depthCover,jdbcType=INTEGER},
       </if>
       <if test="weight != null">
         #{weight,jdbcType=INTEGER},
@@ -267,26 +267,26 @@
       <if test="height != null">
         #{height,jdbcType=INTEGER},
       </if>
-      <if test="weightlb != null">
-        #{weightlb,jdbcType=INTEGER},
+      <if test="weightLb != null">
+        #{weightLb,jdbcType=INTEGER},
       </if>
-      <if test="heightlb != null">
-        #{heightlb,jdbcType=INTEGER},
+      <if test="heightLb != null">
+        #{heightLb,jdbcType=INTEGER},
       </if>
-      <if test="weightdb != null">
-        #{weightdb,jdbcType=INTEGER},
+      <if test="weightDb != null">
+        #{weightDb,jdbcType=INTEGER},
       </if>
-      <if test="heightdb != null">
-        #{heightdb,jdbcType=INTEGER},
+      <if test="heightDb != null">
+        #{heightDb,jdbcType=INTEGER},
       </if>
-      <if test="colorid != null">
-        #{colorid,jdbcType=VARCHAR},
+      <if test="colorId != null">
+        #{colorId,jdbcType=VARCHAR},
       </if>
-      <if test="lineid != null">
-        #{lineid,jdbcType=VARCHAR},
+      <if test="lineId != null">
+        #{lineId,jdbcType=VARCHAR},
       </if>
-      <if test="linesum != null">
-        #{linesum,jdbcType=INTEGER},
+      <if test="lineSum != null">
+        #{lineSum,jdbcType=INTEGER},
       </if>
       <if test="productcol != null">
         #{productcol,jdbcType=VARCHAR},
@@ -294,11 +294,11 @@
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="ismodule != null">
-        #{ismodule,jdbcType=BIT},
+      <if test="isModule != null">
+        #{isModule,jdbcType=BIT},
       </if>
-      <if test="moduleid != null">
-        #{moduleid,jdbcType=VARCHAR},
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -323,8 +323,8 @@
       <if test="record.doorid != null">
         doorId = #{record.doorid,jdbcType=VARCHAR},
       </if>
-      <if test="record.processids != null">
-        processIds = #{record.processids,jdbcType=VARCHAR},
+      <if test="record.processIds != null">
+        process_ids = #{record.processIds,jdbcType=VARCHAR},
       </if>
       <if test="record.img != null">
         img = #{record.img,jdbcType=VARCHAR},
@@ -332,23 +332,23 @@
       <if test="record.describe != null">
         describe = #{record.describe,jdbcType=VARCHAR},
       </if>
-      <if test="record.starttime != null">
-        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.endtime != null">
-        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.corporationid != null">
-        corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      <if test="record.corporationId != null">
+        corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       </if>
-      <if test="record.weightcover != null">
-        weightCover = #{record.weightcover,jdbcType=INTEGER},
+      <if test="record.weightCover != null">
+        weight_cover = #{record.weightCover,jdbcType=INTEGER},
       </if>
-      <if test="record.heightcover != null">
-        heightCover = #{record.heightcover,jdbcType=INTEGER},
+      <if test="record.heightCover != null">
+        height_cover = #{record.heightCover,jdbcType=INTEGER},
       </if>
-      <if test="record.depthcover != null">
-        depthCover = #{record.depthcover,jdbcType=INTEGER},
+      <if test="record.depthCover != null">
+        depth_cover = #{record.depthCover,jdbcType=INTEGER},
       </if>
       <if test="record.weight != null">
         weight = #{record.weight,jdbcType=INTEGER},
@@ -356,26 +356,26 @@
       <if test="record.height != null">
         height = #{record.height,jdbcType=INTEGER},
       </if>
-      <if test="record.weightlb != null">
-        weightLb = #{record.weightlb,jdbcType=INTEGER},
+      <if test="record.weightLb != null">
+        weight_lb = #{record.weightLb,jdbcType=INTEGER},
       </if>
-      <if test="record.heightlb != null">
-        heightLb = #{record.heightlb,jdbcType=INTEGER},
+      <if test="record.heightLb != null">
+        height_lb = #{record.heightLb,jdbcType=INTEGER},
       </if>
-      <if test="record.weightdb != null">
-        weightDb = #{record.weightdb,jdbcType=INTEGER},
+      <if test="record.weightDb != null">
+        weight_db = #{record.weightDb,jdbcType=INTEGER},
       </if>
-      <if test="record.heightdb != null">
-        heightDb = #{record.heightdb,jdbcType=INTEGER},
+      <if test="record.heightDb != null">
+        height_db = #{record.heightDb,jdbcType=INTEGER},
       </if>
-      <if test="record.colorid != null">
-        colorId = #{record.colorid,jdbcType=VARCHAR},
+      <if test="record.colorId != null">
+        color_id = #{record.colorId,jdbcType=VARCHAR},
       </if>
-      <if test="record.lineid != null">
-        lineId = #{record.lineid,jdbcType=VARCHAR},
+      <if test="record.lineId != null">
+        line_id = #{record.lineId,jdbcType=VARCHAR},
       </if>
-      <if test="record.linesum != null">
-        lineSum = #{record.linesum,jdbcType=INTEGER},
+      <if test="record.lineSum != null">
+        line_sum = #{record.lineSum,jdbcType=INTEGER},
       </if>
       <if test="record.productcol != null">
         productcol = #{record.productcol,jdbcType=VARCHAR},
@@ -383,11 +383,11 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.ismodule != null">
-        isModule = #{record.ismodule,jdbcType=BIT},
+      <if test="record.isModule != null">
+        is_module = #{record.isModule,jdbcType=BIT},
       </if>
-      <if test="record.moduleid != null">
-        moduleId = #{record.moduleid,jdbcType=VARCHAR},
+      <if test="record.moduleId != null">
+        module_id = #{record.moduleId,jdbcType=VARCHAR},
       </if>
       <if test="record.state != null">
         state = #{record.state,jdbcType=INTEGER},
@@ -402,28 +402,28 @@
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       doorId = #{record.doorid,jdbcType=VARCHAR},
-      processIds = #{record.processids,jdbcType=VARCHAR},
+      process_ids = #{record.processIds,jdbcType=VARCHAR},
       img = #{record.img,jdbcType=VARCHAR},
       describe = #{record.describe,jdbcType=VARCHAR},
-      startTime = #{record.starttime,jdbcType=TIMESTAMP},
-      endTime = #{record.endtime,jdbcType=TIMESTAMP},
-      corporationId = #{record.corporationid,jdbcType=VARCHAR},
-      weightCover = #{record.weightcover,jdbcType=INTEGER},
-      heightCover = #{record.heightcover,jdbcType=INTEGER},
-      depthCover = #{record.depthcover,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      corporation_id = #{record.corporationId,jdbcType=VARCHAR},
+      weight_cover = #{record.weightCover,jdbcType=INTEGER},
+      height_cover = #{record.heightCover,jdbcType=INTEGER},
+      depth_cover = #{record.depthCover,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=INTEGER},
       height = #{record.height,jdbcType=INTEGER},
-      weightLb = #{record.weightlb,jdbcType=INTEGER},
-      heightLb = #{record.heightlb,jdbcType=INTEGER},
-      weightDb = #{record.weightdb,jdbcType=INTEGER},
-      heightDb = #{record.heightdb,jdbcType=INTEGER},
-      colorId = #{record.colorid,jdbcType=VARCHAR},
-      lineId = #{record.lineid,jdbcType=VARCHAR},
-      lineSum = #{record.linesum,jdbcType=INTEGER},
+      weight_lb = #{record.weightLb,jdbcType=INTEGER},
+      height_lb = #{record.heightLb,jdbcType=INTEGER},
+      weight_db = #{record.weightDb,jdbcType=INTEGER},
+      height_db = #{record.heightDb,jdbcType=INTEGER},
+      color_id = #{record.colorId,jdbcType=VARCHAR},
+      line_id = #{record.lineId,jdbcType=VARCHAR},
+      line_sum = #{record.lineSum,jdbcType=INTEGER},
       productcol = #{record.productcol,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
-      isModule = #{record.ismodule,jdbcType=BIT},
-      moduleId = #{record.moduleid,jdbcType=VARCHAR},
+      is_module = #{record.isModule,jdbcType=BIT},
+      module_id = #{record.moduleId,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -438,8 +438,8 @@
       <if test="doorid != null">
         doorId = #{doorid,jdbcType=VARCHAR},
       </if>
-      <if test="processids != null">
-        processIds = #{processids,jdbcType=VARCHAR},
+      <if test="processIds != null">
+        process_ids = #{processIds,jdbcType=VARCHAR},
       </if>
       <if test="img != null">
         img = #{img,jdbcType=VARCHAR},
@@ -447,23 +447,23 @@
       <if test="describe != null">
         describe = #{describe,jdbcType=VARCHAR},
       </if>
-      <if test="starttime != null">
-        startTime = #{starttime,jdbcType=TIMESTAMP},
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="endtime != null">
-        endTime = #{endtime,jdbcType=TIMESTAMP},
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="corporationid != null">
-        corporationId = #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        corporation_id = #{corporationId,jdbcType=VARCHAR},
       </if>
-      <if test="weightcover != null">
-        weightCover = #{weightcover,jdbcType=INTEGER},
+      <if test="weightCover != null">
+        weight_cover = #{weightCover,jdbcType=INTEGER},
       </if>
-      <if test="heightcover != null">
-        heightCover = #{heightcover,jdbcType=INTEGER},
+      <if test="heightCover != null">
+        height_cover = #{heightCover,jdbcType=INTEGER},
       </if>
-      <if test="depthcover != null">
-        depthCover = #{depthcover,jdbcType=INTEGER},
+      <if test="depthCover != null">
+        depth_cover = #{depthCover,jdbcType=INTEGER},
       </if>
       <if test="weight != null">
         weight = #{weight,jdbcType=INTEGER},
@@ -471,26 +471,26 @@
       <if test="height != null">
         height = #{height,jdbcType=INTEGER},
       </if>
-      <if test="weightlb != null">
-        weightLb = #{weightlb,jdbcType=INTEGER},
+      <if test="weightLb != null">
+        weight_lb = #{weightLb,jdbcType=INTEGER},
       </if>
-      <if test="heightlb != null">
-        heightLb = #{heightlb,jdbcType=INTEGER},
+      <if test="heightLb != null">
+        height_lb = #{heightLb,jdbcType=INTEGER},
       </if>
-      <if test="weightdb != null">
-        weightDb = #{weightdb,jdbcType=INTEGER},
+      <if test="weightDb != null">
+        weight_db = #{weightDb,jdbcType=INTEGER},
       </if>
-      <if test="heightdb != null">
-        heightDb = #{heightdb,jdbcType=INTEGER},
+      <if test="heightDb != null">
+        height_db = #{heightDb,jdbcType=INTEGER},
       </if>
-      <if test="colorid != null">
-        colorId = #{colorid,jdbcType=VARCHAR},
+      <if test="colorId != null">
+        color_id = #{colorId,jdbcType=VARCHAR},
       </if>
-      <if test="lineid != null">
-        lineId = #{lineid,jdbcType=VARCHAR},
+      <if test="lineId != null">
+        line_id = #{lineId,jdbcType=VARCHAR},
       </if>
-      <if test="linesum != null">
-        lineSum = #{linesum,jdbcType=INTEGER},
+      <if test="lineSum != null">
+        line_sum = #{lineSum,jdbcType=INTEGER},
       </if>
       <if test="productcol != null">
         productcol = #{productcol,jdbcType=VARCHAR},
@@ -498,11 +498,11 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="ismodule != null">
-        isModule = #{ismodule,jdbcType=BIT},
+      <if test="isModule != null">
+        is_module = #{isModule,jdbcType=BIT},
       </if>
-      <if test="moduleid != null">
-        moduleId = #{moduleid,jdbcType=VARCHAR},
+      <if test="moduleId != null">
+        module_id = #{moduleId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
@@ -514,28 +514,28 @@
     update product
     set name = #{name,jdbcType=VARCHAR},
       doorId = #{doorid,jdbcType=VARCHAR},
-      processIds = #{processids,jdbcType=VARCHAR},
+      process_ids = #{processIds,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
       describe = #{describe,jdbcType=VARCHAR},
-      startTime = #{starttime,jdbcType=TIMESTAMP},
-      endTime = #{endtime,jdbcType=TIMESTAMP},
-      corporationId = #{corporationid,jdbcType=VARCHAR},
-      weightCover = #{weightcover,jdbcType=INTEGER},
-      heightCover = #{heightcover,jdbcType=INTEGER},
-      depthCover = #{depthcover,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      corporation_id = #{corporationId,jdbcType=VARCHAR},
+      weight_cover = #{weightCover,jdbcType=INTEGER},
+      height_cover = #{heightCover,jdbcType=INTEGER},
+      depth_cover = #{depthCover,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
       height = #{height,jdbcType=INTEGER},
-      weightLb = #{weightlb,jdbcType=INTEGER},
-      heightLb = #{heightlb,jdbcType=INTEGER},
-      weightDb = #{weightdb,jdbcType=INTEGER},
-      heightDb = #{heightdb,jdbcType=INTEGER},
-      colorId = #{colorid,jdbcType=VARCHAR},
-      lineId = #{lineid,jdbcType=VARCHAR},
-      lineSum = #{linesum,jdbcType=INTEGER},
+      weight_lb = #{weightLb,jdbcType=INTEGER},
+      height_lb = #{heightLb,jdbcType=INTEGER},
+      weight_db = #{weightDb,jdbcType=INTEGER},
+      height_db = #{heightDb,jdbcType=INTEGER},
+      color_id = #{colorId,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=VARCHAR},
+      line_sum = #{lineSum,jdbcType=INTEGER},
       productcol = #{productcol,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
-      isModule = #{ismodule,jdbcType=BIT},
-      moduleId = #{moduleid,jdbcType=VARCHAR},
+      is_module = #{isModule,jdbcType=BIT},
+      module_id = #{moduleId,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>

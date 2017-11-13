@@ -10,7 +10,12 @@ import {Router} from '@angular/router';
 export class AddComponent implements OnInit {
   user = {
     name: null,
-    password: null
+    password: null,
+    phone: null,
+    loginName: null,
+    type: null,
+    roles: null,
+    state:1
   };
 
   constructor(private userService: UserService,

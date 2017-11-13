@@ -9,13 +9,13 @@ public class User {
 
     private String password;
 
-    private String corporationid;
+    private String corporationId;
 
     private Integer state;
 
     private String phone;
 
-    private String loginname;
+    private String loginName;
 
     private Integer type;
 
@@ -23,7 +23,7 @@ public class User {
 
     private String token;
 
-    private Date tokentime;
+    private Date tokenTime;
 
     public String getId() {
         return id;
@@ -49,12 +49,12 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getCorporationid() {
-        return corporationid;
+    public String getCorporationId() {
+        return corporationId;
     }
 
-    public void setCorporationid(String corporationid) {
-        this.corporationid = corporationid == null ? null : corporationid.trim();
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId == null ? null : corporationId.trim();
     }
 
     public Integer getState() {
@@ -73,12 +73,12 @@ public class User {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getLoginname() {
-        return loginname;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setLoginname(String loginname) {
-        this.loginname = loginname == null ? null : loginname.trim();
+    public void setLoginName(String loginName) {
+        this.loginName = loginName == null ? null : loginName.trim();
     }
 
     public Integer getType() {
@@ -105,11 +105,11 @@ public class User {
         this.token = token == null ? null : token.trim();
     }
 
-    public Date getTokentime() {
-        return tokentime;
+    public Date getTokenTime() {
+        return tokenTime;
     }
 
-    public void setTokentime(Date tokentime) {
-        this.tokentime = tokentime;
+    public void setTokenTime(Date tokenTime) {
+        this.tokenTime = tokenTime;
     }
 }

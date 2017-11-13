@@ -7,7 +7,11 @@ public class Gx {
 
     private Integer price;
 
-    private String corporationid;
+    private String corporationId;
+
+    private String name;
+
+    private Integer state;
 
     public String getId() {
         return id;
@@ -33,11 +37,27 @@ public class Gx {
         this.price = price;
     }
 
-    public String getCorporationid() {
-        return corporationid;
+    public String getCorporationId() {
+        return corporationId;
     }
 
-    public void setCorporationid(String corporationid) {
-        this.corporationid = corporationid == null ? null : corporationid.trim();
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId == null ? null : corporationId.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

@@ -5,14 +5,14 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="corporationId" jdbcType="VARCHAR" property="corporationid" />
+    <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="loginName" jdbcType="VARCHAR" property="loginname" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="roles" jdbcType="VARCHAR" property="roles" />
     <result column="token" jdbcType="VARCHAR" property="token" />
-    <result column="tokenTime" jdbcType="TIMESTAMP" property="tokentime" />
+    <result column="token_time" jdbcType="TIMESTAMP" property="tokenTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password, corporationId, state, phone, loginName, type, roles, token, tokenTime
+    id, name, password, corporation_id, state, phone, login_name, type, roles, token, 
+    token_time
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.UserExample" resultMap="BaseResultMap">
     select
@@ -107,13 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.User">
     insert into users (id, name, password, 
-      corporationId, state, phone, 
-      loginName, type, roles, 
-      token, tokenTime)
+      corporation_id, state, phone, 
+      login_name, type, roles, 
+      token, token_time)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{corporationid,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
-      #{loginname,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{roles,jdbcType=VARCHAR}, 
-      #{token,jdbcType=VARCHAR}, #{tokentime,jdbcType=TIMESTAMP})
+      #{corporationId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{loginName,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{roles,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{tokenTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.User">
     insert into users
@@ -127,8 +128,8 @@
       <if test="password != null">
         password,
       </if>
-      <if test="corporationid != null">
-        corporationId,
+      <if test="corporationId != null">
+        corporation_id,
       </if>
       <if test="state != null">
         state,
@@ -136,8 +137,8 @@
       <if test="phone != null">
         phone,
       </if>
-      <if test="loginname != null">
-        loginName,
+      <if test="loginName != null">
+        login_name,
       </if>
       <if test="type != null">
         type,
@@ -148,8 +149,8 @@
       <if test="token != null">
         token,
       </if>
-      <if test="tokentime != null">
-        tokenTime,
+      <if test="tokenTime != null">
+        token_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -162,8 +163,8 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="corporationid != null">
-        #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        #{corporationId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -171,8 +172,8 @@
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="loginname != null">
-        #{loginname,jdbcType=VARCHAR},
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -183,8 +184,8 @@
       <if test="token != null">
         #{token,jdbcType=VARCHAR},
       </if>
-      <if test="tokentime != null">
-        #{tokentime,jdbcType=TIMESTAMP},
+      <if test="tokenTime != null">
+        #{tokenTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -206,8 +207,8 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.corporationid != null">
-        corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      <if test="record.corporationId != null">
+        corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       </if>
       <if test="record.state != null">
         state = #{record.state,jdbcType=INTEGER},
@@ -215,8 +216,8 @@
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
-      <if test="record.loginname != null">
-        loginName = #{record.loginname,jdbcType=VARCHAR},
+      <if test="record.loginName != null">
+        login_name = #{record.loginName,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
@@ -227,8 +228,8 @@
       <if test="record.token != null">
         token = #{record.token,jdbcType=VARCHAR},
       </if>
-      <if test="record.tokentime != null">
-        tokenTime = #{record.tokentime,jdbcType=TIMESTAMP},
+      <if test="record.tokenTime != null">
+        token_time = #{record.tokenTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -240,14 +241,14 @@
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      corporationId = #{record.corporationid,jdbcType=VARCHAR},
+      corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
       phone = #{record.phone,jdbcType=VARCHAR},
-      loginName = #{record.loginname,jdbcType=VARCHAR},
+      login_name = #{record.loginName,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
       roles = #{record.roles,jdbcType=VARCHAR},
       token = #{record.token,jdbcType=VARCHAR},
-      tokenTime = #{record.tokentime,jdbcType=TIMESTAMP}
+      token_time = #{record.tokenTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -261,8 +262,8 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="corporationid != null">
-        corporationId = #{corporationid,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        corporation_id = #{corporationId,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
@@ -270,8 +271,8 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="loginname != null">
-        loginName = #{loginname,jdbcType=VARCHAR},
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
@@ -282,8 +283,8 @@
       <if test="token != null">
         token = #{token,jdbcType=VARCHAR},
       </if>
-      <if test="tokentime != null">
-        tokenTime = #{tokentime,jdbcType=TIMESTAMP},
+      <if test="tokenTime != null">
+        token_time = #{tokenTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -292,14 +293,14 @@
     update users
     set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      corporationId = #{corporationid,jdbcType=VARCHAR},
+      corporation_id = #{corporationId,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       phone = #{phone,jdbcType=VARCHAR},
-      loginName = #{loginname,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       roles = #{roles,jdbcType=VARCHAR},
       token = #{token,jdbcType=VARCHAR},
-      tokenTime = #{tokentime,jdbcType=TIMESTAMP}
+      token_time = #{tokenTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
