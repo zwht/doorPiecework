@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         const rep = (response as any);
         if (rep.code === 200) {
           localStorage.setItem('token', rep.data.token);
-          this.router.navigate(['/admin/user/list']);
+          this.router.navigateByUrl('/user/list');
         } else {
           console.log(data);
         }

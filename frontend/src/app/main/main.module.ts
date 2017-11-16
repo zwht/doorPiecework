@@ -4,18 +4,17 @@ import {FormsModule} from '@angular/forms';
 import {Http, HttpModule, XHRBackend, RequestOptions} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
-//拦截器代码
+// 拦截器代码
 import {HttpInterceptorService} from './core/http/HttpInterceptorService';
 
 import {AppComponent} from './component/app/app.component';
 import {mainRoutes, mainComponentList} from './main.routes';
 export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
-  let service = new HttpInterceptorService(xhrBackend, requestOptions);
-  return service;
+  return new HttpInterceptorService(xhrBackend, requestOptions);
 }
 
 @NgModule({
-  declarations: [].concat([AppComponent],mainComponentList),
+  declarations: [].concat([AppComponent], mainComponentList),
   imports: [
     BrowserModule,
     FormsModule,

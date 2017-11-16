@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {userRoutes} from './../../../user/user.routes';
+import {productRoutes} from './../../../product/product.routes';
+
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-menu',
@@ -7,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   menu = [];
+  routesMenu = [userRoutes[0], productRoutes[0]];
 
   constructor(private router: Router) {
   }
@@ -15,9 +19,9 @@ export class MenuComponent implements OnInit {
     this.router.config.forEach(item => {
       if (item.data && (item.data as any).menu) {
         const itemMenu = {path: item.path, name: (item.data as any).name, children: []};
-        if ((item as any)._loadedConfig && (item as any)._loadedConfig.routes) {
-          (item as any)._loadedConfig.routes.forEach(subItem => {
-            subItem.children.forEach(subSubItem => {
+        this.routesMenu.forEach(subItem => {
+          if ((item.data as any).name === subItem.data.name) {
+            (subItem  as any).children.forEach(subSubItem => {
               if (subSubItem.data && subSubItem.data.menu) {
                 itemMenu.children.push({
                   path: item.path + '/' + subSubItem.path,
@@ -25,8 +29,20 @@ export class MenuComponent implements OnInit {
                 });
               }
             });
-          });
-        }
+          }
+        });
+        /*if ((item as any)._loadedConfig && (item as any)._loadedConfig.routes) {
+         (item as any)._loadedConfig.routes.forEach(subItem => {
+         subItem.children.forEach(subSubItem => {
+         if (subSubItem.data && subSubItem.data.menu) {
+         itemMenu.children.push({
+         path: item.path + '/' + subSubItem.path,
+         name: subSubItem.data.name
+         });
+         }
+         });
+         });
+         }*/
         this.menu.push(itemMenu);
       }
     });
@@ -56,7 +72,8 @@ export class MenuComponent implements OnInit {
 
   goMenu(item) {
     this.setActiveMenu(item.path, '');
-    this.router.navigate([item.path]);
+    //window.location.href = item.path;
+    this.router.navigateByUrl('/' + item.path);
   }
 
   bigMenu(item) {

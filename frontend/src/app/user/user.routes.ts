@@ -8,6 +8,9 @@ export const userRoutes = [
   {
     path: '',
     component: MenuComponent,
+    data: {
+      name: '用户管理'
+    },
     children: [
       {
         path: 'company',
