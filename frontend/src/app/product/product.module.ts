@@ -1,15 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {productRoutes, productComponentList} from './product.routes';
+import {ProductRoutes, ProductComponents} from './product.routes';
 @NgModule({
   imports: [
     FormsModule,
     CommonModule,
-    RouterModule.forChild(productRoutes)
+    ProductRoutes
   ],
-  declarations: productComponentList
+  declarations: ProductComponents
 })
-export default class ProductModule {
+export class ProductModule {
 }

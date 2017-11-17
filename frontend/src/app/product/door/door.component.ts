@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-door',
   templateUrl: './door.component.html',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoorComponent implements OnInit {
 
-  constructor() { }
+  constructor( private router: Router) {
+  }
 
   ngOnInit() {
+  }
+
+  go() {
+    this.router.navigateByUrl('/work/door');
   }
 
 }

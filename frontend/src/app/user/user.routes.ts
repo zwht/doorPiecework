@@ -1,13 +1,14 @@
-import {MenuComponent} from './../main/component/menu/menu.component';
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+
 import {CorporationListComponent} from './component/corporation-list/corporation-list.component';
 import {CorporationAddComponent} from './component/corporation-add/corporation-add.component';
 import {ListComponent} from './component/list/list.component';
 import {AddComponent} from './component/add/add.component';
 
-export const userRoutes = [
+export const routes: Routes = [
   {
     path: '',
-    component: MenuComponent,
     data: {
       name: '用户管理'
     },
@@ -46,10 +47,19 @@ export const userRoutes = [
   }
 ];
 
-export const userComponentList = [
-  MenuComponent,
+@NgModule({
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  exports: [RouterModule]
+})
+export class UserRoutes {
+}
+
+export const UserComponents = [
   CorporationListComponent,
   CorporationAddComponent,
   ListComponent,
   AddComponent
 ];
+export const UserList = routes;

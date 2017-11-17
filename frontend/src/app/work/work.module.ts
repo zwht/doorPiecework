@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {WorkRoutes, WorkComponents} from './work.routes';
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    WorkRoutes
   ],
-  declarations: []
+  declarations: WorkComponents
 })
-export default class WorkModule { }
+export class WorkModule { }

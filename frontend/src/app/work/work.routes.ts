@@ -1,11 +1,12 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
+
 import {DoorComponent} from './door/door.component';
 const routes: Routes = [
   {
     path: '',
     data: {
-      name: '产品管理'
+      name: '工单管理'
     },
     children: [
       {
@@ -19,7 +20,6 @@ const routes: Routes = [
     ]
   }
 ];
-
 @NgModule({
   imports: [
     RouterModule.forChild(routes)
@@ -27,7 +27,7 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class ProductRoutes {
+export class WorkRoutes {
 }
-export const ProductComponents = [DoorComponent];
-export const ProductList = routes;
+export const WorkComponents = [DoorComponent];
+export const WorkList = routes;

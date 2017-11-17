@@ -19,7 +19,7 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(mainRoutes)
+    RouterModule.forRoot(mainRoutes, {useHash: true})
   ],
   providers: [HttpInterceptorService,
     {
