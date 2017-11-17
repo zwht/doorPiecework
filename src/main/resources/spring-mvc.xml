@@ -19,9 +19,12 @@
     <context:component-scan base-package="com.zw"></context:component-scan>
 
     <!-- 静态资源文件，不会被Spring MVC拦截 -->
-    <mvc:resources location="/" mapping="**.html"/>
-    <mvc:resources location="/static/" mapping="/static/**"/>
+
+
     <mvc:resources location="/swagger/" mapping="/swagger/**" />
+    <mvc:resources location="/frontend/assets/" mapping="/assets/**" />
+    <mvc:resources location="/frontend/" mapping="/frontend/**"/>
+    <mvc:resources location="/frontend/" mapping="/**"/>
 
     <!-- swagger接口api生成，的配置文件 -->
     <!-- 将 springSwaggerConfig加载到spring容器 -->
