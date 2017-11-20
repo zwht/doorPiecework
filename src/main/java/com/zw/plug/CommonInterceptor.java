@@ -48,7 +48,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
 
         String requestUri = request.getRequestURI();
         if(requestUri.equals("/cfmy/user/login")) return true;
-
+        if(requestUri.equals("/cfmy/file/add")) return true;
         String token = request.getHeader("Authorization");
         if(token==null){
             token = request.getParameter("Authorization");
