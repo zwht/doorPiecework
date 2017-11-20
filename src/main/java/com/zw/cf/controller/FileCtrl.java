@@ -5,13 +5,17 @@ package com.zw.cf.controller;
  */
 
 import com.wordnik.swagger.annotations.*;
+import com.zw.cf.model.User;
 import com.zw.cf.service.FileService;
+import com.zw.cf.service.UtilsService;
+import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
 /**
@@ -25,6 +29,8 @@ import java.io.*;
 public class FileCtrl {
     @Autowired
     FileService fileService;
+    @Autowired
+    UtilsService utilsService;
 
     /*
      * 通过流的方式上传文件
@@ -33,26 +39,17 @@ public class FileCtrl {
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加用户", httpMethod = "POST", notes = "添加用户")
-    public String  add(@RequestParam("file") CommonsMultipartFile file) throws IOException {
+    public Response add(@RequestParam("file") CommonsMultipartFile file,
+                        @ApiParam(required = true, value = "产品ID", name = "id") @RequestParam String id,
+                        HttpServletRequest request) throws IOException {
 
-
-        //用来检测程序运行时间
-        long  startTime=System.currentTimeMillis();
-        System.out.println("fileName："+file.getOriginalFilename());
-
-        try {
-            //获取输入流 CommonsMultipartFile 中可以直接得到文件的流
-            InputStream is=file.getInputStream();
-            fileService.add(is);
-            is.close();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        long  endTime=System.currentTimeMillis();
-        System.out.println("方法一的运行时间："+String.valueOf(endTime-startTime)+"ms");
-        return "/success";
+        User user = utilsService.getUser(request);
+        String corporationid = user.getCorporationId();
+        //获取输入流 CommonsMultipartFile 中可以直接得到文件的流
+        InputStream is = file.getInputStream();
+        Response response = fileService.add(is, id, corporationid);
+        is.close();
+        return response;
     }
 
 }

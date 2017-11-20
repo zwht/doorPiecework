@@ -3,6 +3,7 @@ package com.zw.cf.controller;
 import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
+import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.LoginVo;
 import com.zw.cf.vo.UserListFind;
 import com.zw.plug.JwtUtils;
@@ -28,7 +29,8 @@ import java.util.List;
 public class UserCtrl {
     @Autowired
     UserService userService;
-
+    @Autowired
+    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -60,11 +62,7 @@ public class UserCtrl {
             @ApiParam(required = true, value = "userListFind", name = "userListFind") @RequestBody UserListFind userListFind,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("Authorization");
-        if (token == null) {
-            token = request.getParameter("Authorization");
-        }
-        User user = JwtUtils.unsign(token, User.class);
+        User user = utilsService.getUser(request);
         String corporationid = user.getCorporationId();
         userListFind.setCorporationId(corporationid);
         return userService.getUserList(pageNum, pageSize, userListFind);
