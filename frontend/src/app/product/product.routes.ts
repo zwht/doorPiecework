@@ -1,6 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {DoorComponent} from './door/door.component';
+import {CropperImgComponent} from './../main/component/cropper-img/cropper-img.component';
 const routes: Routes = [
   {
     path: '',
@@ -29,5 +30,5 @@ const routes: Routes = [
 
 export class ProductRoutes {
 }
-export const ProductComponents = [DoorComponent];
+export const ProductComponents = [DoorComponent, CropperImgComponent];
 export const ProductList = routes;

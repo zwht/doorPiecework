@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.less"
+        "styles.less",
+        "../node_modules/cropperjs/dist/cropper.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js"
