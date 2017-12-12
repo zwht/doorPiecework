@@ -1,0 +1,16 @@
+<div>
+  <label>
+    <span>名称：</span>
+    <input [(ngModel)]="gx.name" placeholder="请输入名称" type="text" >
+  </label>
+  <label>
+    <span>价格：</span>
+    <input [(ngModel)]="gx.price" type="text">
+  </label>
+  <label>
+    <span>类型：</span>
+    <input [(ngModel)]="gx.type" type="text">
+  </label>
+
+  <button (click)="save()" type="info" style="width: 100%; margin-top: 30px;">保存</button>
+</div>

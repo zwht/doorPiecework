@@ -1,5 +1,6 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
+import {CropperImgComponent} from './../main/component/cropper-img/cropper-img.component';
 
 import {DoorComponent} from './door/door.component';
 const routes: Routes = [
@@ -29,5 +30,5 @@ const routes: Routes = [
 
 export class WorkRoutes {
 }
-export const WorkComponents = [DoorComponent];
+export const WorkComponents = [DoorComponent, CropperImgComponent];
 export const WorkList = routes;

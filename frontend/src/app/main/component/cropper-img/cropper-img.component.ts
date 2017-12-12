@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import Cropper from 'cropperjs'
+import Cropper from 'cropperjs';
 
 @Component({
   selector: 'app-cropper-img',
@@ -12,8 +12,8 @@ export class CropperImgComponent implements OnInit {
   }
 
   ngOnInit() {
-    var image = document.getElementById('image');
-    var cropper = new Cropper(image, {
+    const image = document.getElementById('image');
+    const cropper = new Cropper(image, {
       autoCropArea: 0.4,
       cropBoxResizable: false,
       crop: function (e) {
@@ -28,14 +28,14 @@ export class CropperImgComponent implements OnInit {
     });
 
     // Import image
-    var inputImage = <HTMLInputElement>document.getElementById('inputImage');
-    var URL = window.URL;
-    var blobURL;
+    const inputImage = <HTMLInputElement>document.getElementById('inputImage');
+    const URL = window.URL;
+    const blobURL;
 
     if (URL) {
       inputImage.onchange = function () {
-        var files = inputImage.files;
-        var file;
+        const files = inputImage.files;
+        const file;
 
         if (cropper && files && files.length) {
           file = files[0];

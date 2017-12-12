@@ -1,32 +1,32 @@
 import {Component, OnInit} from '@angular/core';
-import {DoorService} from '../../common/restService/DoorService';
+import {GxService} from '../../common/restService/GxService';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 @Component({
-  selector: 'app-door-add',
-  templateUrl: './door-add.component.html',
-  styleUrls: ['./door-add.component.css'],
-  providers: [DoorService]
+  selector: 'app-gx-add',
+  templateUrl: './gx-add.component.html',
+  styleUrls: ['./gx-add.component.css'],
+  providers: [GxService]
 })
-export class DoorAddComponent implements OnInit {
+export class GxAddComponent implements OnInit {
 
-  door = {
+
+  gx = {
     id: null,
     name: null,
-    img: null,
-    gxids: null,
-    createTime: null,
+    price: null,
+    type: null,
     state: 0
   };
 
-  constructor(private doorService: DoorService,
+  constructor(private gxService: GxService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.door.id = params['id'];
-      if (this.door.id) {
+      this.gx.id = params['id'];
+      if (this.gx.id) {
         this.getById();
       }
 
@@ -34,33 +34,33 @@ export class DoorAddComponent implements OnInit {
   }
 
   getById() {
-    (this.doorService as any).getById(this.door.id)
+    (this.gxService as any).getById(this.gx.id)
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
-          this.door = rep.data;
+          this.gx = rep.data;
         } else {
         }
       });
   }
 
   save() {
-    if (this.door.id) {
-      (this.doorService as any).update(this.door)
+    if (this.gx.id) {
+      (this.gxService as any).update(this.gx)
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
-            this.router.navigate(['/admin/product/door']);
+            this.router.navigate(['/admin/product/gx']);
           } else {
             console.log(response);
           }
         });
     } else {
-      (this.doorService as any).add(this.door)
+      (this.gxService as any).add(this.gx)
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
-            this.router.navigate(['/admin/product/door']);
+            this.router.navigate(['/admin/product/gx']);
           } else {
             console.log(response);
           }
