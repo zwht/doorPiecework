@@ -1,0 +1,16 @@
+<div>
+  <label>
+    <span>名称：</span>
+    <input [(ngModel)]="door.name" placeholder="请输入密码" type="text" >
+  </label>
+  <label>
+    <span>添加图片：</span>
+    <input [(ngModel)]="door.img" type="text">
+  </label>
+  <label>
+    <span>添加工序：</span>
+    <input [(ngModel)]="door.gxids" type="text">
+  </label>
+
+  <button (click)="save()" type="info" style="width: 100%; margin-top: 30px;">保存</button>
+</div>

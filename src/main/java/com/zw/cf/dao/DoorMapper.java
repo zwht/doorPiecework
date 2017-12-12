@@ -16,21 +16,15 @@ public interface DoorMapper {
 
     int insertSelective(Door record);
 
-    List<Door> selectByExampleWithBLOBs(DoorExample example);
-
     List<Door> selectByExample(DoorExample example);
 
     Door selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") Door record, @Param("example") DoorExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") Door record, @Param("example") DoorExample example);
-
     int updateByExample(@Param("record") Door record, @Param("example") DoorExample example);
 
     int updateByPrimaryKeySelective(Door record);
-
-    int updateByPrimaryKeyWithBLOBs(Door record);
 
     int updateByPrimaryKey(Door record);
 }

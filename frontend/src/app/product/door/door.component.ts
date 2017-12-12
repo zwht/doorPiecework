@@ -1,48 +1,55 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FileUploader} from 'ng2-file-upload';
+import {DoorService} from '../../common/restService/DoorService';
 @Component({
   selector: 'app-door',
   templateUrl: './door.component.html',
-  styleUrls: ['./door.component.css']
+  styleUrls: ['./door.component.css'],
+  providers: [DoorService]
 })
 export class DoorComponent implements OnInit {
-  uploader: FileUploader = new FileUploader({
-    url: '/cfmy/file/add?id=8888',
-    method: 'POST',
-    itemAlias: 'file',
-    headers: [{
-      name: 'Authorization',
-      value: localStorage.getItem('token')
-    }]
-  });
 
+  list = [];
 
-  constructor(private router: Router) {
+  constructor(private doorService: DoorService,
+              private router: Router) {
   }
 
   ngOnInit() {
-
+    this.getList();
   }
 
-  go() {
-    this.router.navigateByUrl('/work/door');
+  getList() {
+    (this.doorService as any).list({
+      pageNum: 1,
+      pageSize: 10
+    }, {})
+      .then(response => {
+        const rep = (response as any);
+        if (rep.code === 200) {
+          this.list = response.data.data;
+        } else {
+          console.log(response);
+        }
+      });
   }
 
-  selectedFileOnChanged() {
-    // 这里是文件选择完成后的操作处理
-    this.uploader.queue[0].onSuccess = (response, status, headers) => {
-      let rep = JSON.parse(response);
-      // 上传文件成功
-      if (status == 200) {
-        // 上传文件后获取服务器返回的数据
-        let tempRes = JSON.parse(response);
-      } else {
-        // 上传文件后获取服务器返回的数据错误
-      }
-      this.uploader.queue = [];
-    };
-    this.uploader.queue[0].upload(); // 开始上传
+  add(item) {
+    this.router.navigate(['/admin/product/door/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
+  del(item, k) {
+    (this.doorService as any).updateState({
+      id: item.id,
+      state: k
+    })
+      .then(response => {
+        const rep = (response as any);
+        if (rep.code === 200) {
+          this.getList();
+        } else {
+          console.log(response);
+        }
+      });
+  }
 }

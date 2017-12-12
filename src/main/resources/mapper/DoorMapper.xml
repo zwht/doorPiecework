@@ -5,12 +5,10 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
     <result column="gxIds" jdbcType="VARCHAR" property="gxids" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zw.cf.model.Door">
-    <result column="corporation_id" jdbcType="VARBINARY" property="corporationId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,27 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, img, gxIds, create_time, state
+    id, name, img, corporation_id, gxIds, create_time, state
   </sql>
-  <sql id="Blob_Column_List">
-    corporation_id
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.zw.cf.model.DoorExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from door
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.zw.cf.model.DoorExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -106,11 +85,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from door
     where id = #{id,jdbcType=VARCHAR}
   </select>
@@ -126,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Door">
     insert into door (id, name, img, 
-      gxIds, create_time, state, 
-      corporation_id)
+      corporation_id, gxIds, create_time, 
+      state)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
-      #{gxids,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
-      #{corporationId,jdbcType=VARBINARY})
+      #{corporationId,jdbcType=VARCHAR}, #{gxids,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Door">
     insert into door
@@ -144,6 +121,9 @@
       <if test="img != null">
         img,
       </if>
+      <if test="corporationId != null">
+        corporation_id,
+      </if>
       <if test="gxids != null">
         gxIds,
       </if>
@@ -152,9 +132,6 @@
       </if>
       <if test="state != null">
         state,
-      </if>
-      <if test="corporationId != null">
-        corporation_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -167,6 +144,9 @@
       <if test="img != null">
         #{img,jdbcType=VARCHAR},
       </if>
+      <if test="corporationId != null">
+        #{corporationId,jdbcType=VARCHAR},
+      </if>
       <if test="gxids != null">
         #{gxids,jdbcType=VARCHAR},
       </if>
@@ -175,9 +155,6 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
-      </if>
-      <if test="corporationId != null">
-        #{corporationId,jdbcType=VARBINARY},
       </if>
     </trim>
   </insert>
@@ -199,6 +176,9 @@
       <if test="record.img != null">
         img = #{record.img,jdbcType=VARCHAR},
       </if>
+      <if test="record.corporationId != null">
+        corporation_id = #{record.corporationId,jdbcType=VARCHAR},
+      </if>
       <if test="record.gxids != null">
         gxIds = #{record.gxids,jdbcType=VARCHAR},
       </if>
@@ -208,23 +188,7 @@
       <if test="record.state != null">
         state = #{record.state,jdbcType=INTEGER},
       </if>
-      <if test="record.corporationId != null">
-        corporation_id = #{record.corporationId,jdbcType=VARBINARY},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update door
-    set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      img = #{record.img,jdbcType=VARCHAR},
-      gxIds = #{record.gxids,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      state = #{record.state,jdbcType=INTEGER},
-      corporation_id = #{record.corporationId,jdbcType=VARBINARY}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -234,6 +198,7 @@
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       img = #{record.img,jdbcType=VARCHAR},
+      corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       gxIds = #{record.gxids,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       state = #{record.state,jdbcType=INTEGER}
@@ -250,6 +215,9 @@
       <if test="img != null">
         img = #{img,jdbcType=VARCHAR},
       </if>
+      <if test="corporationId != null">
+        corporation_id = #{corporationId,jdbcType=VARCHAR},
+      </if>
       <if test="gxids != null">
         gxIds = #{gxids,jdbcType=VARCHAR},
       </if>
@@ -259,26 +227,14 @@
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
       </if>
-      <if test="corporationId != null">
-        corporation_id = #{corporationId,jdbcType=VARBINARY},
-      </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zw.cf.model.Door">
-    update door
-    set name = #{name,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR},
-      gxIds = #{gxids,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      state = #{state,jdbcType=INTEGER},
-      corporation_id = #{corporationId,jdbcType=VARBINARY}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Door">
     update door
     set name = #{name,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
+      corporation_id = #{corporationId,jdbcType=VARCHAR},
       gxIds = #{gxids,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       state = #{state,jdbcType=INTEGER}

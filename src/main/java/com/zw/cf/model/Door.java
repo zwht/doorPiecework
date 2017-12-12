@@ -9,13 +9,13 @@ public class Door {
 
     private String img;
 
+    private String corporationId;
+
     private String gxids;
 
     private Date createTime;
 
     private Integer state;
-
-    private byte[] corporationId;
 
     public String getId() {
         return id;
@@ -41,6 +41,14 @@ public class Door {
         this.img = img == null ? null : img.trim();
     }
 
+    public String getCorporationId() {
+        return corporationId;
+    }
+
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId == null ? null : corporationId.trim();
+    }
+
     public String getGxids() {
         return gxids;
     }
@@ -63,13 +71,5 @@ public class Door {
 
     public void setState(Integer state) {
         this.state = state;
-    }
-
-    public byte[] getCorporationId() {
-        return corporationId;
-    }
-
-    public void setCorporationId(byte[] corporationId) {
-        this.corporationId = corporationId;
     }
 }
