@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Http, HttpModule, XHRBackend, RequestOptions} from '@angular/http';
 import {RouterModule} from '@angular/router';
+import { ElModule } from 'element-angular';
 
 
 // 拦截器代码
@@ -19,6 +20,7 @@ import {mainRoutes, mainComponentList} from './main.routes';
 @NgModule({
   declarations: [].concat([AppComponent], mainComponentList),
   imports: [
+    ElModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
