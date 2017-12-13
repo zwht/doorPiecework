@@ -1,7 +1,8 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CropperImgComponent} from './../main/component/cropper-img/cropper-img.component';
-
+import {TicketListComponent} from './ticket-list/ticket-list.component';
+import {TicketAddComponent} from './ticket-add/ticket-add.component';
 import {DoorComponent} from './door/door.component';
 const routes: Routes = [
   {
@@ -17,6 +18,21 @@ const routes: Routes = [
           name: '门列表',
           menu: true
         }
+      },
+      {
+        path: 'ticket',
+        component: TicketListComponent,
+        data: {
+          name: '订单',
+          menu: true
+        }
+      },
+      {
+        path: 'ticket/add',
+        component: TicketAddComponent,
+        data: {
+          name: '添加'
+        }
       }
     ]
   }
@@ -30,5 +46,5 @@ const routes: Routes = [
 
 export class WorkRoutes {
 }
-export const WorkComponents = [DoorComponent, CropperImgComponent];
+export const WorkComponents = [DoorComponent, CropperImgComponent, TicketListComponent, TicketAddComponent];
 export const WorkList = routes;
