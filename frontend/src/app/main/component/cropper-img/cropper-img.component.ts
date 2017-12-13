@@ -12,8 +12,8 @@ export class CropperImgComponent implements OnInit {
   }
 
   ngOnInit() {
-    const image = document.getElementById('image');
-    const cropper = new Cropper(image, {
+    let image = document.getElementById('image');
+    let cropper = new Cropper(image, {
       autoCropArea: 0.4,
       cropBoxResizable: false,
       crop: function (e) {
@@ -28,14 +28,14 @@ export class CropperImgComponent implements OnInit {
     });
 
     // Import image
-    const inputImage = <HTMLInputElement>document.getElementById('inputImage');
-    const URL = window.URL;
-    const blobURL;
+    let inputImage = <HTMLInputElement>document.getElementById('inputImage');
+    let URL = window.URL;
+    let blobURL;
 
     if (URL) {
       inputImage.onchange = function () {
-        const files = inputImage.files;
-        const file;
+        let files = inputImage.files;
+        let file;
 
         if (cropper && files && files.length) {
           file = files[0];

@@ -7,12 +7,14 @@ import {RouterModule} from '@angular/router';
 
 // 拦截器代码
 import {HttpInterceptorService} from './core/http/HttpInterceptorService';
+export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
+  debugger
+  return new HttpInterceptorService(xhrBackend, requestOptions);
+}
 
 import {AppComponent} from './component/app/app.component';
 import {mainRoutes, mainComponentList} from './main.routes';
-export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
-  return new HttpInterceptorService(xhrBackend, requestOptions);
-}
+
 
 @NgModule({
   declarations: [].concat([AppComponent], mainComponentList),
