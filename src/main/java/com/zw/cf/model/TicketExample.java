@@ -765,73 +765,73 @@ public class TicketExample {
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsIsNull() {
-            addCriterion("process_ids is null");
+        public Criteria andProductIdsIsNull() {
+            addCriterion("product_ids is null");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsIsNotNull() {
-            addCriterion("process_ids is not null");
+        public Criteria andProductIdsIsNotNull() {
+            addCriterion("product_ids is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsEqualTo(String value) {
-            addCriterion("process_ids =", value, "processIds");
+        public Criteria andProductIdsEqualTo(String value) {
+            addCriterion("product_ids =", value, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsNotEqualTo(String value) {
-            addCriterion("process_ids <>", value, "processIds");
+        public Criteria andProductIdsNotEqualTo(String value) {
+            addCriterion("product_ids <>", value, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsGreaterThan(String value) {
-            addCriterion("process_ids >", value, "processIds");
+        public Criteria andProductIdsGreaterThan(String value) {
+            addCriterion("product_ids >", value, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsGreaterThanOrEqualTo(String value) {
-            addCriterion("process_ids >=", value, "processIds");
+        public Criteria andProductIdsGreaterThanOrEqualTo(String value) {
+            addCriterion("product_ids >=", value, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsLessThan(String value) {
-            addCriterion("process_ids <", value, "processIds");
+        public Criteria andProductIdsLessThan(String value) {
+            addCriterion("product_ids <", value, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsLessThanOrEqualTo(String value) {
-            addCriterion("process_ids <=", value, "processIds");
+        public Criteria andProductIdsLessThanOrEqualTo(String value) {
+            addCriterion("product_ids <=", value, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsLike(String value) {
-            addCriterion("process_ids like", value, "processIds");
+        public Criteria andProductIdsLike(String value) {
+            addCriterion("product_ids like", value, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsNotLike(String value) {
-            addCriterion("process_ids not like", value, "processIds");
+        public Criteria andProductIdsNotLike(String value) {
+            addCriterion("product_ids not like", value, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsIn(List<String> values) {
-            addCriterion("process_ids in", values, "processIds");
+        public Criteria andProductIdsIn(List<String> values) {
+            addCriterion("product_ids in", values, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsNotIn(List<String> values) {
-            addCriterion("process_ids not in", values, "processIds");
+        public Criteria andProductIdsNotIn(List<String> values) {
+            addCriterion("product_ids not in", values, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsBetween(String value1, String value2) {
-            addCriterion("process_ids between", value1, value2, "processIds");
+        public Criteria andProductIdsBetween(String value1, String value2) {
+            addCriterion("product_ids between", value1, value2, "productIds");
             return (Criteria) this;
         }
 
-        public Criteria andProcessIdsNotBetween(String value1, String value2) {
-            addCriterion("process_ids not between", value1, value2, "processIds");
+        public Criteria andProductIdsNotBetween(String value1, String value2) {
+            addCriterion("product_ids not between", value1, value2, "productIds");
             return (Criteria) this;
         }
 
@@ -962,6 +962,76 @@ public class TicketExample {
 
         public Criteria andStateNotBetween(Integer value1, Integer value2) {
             addCriterion("state not between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIsNull() {
+            addCriterion("number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIsNotNull() {
+            addCriterion("number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberEqualTo(String value) {
+            addCriterion("number =", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotEqualTo(String value) {
+            addCriterion("number <>", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberGreaterThan(String value) {
+            addCriterion("number >", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("number >=", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLessThan(String value) {
+            addCriterion("number <", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLessThanOrEqualTo(String value) {
+            addCriterion("number <=", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLike(String value) {
+            addCriterion("number like", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotLike(String value) {
+            addCriterion("number not like", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIn(List<String> values) {
+            addCriterion("number in", values, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotIn(List<String> values) {
+            addCriterion("number not in", values, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberBetween(String value1, String value2) {
+            addCriterion("number between", value1, value2, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotBetween(String value1, String value2) {
+            addCriterion("number not between", value1, value2, "number");
             return (Criteria) this;
         }
     }

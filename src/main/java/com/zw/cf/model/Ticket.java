@@ -23,11 +23,13 @@ public class Ticket {
 
     private Date overTime;
 
-    private String processIds;
+    private String productIds;
 
     private String corporationId;
 
     private Integer state;
+
+    private String number;
 
     public String getId() {
         return id;
@@ -109,12 +111,12 @@ public class Ticket {
         this.overTime = overTime;
     }
 
-    public String getProcessIds() {
-        return processIds;
+    public String getProductIds() {
+        return productIds;
     }
 
-    public void setProcessIds(String processIds) {
-        this.processIds = processIds == null ? null : processIds.trim();
+    public void setProductIds(String productIds) {
+        this.productIds = productIds == null ? null : productIds.trim();
     }
 
     public String getCorporationId() {
@@ -131,5 +133,13 @@ public class Ticket {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number == null ? null : number.trim();
     }
 }

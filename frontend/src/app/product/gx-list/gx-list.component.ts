@@ -22,7 +22,7 @@ export class GxListComponent implements OnInit {
   getList() {
     (this.gxService as any).list({
       pageNum: 1,
-      pageSize: 10
+      pageSize: 50
     }, {})
       .then(response => {
         const rep = (response as any);

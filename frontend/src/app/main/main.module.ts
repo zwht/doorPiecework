@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {Http, HttpModule, XHRBackend, RequestOptions} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import { ElModule } from 'element-angular';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // 拦截器代码
 import {HttpInterceptorService} from './core/http/HttpInterceptorService';
@@ -22,6 +22,7 @@ import {mainRoutes, mainComponentList} from './main.routes';
   imports: [
     ElModule.forRoot(),
     BrowserModule,
+    NoopAnimationsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(mainRoutes, {useHash: true})

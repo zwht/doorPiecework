@@ -17,7 +17,7 @@ public class User {
 
     private String loginName;
 
-    private Integer type;
+    private String type;
 
     private String roles;
 
@@ -81,12 +81,12 @@ public class User {
         this.loginName = loginName == null ? null : loginName.trim();
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public String getRoles() {

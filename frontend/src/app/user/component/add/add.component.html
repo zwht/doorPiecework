@@ -17,7 +17,12 @@
   </label>
   <label>
     <span>类型：</span>
-    <input [(ngModel)]="user.type" placeholder="请输入类型" type="number">
+    <el-select [model]="user.type" placeholder="请选择" (modelChange)="handle($event)">
+      <el-option *ngFor="let item of gxList"
+                 [label]="item.name"
+                 [value]="item.name">
+      </el-option>
+    </el-select>
   </label>
   <label>
     <span>角色：</span>

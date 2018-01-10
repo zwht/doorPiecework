@@ -1,4 +1,5 @@
-<div>
+<div class="ticketAdd">
+
   <!--<label>
     <span>名称：</span>
     <input [(ngModel)]="ticket.name" placeholder="请输入名称" type="text" >
@@ -11,6 +12,159 @@
     <span>类型：</span>
     <input [(ngModel)]="ticket.type" type="text">
   </label>-->
+  <div class="tableBox">
+    <table cellspacing="0">
+      <tr>
+        <td colspan="2">经销商</td>
+        <td>
+          <el-select [model]="ticket.dealersId" placeholder="请选择">
+            <el-option *ngFor="let item of userListObj[3]"
+                       [label]="item.name"
+                       [value]="item.id">
+            </el-option>
+          </el-select>
+        </td>
 
-  <button (click)="save()" type="info" style="width: 100%; margin-top: 30px;">保存</button>
+        <td>品牌名称</td>
+        <td>
+          <el-select [model]="ticket.brandId" placeholder="请选择">
+            <el-option *ngFor="let item of userListObj[3]"
+                       [label]="item.name"
+                       [value]="item.id">
+            </el-option>
+          </el-select>
+        </td>
+
+        <td>订单编号</td>
+        <td colspan="5">
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">地址</td>
+        <td colspan="3">
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+
+        <td>订货日期</td>
+        <td colspan="2">
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td>交货日期</td>
+        <td colspan="2">
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="2" style="width: 60px;">序号</td>
+        <td rowspan="2">型号</td>
+
+        <td>洞口尺寸</td>
+        <td>门扇尺寸</td>
+
+        <td rowspan="2">立板尺寸</td>
+        <td rowspan="2">顶板尺寸</td>
+        <td rowspan="2">颜色</td>
+        <td rowspan="2">线条款式</td>
+        <td rowspan="2">线条数量</td>
+        <td rowspan="2">备注</td>
+        <td rowspan="2" style="width: 90px;">
+          操作
+          <el-button size="mini" type="primary" icon="plus" (click)="addDoor()"></el-button>
+        </td>
+      </tr>
+      <tr>
+        <td class="s30">
+          <span>高</span>
+          <span>宽</span>
+          <span>厚</span>
+        </td>
+        <td class="s50">
+          <span>高</span>
+          <span>宽</span>
+        </td>
+      </tr>
+      <tr *ngFor="let item of productList let i=index">
+        <td>1</td>
+        <td>
+          <el-select size="mini" [model]="item.doorId" placeholder="请选择">
+            <el-option *ngFor="let obj of doorList"
+                       [label]="obj.name"
+                       [value]="obj.id">
+            </el-option>
+          </el-select>
+        </td>
+        <td class="input3" >
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          *
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          *
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td class="input3" >
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          *<el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          =<el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td class="input3" >
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          *<el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          =<el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td class="input3" >
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>*
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>=
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td>
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td>
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td class="input2">
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          =
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td >
+          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        </td>
+        <td>
+          <el-button size="mini" type="primary" icon="minus" (click)="delDoor(i)"></el-button>
+        </td>
+      </tr>
+      <tr>
+        <td>总计：</td>
+        <td colspan="11" class="statistics">
+          门扇：
+          <span>33</span>
+          <b>个</b>
+          门套：
+          <span>33</span>
+          <b>块</b>
+          线条：
+          <span>33</span>
+          <b>支</b>
+        </td>
+      </tr>
+    </table>
+    <ul class="gxBox clear">
+      <li *ngFor="let item of gxList let i=index">
+        <div>{{item.name}}</div>
+        <div>
+          <el-select size="mini" [model]="item.userId" placeholder="请选择">
+            <el-option *ngFor="let obj of userListObj[item.name]"
+                       [label]="obj.name"
+                       [value]="obj.id">
+            </el-option>
+          </el-select>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+  <button (click)="save()" type="info" style=" margin-top: 30px;">保存</button>
+  <button (click)="save()" type="info" style=" margin-top: 30px;">完成订单</button>
 </div>

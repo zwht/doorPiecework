@@ -9,7 +9,7 @@
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="login_name" jdbcType="VARCHAR" property="loginName" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="roles" jdbcType="VARCHAR" property="roles" />
     <result column="token" jdbcType="VARCHAR" property="token" />
     <result column="token_time" jdbcType="TIMESTAMP" property="tokenTime" />
@@ -113,7 +113,7 @@
       token, token_time)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{corporationId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
-      #{loginName,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{roles,jdbcType=VARCHAR}, 
+      #{loginName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, 
       #{token,jdbcType=VARCHAR}, #{tokenTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.User">
@@ -176,7 +176,7 @@
         #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
-        #{type,jdbcType=INTEGER},
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="roles != null">
         #{roles,jdbcType=VARCHAR},
@@ -220,7 +220,7 @@
         login_name = #{record.loginName,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.roles != null">
         roles = #{record.roles,jdbcType=VARCHAR},
@@ -245,7 +245,7 @@
       state = #{record.state,jdbcType=INTEGER},
       phone = #{record.phone,jdbcType=VARCHAR},
       login_name = #{record.loginName,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
       roles = #{record.roles,jdbcType=VARCHAR},
       token = #{record.token,jdbcType=VARCHAR},
       token_time = #{record.tokenTime,jdbcType=TIMESTAMP}
@@ -275,7 +275,7 @@
         login_name = #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+        type = #{type,jdbcType=VARCHAR},
       </if>
       <if test="roles != null">
         roles = #{roles,jdbcType=VARCHAR},
@@ -297,7 +297,7 @@
       state = #{state,jdbcType=INTEGER},
       phone = #{phone,jdbcType=VARCHAR},
       login_name = #{loginName,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
       roles = #{roles,jdbcType=VARCHAR},
       token = #{token,jdbcType=VARCHAR},
       token_time = #{tokenTime,jdbcType=TIMESTAMP}
