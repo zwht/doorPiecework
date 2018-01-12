@@ -15,24 +15,52 @@ export class TicketAddComponent implements OnInit {
 
   userListObj = {3: []};
   ticket = {
-    "id": "string",
-    "name": "string",
-    "dealersId": "string",
-    "brandId": "string",
-    "odd": "string",
-    "address": "string",
-    "startTime": "2017-12-29T07:01:54.699Z",
-    "endTime": "2017-12-29T07:01:54.699Z",
-    "creatTime": "2017-12-29T07:01:54.699Z",
-    "overTime": "2017-12-29T07:01:54.699Z",
-    "processIds": "string",
-    "corporationId": "string",
-    "state": 0,
+    id: 'string',
+    name: 'string',
+    dealersId: 'string',
+    brandId: 1,
+    odd: 'string',
+    address: 'string',
+    startTime: '2017-12-29T07:01:54.699Z',
+    endTime: '2017-12-29T07:01:54.699Z',
+    createTime: '2017-12-29T07:01:54.699Z',
+    overTime: '2017-12-29T07:01:54.699Z',
+    processIds: 'string',
+    corporationId: 'string',
+    state: 0,
     number: 0
   };
-  productList = [];
   gxList = [];
   doorList = [];
+  emptyDoor = {
+    doorId: 0,
+    coverWidth: 100,
+    coverHeight: 180,
+    coverDepth: 70,
+    width: 100,
+    height: 180,
+    sum: 1,
+    lbWidth: 100,
+    lbHeight: 180,
+    lbSum: 2,
+    dbWidth: 100,
+    dbHeight: 180,
+    dbSum: 1,
+    lineSum: 1,
+    lineLength: 2200,
+
+  };
+  productList = [JSON.parse(JSON.stringify(this.emptyDoor))];
+  brandList = [
+    {
+      name: '川峰门业',
+      id: 1
+    },
+    {
+      name: '御驰门业',
+      id: 2
+    }
+  ];
 
   constructor(private ticketService: TicketService,
               private gxService: GxService,
@@ -53,6 +81,11 @@ export class TicketAddComponent implements OnInit {
     this.getUserList();
     this.getDoorList();
 
+  }
+
+  // 复制添加
+  copyAdd(item) {
+    this.productList.push(JSON.parse(JSON.stringify(item)));
   }
 
   getById() {
@@ -154,7 +187,7 @@ export class TicketAddComponent implements OnInit {
 
   // 添加购买产品
   addDoor() {
-    this.productList.push({});
+    this.productList.push(this.emptyDoor);
   }
 
   // 删除购买产品

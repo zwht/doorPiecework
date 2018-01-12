@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zw.cf.dao.ColorMapper">
   <resultMap id="BaseResultMap" type="com.zw.cf.model.Color">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="color" jdbcType="VARCHAR" property="color" />
-    <result column="croporation_id" jdbcType="VARCHAR" property="croporationId" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, color, croporation_id
+    id, name, corporation_id, img, value
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.ColorExample" resultMap="BaseResultMap">
     select
@@ -81,15 +83,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from color
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from color
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.zw.cf.model.ColorExample">
     delete from color
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Color">
-    insert into color (id, color, croporation_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, #{croporationId,jdbcType=VARCHAR}
-      )
+    insert into color (id, name, corporation_id, 
+      img, value)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{corporationId,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Color">
     insert into color
@@ -109,22 +111,34 @@
       <if test="id != null">
         id,
       </if>
-      <if test="color != null">
-        color,
+      <if test="name != null">
+        name,
       </if>
-      <if test="croporationId != null">
-        croporation_id,
+      <if test="corporationId != null">
+        corporation_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="value != null">
+        value,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
-      <if test="color != null">
-        #{color,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="croporationId != null">
-        #{croporationId,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        #{corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -138,13 +152,19 @@
     update color
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.color != null">
-        color = #{record.color,jdbcType=VARCHAR},
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.croporationId != null">
-        croporation_id = #{record.croporationId,jdbcType=VARCHAR},
+      <if test="record.corporationId != null">
+        corporation_id = #{record.corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value != null">
+        value = #{record.value,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -153,9 +173,11 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update color
-    set id = #{record.id,jdbcType=INTEGER},
-      color = #{record.color,jdbcType=VARCHAR},
-      croporation_id = #{record.croporationId,jdbcType=VARCHAR}
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      corporation_id = #{record.corporationId,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      value = #{record.value,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -163,19 +185,27 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zw.cf.model.Color">
     update color
     <set>
-      <if test="color != null">
-        color = #{color,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="croporationId != null">
-        croporation_id = #{croporationId,jdbcType=VARCHAR},
+      <if test="corporationId != null">
+        corporation_id = #{corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Color">
     update color
-    set color = #{color,jdbcType=VARCHAR},
-      croporation_id = #{croporationId,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    set name = #{name,jdbcType=VARCHAR},
+      corporation_id = #{corporationId,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

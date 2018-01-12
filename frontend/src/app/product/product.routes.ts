@@ -4,6 +4,8 @@ import {DoorComponent} from './door/door.component';
 import {DoorAddComponent} from './door-add/door-add.component';
 import {GxListComponent} from './gx-list/gx-list.component';
 import {GxAddComponent} from './gx-add/gx-add.component';
+import {ColorListComponent} from './color-list/color-list.component';
+import {ColorAddComponent} from './color-add/color-add.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,21 @@ const routes: Routes = [
       {
         path: 'door/add',
         component: DoorAddComponent,
+        data: {
+          name: '添加'
+        }
+      },
+      {
+        path: 'color',
+        component: ColorListComponent,
+        data: {
+          name: 'color列表',
+          menu: true
+        }
+      },
+      {
+        path: 'color/add',
+        component: ColorAddComponent,
         data: {
           name: '添加'
         }
@@ -55,5 +72,6 @@ const routes: Routes = [
 
 export class ProductRoutes {
 }
-export const ProductComponents = [DoorComponent, DoorAddComponent, GxListComponent, GxAddComponent];
+export const ProductComponents = [DoorComponent, DoorAddComponent, GxListComponent,
+  GxAddComponent, ColorListComponent, ColorAddComponent];
 export const ProductList = routes;

@@ -21,23 +21,23 @@ public class Product {
 
     private String corporationId;
 
-    private Integer weightCover;
+    private Integer coverWidth;
 
-    private Integer heightCover;
+    private Integer coverHeight;
 
-    private Integer depthCover;
+    private Integer coverDepth;
 
-    private Integer weight;
+    private Integer widht;
 
     private Integer height;
 
-    private Integer weightLb;
+    private Integer lbWidth;
 
-    private Integer heightLb;
+    private Integer lbHeight;
 
-    private Integer weightDb;
+    private Integer dbWidth;
 
-    private Integer heightDb;
+    private Integer dbHeight;
 
     private String colorId;
 
@@ -54,6 +54,14 @@ public class Product {
     private String moduleId;
 
     private Integer state;
+
+    private Integer lbSum;
+
+    private Integer dbSum;
+
+    private Integer sum;
+
+    private Integer lineLength;
 
     public String getId() {
         return id;
@@ -127,36 +135,36 @@ public class Product {
         this.corporationId = corporationId == null ? null : corporationId.trim();
     }
 
-    public Integer getWeightCover() {
-        return weightCover;
+    public Integer getCoverWidth() {
+        return coverWidth;
     }
 
-    public void setWeightCover(Integer weightCover) {
-        this.weightCover = weightCover;
+    public void setCoverWidth(Integer coverWidth) {
+        this.coverWidth = coverWidth;
     }
 
-    public Integer getHeightCover() {
-        return heightCover;
+    public Integer getCoverHeight() {
+        return coverHeight;
     }
 
-    public void setHeightCover(Integer heightCover) {
-        this.heightCover = heightCover;
+    public void setCoverHeight(Integer coverHeight) {
+        this.coverHeight = coverHeight;
     }
 
-    public Integer getDepthCover() {
-        return depthCover;
+    public Integer getCoverDepth() {
+        return coverDepth;
     }
 
-    public void setDepthCover(Integer depthCover) {
-        this.depthCover = depthCover;
+    public void setCoverDepth(Integer coverDepth) {
+        this.coverDepth = coverDepth;
     }
 
-    public Integer getWeight() {
-        return weight;
+    public Integer getWidht() {
+        return widht;
     }
 
-    public void setWeight(Integer weight) {
-        this.weight = weight;
+    public void setWidht(Integer widht) {
+        this.widht = widht;
     }
 
     public Integer getHeight() {
@@ -167,36 +175,36 @@ public class Product {
         this.height = height;
     }
 
-    public Integer getWeightLb() {
-        return weightLb;
+    public Integer getLbWidth() {
+        return lbWidth;
     }
 
-    public void setWeightLb(Integer weightLb) {
-        this.weightLb = weightLb;
+    public void setLbWidth(Integer lbWidth) {
+        this.lbWidth = lbWidth;
     }
 
-    public Integer getHeightLb() {
-        return heightLb;
+    public Integer getLbHeight() {
+        return lbHeight;
     }
 
-    public void setHeightLb(Integer heightLb) {
-        this.heightLb = heightLb;
+    public void setLbHeight(Integer lbHeight) {
+        this.lbHeight = lbHeight;
     }
 
-    public Integer getWeightDb() {
-        return weightDb;
+    public Integer getDbWidth() {
+        return dbWidth;
     }
 
-    public void setWeightDb(Integer weightDb) {
-        this.weightDb = weightDb;
+    public void setDbWidth(Integer dbWidth) {
+        this.dbWidth = dbWidth;
     }
 
-    public Integer getHeightDb() {
-        return heightDb;
+    public Integer getDbHeight() {
+        return dbHeight;
     }
 
-    public void setHeightDb(Integer heightDb) {
-        this.heightDb = heightDb;
+    public void setDbHeight(Integer dbHeight) {
+        this.dbHeight = dbHeight;
     }
 
     public String getColorId() {
@@ -261,5 +269,37 @@ public class Product {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getLbSum() {
+        return lbSum;
+    }
+
+    public void setLbSum(Integer lbSum) {
+        this.lbSum = lbSum;
+    }
+
+    public Integer getDbSum() {
+        return dbSum;
+    }
+
+    public void setDbSum(Integer dbSum) {
+        this.dbSum = dbSum;
+    }
+
+    public Integer getSum() {
+        return sum;
+    }
+
+    public void setSum(Integer sum) {
+        this.sum = sum;
+    }
+
+    public Integer getLineLength() {
+        return lineLength;
+    }
+
+    public void setLineLength(Integer lineLength) {
+        this.lineLength = lineLength;
     }
 }

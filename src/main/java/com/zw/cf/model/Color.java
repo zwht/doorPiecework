@@ -1,33 +1,53 @@
 package com.zw.cf.model;
 
 public class Color {
-    private Integer id;
+    private String id;
 
-    private String color;
+    private String name;
 
-    private String croporationId;
+    private String corporationId;
 
-    public Integer getId() {
+    private String img;
+
+    private String value;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
-    public String getColor() {
-        return color;
+    public String getName() {
+        return name;
     }
 
-    public void setColor(String color) {
-        this.color = color == null ? null : color.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getCroporationId() {
-        return croporationId;
+    public String getCorporationId() {
+        return corporationId;
     }
 
-    public void setCroporationId(String croporationId) {
-        this.croporationId = croporationId == null ? null : croporationId.trim();
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId == null ? null : corporationId.trim();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value == null ? null : value.trim();
     }
 }

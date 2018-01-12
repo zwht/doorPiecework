@@ -2,22 +2,22 @@
 
   <!--<label>
     <span>名称：</span>
-    <input [(ngModel)]="ticket.name" placeholder="请输入名称" type="text" >
+    <input [(ng(model))]="ticket.name" placeholder="请输入名称" type="text" >
   </label>
   <label>
     <span>价格：</span>
-    <input [(ngModel)]="ticket.price" type="text">
+    <input [(ng(model))]="ticket.price" type="text">
   </label>
   <label>
     <span>类型：</span>
-    <input [(ngModel)]="ticket.type" type="text">
+    <input [(ng(model))]="ticket.type" type="text">
   </label>-->
   <div class="tableBox">
     <table cellspacing="0">
       <tr>
         <td colspan="2">经销商</td>
         <td>
-          <el-select [model]="ticket.dealersId" placeholder="请选择">
+          <el-select [(model)]="ticket.dealersId" placeholder="请选择">
             <el-option *ngFor="let item of userListObj[3]"
                        [label]="item.name"
                        [value]="item.id">
@@ -27,8 +27,8 @@
 
         <td>品牌名称</td>
         <td>
-          <el-select [model]="ticket.brandId" placeholder="请选择">
-            <el-option *ngFor="let item of userListObj[3]"
+          <el-select [(model)]="ticket.brandId" placeholder="请选择">
+            <el-option *ngFor="let item of brandList"
                        [label]="item.name"
                        [value]="item.id">
             </el-option>
@@ -37,22 +37,22 @@
 
         <td>订单编号</td>
         <td colspan="5">
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="ticket.number" placeholder="请输入内容"></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="2">地址</td>
         <td colspan="3">
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="ticket.number" placeholder="请输入内容"></el-input>
         </td>
 
         <td>订货日期</td>
         <td colspan="2">
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="ticket.number" placeholder="请输入内容"></el-input>
         </td>
         <td>交货日期</td>
         <td colspan="2">
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="ticket.number" placeholder="请输入内容"></el-input>
         </td>
       </tr>
       <tr>
@@ -68,7 +68,7 @@
         <td rowspan="2">线条款式</td>
         <td rowspan="2">线条数量</td>
         <td rowspan="2">备注</td>
-        <td rowspan="2" style="width: 90px;">
+        <td rowspan="2" style="width: 150px;">
           操作
           <el-button size="mini" type="primary" icon="plus" (click)="addDoor()"></el-button>
         </td>
@@ -87,51 +87,58 @@
       <tr *ngFor="let item of productList let i=index">
         <td>1</td>
         <td>
-          <el-select size="mini" [model]="item.doorId" placeholder="请选择">
+          <el-select size="mini" [(model)]="item.doorId" placeholder="请选择">
             <el-option *ngFor="let obj of doorList"
                        [label]="obj.name"
                        [value]="obj.id">
             </el-option>
           </el-select>
         </td>
-        <td class="input3" >
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        <td class="input3">
+          <el-input [(model)]="item.coverWidth" placeholder="请输入内容"></el-input>
           *
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="item.coverHeight" placeholder="请输入内容"></el-input>
           *
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="item.coverDepth" placeholder="请输入内容"></el-input>
         </td>
-        <td class="input3" >
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
-          *<el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
-          =<el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        <td class="input3">
+          <el-input [(model)]="item.width" placeholder="请输入内容"></el-input>
+          *
+          <el-input [(model)]="item.height" placeholder="请输入内容"></el-input>
+          =
+          <el-input [(model)]="item.sum" placeholder="请输入内容"></el-input>
         </td>
-        <td class="input3" >
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
-          *<el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
-          =<el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        <td class="input3">
+          <el-input [(model)]="item.lbWidth" placeholder="请输入内容"></el-input>
+          *
+          <el-input [(model)]="item.lbHeight" placeholder="请输入内容"></el-input>
+          =
+          <el-input [(model)]="item.lbSum" placeholder="请输入内容"></el-input>
         </td>
-        <td class="input3" >
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>*
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>=
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+        <td class="input3">
+          <el-input [(model)]="item.dbWidth" placeholder="请输入内容"></el-input>
+          *
+          <el-input [(model)]="item.dbHeight" placeholder="请输入内容"></el-input>
+          =
+          <el-input [(model)]="item.dbSum" placeholder="请输入内容"></el-input>
         </td>
         <td>
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="item.colorId" placeholder="请输入内容"></el-input>
         </td>
         <td>
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="item.lineId" placeholder="请输入内容"></el-input>
         </td>
         <td class="input2">
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="item.lineLength" placeholder="请输入内容"></el-input>
           =
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
-        </td>
-        <td >
-          <el-input [model]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="item.lineSum" placeholder="请输入内容"></el-input>
         </td>
         <td>
-          <el-button size="mini" type="primary" icon="minus" (click)="delDoor(i)"></el-button>
+          <el-input [(model)]="item.describe" placeholder="请输入内容"></el-input>
+        </td>
+        <td class="operation">
+          <span (click)="copyAdd(item)">复制添加</span>
+          <span (click)="delDoor(i)">删除</span>
         </td>
       </tr>
       <tr>
@@ -153,7 +160,7 @@
       <li *ngFor="let item of gxList let i=index">
         <div>{{item.name}}</div>
         <div>
-          <el-select size="mini" [model]="item.userId" placeholder="请选择">
+          <el-select size="mini" [(model)]="item.userId" placeholder="请选择">
             <el-option *ngFor="let obj of userListObj[item.name]"
                        [label]="obj.name"
                        [value]="obj.id">

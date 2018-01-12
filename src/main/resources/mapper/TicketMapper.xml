@@ -10,7 +10,7 @@
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="over_time" jdbcType="TIMESTAMP" property="overTime" />
     <result column="product_ids" jdbcType="VARCHAR" property="productIds" />
     <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
@@ -76,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, dealers_id, brand_id, odd, address, start_time, end_time, creat_time, over_time, 
-    product_ids, corporation_id, state, number
+    id, name, dealers_id, brand_id, odd, address, start_time, end_time, create_time, 
+    over_time, product_ids, corporation_id, state, number
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.TicketExample" resultMap="BaseResultMap">
     select
@@ -112,12 +112,12 @@
   <insert id="insert" parameterType="com.zw.cf.model.Ticket">
     insert into ticket (id, name, dealers_id, 
       brand_id, odd, address, 
-      start_time, end_time, creat_time, 
+      start_time, end_time, create_time, 
       over_time, product_ids, corporation_id, 
       state, number)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{dealersId,jdbcType=VARCHAR}, 
       #{brandId,jdbcType=VARCHAR}, #{odd,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{overTime,jdbcType=TIMESTAMP}, #{productIds,jdbcType=VARCHAR}, #{corporationId,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR})
   </insert>
@@ -148,8 +148,8 @@
       <if test="endTime != null">
         end_time,
       </if>
-      <if test="creatTime != null">
-        creat_time,
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="overTime != null">
         over_time,
@@ -192,8 +192,8 @@
       <if test="endTime != null">
         #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="creatTime != null">
-        #{creatTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="overTime != null">
         #{overTime,jdbcType=TIMESTAMP},
@@ -245,8 +245,8 @@
       <if test="record.endTime != null">
         end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.creatTime != null">
-        creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.overTime != null">
         over_time = #{record.overTime,jdbcType=TIMESTAMP},
@@ -278,7 +278,7 @@
       address = #{record.address,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
-      creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       over_time = #{record.overTime,jdbcType=TIMESTAMP},
       product_ids = #{record.productIds,jdbcType=VARCHAR},
       corporation_id = #{record.corporationId,jdbcType=VARCHAR},
@@ -312,8 +312,8 @@
       <if test="endTime != null">
         end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="creatTime != null">
-        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="overTime != null">
         over_time = #{overTime,jdbcType=TIMESTAMP},
@@ -342,7 +342,7 @@
       address = #{address,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
-      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       over_time = #{overTime,jdbcType=TIMESTAMP},
       product_ids = #{productIds,jdbcType=VARCHAR},
       corporation_id = #{corporationId,jdbcType=VARCHAR},
