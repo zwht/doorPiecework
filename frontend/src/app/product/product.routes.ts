@@ -6,6 +6,8 @@ import {GxListComponent} from './gx-list/gx-list.component';
 import {GxAddComponent} from './gx-add/gx-add.component';
 import {ColorListComponent} from './color-list/color-list.component';
 import {ColorAddComponent} from './color-add/color-add.component';
+import {LineListComponent} from './line-list/line-list.component';
+import {LineAddComponent} from './line-add/line-add.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,21 @@ const routes: Routes = [
         }
       },
       {
+        path: 'line',
+        component: LineListComponent,
+        data: {
+          name: '线条列表',
+          menu: true
+        }
+      },
+      {
+        path: 'line/add',
+        component: LineAddComponent,
+        data: {
+          name: '添加'
+        }
+      },
+      {
         path: 'gx',
         component: GxListComponent,
         data: {
@@ -73,5 +90,5 @@ const routes: Routes = [
 export class ProductRoutes {
 }
 export const ProductComponents = [DoorComponent, DoorAddComponent, GxListComponent,
-  GxAddComponent, ColorListComponent, ColorAddComponent];
+  GxAddComponent, ColorListComponent, ColorAddComponent, LineListComponent, LineAddComponent];
 export const ProductList = routes;

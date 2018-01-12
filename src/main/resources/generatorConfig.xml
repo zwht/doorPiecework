@@ -50,6 +50,7 @@
         <table tableName="process" domainObjectName="Process"></table>
         <table tableName="product" domainObjectName="Product"></table>
         <table tableName="ticket" domainObjectName="Ticket"></table>
+        <table tableName="line" domainObjectName="Line"></table>
     </context>
 
 </generatorConfiguration>
