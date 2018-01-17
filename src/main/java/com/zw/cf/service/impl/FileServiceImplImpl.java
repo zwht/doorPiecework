@@ -14,7 +14,6 @@ import com.zw.cf.service.FileService;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
-import java.util.Date;
 
 /**
  * Created by zhaowei on 2017/8/17.
@@ -49,7 +48,7 @@ public class FileServiceImplImpl implements FileService {
             Auth auth1 = Auth.create(accessKey, secretKey);
             BucketManager bucketManager = new BucketManager(auth1, cfg);
             try {
-                String imgId=id+"-cfmy-"+corporationid;
+                String imgId = id + "-cfmy-" + corporationid;
 
                 bucketManager.move(bucket, putRet.hash, bucket, imgId);
 
@@ -64,5 +63,27 @@ public class FileServiceImplImpl implements FileService {
         } catch (QiniuException ex) {
             return response1.failure(501, ex.response.toString());
         }
+    }
+
+    public com.zw.plug.Response upToken() {
+        com.zw.plug.Response response1 = new com.zw.plug.Response();
+        //构造一个带指定Zone对象的配置类
+        Configuration cfg = new Configuration(Zone.zone2());
+        //...其他参数参考类注释
+        UploadManager uploadManager = new UploadManager(cfg);
+        //...生成上传凭证，然后准备上传
+        String accessKey = "IBLCYav5ECJaqeEqyUeojfhLEC5wkN4tM0BsQi2S";
+        String secretKey = "4_uIHTtisPV2UuxoniJC-wpHhAzim6HujhcdmDYF";
+        String bucket = "piecework";
+        //默认不指定key的情况下，以文件内容的hash值作为文件名
+        String key = null;
+
+        Auth auth = Auth.create(accessKey, secretKey);
+        StringMap putPolicy = new StringMap();
+        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":$(fsize)}");
+        long expireSeconds = 3600;
+        String upToken = auth.uploadToken(bucket, null, expireSeconds, putPolicy);
+
+        return response1.success(upToken);
     }
 }

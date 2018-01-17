@@ -17,7 +17,8 @@ export class AddComponent implements OnInit {
     loginName: null,
     type: '',
     roles: null,
-    state: 1
+    state: 1,
+    address: null
   };
 
   constructor(private userService: UserService,

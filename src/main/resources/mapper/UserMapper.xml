@@ -13,6 +13,7 @@
     <result column="roles" jdbcType="VARCHAR" property="roles" />
     <result column="token" jdbcType="VARCHAR" property="token" />
     <result column="token_time" jdbcType="TIMESTAMP" property="tokenTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, name, password, corporation_id, state, phone, login_name, type, roles, token, 
-    token_time
+    token_time, address
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.UserExample" resultMap="BaseResultMap">
     select
@@ -110,11 +111,13 @@
     insert into users (id, name, password, 
       corporation_id, state, phone, 
       login_name, type, roles, 
-      token, token_time)
+      token, token_time, address
+      )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{corporationId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
       #{loginName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, 
-      #{token,jdbcType=VARCHAR}, #{tokenTime,jdbcType=TIMESTAMP})
+      #{token,jdbcType=VARCHAR}, #{tokenTime,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.User">
     insert into users
@@ -152,6 +155,9 @@
       <if test="tokenTime != null">
         token_time,
       </if>
+      <if test="address != null">
+        address,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -186,6 +192,9 @@
       </if>
       <if test="tokenTime != null">
         #{tokenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -231,6 +240,9 @@
       <if test="record.tokenTime != null">
         token_time = #{record.tokenTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +260,8 @@
       type = #{record.type,jdbcType=VARCHAR},
       roles = #{record.roles,jdbcType=VARCHAR},
       token = #{record.token,jdbcType=VARCHAR},
-      token_time = #{record.tokenTime,jdbcType=TIMESTAMP}
+      token_time = #{record.tokenTime,jdbcType=TIMESTAMP},
+      address = #{record.address,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +299,9 @@
       <if test="tokenTime != null">
         token_time = #{tokenTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -300,7 +316,8 @@
       type = #{type,jdbcType=VARCHAR},
       roles = #{roles,jdbcType=VARCHAR},
       token = #{token,jdbcType=VARCHAR},
-      token_time = #{tokenTime,jdbcType=TIMESTAMP}
+      token_time = #{tokenTime,jdbcType=TIMESTAMP},
+      address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

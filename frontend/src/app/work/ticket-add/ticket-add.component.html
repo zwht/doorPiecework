@@ -17,7 +17,8 @@
       <tr>
         <td colspan="2">经销商</td>
         <td>
-          <el-select [(model)]="ticket.dealersId" placeholder="请选择">
+          <el-select [(model)]="ticket.dealersId" placeholder="请选择"
+                     (modelChange)="dealersChange($event)">
             <el-option *ngFor="let item of userListObj[3]"
                        [label]="item.name"
                        [value]="item.id">
@@ -43,16 +44,19 @@
       <tr>
         <td colspan="2">地址</td>
         <td colspan="3">
-          <el-input [(model)]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="ticket.address" placeholder="请输入内容"></el-input>
         </td>
 
         <td>订货日期</td>
         <td colspan="2">
-          <el-input [(model)]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-date-picker [(model)]="ticket.startTime"
+          [format]="'yyyy年MM月-dd日'"></el-date-picker>
+
         </td>
         <td>交货日期</td>
         <td colspan="2">
-          <el-input [(model)]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-date-picker [(model)]="ticket.endTime"
+                          [format]="'yyyy年MM月-dd日'"></el-date-picker>
         </td>
       </tr>
       <tr>

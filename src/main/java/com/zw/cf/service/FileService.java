@@ -7,5 +7,5 @@ import java.io.InputStream;
  */
 public interface FileService {
     com.zw.plug.Response add(InputStream file,String id, String corporationid);
-
+    com.zw.plug.Response upToken();
 }

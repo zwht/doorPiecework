@@ -15,18 +15,18 @@ export class TicketAddComponent implements OnInit {
 
   userListObj = {3: []};
   ticket = {
-    id: 'string',
-    name: 'string',
-    dealersId: 'string',
+    id: null,
+    name: null,
+    dealersId: null,
     brandId: 1,
-    odd: 'string',
-    address: 'string',
-    startTime: '2017-12-29T07:01:54.699Z',
-    endTime: '2017-12-29T07:01:54.699Z',
-    createTime: '2017-12-29T07:01:54.699Z',
-    overTime: '2017-12-29T07:01:54.699Z',
-    processIds: 'string',
-    corporationId: 'string',
+    odd: null,
+    address: null,
+    startTime: null,
+    endTime: null,
+    createTime: null,
+    overTime: null,
+    processIds: null,
+    corporationId: null,
     state: 0,
     number: 0
   };
@@ -81,6 +81,14 @@ export class TicketAddComponent implements OnInit {
     this.getUserList();
     this.getDoorList();
 
+  }
+
+  dealersChange(e) {
+    this.userListObj[3].forEach(item => {
+      if (item.id === e) {
+        this.ticket.address = item.address;
+      }
+    });
   }
 
   // 复制添加

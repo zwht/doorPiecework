@@ -8,15 +8,18 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.User;
 import com.zw.cf.service.FileService;
 import com.zw.cf.service.UtilsService;
+import com.zw.cf.vo.FileAddBase64;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.net.URLDecoder;
 
 /**
  * Created by zhaowei on 2017/6/24.
@@ -51,5 +54,18 @@ public class FileCtrl {
         is.close();
         return response;
     }
+
+    /*
+     * 通过流的方式上传文件
+     * @RequestParam("file") 将name=file控件得到的文件封装成CommonsMultipartFile 对象
+     */
+    @ResponseBody
+    @RequestMapping(value = "/upToken", method = RequestMethod.GET)
+    @ApiOperation(value = "upToken", httpMethod = "GET", notes = "upToken")
+    public Response upToken() throws IOException {
+        Response response = fileService.upToken();
+        return response;
+    }
+
 
 }
