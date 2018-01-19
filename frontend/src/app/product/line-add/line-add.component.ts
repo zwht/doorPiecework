@@ -31,7 +31,9 @@ export class LineAddComponent implements OnInit {
 
     });
   }
-
+  imageChange(data) {
+    this.line.img = data.url;
+  }
   getById() {
     (this.lineService as any).getById(this.line.id)
       .then(response => {

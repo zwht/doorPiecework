@@ -1,17 +1,26 @@
-<div>
-  <div class="search">
-    <div (click)="add()">
-      <i class="icon iconfont icon-add"></i>
-      添加
-      <el-button type="primary">主要按钮</el-button>
+<div class="doorList viewBox">
+  <div class="zwSearch">
+    <div class="right">
+      <el-button (click)="add()" size="mini" type="primary">添加</el-button>
     </div>
-
   </div>
-  <ul>
-    <li *ngFor="let item of list let i=index">{{item.name}}
-      <img width="100" [src]="item.img" alt="">
-      <button (click)="see(item)">查看</button>
-      <button (click)="add(item)">编辑</button>
-    </li>
-  </ul>
+  <div class="viewMain">
+    <table class="zwTable">
+      <tr>
+        <th>名称</th>
+        <th>图片</th>
+        <th>操作</th>
+      </tr>
+      <tr *ngFor="let item of list let i=index">
+        <td>{{item.name}}</td>
+        <td>
+          <img [src]="item.img" alt="">
+        </td>
+        <td>
+          <button (click)="see(item)">查看</button>
+          <button (click)="add(item)">编辑</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

@@ -9,6 +9,7 @@
   </div>
   <ul>
     <li *ngFor="let item of list let i=index">{{item.name}}
+      <img  width="100" [src]="item.img" alt="">
       <button (click)="see(item)">查看</button>
       <button (click)="add(item)">编辑</button>
     </li>

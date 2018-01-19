@@ -5,7 +5,7 @@
   </label>
   <label>
     <span>添加图片：</span>
-    <app-cropper-img [boxStyle]="{width:500,height:500}"
+    <app-cropper-img [cpImg]="door.img" [boxStyle]="{width:300,height:400}"
                      (saveEnd)="imageChange($event)"></app-cropper-img>
   </label>
   <label>

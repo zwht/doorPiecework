@@ -4,7 +4,7 @@ import {DoorService} from '../../common/restService/DoorService';
 @Component({
   selector: 'app-door',
   templateUrl: './door.component.html',
-  styleUrls: ['./door.component.css'],
+  styleUrls: ['./door.component.less'],
   providers: [DoorService]
 })
 export class DoorComponent implements OnInit {

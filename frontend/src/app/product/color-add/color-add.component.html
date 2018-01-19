@@ -5,7 +5,8 @@
   </label>
   <label>
     <span>添加图片：</span>
-    <input [(ngModel)]="color.img" type="text">
+    <app-cropper-img [cpImg]="color.img" [boxStyle]="{width:200,height:200}"
+                     (saveEnd)="imageChange($event)"></app-cropper-img>
   </label>
   <label>
     <span>选择颜色：</span>

@@ -31,7 +31,9 @@ export class ColorAddComponent implements OnInit {
 
     });
   }
-
+  imageChange(data) {
+    this.color.img = data.url;
+  }
   getById() {
     (this.colorService as any).getById(this.color.id)
       .then(response => {

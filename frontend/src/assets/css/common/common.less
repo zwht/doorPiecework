@@ -31,3 +31,21 @@ ul,li{ list-style-type: none; margin: 0; padding: 0 }
 .no-select{-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;}
 .disabled {pointer-events: none; opacity: 0.3; cursor: not-allowed; }
 
+
+.zwTable{ border: 1px solid @borderColor; width: 100%;  border-left: none;
+  border-bottom: none;  border-collapse: collapse; background: @white; color:@color1;
+  td,th{ border-left: 1px solid @borderColor; border-bottom: 1px solid @borderColor; }
+  th{text-align: center; height: 50px; font-weight: bold; background: @white;}
+  td{ padding-left: 10px;}
+}
+
+.zwSearch{clear: both; padding-bottom: 20px;
+  &:after { content: " "; height: 0; width: 0; visibility: hidden;
+    display: block; clear: both }
+  .right{ float: right;}
+
+}
+.viewBox{ padding: 20px;
+  .viewMain{ padding: 10px; background: @white; border-radius: 6px;}
+}
+

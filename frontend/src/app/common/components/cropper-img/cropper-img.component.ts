@@ -7,15 +7,15 @@ import {FileService} from '../../../common/restService/FileService';
   templateUrl: './cropper-img.component.html',
   styleUrls: ['./cropper-img.component.less'],
   providers: [FileService],
-  inputs: ['boxStyle']
+  inputs: ['boxStyle', 'cpImg']
 })
 export class CropperImgComponent implements OnInit {
   private boxStyle;
+  private cpImg;
   loading = false;
   dialog = false;
   cropper = {};
   contentDialogStyle = {};
-  cpImg = '';
   @ViewChild('image')
   image: ElementRef;
   @ViewChild('inputImage')
@@ -84,7 +84,7 @@ export class CropperImgComponent implements OnInit {
         // $(inputImage).find('img').hide();
       };
     } else {
-      inputImage.disabled = true;
+      // inputImage.disabled = true;
     }
   }
 
