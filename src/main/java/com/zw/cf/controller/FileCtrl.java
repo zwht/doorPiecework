@@ -56,15 +56,25 @@ public class FileCtrl {
     }
 
     /*
-     * 通过流的方式上传文件
-     * @RequestParam("file") 将name=file控件得到的文件封装成CommonsMultipartFile 对象
+     * 获取upToken
      */
     @ResponseBody
     @RequestMapping(value = "/upToken", method = RequestMethod.GET)
     @ApiOperation(value = "upToken", httpMethod = "GET", notes = "upToken")
     public Response upToken() throws IOException {
-        Response response = fileService.upToken();
-        return response;
+        return fileService.upToken();
+    }
+
+    /*
+     * 删除图片
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @ApiOperation(value = "delete", httpMethod = "GET", notes = "delete")
+    public Response delete(
+            @ApiParam(required = true, value = "key", name = "key") @RequestParam String key
+    ) throws IOException {
+        return fileService.delete(key);
     }
 
 

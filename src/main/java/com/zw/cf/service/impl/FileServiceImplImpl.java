@@ -3,7 +3,6 @@ package com.zw.cf.service.impl;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
-import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
@@ -11,6 +10,7 @@ import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.zw.cf.service.FileService;
+import com.zw.plug.Response;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -21,26 +21,38 @@ import java.io.InputStream;
 @Service
 public class FileServiceImplImpl implements FileService {
 
-    public com.zw.plug.Response add(InputStream file, String id, String corporationid) {
-        com.zw.plug.Response response1 = new com.zw.plug.Response();
-        //构造一个带指定Zone对象的配置类
-        Configuration cfg = new Configuration(Zone.zone2());
-        //...其他参数参考类注释
-        UploadManager uploadManager = new UploadManager(cfg);
-        //...生成上传凭证，然后准备上传
-        String accessKey = "IBLCYav5ECJaqeEqyUeojfhLEC5wkN4tM0BsQi2S";
-        String secretKey = "4_uIHTtisPV2UuxoniJC-wpHhAzim6HujhcdmDYF";
-        String bucket = "piecework";
-        //默认不指定key的情况下，以文件内容的hash值作为文件名
-        String key = null;
+    Response response1 = new Response();
+    //构造一个带指定Zone对象的配置类
+    Configuration cfg = new Configuration(Zone.zone2());
+    //...其他参数参考类注释
+    UploadManager uploadManager = new UploadManager(cfg);
+    //...生成上传凭证，然后准备上传
+    String accessKey = "IBLCYav5ECJaqeEqyUeojfhLEC5wkN4tM0BsQi2S";
+    String secretKey = "4_uIHTtisPV2UuxoniJC-wpHhAzim6HujhcdmDYF";
+    String bucket = "piecework";
+    //默认不指定key的情况下，以文件内容的hash值作为文件名
+    String key = null;
 
-        Auth auth = Auth.create(accessKey, secretKey);
+    Auth auth = Auth.create(accessKey, secretKey);
+
+
+    public Response upToken() {
+        StringMap putPolicy = new StringMap();
+        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":$(fsize)}");
+        long expireSeconds = 3600;
+        String upToken = auth.uploadToken(bucket, null, expireSeconds, putPolicy);
+        return response1.success(upToken);
+    }
+
+
+    public Response add(InputStream file, String id, String corporationid) {
+        Response response1 = new Response();
         StringMap putPolicy = new StringMap();
         putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":$(fsize)}");
         long expireSeconds = 3600;
         String upToken = auth.uploadToken(bucket, null, expireSeconds, putPolicy);
         try {
-            Response response = uploadManager.put(file, key, upToken, null, null);
+            com.qiniu.http.Response response = uploadManager.put(file, key, upToken, null, null);
             //解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
 
@@ -65,25 +77,18 @@ public class FileServiceImplImpl implements FileService {
         }
     }
 
-    public com.zw.plug.Response upToken() {
-        com.zw.plug.Response response1 = new com.zw.plug.Response();
-        //构造一个带指定Zone对象的配置类
-        Configuration cfg = new Configuration(Zone.zone2());
-        //...其他参数参考类注释
-        UploadManager uploadManager = new UploadManager(cfg);
-        //...生成上传凭证，然后准备上传
-        String accessKey = "IBLCYav5ECJaqeEqyUeojfhLEC5wkN4tM0BsQi2S";
-        String secretKey = "4_uIHTtisPV2UuxoniJC-wpHhAzim6HujhcdmDYF";
-        String bucket = "piecework";
-        //默认不指定key的情况下，以文件内容的hash值作为文件名
-        String key = null;
 
-        Auth auth = Auth.create(accessKey, secretKey);
-        StringMap putPolicy = new StringMap();
-        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":$(fsize)}");
-        long expireSeconds = 3600;
-        String upToken = auth.uploadToken(bucket, null, expireSeconds, putPolicy);
+    public Response delete(String key) {
+        Response response1 = new Response();
+        Response upToken = this.upToken();
 
-        return response1.success(upToken);
+        BucketManager bucketManager = new BucketManager(auth, cfg);
+        try {
+            bucketManager.delete(bucket, key);
+            return response1.success(key);
+        } catch (QiniuException ex) {
+            //如果遇到异常，说明删除失败
+            return response1.failure(501, ex.response.toString());
+        }
     }
 }

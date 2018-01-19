@@ -1,11 +1,14 @@
 package com.zw.cf.service;
 
+import com.zw.plug.Response;
+
 import java.io.InputStream;
 
 /**
  * Created by zhaowei on 2017/8/17.
  */
 public interface FileService {
-    com.zw.plug.Response add(InputStream file,String id, String corporationid);
-    com.zw.plug.Response upToken();
+    Response add(InputStream file,String id, String corporationid);
+    Response upToken();
+    Response delete(String key);
 }
