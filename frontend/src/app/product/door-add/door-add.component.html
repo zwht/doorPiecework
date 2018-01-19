@@ -5,7 +5,8 @@
   </label>
   <label>
     <span>添加图片：</span>
-    <input [(ngModel)]="door.img" type="text">
+    <app-cropper-img [boxStyle]="{width:500,height:500}"
+                     (saveEnd)="imageChange($event)"></app-cropper-img>
   </label>
   <label>
     <span>添加工序：</span>

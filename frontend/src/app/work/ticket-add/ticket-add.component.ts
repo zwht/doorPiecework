@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TicketService} from '../../common/restService/TicketService';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import {UserService} from '../../user/service/UserService';
+import {UserService} from '../../common/restService/UserService';
 import {GxService} from '../../common/restService/GxService';
 import {DoorService} from '../../common/restService/DoorService';
 

@@ -1,6 +1,5 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {CropperImgComponent} from './../main/component/cropper-img/cropper-img.component';
 import {TicketListComponent} from './ticket-list/ticket-list.component';
 import {TicketAddComponent} from './ticket-add/ticket-add.component';
 import {DoorComponent} from './door/door.component';
@@ -46,5 +45,5 @@ const routes: Routes = [
 
 export class WorkRoutes {
 }
-export const WorkComponents = [DoorComponent, CropperImgComponent, TicketListComponent, TicketAddComponent];
+export const WorkComponents = [DoorComponent, TicketListComponent, TicketAddComponent];
 export const WorkList = routes;

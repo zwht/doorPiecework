@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from './../../service/UserService';
+import {UserService} from '../../../common/restService/UserService';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-list',

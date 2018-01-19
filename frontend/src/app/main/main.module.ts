@@ -5,13 +5,8 @@ import {Http, HttpModule, XHRBackend, RequestOptions} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import { ElModule } from 'element-angular';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from '../common/shared.module';
 
-// 拦截器代码
-import {HttpInterceptorService} from './core/http/HttpInterceptorService';
-export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
-  debugger
-  return new HttpInterceptorService(xhrBackend, requestOptions);
-}
 
 import {AppComponent} from './component/app/app.component';
 import {mainRoutes, mainComponentList} from './main.routes';
@@ -25,14 +20,10 @@ import {mainRoutes, mainComponentList} from './main.routes';
     NoopAnimationsModule,
     FormsModule,
     HttpModule,
+    SharedModule,
     RouterModule.forRoot(mainRoutes, {useHash: true})
   ],
-  providers: [HttpInterceptorService,
-    {
-      provide: Http,
-      useFactory: interceptorFactory,
-      deps: [XHRBackend, RequestOptions]
-    }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 

@@ -33,6 +33,10 @@ export class DoorAddComponent implements OnInit {
     });
   }
 
+  imageChange(data) {
+    this.door.img = data.url;
+  }
+
   getById() {
     (this.doorService as any).getById(this.door.id)
       .then(response => {
