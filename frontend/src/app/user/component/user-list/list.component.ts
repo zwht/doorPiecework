@@ -27,7 +27,7 @@ export class ListComponent implements OnInit {
   getList() {
     (this.userService as any).list({
       pageNum: this.pageNum,
-      pageSize: 20
+      pageSize: 10
     }, {})
       .then(response => {
         const rep = (response as any);

@@ -1,7 +1,19 @@
 <div class="loginCmp">
-  <a routerLink="/product/door" queryParamsHandling="preserve">3ewewewew</a>
-  <a routerLink="/work/door" queryParamsHandling="preserve">3ewewewew</a>
-  <input  type="text" placeholder="请输入用户名" [(ngModel)]="login.name">
-  <input [(ngModel)]="login.password" type="password" placeholder="请输入密码">
-  <button (click)="onLogin(login)" type="info" style="width: 100%; margin-top: 30px;">登录</button>
+  <div>
+    <div class="logo">
+      <img style=" height: 60px;"
+           src="../../../../assets/images/logo/logo.png" alt="">
+    </div>
+    <div class="mainC">
+      <div class="inpu">
+        <el-input [(model)]="login.name" placeholder="请输入用户名"></el-input>
+      </div>
+      <div class="inpu">
+        <el-input [(model)]="login.password" native-type="password" placeholder="请输入密码"></el-input>
+      </div>
+      <el-button type="success" (click)="onLogin(login)" [plain]="true"
+                 style="width: 100%; margin-top: 20px;"
+      >登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
+    </div>
+  </div>
 </div>

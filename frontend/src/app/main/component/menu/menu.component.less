@@ -1,7 +1,8 @@
 @import "../../../../assets/css/themes/default";
 .menuCpl{ height: 100%; display: flex;flex-flow: row wrap;
   >.header{ height: 50px; width: 100%; background: @color1;
-    line-height: 50px;font-size: 20px; padding-left: 40px;
+    line-height: 50px;font-size: 20px;
+    .logo{ text-align: center; width: 200px;}
   }
   >.leftMenu{ width: 200px; background: @color1;
     height: 100%;/*写给不支持calc()的浏览器*/
@@ -31,8 +32,9 @@
     }
   }
   >.mainBox {
-    background: url(../../../../assets/images/sky-bg.jpg) no-repeat 50%;
-    background-size: cover;
+    /*background: url(../../../../assets/images/sky-bg.jpg) no-repeat 50%;
+    background-size: cover;*/
+    background: #f1f1f1;
     height: 100%; /*写给不支持calc()的浏览器*/
     height: -moz-calc(~"100% - 50px");
     height: -webkit-calc(~"100% - 50px");

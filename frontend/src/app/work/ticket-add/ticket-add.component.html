@@ -1,18 +1,11 @@
-<div class="ticketAdd">
-
-  <!--<label>
-    <span>名称：</span>
-    <input [(ng(model))]="ticket.name" placeholder="请输入名称" type="text" >
-  </label>
-  <label>
-    <span>价格：</span>
-    <input [(ng(model))]="ticket.price" type="text">
-  </label>
-  <label>
-    <span>类型：</span>
-    <input [(ng(model))]="ticket.type" type="text">
-  </label>-->
-  <div class="tableBox">
+<div class="ticketAdd viewBox">
+  <div class="zwSearch">
+    <div class="right">
+      <el-button (click)="save()" size="mini" type="primary">保存</el-button>
+      <el-button (click)="over()" size="mini" type="primary">完成订单</el-button>
+    </div>
+  </div>
+  <div class="tableBox viewMain">
     <table cellspacing="0">
       <tr>
         <td colspan="2">经销商</td>
@@ -176,6 +169,5 @@
   </div>
 
 
-  <button (click)="save()" type="info" style=" margin-top: 30px;">保存</button>
-  <button (click)="save()" type="info" style=" margin-top: 30px;">完成订单</button>
+
 </div>

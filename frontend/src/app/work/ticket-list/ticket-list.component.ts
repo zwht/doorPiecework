@@ -10,6 +10,8 @@ import {TicketService} from '../../common/restService/TicketService';
 export class TicketListComponent implements OnInit {
 
   list = [];
+  total = 0;
+  pageNum = 1;
 
   constructor(private ticketService: TicketService,
               private router: Router) {
@@ -21,12 +23,13 @@ export class TicketListComponent implements OnInit {
 
   getList() {
     (this.ticketService as any).list({
-      pageNum: 1,
+      pageNum: this.pageNum,
       pageSize: 10
     }, {})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
+          this.total = response.data.pageCount;
           this.list = response.data.data;
         } else {
           console.log(response);

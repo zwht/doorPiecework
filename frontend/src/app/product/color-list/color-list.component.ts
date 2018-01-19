@@ -9,6 +9,8 @@ import {ColorService} from '../../common/restService/ColorService';
 })
 export class ColorListComponent implements OnInit {
   list = [];
+  total = 0;
+  pageNum = 1;
 
   constructor(private colorService: ColorService,
               private router: Router) {
@@ -20,12 +22,13 @@ export class ColorListComponent implements OnInit {
 
   getList() {
     (this.colorService as any).list({
-      pageNum: 1,
+      pageNum: this.pageNum,
       pageSize: 10
     }, {})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
+          this.total = response.data.pageCount;
           this.list = response.data.data;
         } else {
           console.log(response);

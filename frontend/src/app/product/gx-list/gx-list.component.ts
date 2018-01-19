@@ -10,6 +10,8 @@ import {GxService} from '../../common/restService/GxService';
 export class GxListComponent implements OnInit {
 
   list = [];
+  total = 0;
+  pageNum = 1;
 
   constructor(private gxService: GxService,
               private router: Router) {
@@ -21,12 +23,13 @@ export class GxListComponent implements OnInit {
 
   getList() {
     (this.gxService as any).list({
-      pageNum: 1,
-      pageSize: 50
+      pageNum: this.pageNum,
+      pageSize: 10
     }, {})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
+          this.total = response.data.pageCount;
           this.list = response.data.data;
         } else {
           console.log(response);

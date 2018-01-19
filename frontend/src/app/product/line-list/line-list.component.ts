@@ -9,6 +9,8 @@ import {LineService} from '../../common/restService/LineService';
 })
 export class LineListComponent implements OnInit {
   list = [];
+  total = 0;
+  pageNum = 1;
 
   constructor(private lineService: LineService,
               private router: Router) {
@@ -20,12 +22,13 @@ export class LineListComponent implements OnInit {
 
   getList() {
     (this.lineService as any).list({
-      pageNum: 1,
+      pageNum: this.pageNum,
       pageSize: 10
     }, {})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
+          this.total = response.data.pageCount;
           this.list = response.data.data;
         } else {
           console.log(response);
