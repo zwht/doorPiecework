@@ -9,6 +9,8 @@ import {Router} from '@angular/router';
 })
 export class ListComponent implements OnInit {
   list = [];
+  total = 0;
+  pageNum = 1;
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -24,12 +26,13 @@ export class ListComponent implements OnInit {
 
   getList() {
     (this.userService as any).list({
-      pageNum: 1,
-      pageSize: 10
+      pageNum: this.pageNum,
+      pageSize: 20
     }, {})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
+          this.total = response.data.pageCount;
           this.list = response.data.data;
         } else {
           console.log(response);
