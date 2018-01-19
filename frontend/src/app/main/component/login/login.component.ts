@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
+          localStorage.setItem('userName', this.login.name);
           localStorage.setItem('token', rep.data.token);
           this.router.navigateByUrl('/admin/user/company');
         } else {

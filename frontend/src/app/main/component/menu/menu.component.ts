@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserList} from './../../../user/user.routes';
-import {ProductList} from './../../../product/product.routes';
-import {WorkList} from './../../../work/work.routes';
+import {UserList} from '../../../user/user.routes';
+import {ProductList} from '../../../product/product.routes';
+import {WorkList} from '../../../work/work.routes';
 
 import {Router} from '@angular/router';
 @Component({
@@ -11,10 +11,22 @@ import {Router} from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   menu = [];
+  userName = localStorage.getItem('userName');
   routesMenu = [UserList[0], ProductList[0], WorkList[0]];
+  rightDown: any[] = [
+    {
+      value: 'my',
+      label: '个人中心',
+    },
+    {
+      value: 'exit',
+      label: '退出',
+    }
+  ];
 
   constructor(private router: Router) {
   }
+
   ngOnInit() {
     this.router.config[1].children.forEach(item => {
       if (item.data && (item.data as any).menu) {
@@ -37,7 +49,21 @@ export class MenuComponent implements OnInit {
     this.setActiveMenu(this.router.url, '/admin/');
   }
 
-  //设置菜单选中
+  downChange(data) {
+    switch (data.value) {
+      case 'my': {
+        break;
+      }
+      case 'exit': {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        window.location.href = '#';
+        break;
+      }
+    }
+  }
+
+  // 设置菜单选中
   setActiveMenu(url, br) {
     this.menu.forEach(item => {
       let isActive = false;
@@ -60,7 +86,7 @@ export class MenuComponent implements OnInit {
 
   goMenu(item) {
     this.setActiveMenu(item.path, '');
-    //window.location.href = item.path;
+    // window.location.href = item.path;
     this.router.navigateByUrl('/admin/' + item.path);
   }
 
