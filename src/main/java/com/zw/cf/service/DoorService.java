@@ -12,4 +12,5 @@ public interface DoorService {
     Response list(Integer pageNum, Integer pageSize,DoorListFind doorListFind);
     Response getById(String id);
     Response update(Door door);
+    Response del(String id);
 }
