@@ -150,4 +150,12 @@ public class UserServiceImpl implements UserService {
             return response.failure(400, "未知错误！");
         }
     }
+    public Response del(String id) {
+        Response response = new Response();
+        try {
+            return response.success(userMapper.deleteByPrimaryKey(id));
+        } catch (Exception e) {
+            return response.failure(501, e.getMessage());
+        }
+    }
 }

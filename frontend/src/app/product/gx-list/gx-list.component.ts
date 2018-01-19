@@ -38,11 +38,8 @@ export class GxListComponent implements OnInit {
     this.router.navigate(['/admin/product/gx/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
-  del(item, k) {
-    (this.gxService as any).updateState({
-      id: item.id,
-      state: k
-    })
+  del(id) {
+    (this.gxService as any).del(id)
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

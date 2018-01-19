@@ -3,8 +3,8 @@ import {NgModule} from '@angular/core';
 
 import {CorporationListComponent} from './component/corporation-list/corporation-list.component';
 import {CorporationAddComponent} from './component/corporation-add/corporation-add.component';
-import {ListComponent} from './component/list/list.component';
-import {AddComponent} from './component/add/add.component';
+import {ListComponent} from './component/user-list/list.component';
+import {AddComponent} from './component/user-add/add.component';
 
 export const routes: Routes = [
   {

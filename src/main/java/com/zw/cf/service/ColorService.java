@@ -12,4 +12,5 @@ public interface ColorService {
     Response list(Integer pageNum, Integer pageSize, ColorListFind doorListFind);
     Response getById(String id);
     Response update(Color door);
+    Response del(String id);
 }

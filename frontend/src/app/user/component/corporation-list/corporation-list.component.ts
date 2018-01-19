@@ -37,7 +37,7 @@ export class CorporationListComponent implements OnInit {
     this.router.navigate(['/admin/user/company/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
-  del(item, k) {
+  updateState(item, k) {
     (this.corporationService as any).updateState({
       id: item.id,
       state: k

@@ -1,6 +1,6 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {DoorComponent} from './door/door.component';
+import {DoorComponent} from './door-list/door.component';
 import {DoorAddComponent} from './door-add/door-add.component';
 import {GxListComponent} from './gx-list/gx-list.component';
 import {GxAddComponent} from './gx-add/gx-add.component';

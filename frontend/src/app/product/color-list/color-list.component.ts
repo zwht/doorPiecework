@@ -37,11 +37,8 @@ export class ColorListComponent implements OnInit {
     this.router.navigate(['/admin/product/color/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
-  del(item, k) {
-    (this.colorService as any).updateState({
-      id: item.id,
-      state: k
-    })
+  del(id) {
+    (this.colorService as any).del(id)
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

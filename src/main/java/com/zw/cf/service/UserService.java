@@ -13,5 +13,6 @@ public interface UserService {
     Response refreshToken(String token,String token1);
     Response getUserList(Integer pageNum, Integer pageSize, UserListFind userListFind);
     Response addUser(User user);
+    Response del(String id);
 
 }

@@ -1,16 +1,32 @@
-<div>
-  <div class="search">
-    <div (click)="add()">
-      <i class="icon iconfont icon-add"></i>
-      添加公司
+<div class="userList viewBox">
+  <div class="zwSearch">
+    <div class="right">
+      <el-button (click)="add()" size="mini" type="primary">添加</el-button>
     </div>
-
   </div>
-  <ul>
-    <li *ngFor="let item of list let i=index">{{item.name}}
-      <button *ngIf="item.state==1" (click)="del(item,0)">禁用</button>
-      <button *ngIf="item.state==0" (click)="del(item,1)">起用</button>
-      <button (click)="add(item)">编辑</button>
-    </li>
-  </ul>
+  <div class="viewMain">
+    <table class="zwTable">
+      <tr>
+        <th>名称</th>
+        <th>老板</th>
+        <th>电话</th>
+        <th>地址</th>
+        <th>操作</th>
+      </tr>
+      <tr *ngFor="let item of list let i=index">
+        <td>{{item.name}}</td>
+        <td>{{item.boss}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.address}}</td>
+        <td style="width: 180px; text-align: center;">
+          <el-button *ngIf="item.state==1" (click)="updateState(item,0)" size="mini" type="warning" icon="delete" [plain]="true">禁用</el-button>
+          <el-button *ngIf="item.state==0" (click)="updateState(item,1)" size="mini" type="primary" icon="delete" [plain]="true">起用</el-button>
+          <el-button (click)="add(item)" size="mini" type="success" icon="edit" [plain]="true">编辑</el-button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
+
+
+

@@ -16,9 +16,9 @@
         <td>
           <img [src]="item.img" alt="">
         </td>
-        <td>
-          <button (click)="del(item.id)">删除</button>
-          <button (click)="add(item)">编辑</button>
+        <td style="width: 180px; text-align: center;">
+          <el-button (click)="del(item.id)" size="mini" type="warning" icon="delete" [plain]="true">删除</el-button>
+          <el-button (click)="add(item)" size="mini" type="success" icon="edit" [plain]="true">编辑</el-button>
         </td>
       </tr>
     </table>

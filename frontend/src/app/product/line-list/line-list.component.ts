@@ -37,11 +37,8 @@ export class LineListComponent implements OnInit {
     this.router.navigate(['/admin/product/line/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
-  del(item, k) {
-    (this.lineService as any).updateState({
-      id: item.id,
-      state: k
-    })
+  del(id) {
+    (this.lineService as any).del(id)
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

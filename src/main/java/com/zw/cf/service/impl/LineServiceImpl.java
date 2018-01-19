@@ -121,4 +121,12 @@ public class LineServiceImpl implements LineService {
             return response.failure(400, "未知错误！");
         }
     }
+    public Response del(String id) {
+        Response response = new Response();
+        try {
+            return response.success(lineMapper.deleteByPrimaryKey(id));
+        } catch (Exception e) {
+            return response.failure(501, e.getMessage());
+        }
+    }
 }

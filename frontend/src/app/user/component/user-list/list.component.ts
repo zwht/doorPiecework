@@ -15,14 +15,14 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUserList();
+    this.getList();
   }
 
   add(item) {
-    this.router.navigate(['/admin/user/add']);
+    this.router.navigate(['/admin/user/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
-  getUserList() {
+  getList() {
     (this.userService as any).list({
       pageNum: 1,
       pageSize: 10
@@ -31,6 +31,18 @@ export class ListComponent implements OnInit {
         const rep = (response as any);
         if (rep.code === 200) {
           this.list = response.data.data;
+        } else {
+          console.log(response);
+        }
+      });
+  }
+
+  del(id) {
+    (this.userService as any).del(id)
+      .then(response => {
+        const rep = (response as any);
+        if (rep.code === 200) {
+          this.getList();
         } else {
           console.log(response);
         }

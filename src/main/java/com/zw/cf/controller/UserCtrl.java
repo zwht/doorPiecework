@@ -92,11 +92,20 @@ public class UserCtrl {
 
 
     @ResponseBody
-    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/getById", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
     public Response<User> selectByPrimaryKey(
-            @ApiParam(required = true, value = "用户Id", name = "userId") @RequestParam String userId
+            @ApiParam(required = true, value = "用户Id", name = "id") @RequestParam String id
     ) {
-        return userService.getUserById(userId);
+        return userService.getUserById(id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/del", method = RequestMethod.GET)
+    @ApiOperation(value = "根据id删除", httpMethod = "GET", notes = "删除")
+    public Response<User> del(
+            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
+    ) {
+        return userService.del(id);
     }
 }

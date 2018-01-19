@@ -46,4 +46,11 @@ export class ColorService {
       .catch(HandleError);
   }
 
+  public del(id: String): Promise<void> {
+    return this.http.get(this.url + 'del?id=' + id)
+      .toPromise()
+      .then(response => response.json())
+      .catch(HandleError);
+  }
+
 }

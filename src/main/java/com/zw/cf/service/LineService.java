@@ -12,4 +12,5 @@ public interface LineService {
     Response list(Integer pageNum, Integer pageSize, LineListFind lineListFind);
     Response getById(String id);
     Response update(Line line);
+    Response del(String id);
 }

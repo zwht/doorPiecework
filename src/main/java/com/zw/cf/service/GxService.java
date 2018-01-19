@@ -12,4 +12,5 @@ public interface GxService {
     Response list(Integer pageNum, Integer pageSize, GxListFind gxListFind);
     Response getById(String id);
     Response update(Gx gx);
+    Response del(String id);
 }

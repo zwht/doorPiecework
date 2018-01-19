@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../common/restService/UserService';
 import {GxService} from '../../../common/restService/GxService';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class AddComponent implements OnInit {
   gxList = [];
   user = {
+    id: null,
     name: null,
     password: null,
     phone: null,
@@ -23,11 +24,31 @@ export class AddComponent implements OnInit {
 
   constructor(private userService: UserService,
               private gxService: GxService,
-              private router: Router) {
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.user.id = params['id'];
+      if (this.user.id) {
+        this.getById();
+      }
+
+    });
+
     this.getGxList();
+  }
+
+  getById() {
+    (this.userService as any).getById(this.user.id)
+      .then(response => {
+        const rep = (response as any);
+        if (rep.code === 200) {
+          this.user = rep.data;
+        } else {
+        }
+      });
   }
 
   handle(event: any): void {
