@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FileUploader} from 'ng2-file-upload';
 @Component({
   selector: 'app-door',
   templateUrl: './door.component.html',
