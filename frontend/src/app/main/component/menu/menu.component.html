@@ -15,14 +15,16 @@
 
   </div>
   <ul class="leftMenu">
-    <li *ngFor="let item of menu let i=index" [ngClass]="{active:item.active,show:item.show}">
+    <li *ngFor="let item of menu let i=index"
+        [ngClass]="{active:item.active,show:item.show,noChild:!item.children.length}">
       <span (click)="bigMenu(item)">{{item.name}}
-        <i [ngClass]="{'icon-packup':item.show,'icon-unfold':!item.show}" class="icon iconfont"></i>
+        <i *ngIf="item.children.length" [ngClass]="{'icon-packup':item.show,'icon-unfold':!item.show}"
+           class="icon iconfont"></i>
       </span>
 
       <ul class="child" [ngStyle]="{height:item.show?item.children.length*34+'px':'0'}">
         <li *ngFor="let child of item.children let j=index" (click)="goMenu(child)"
-        [ngClass]="{active:child.active}">
+            [ngClass]="{active:child.active}">
           <span>{{child.name}}</span>
         </li>
       </ul>

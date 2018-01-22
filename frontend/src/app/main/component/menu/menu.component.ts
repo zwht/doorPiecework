@@ -28,7 +28,18 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    const userType = localStorage.getItem('userType');
     this.router.config[1].children.forEach(item => {
+
+      if (item.data.type) {
+        let key = false;
+        item.data.type.forEach(ob1 => {
+          if (ob1 == userType) {
+            key = true;
+          }
+        });
+        if (!key) return;
+      }
       if (item.data && (item.data as any).menu) {
         const itemMenu = {path: item.path, name: (item.data as any).name, children: []};
         this.routesMenu.forEach(subItem => {
@@ -52,12 +63,13 @@ export class MenuComponent implements OnInit {
   downChange(data) {
     switch (data.value) {
       case 'my': {
+        this.router.navigate(['/admin/user/detail']);
         break;
       }
       case 'exit': {
         localStorage.removeItem('token');
         localStorage.removeItem('userName');
-        window.location.href = '#';
+        this.router.navigate(['/']);
         break;
       }
     }
@@ -66,16 +78,14 @@ export class MenuComponent implements OnInit {
   // 设置菜单选中
   setActiveMenu(url, br) {
     this.menu.forEach(item => {
-      let isActive = false;
       item.children.forEach(subItem => {
         if (br + subItem.path === url) {
           subItem.active = true;
-          isActive = true;
         } else {
           subItem.active = false;
         }
       });
-      if (isActive || br + item.path === url) {
+      if (url.indexOf(item.path) != -1) {
         item.active = true;
         item.show = true;
       } else {
@@ -91,6 +101,10 @@ export class MenuComponent implements OnInit {
   }
 
   bigMenu(item) {
+    if (!item.children.length) {
+      this.setActiveMenu(item.path, '');
+      this.router.navigateByUrl('/admin/' + item.path);
+    }
     item.show = !item.show;
   }
 }

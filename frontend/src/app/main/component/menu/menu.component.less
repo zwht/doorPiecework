@@ -23,6 +23,9 @@
         .icon{ float: right;}
         &:hover{ background: darken(@color1,10%);}
       }
+      &.active.noChild>span{
+        background: @primary;
+      }
       &.show{ }
     }
     .child{overflow: hidden; background: #c00; display: block; position: relative;

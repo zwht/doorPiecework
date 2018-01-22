@@ -7,7 +7,8 @@ import {Router} from '@angular/router';
 })
 export class DoorComponent implements OnInit {
 
-  img=""
+  img = ''
+
   constructor(private router: Router) {
   }
 
@@ -15,8 +16,8 @@ export class DoorComponent implements OnInit {
 
   }
 
-  saveEnd(data,hhh) {
-    this.img=data.url;
+  saveEnd(data, hhh) {
+    this.img = data.url;
   }
 
 }
