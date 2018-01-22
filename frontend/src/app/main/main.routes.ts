@@ -1,6 +1,6 @@
 import {LoginComponent} from './component/login/login.component';
 import {NotFoundComponent} from './component/not-found/not-found.component';
-import {MenuComponent} from './../main/component/menu/menu.component';
+import {MenuComponent} from './component/menu/menu.component';
 export const mainRoutes = [
   {
     path: '',
