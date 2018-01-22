@@ -11,6 +11,7 @@ export class ListComponent implements OnInit {
   list = [];
   total = 0;
   pageNum = 1;
+  loading = false;
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -25,11 +26,13 @@ export class ListComponent implements OnInit {
   }
 
   getList() {
+    this.loading = true;
     (this.userService as any).list({
       pageNum: this.pageNum,
       pageSize: 10
     }, {})
       .then(response => {
+        this.loading = false;
         const rep = (response as any);
         if (rep.code === 200) {
           this.total = response.data.pageCount;

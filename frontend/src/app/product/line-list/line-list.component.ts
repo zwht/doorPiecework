@@ -11,6 +11,7 @@ export class LineListComponent implements OnInit {
   list = [];
   total = 0;
   pageNum = 1;
+  loading = false;
 
   constructor(private lineService: LineService,
               private router: Router) {
@@ -21,11 +22,13 @@ export class LineListComponent implements OnInit {
   }
 
   getList() {
+    this.loading = true;
     (this.lineService as any).list({
       pageNum: this.pageNum,
       pageSize: 10
     }, {})
       .then(response => {
+        this.loading = false;
         const rep = (response as any);
         if (rep.code === 200) {
           this.total = response.data.pageCount;

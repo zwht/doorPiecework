@@ -4,7 +4,7 @@
       <el-button (click)="add()" size="mini" type="primary">添加</el-button>
     </div>
   </div>
-  <div class="viewMain">
+  <div class="viewMain" [el-loading]="loading" [text]="'拼命加载中'">
     <table class="zwTable">
       <tr>
         <th>名称</th>

@@ -11,6 +11,7 @@ export class CorporationListComponent implements OnInit {
   list = [];
   total = 0;
   pageNum = 1;
+  loading = false;
 
   constructor(private corporationService: CorporationService,
               private router: Router) {
@@ -21,11 +22,13 @@ export class CorporationListComponent implements OnInit {
   }
 
   getList() {
+    this.loading = true;
     (this.corporationService as any).list({
       pageNum: this.pageNum,
       pageSize: 10
     }, {})
       .then(response => {
+        this.loading = false;
         const rep = (response as any);
         if (rep.code === 200) {
           this.total = response.data.pageCount;

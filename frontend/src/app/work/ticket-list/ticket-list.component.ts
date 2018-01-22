@@ -8,7 +8,7 @@ import {TicketService} from '../../common/restService/TicketService';
   providers: [TicketService]
 })
 export class TicketListComponent implements OnInit {
-
+  loading = false;
   list = [];
   total = 0;
   pageNum = 1;
@@ -22,11 +22,13 @@ export class TicketListComponent implements OnInit {
   }
 
   getList() {
+    this.loading = true;
     (this.ticketService as any).list({
       pageNum: this.pageNum,
       pageSize: 10
     }, {})
       .then(response => {
+        this.loading = false;
         const rep = (response as any);
         if (rep.code === 200) {
           this.total = response.data.pageCount;
