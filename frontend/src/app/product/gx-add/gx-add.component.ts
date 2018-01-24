@@ -34,7 +34,7 @@ export class GxAddComponent implements OnInit {
   }
 
   getById() {
-    (this.gxService as any).getById(this.gx.id)
+    (this.gxService as any).getById({params: {id: this.gx.id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -46,7 +46,7 @@ export class GxAddComponent implements OnInit {
 
   save() {
     if (this.gx.id) {
-      (this.gxService as any).update(this.gx)
+      (this.gxService as any).update({data: this.gx})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
@@ -56,7 +56,7 @@ export class GxAddComponent implements OnInit {
           }
         });
     } else {
-      (this.gxService as any).add(this.gx)
+      (this.gxService as any).add({data: this.gx})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {

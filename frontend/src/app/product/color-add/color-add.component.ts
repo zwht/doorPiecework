@@ -31,11 +31,13 @@ export class ColorAddComponent implements OnInit {
 
     });
   }
+
   imageChange(data) {
     this.color.img = data.url;
   }
+
   getById() {
-    (this.colorService as any).getById(this.color.id)
+    (this.colorService as any).getById({params: {id: this.color.id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -47,7 +49,7 @@ export class ColorAddComponent implements OnInit {
 
   save() {
     if (this.color.id) {
-      (this.colorService as any).update(this.color)
+      (this.colorService as any).update({data: this.color})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
@@ -57,7 +59,7 @@ export class ColorAddComponent implements OnInit {
           }
         });
     } else {
-      (this.colorService as any).add(this.color)
+      (this.colorService as any).add({data: this.color})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {

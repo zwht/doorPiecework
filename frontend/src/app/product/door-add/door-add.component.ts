@@ -38,7 +38,7 @@ export class DoorAddComponent implements OnInit {
   }
 
   getById() {
-    (this.doorService as any).getById(this.door.id)
+    (this.doorService as any).getById({params: {id: this.door.id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -50,7 +50,7 @@ export class DoorAddComponent implements OnInit {
 
   save() {
     if (this.door.id) {
-      (this.doorService as any).update(this.door)
+      (this.doorService as any).update({data: this.door})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
@@ -60,7 +60,7 @@ export class DoorAddComponent implements OnInit {
           }
         });
     } else {
-      (this.doorService as any).add(this.door)
+      (this.doorService as any).add({data: this.door})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {

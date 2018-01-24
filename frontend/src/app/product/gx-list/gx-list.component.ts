@@ -24,8 +24,10 @@ export class GxListComponent implements OnInit {
   getList() {
     this.loading = true;
     (this.gxService as any).list({
-      pageNum: this.pageNum,
-      pageSize: 10
+      params: {
+        params2: this.pageNum,
+        params3: 10
+      }
     }, {})
       .then(response => {
         this.loading = false;
@@ -44,7 +46,7 @@ export class GxListComponent implements OnInit {
   }
 
   del(id) {
-    (this.gxService as any).del(id)
+    (this.gxService as any).del({params: {id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

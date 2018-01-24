@@ -3,27 +3,25 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ElModule} from 'element-angular';
 import {CropperImgComponent} from './components/cropper-img/cropper-img.component';
-
-// 拦截器代码
-import {Http, XHRBackend, RequestOptions} from '@angular/http';
-import {HttpInterceptorService} from './service/HttpInterceptorService';
-export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
-  return new HttpInterceptorService(xhrBackend, requestOptions);
-}
+import {ZwHttpInterceptor} from './service/ZwHttpInterceptor';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpServer} from './service/HttpServer';
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     ElModule.forRoot()
   ],
   declarations: [CropperImgComponent],
   exports: [CropperImgComponent],
-  providers: [HttpInterceptorService,
+  providers: [
+    HttpServer,
     {
-      provide: Http,
-      useFactory: interceptorFactory,
-      deps: [XHRBackend, RequestOptions]
+      provide: HTTP_INTERCEPTORS,
+      useClass: ZwHttpInterceptor,
+      multi: true,
     }
-  ],
+  ]
 })
 export class SharedModule {
 }

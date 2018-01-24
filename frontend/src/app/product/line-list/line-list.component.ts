@@ -24,9 +24,11 @@ export class LineListComponent implements OnInit {
   getList() {
     this.loading = true;
     (this.lineService as any).list({
-      pageNum: this.pageNum,
-      pageSize: 10
-    }, {})
+      params: {
+        params2: this.pageNum,
+        params3: 10
+      }
+    })
       .then(response => {
         this.loading = false;
         const rep = (response as any);
@@ -44,7 +46,7 @@ export class LineListComponent implements OnInit {
   }
 
   del(id) {
-    (this.lineService as any).del(id)
+    (this.lineService as any).del({params: {id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

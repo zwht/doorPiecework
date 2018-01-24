@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 import {Router} from '@angular/router';
-import {LoginVo} from './../../class/vo/LoginVo';
-import {AuthService} from './../../service/AuthService';
+import {LoginVo} from '../../../common/class/LoginVo';
+import {AuthService} from '../../../common/restService/AuthService';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(data) {
-    this.authService.login(this.login)
+    this.authService['login']({data: this.login})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
         } else {
           console.log(data);
         }
+      })
+      .catch(err => {
       });
   }
 }

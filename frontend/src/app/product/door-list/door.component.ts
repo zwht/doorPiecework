@@ -24,8 +24,11 @@ export class DoorComponent implements OnInit {
   getList() {
     this.loading = true;
     (this.doorService as any).list({
-      pageNum: this.pageNum,
-      pageSize: 10
+      params: {
+        params2: this.pageNum,
+        params3: 10
+      },
+      data: {}
     }, {})
       .then(response => {
         this.loading = false;
@@ -44,7 +47,7 @@ export class DoorComponent implements OnInit {
   }
 
   del(id) {
-    (this.doorService as any).del(id)
+    (this.doorService as any).del({params: {id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

@@ -28,8 +28,10 @@ export class ListComponent implements OnInit {
   getList() {
     this.loading = true;
     (this.userService as any).list({
-      pageNum: this.pageNum,
-      pageSize: 10
+      params: {
+        pageNum: this.pageNum,
+        pageSize: 10
+      }
     }, {})
       .then(response => {
         this.loading = false;

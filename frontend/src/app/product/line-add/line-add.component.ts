@@ -31,11 +31,13 @@ export class LineAddComponent implements OnInit {
 
     });
   }
+
   imageChange(data) {
     this.line.img = data.url;
   }
+
   getById() {
-    (this.lineService as any).getById(this.line.id)
+    (this.lineService as any).getById({params: {id: this.line.id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -47,7 +49,7 @@ export class LineAddComponent implements OnInit {
 
   save() {
     if (this.line.id) {
-      (this.lineService as any).update(this.line)
+      (this.lineService as any).update({data: this.line})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
@@ -57,7 +59,7 @@ export class LineAddComponent implements OnInit {
           }
         });
     } else {
-      (this.lineService as any).add(this.line)
+      (this.lineService as any).add({data: this.line})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
