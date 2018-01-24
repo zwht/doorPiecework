@@ -6,7 +6,7 @@ import {CropperImgComponent} from './components/cropper-img/cropper-img.componen
 
 // 拦截器代码
 import {Http, XHRBackend, RequestOptions} from '@angular/http';
-import {HttpInterceptorService} from '../main/core/http/HttpInterceptorService';
+import {HttpInterceptorService} from './service/HttpInterceptorService';
 export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
   return new HttpInterceptorService(xhrBackend, requestOptions);
 }
