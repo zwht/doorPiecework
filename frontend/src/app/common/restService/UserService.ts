@@ -2,46 +2,45 @@
  * Created by zhaowei on 2017/10/16.
  */
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import HandleError from './../../common/service/HandleError';
-import {User} from './../../common/class/User';
+import {HttpServer} from '../service/HttpServer';
 @Injectable()
 export class UserService {
 
-  constructor(private http: Http) {
+  url = '/cfmy/user/:params1/:params2/:params3/:params4/:params5';
+  urls = {
+    add: {
+      method: 'post',
+      params: {
+        params1: 'add'
+      }
+    },
+    list: {
+      method: 'post',
+      params: {
+        params1: 'list'
+      }
+    },
+    getById: {
+      method: 'get',
+      params: {
+        params1: 'getById'
+      }
+    },
+    update: {
+      method: 'post',
+      params: {
+        params1: 'update'
+      }
+    },
+    del: {
+      method: 'get',
+      params: {
+        params1: 'del'
+      }
+    }
+  };
+  constructor( httpServer: HttpServer) {
+    httpServer.S(this);
   }
 
-  /**获取用户列表**/
-  private url = '/cfmy/user/';
-
-  public list(obj: Object, obj1: Object): Promise<void> {
-    return this.http.post(this.url + 'getUserList/' + (obj as any).pageNum + '/' + (obj as any).pageSize,
-      JSON.stringify(obj1 ? obj1 : {}))
-      .toPromise()
-      .then(response => response.json())
-      .catch(HandleError);
-  }
-
-  public getById(id: String): Promise<void> {
-    return this.http.get(this.url + 'getById?id=' + id)
-      .toPromise()
-      .then(response => response.json())
-      .catch(HandleError);
-  }
-
-  // 添加用户
-  public add(user: User): Promise<void> {
-    return this.http.post(this.url + 'add',
-      JSON.stringify(user))
-      .toPromise()
-      .then(response => response.json())
-      .catch(HandleError);
-  }
-
-  public del(id: String): Promise<void> {
-    return this.http.get(this.url + 'del?id=' + id)
-      .toPromise()
-      .then(response => response.json())
-      .catch(HandleError);
-  }
 }

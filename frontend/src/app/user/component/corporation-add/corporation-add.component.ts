@@ -11,7 +11,8 @@ export class CorporationAddComponent implements OnInit {
   component = {
     id: null,
     name: null,
-    address: null
+    address: null,
+    state: 1
   };
 
   constructor(private corporationService: CorporationService,
@@ -22,13 +23,15 @@ export class CorporationAddComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.component.id = params['id'];
-      this.getById();
+      if (this.component.id) {
+        this.getById();
+      }
 
     });
   }
 
   getById() {
-    (this.corporationService as any).getById(this.component.id)
+    (this.corporationService as any).getById({params: {id: this.component.id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -40,7 +43,7 @@ export class CorporationAddComponent implements OnInit {
 
   save() {
     if (this.component.id) {
-      (this.corporationService as any).update(this.component)
+      (this.corporationService as any).update({data: this.component})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
@@ -50,7 +53,7 @@ export class CorporationAddComponent implements OnInit {
           }
         });
     } else {
-      (this.corporationService as any).add(this.component)
+      (this.corporationService as any).add({data: this.component})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {

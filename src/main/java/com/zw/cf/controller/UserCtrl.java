@@ -54,7 +54,7 @@ public class UserCtrl {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getUserList/{pageNum}/{pageSize}", method = RequestMethod.POST)
+    @RequestMapping(value = "/list/{pageNum}/{pageSize}", method = RequestMethod.POST)
     @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
     public Response<PageObj<List<User>>> getUserList(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,

@@ -29,10 +29,10 @@ export class ListComponent implements OnInit {
     this.loading = true;
     (this.userService as any).list({
       params: {
-        pageNum: this.pageNum,
-        pageSize: 10
+        params2: this.pageNum,
+        params3: 10
       }
-    }, {})
+    })
       .then(response => {
         this.loading = false;
         const rep = (response as any);
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
   }
 
   del(id) {
-    (this.userService as any).del(id)
+    (this.userService as any).del({params: {id})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

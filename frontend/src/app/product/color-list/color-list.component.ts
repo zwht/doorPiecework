@@ -28,7 +28,7 @@ export class ColorListComponent implements OnInit {
         params2: this.pageNum,
         params3: 10
       }
-    }, {})
+    })
       .then(response => {
         this.loading = false;
         const rep = (response as any);

@@ -24,9 +24,11 @@ export class CorporationListComponent implements OnInit {
   getList() {
     this.loading = true;
     (this.corporationService as any).list({
-      pageNum: this.pageNum,
-      pageSize: 10
-    }, {})
+      params: {
+        params2: this.pageNum,
+        params3: 10
+      }
+    })
       .then(response => {
         this.loading = false;
         const rep = (response as any);
@@ -45,8 +47,10 @@ export class CorporationListComponent implements OnInit {
 
   updateState(item, k) {
     (this.corporationService as any).updateState({
-      id: item.id,
-      state: k
+      data: {
+        id: item.id,
+        state: k
+      }
     })
       .then(response => {
         const rep = (response as any);

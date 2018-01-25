@@ -41,7 +41,7 @@ export class AddComponent implements OnInit {
   }
 
   getById() {
-    (this.userService as any).getById(this.user.id)
+    (this.userService as any).getById({params: {id: this.user.id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -57,9 +57,11 @@ export class AddComponent implements OnInit {
 
   getGxList() {
     (this.gxService as any).list({
-      pageNum: 1,
-      pageSize: 50
-    }, {})
+      params: {
+        params2: 1,
+        params3: 1000
+      }
+    })
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -71,15 +73,27 @@ export class AddComponent implements OnInit {
   }
 
   save() {
-    (this.userService as any).add(this.user)
-      .then(response => {
-        const rep = (response as any);
-        if (rep.code === 200) {
-          this.router.navigate(['/admin/user/list']);
-        } else {
-          console.log(response);
-        }
-      });
+    if (this.user.id) {
+      (this.userService as any).update({data: this.user})
+        .then(response => {
+          const rep = (response as any);
+          if (rep.code === 200) {
+            this.router.navigate(['/admin/user/list']);
+          } else {
+            console.log(response);
+          }
+        });
+    } else {
+      (this.userService as any).add({data: this.user})
+        .then(response => {
+          const rep = (response as any);
+          if (rep.code === 200) {
+            this.router.navigate(['/admin/user/list']);
+          } else {
+            console.log(response);
+          }
+        });
+    }
   }
 
 

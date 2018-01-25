@@ -24,9 +24,11 @@ export class TicketListComponent implements OnInit {
   getList() {
     this.loading = true;
     (this.ticketService as any).list({
-      pageNum: this.pageNum,
-      pageSize: 10
-    }, {})
+      params: {
+        params2: this.pageNum,
+        params3: 10
+      }
+    })
       .then(response => {
         this.loading = false;
         const rep = (response as any);

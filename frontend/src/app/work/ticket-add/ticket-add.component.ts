@@ -97,7 +97,7 @@ export class TicketAddComponent implements OnInit {
   }
 
   getById() {
-    (this.ticketService as any).getById(this.ticket.id)
+    (this.ticketService as any).getById({params: {id: this.ticket.id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -109,9 +109,11 @@ export class TicketAddComponent implements OnInit {
 
   getUserList() {
     (this.userService as any).list({
-      pageNum: 1,
-      pageSize: 10
-    }, {})
+      params: {
+        params2: 1,
+        params3: 1000
+      }
+    })
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -160,9 +162,11 @@ export class TicketAddComponent implements OnInit {
 
   getDoorList() {
     (this.doorService as any).list({
-      pageNum: 1,
-      pageSize: 10
-    }, {})
+      params: {
+        params2: 1,
+        params3: 1000
+      }
+    })
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -175,9 +179,11 @@ export class TicketAddComponent implements OnInit {
 
   getGxList() {
     (this.gxService as any).list({
-      pageNum: 1,
-      pageSize: 50
-    }, {})
+      params: {
+        params2: 1,
+        params3: 1000
+      }
+    })
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
