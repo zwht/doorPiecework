@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
   }
 
   del(id) {
-    (this.userService as any).del({params: {id})
+    (this.userService as any).del({params: {id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
