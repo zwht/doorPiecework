@@ -13,6 +13,8 @@ public class Gx {
 
     private Integer state;
 
+    private Integer serial;
+
     public String getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class Gx {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getSerial() {
+        return serial;
+    }
+
+    public void setSerial(Integer serial) {
+        this.serial = serial;
     }
 }

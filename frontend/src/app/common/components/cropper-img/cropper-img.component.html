@@ -1,9 +1,13 @@
 <div class="cropperImg">
-  <div class="showImg" [style.display]="cpImg?'block':'none'" (click)="showDialog()">
+  <div class="showImg" *ngIf="!!cpImg"  (click)="showDialog()">
     <p>重新选择图片</p>
     <img  [src]="cpImg" alt="">
   </div>
-  <button [style.display]="cpImg?'none':'block'" (click)="showDialog()" >选择图片</button>
+  <div *ngIf="!cpImg" >
+    <el-button (click)="showDialog()"
+               [plain]="true" type="info">选择图片</el-button>
+  </div>
+
 
   <el-dialog [(visible)]="dialog"
              [close-on-click-modal]="false" class="">

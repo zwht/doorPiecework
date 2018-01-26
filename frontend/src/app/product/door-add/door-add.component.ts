@@ -1,24 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {DoorService} from '../../common/restService/DoorService';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {GxService} from '../../common/restService/GxService';
 @Component({
   selector: 'app-door-add',
   templateUrl: './door-add.component.html',
-  styleUrls: ['./door-add.component.css'],
-  providers: [DoorService]
+  styleUrls: ['./door-add.component.less'],
+  providers: [DoorService, GxService]
 })
 export class DoorAddComponent implements OnInit {
 
+  gxList = [];
   door = {
     id: null,
     name: null,
     img: null,
-    gxids: null,
+    gxIds: null,
+    gxValues: null,
     createTime: null,
     state: 0
   };
 
   constructor(private doorService: DoorService,
+              private gxService: GxService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
@@ -28,9 +32,46 @@ export class DoorAddComponent implements OnInit {
       this.door.id = params['id'];
       if (this.door.id) {
         this.getById();
+      } else {
+        this.getGxList();
       }
-
     });
+
+  }
+
+  getGxList() {
+    this.gxService['list']({
+      params: {
+        params2: 1,
+        params3: 1000
+      }
+    }, {})
+      .then(response => {
+        const rep = (response as any);
+        if (rep.code === 200) {
+          this.gxList = response.data.data.sort(function (a, b) {
+            return a.serial - b.serial;
+          });
+          if (this.door.id) {
+            this.gxList.forEach(item => {
+              if (this.door.gxIds) {
+                this.door.gxIds.forEach((obj,i) => {
+                  if (obj == item.id){
+                    item.active = true;
+                    item.value = this.door.gxValues[i];
+                  }
+                })
+              }
+            })
+          } else {
+            this.gxList.forEach(item => {
+              item.active = true;
+            })
+          }
+        } else {
+          console.log(response);
+        }
+      });
   }
 
   imageChange(data) {
@@ -42,13 +83,28 @@ export class DoorAddComponent implements OnInit {
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
+          rep.data.gxIds = rep.data.gxIds.split(",");
+          rep.data.gxValues = rep.data.gxValues.split(",");
           this.door = rep.data;
+          this.getGxList();
         } else {
         }
       });
   }
 
   save() {
+    this.door.gxIds = '';
+    this.door.gxValues = '';
+    this.gxList.forEach(item => {
+      if (item.active) {
+        this.door.gxIds += item.id + ',';
+        this.door.gxValues += item.id + ',';
+      }
+    });
+    if (this.door.gxIds) {
+      this.door.gxIds = this.door.gxIds.substring(0, this.door.gxIds.length - 1);
+      this.door.gxValues = this.door.gxValues.substring(0, this.door.gxValues.length - 1)
+    }
     if (this.door.id) {
       (this.doorService as any).update({data: this.door})
         .then(response => {
@@ -60,6 +116,7 @@ export class DoorAddComponent implements OnInit {
           }
         });
     } else {
+      debugger;
       (this.doorService as any).add({data: this.door})
         .then(response => {
           const rep = (response as any);

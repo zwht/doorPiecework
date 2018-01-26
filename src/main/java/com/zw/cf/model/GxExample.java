@@ -493,6 +493,66 @@ public class GxExample {
             addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
+
+        public Criteria andSerialIsNull() {
+            addCriterion("serial is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialIsNotNull() {
+            addCriterion("serial is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialEqualTo(Integer value) {
+            addCriterion("serial =", value, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNotEqualTo(Integer value) {
+            addCriterion("serial <>", value, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialGreaterThan(Integer value) {
+            addCriterion("serial >", value, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialGreaterThanOrEqualTo(Integer value) {
+            addCriterion("serial >=", value, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialLessThan(Integer value) {
+            addCriterion("serial <", value, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialLessThanOrEqualTo(Integer value) {
+            addCriterion("serial <=", value, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialIn(List<Integer> values) {
+            addCriterion("serial in", values, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNotIn(List<Integer> values) {
+            addCriterion("serial not in", values, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialBetween(Integer value1, Integer value2) {
+            addCriterion("serial between", value1, value2, "serial");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNotBetween(Integer value1, Integer value2) {
+            addCriterion("serial not between", value1, value2, "serial");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

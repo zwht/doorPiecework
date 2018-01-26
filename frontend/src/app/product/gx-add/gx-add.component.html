@@ -1,16 +1,31 @@
-<div>
-  <label>
-    <span>名称：</span>
-    <input [(ngModel)]="gx.name" placeholder="请输入名称" type="text" >
-  </label>
-  <label>
-    <span>价格：</span>
-    <input [(ngModel)]="gx.price" type="text">
-  </label>
-  <label>
-    <span>类型：</span>
-    <input [(ngModel)]="gx.type" type="text">
-  </label>
-
-  <button (click)="save()" type="info" style="width: 100%; margin-top: 30px;">保存</button>
+<div class="addUser viewBox">
+  <div class="zwSearch">
+    <div class="left">
+      <span>{{title}}</span>
+    </div>
+    <div class="right">
+    </div>
+  </div>
+  <div class="viewMain">
+    <div class="addFrom">
+      <div>
+        <span>名称：</span>
+        <el-input [(model)]="gx.name" placeholder="请输入密码" type="text"></el-input>
+      </div>
+      <div>
+        <span>价格：</span>
+        <el-input [(model)]="gx.price" type="text"></el-input>
+      </div>
+      <div>
+        <span>类型：</span>
+        <el-input [(model)]="gx.type" type="text"></el-input>
+      </div>
+      <div>
+        <span>序号：</span>
+        <el-input [(model)]="gx.serial" type="text"></el-input>
+      </div>
+      <br>
+      <el-button (click)="save()" [plain]="true" type="success">保存</el-button>
+    </div>
+  </div>
 </div>

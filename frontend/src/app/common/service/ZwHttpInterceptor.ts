@@ -32,7 +32,7 @@ export class ZwHttpInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authReq = req.clone({
       setHeaders: {
-        Authorization: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token') || '',
         'Content-Type': 'application/json; charset=utf-8'
       }
     });

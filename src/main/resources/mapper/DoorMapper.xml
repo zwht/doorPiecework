@@ -6,9 +6,10 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="img" jdbcType="VARCHAR" property="img" />
     <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
-    <result column="gxIds" jdbcType="VARCHAR" property="gxids" />
+    <result column="gx_ids" jdbcType="VARCHAR" property="gxIds" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="gx_values" jdbcType="VARCHAR" property="gxValues" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, img, corporation_id, gxIds, create_time, state
+    id, name, img, corporation_id, gx_ids, create_time, state, gx_values
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.DoorExample" resultMap="BaseResultMap">
     select
@@ -103,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Door">
     insert into door (id, name, img, 
-      corporation_id, gxIds, create_time, 
-      state)
+      corporation_id, gx_ids, create_time, 
+      state, gx_values)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
-      #{corporationId,jdbcType=VARCHAR}, #{gxids,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{state,jdbcType=INTEGER})
+      #{corporationId,jdbcType=VARCHAR}, #{gxIds,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{gxValues,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Door">
     insert into door
@@ -124,14 +125,17 @@
       <if test="corporationId != null">
         corporation_id,
       </if>
-      <if test="gxids != null">
-        gxIds,
+      <if test="gxIds != null">
+        gx_ids,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
       <if test="state != null">
         state,
+      </if>
+      <if test="gxValues != null">
+        gx_values,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -147,14 +151,17 @@
       <if test="corporationId != null">
         #{corporationId,jdbcType=VARCHAR},
       </if>
-      <if test="gxids != null">
-        #{gxids,jdbcType=VARCHAR},
+      <if test="gxIds != null">
+        #{gxIds,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
+      </if>
+      <if test="gxValues != null">
+        #{gxValues,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,14 +186,17 @@
       <if test="record.corporationId != null">
         corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       </if>
-      <if test="record.gxids != null">
-        gxIds = #{record.gxids,jdbcType=VARCHAR},
+      <if test="record.gxIds != null">
+        gx_ids = #{record.gxIds,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.state != null">
         state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.gxValues != null">
+        gx_values = #{record.gxValues,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -199,9 +209,10 @@
       name = #{record.name,jdbcType=VARCHAR},
       img = #{record.img,jdbcType=VARCHAR},
       corporation_id = #{record.corporationId,jdbcType=VARCHAR},
-      gxIds = #{record.gxids,jdbcType=VARCHAR},
+      gx_ids = #{record.gxIds,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      state = #{record.state,jdbcType=INTEGER}
+      state = #{record.state,jdbcType=INTEGER},
+      gx_values = #{record.gxValues,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,14 +229,17 @@
       <if test="corporationId != null">
         corporation_id = #{corporationId,jdbcType=VARCHAR},
       </if>
-      <if test="gxids != null">
-        gxIds = #{gxids,jdbcType=VARCHAR},
+      <if test="gxIds != null">
+        gx_ids = #{gxIds,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="gxValues != null">
+        gx_values = #{gxValues,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -235,9 +249,10 @@
     set name = #{name,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
       corporation_id = #{corporationId,jdbcType=VARCHAR},
-      gxIds = #{gxids,jdbcType=VARCHAR},
+      gx_ids = #{gxIds,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      state = #{state,jdbcType=INTEGER}
+      state = #{state,jdbcType=INTEGER},
+      gx_values = #{gxValues,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

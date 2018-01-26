@@ -1,15 +1,20 @@
 package com.zw.cf.service.impl;
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.zw.cf.dao.DoorMapper;
 import com.zw.cf.model.Door;
 import com.zw.cf.model.DoorExample;
 import com.zw.cf.service.DoorService;
 import com.zw.cf.vo.DoorListFind;
+import com.zw.cf.vo.GxVo;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -28,8 +33,8 @@ public class DoorServiceImpl implements DoorService {
         Response response = new Response();
         try {
             Date date = new Date();
-            DoorExample doorExample=new DoorExample();
-            DoorExample.Criteria criteria=doorExample.createCriteria();
+            DoorExample doorExample = new DoorExample();
+            DoorExample.Criteria criteria = doorExample.createCriteria();
             criteria.andNameEqualTo(door.getName());
             //使用用户名查询是否有相同用户名
             List<Door> doors = doorMapper.selectByExample(doorExample);
@@ -38,11 +43,11 @@ public class DoorServiceImpl implements DoorService {
                 door.setCreateTime(date);
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
-                Set<ConstraintViolation<Door>> constraintViolations= validator.validate(door);
+                Set<ConstraintViolation<Door>> constraintViolations = validator.validate(door);
 
-                if(constraintViolations.size()!=0){
+                if (constraintViolations.size() != 0) {
                     return response.validation(constraintViolations);
-                }else {
+                } else {
                     doorMapper.insert(door);
                     return response.success("添加成功");
                 }
@@ -69,9 +74,14 @@ public class DoorServiceImpl implements DoorService {
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
-            List list = doorMapper.selectByExample(doorExample);
+            List<Door> list = doorMapper.selectByExample(doorExample);
             long count = page.getTotal();
-            return response.success(pageObj.init(pageNum, pageSize, count, list));
+            List<GxVo> list1 = new ArrayList<GxVo>();
+            for(Door item:list){
+                GxVo gg = new GxVo("dd",item);
+                list1.add(gg);
+            }
+            return response.success(pageObj.init(pageNum, pageSize, count, list1));
         } catch (Exception e) {
             return response.failure(400, e.getMessage());
         }

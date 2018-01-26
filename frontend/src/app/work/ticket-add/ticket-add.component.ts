@@ -87,6 +87,7 @@ export class TicketAddComponent implements OnInit {
     this.userListObj[3].forEach(item => {
       if (item.id === e) {
         this.ticket.address = item.address;
+        debugger
       }
     });
   }

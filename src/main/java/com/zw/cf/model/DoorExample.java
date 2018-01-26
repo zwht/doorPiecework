@@ -385,73 +385,73 @@ public class DoorExample {
             return (Criteria) this;
         }
 
-        public Criteria andGxidsIsNull() {
-            addCriterion("gxIds is null");
+        public Criteria andGxIdsIsNull() {
+            addCriterion("gx_ids is null");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsIsNotNull() {
-            addCriterion("gxIds is not null");
+        public Criteria andGxIdsIsNotNull() {
+            addCriterion("gx_ids is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsEqualTo(String value) {
-            addCriterion("gxIds =", value, "gxids");
+        public Criteria andGxIdsEqualTo(String value) {
+            addCriterion("gx_ids =", value, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsNotEqualTo(String value) {
-            addCriterion("gxIds <>", value, "gxids");
+        public Criteria andGxIdsNotEqualTo(String value) {
+            addCriterion("gx_ids <>", value, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsGreaterThan(String value) {
-            addCriterion("gxIds >", value, "gxids");
+        public Criteria andGxIdsGreaterThan(String value) {
+            addCriterion("gx_ids >", value, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsGreaterThanOrEqualTo(String value) {
-            addCriterion("gxIds >=", value, "gxids");
+        public Criteria andGxIdsGreaterThanOrEqualTo(String value) {
+            addCriterion("gx_ids >=", value, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsLessThan(String value) {
-            addCriterion("gxIds <", value, "gxids");
+        public Criteria andGxIdsLessThan(String value) {
+            addCriterion("gx_ids <", value, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsLessThanOrEqualTo(String value) {
-            addCriterion("gxIds <=", value, "gxids");
+        public Criteria andGxIdsLessThanOrEqualTo(String value) {
+            addCriterion("gx_ids <=", value, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsLike(String value) {
-            addCriterion("gxIds like", value, "gxids");
+        public Criteria andGxIdsLike(String value) {
+            addCriterion("gx_ids like", value, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsNotLike(String value) {
-            addCriterion("gxIds not like", value, "gxids");
+        public Criteria andGxIdsNotLike(String value) {
+            addCriterion("gx_ids not like", value, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsIn(List<String> values) {
-            addCriterion("gxIds in", values, "gxids");
+        public Criteria andGxIdsIn(List<String> values) {
+            addCriterion("gx_ids in", values, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsNotIn(List<String> values) {
-            addCriterion("gxIds not in", values, "gxids");
+        public Criteria andGxIdsNotIn(List<String> values) {
+            addCriterion("gx_ids not in", values, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsBetween(String value1, String value2) {
-            addCriterion("gxIds between", value1, value2, "gxids");
+        public Criteria andGxIdsBetween(String value1, String value2) {
+            addCriterion("gx_ids between", value1, value2, "gxIds");
             return (Criteria) this;
         }
 
-        public Criteria andGxidsNotBetween(String value1, String value2) {
-            addCriterion("gxIds not between", value1, value2, "gxids");
+        public Criteria andGxIdsNotBetween(String value1, String value2) {
+            addCriterion("gx_ids not between", value1, value2, "gxIds");
             return (Criteria) this;
         }
 
@@ -572,6 +572,76 @@ public class DoorExample {
 
         public Criteria andStateNotBetween(Integer value1, Integer value2) {
             addCriterion("state not between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesIsNull() {
+            addCriterion("gx_values is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesIsNotNull() {
+            addCriterion("gx_values is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesEqualTo(String value) {
+            addCriterion("gx_values =", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesNotEqualTo(String value) {
+            addCriterion("gx_values <>", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesGreaterThan(String value) {
+            addCriterion("gx_values >", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesGreaterThanOrEqualTo(String value) {
+            addCriterion("gx_values >=", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesLessThan(String value) {
+            addCriterion("gx_values <", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesLessThanOrEqualTo(String value) {
+            addCriterion("gx_values <=", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesLike(String value) {
+            addCriterion("gx_values like", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesNotLike(String value) {
+            addCriterion("gx_values not like", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesIn(List<String> values) {
+            addCriterion("gx_values in", values, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesNotIn(List<String> values) {
+            addCriterion("gx_values not in", values, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesBetween(String value1, String value2) {
+            addCriterion("gx_values between", value1, value2, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesNotBetween(String value1, String value2) {
+            addCriterion("gx_values not between", value1, value2, "gxValues");
             return (Criteria) this;
         }
     }

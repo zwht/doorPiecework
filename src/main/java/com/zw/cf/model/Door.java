@@ -11,11 +11,13 @@ public class Door {
 
     private String corporationId;
 
-    private String gxids;
+    private String gxIds;
 
     private Date createTime;
 
     private Integer state;
+
+    private String gxValues;
 
     public String getId() {
         return id;
@@ -49,12 +51,12 @@ public class Door {
         this.corporationId = corporationId == null ? null : corporationId.trim();
     }
 
-    public String getGxids() {
-        return gxids;
+    public String getGxIds() {
+        return gxIds;
     }
 
-    public void setGxids(String gxids) {
-        this.gxids = gxids == null ? null : gxids.trim();
+    public void setGxIds(String gxIds) {
+        this.gxIds = gxIds == null ? null : gxIds.trim();
     }
 
     public Date getCreateTime() {
@@ -71,5 +73,13 @@ public class Door {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getGxValues() {
+        return gxValues;
+    }
+
+    public void setGxValues(String gxValues) {
+        this.gxValues = gxValues == null ? null : gxValues.trim();
     }
 }

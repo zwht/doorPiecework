@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Headers, Http} from '@angular/http';
 import {Router} from '@angular/router';
 import {LoginVo} from '../../../common/class/LoginVo';
 import {AuthService} from '../../../common/restService/AuthService';
@@ -13,16 +12,21 @@ import {AuthService} from '../../../common/restService/AuthService';
 export class LoginComponent implements OnInit {
   login = new LoginVo('', '');
 
-  constructor(private http: Http,
-              private router: Router,
+  constructor(private router: Router,
               private authService: AuthService) {
   }
 
   ngOnInit() {
-    console.log(this);
+    const that=this;
+    $(document).unbind("keyup");
+    $(document).keyup(function(event){
+      if(event.keyCode ==13&&that.router.url==='/'){
+        that.onLogin()
+      }
+    });
   }
 
-  onLogin(data) {
+  onLogin() {
     this.authService['login']({data: this.login})
       .then(response => {
         const rep = (response as any);
