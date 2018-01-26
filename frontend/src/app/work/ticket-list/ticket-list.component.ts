@@ -45,11 +45,8 @@ export class TicketListComponent implements OnInit {
     this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
-  del(item, k) {
-    (this.ticketService as any).updateState({
-      id: item.id,
-      state: k
-    })
+  del(id) {
+    (this.ticketService as any).del({params: {id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

@@ -76,4 +76,13 @@ public class ProcessCtrl {
     ) {
         return processService.update(process);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/del", method = RequestMethod.GET)
+    @ApiOperation(value = "根据id删除", httpMethod = "GET", notes = "删除")
+    public Response<User> del(
+            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
+    ) {
+        return processService.del(id);
+    }
 }

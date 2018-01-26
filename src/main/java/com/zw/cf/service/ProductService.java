@@ -12,4 +12,5 @@ public interface ProductService {
     Response list(Integer pageNum, Integer pageSize, ProductListFind productListFind);
     Response getById(String id);
     Response update(Product product);
+    Response del(String id);
 }

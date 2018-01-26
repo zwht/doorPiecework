@@ -121,4 +121,12 @@ public class TicketServiceImpl implements TicketService {
             return response.failure(400, "未知错误！");
         }
     }
+    public Response del(String id) {
+        Response response = new Response();
+        try {
+            return response.success(ticketMapper.deleteByPrimaryKey(id));
+        } catch (Exception e) {
+            return response.failure(501, e.getMessage());
+        }
+    }
 }

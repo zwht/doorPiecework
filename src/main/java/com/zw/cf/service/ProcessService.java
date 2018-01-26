@@ -12,4 +12,5 @@ public interface ProcessService {
     Response list(Integer pageNum, Integer pageSize, ProcessListFind processListFind);
     Response getById(String id);
     Response update(Process process);
+    Response del(String id);
 }

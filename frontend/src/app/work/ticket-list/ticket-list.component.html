@@ -16,10 +16,12 @@
         <th>操作</th>
       </tr>
       <tr *ngFor="let item of list let i=index">
+        <td>{{item.brandId==1?'重庆川峰门业':'重庆御驰门业'}}</td>
         <td>{{item.name}}</td>
-        <td>
-
-        </td>
+        <td>{{item.dealersId}}</td>
+        <td>{{item.startTime| date:'yyyy年MM月dd日'}}</td>
+        <td>{{item.endTime| date:'yyyy年MM月dd日'}}</td>
+        <td>{{item.address}}</td>
         <td style="width: 180px; text-align: center;">
           <el-button (click)="del(item.id)" size="mini" type="warning" icon="delete" [plain]="true">删除</el-button>
           <el-button (click)="add(item)" size="mini" type="success" icon="edit" [plain]="true">编辑</el-button>
