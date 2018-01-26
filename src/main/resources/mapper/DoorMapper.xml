@@ -10,6 +10,9 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="gx_values" jdbcType="VARCHAR" property="gxValues" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="colors" jdbcType="VARCHAR" property="colors" />
+    <result column="line" jdbcType="VARCHAR" property="line" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, img, corporation_id, gx_ids, create_time, state, gx_values
+    id, name, img, corporation_id, gx_ids, create_time, state, gx_values, number, colors, 
+    line
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.DoorExample" resultMap="BaseResultMap">
     select
@@ -105,10 +109,12 @@
   <insert id="insert" parameterType="com.zw.cf.model.Door">
     insert into door (id, name, img, 
       corporation_id, gx_ids, create_time, 
-      state, gx_values)
+      state, gx_values, number, 
+      colors, line)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
       #{corporationId,jdbcType=VARCHAR}, #{gxIds,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{state,jdbcType=INTEGER}, #{gxValues,jdbcType=VARCHAR})
+      #{state,jdbcType=INTEGER}, #{gxValues,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{colors,jdbcType=VARCHAR}, #{line,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Door">
     insert into door
@@ -137,6 +143,15 @@
       <if test="gxValues != null">
         gx_values,
       </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="colors != null">
+        colors,
+      </if>
+      <if test="line != null">
+        line,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -162,6 +177,15 @@
       </if>
       <if test="gxValues != null">
         #{gxValues,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="colors != null">
+        #{colors,jdbcType=VARCHAR},
+      </if>
+      <if test="line != null">
+        #{line,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -198,6 +222,15 @@
       <if test="record.gxValues != null">
         gx_values = #{record.gxValues,jdbcType=VARCHAR},
       </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colors != null">
+        colors = #{record.colors,jdbcType=VARCHAR},
+      </if>
+      <if test="record.line != null">
+        line = #{record.line,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +245,10 @@
       gx_ids = #{record.gxIds,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       state = #{record.state,jdbcType=INTEGER},
-      gx_values = #{record.gxValues,jdbcType=VARCHAR}
+      gx_values = #{record.gxValues,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      colors = #{record.colors,jdbcType=VARCHAR},
+      line = #{record.line,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +277,15 @@
       <if test="gxValues != null">
         gx_values = #{gxValues,jdbcType=VARCHAR},
       </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="colors != null">
+        colors = #{colors,jdbcType=VARCHAR},
+      </if>
+      <if test="line != null">
+        line = #{line,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -252,7 +297,10 @@
       gx_ids = #{gxIds,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       state = #{state,jdbcType=INTEGER},
-      gx_values = #{gxValues,jdbcType=VARCHAR}
+      gx_values = #{gxValues,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      colors = #{colors,jdbcType=VARCHAR},
+      line = #{line,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

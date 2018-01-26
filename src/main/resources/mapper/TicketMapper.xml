@@ -16,6 +16,7 @@
     <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="pay" jdbcType="REAL" property="pay" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, name, dealers_id, brand_id, odd, address, start_time, end_time, create_time, 
-    over_time, product_ids, corporation_id, state, number
+    over_time, product_ids, corporation_id, state, number, pay
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.TicketExample" resultMap="BaseResultMap">
     select
@@ -114,12 +115,12 @@
       brand_id, odd, address, 
       start_time, end_time, create_time, 
       over_time, product_ids, corporation_id, 
-      state, number)
+      state, number, pay)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{dealersId,jdbcType=VARCHAR}, 
       #{brandId,jdbcType=VARCHAR}, #{odd,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{overTime,jdbcType=TIMESTAMP}, #{productIds,jdbcType=VARCHAR}, #{corporationId,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR})
+      #{state,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{pay,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Ticket">
     insert into ticket
@@ -166,6 +167,9 @@
       <if test="number != null">
         number,
       </if>
+      <if test="pay != null">
+        pay,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -209,6 +213,9 @@
       </if>
       <if test="number != null">
         #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="pay != null">
+        #{pay,jdbcType=REAL},
       </if>
     </trim>
   </insert>
@@ -263,6 +270,9 @@
       <if test="record.number != null">
         number = #{record.number,jdbcType=VARCHAR},
       </if>
+      <if test="record.pay != null">
+        pay = #{record.pay,jdbcType=REAL},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -283,7 +293,8 @@
       product_ids = #{record.productIds,jdbcType=VARCHAR},
       corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
-      number = #{record.number,jdbcType=VARCHAR}
+      number = #{record.number,jdbcType=VARCHAR},
+      pay = #{record.pay,jdbcType=REAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -330,6 +341,9 @@
       <if test="number != null">
         number = #{number,jdbcType=VARCHAR},
       </if>
+      <if test="pay != null">
+        pay = #{pay,jdbcType=REAL},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -347,7 +361,8 @@
       product_ids = #{productIds,jdbcType=VARCHAR},
       corporation_id = #{corporationId,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR}
+      number = #{number,jdbcType=VARCHAR},
+      pay = #{pay,jdbcType=REAL}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

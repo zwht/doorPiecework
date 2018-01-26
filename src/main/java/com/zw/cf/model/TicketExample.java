@@ -1034,6 +1034,66 @@ public class TicketExample {
             addCriterion("number not between", value1, value2, "number");
             return (Criteria) this;
         }
+
+        public Criteria andPayIsNull() {
+            addCriterion("pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayIsNotNull() {
+            addCriterion("pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayEqualTo(Float value) {
+            addCriterion("pay =", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayNotEqualTo(Float value) {
+            addCriterion("pay <>", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayGreaterThan(Float value) {
+            addCriterion("pay >", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayGreaterThanOrEqualTo(Float value) {
+            addCriterion("pay >=", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayLessThan(Float value) {
+            addCriterion("pay <", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayLessThanOrEqualTo(Float value) {
+            addCriterion("pay <=", value, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayIn(List<Float> values) {
+            addCriterion("pay in", values, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayNotIn(List<Float> values) {
+            addCriterion("pay not in", values, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayBetween(Float value1, Float value2) {
+            addCriterion("pay between", value1, value2, "pay");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayNotBetween(Float value1, Float value2) {
+            addCriterion("pay not between", value1, value2, "pay");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

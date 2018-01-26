@@ -21,6 +21,10 @@ public class Process {
 
     private Integer state;
 
+    private String productId;
+
+    private String ticketId;
+
     public String getId() {
         return id;
     }
@@ -91,5 +95,21 @@ public class Process {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId == null ? null : productId.trim();
+    }
+
+    public String getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId == null ? null : ticketId.trim();
     }
 }

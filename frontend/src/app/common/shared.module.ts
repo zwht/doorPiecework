@@ -6,6 +6,9 @@ import {CropperImgComponent} from './components/cropper-img/cropper-img.componen
 import {ZwHttpInterceptor} from './service/ZwHttpInterceptor';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpServer} from './service/HttpServer';
+import {DateSet} from './service/DateSet';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +18,7 @@ import {HttpServer} from './service/HttpServer';
   declarations: [CropperImgComponent],
   exports: [CropperImgComponent],
   providers: [
+    DateSet,
     HttpServer,
     {
       provide: HTTP_INTERCEPTORS,

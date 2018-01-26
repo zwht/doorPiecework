@@ -19,6 +19,12 @@ public class Door {
 
     private String gxValues;
 
+    private String number;
+
+    private String colors;
+
+    private String line;
+
     public String getId() {
         return id;
     }
@@ -81,5 +87,29 @@ public class Door {
 
     public void setGxValues(String gxValues) {
         this.gxValues = gxValues == null ? null : gxValues.trim();
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number == null ? null : number.trim();
+    }
+
+    public String getColors() {
+        return colors;
+    }
+
+    public void setColors(String colors) {
+        this.colors = colors == null ? null : colors.trim();
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line == null ? null : line.trim();
     }
 }

@@ -63,6 +63,8 @@ public class Product {
 
     private Integer lineLength;
 
+    private String ticketId;
+
     public String getId() {
         return id;
     }
@@ -301,5 +303,13 @@ public class Product {
 
     public void setLineLength(Integer lineLength) {
         this.lineLength = lineLength;
+    }
+
+    public String getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId == null ? null : ticketId.trim();
     }
 }

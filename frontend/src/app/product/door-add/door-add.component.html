@@ -13,6 +13,10 @@
         <el-input [(model)]="door.name" placeholder="请输入" type="text"></el-input>
       </div>
       <div>
+        <span>编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</span>
+        <el-input [(model)]="door.number" placeholder="请输入" type="text"></el-input>
+      </div>
+      <div>
         <span>添加图片：</span>
         <app-cropper-img [cpImg]="door.img" [boxStyle]="{width:300,height:400}"
                          (saveEnd)="imageChange($event)"></app-cropper-img>

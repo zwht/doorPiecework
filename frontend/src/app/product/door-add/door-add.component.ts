@@ -18,6 +18,7 @@ export class DoorAddComponent implements OnInit {
     gxIds: null,
     gxValues: null,
     createTime: null,
+    number:null,
     state: 0
   };
 

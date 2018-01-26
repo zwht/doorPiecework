@@ -2,7 +2,8 @@
   <div class="zwSearch">
     <div class="right">
       <el-button (click)="save()" size="mini" type="primary">保存</el-button>
-      <el-button (click)="over()" size="mini" type="primary">完成订单</el-button>
+      <el-button (click)="over()" size="mini" type="primary">生产完成</el-button>
+      <el-button (click)="over()" size="mini" type="primary">确定交货</el-button>
     </div>
   </div>
   <div class="tableBox viewMain">
@@ -31,7 +32,7 @@
 
         <td>订单编号</td>
         <td colspan="5">
-          <el-input [(model)]="ticket.number" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="ticket.name" placeholder="请输入内容"></el-input>
         </td>
       </tr>
       <tr>
@@ -42,19 +43,19 @@
 
         <td>订货日期</td>
         <td colspan="2">
-          <el-date-picker [(model)]="ticket.startTime"
-          [format]="'yyyy年MM月-dd日'"></el-date-picker>
+          <el-date-picker *ngIf="changeDate" [(model)]="ticket.startTime"
+                          [format]="'yyyy年MM月dd日'"></el-date-picker>
 
         </td>
         <td>交货日期</td>
         <td colspan="2">
-          <el-date-picker [(model)]="ticket.endTime"
-                          [format]="'yyyy年MM月-dd日'"></el-date-picker>
+          <el-date-picker *ngIf="changeDate" [(model)]="ticket.endTime"
+                          [format]="'yyyy年MM月dd日'"></el-date-picker>
         </td>
       </tr>
       <tr>
         <td rowspan="2" style="width: 60px;">序号</td>
-        <td rowspan="2">型号</td>
+        <td rowspan="2" style="width: 160px;">型号</td>
 
         <td>洞口尺寸</td>
         <td>门扇尺寸</td>
@@ -120,10 +121,22 @@
           <el-input [(model)]="item.dbSum" placeholder="请输入内容"></el-input>
         </td>
         <td>
-          <el-input [(model)]="item.colorId" placeholder="请输入内容"></el-input>
+          <el-select [(model)]="item.colorId" placeholder="请选择"
+                     (modelChange)="dealersChange($event)">
+            <el-option *ngFor="let obj of colorList"
+                       [label]="obj.name"
+                       [value]="obj.id">
+            </el-option>
+          </el-select>
         </td>
         <td>
-          <el-input [(model)]="item.lineId" placeholder="请输入内容"></el-input>
+          <el-select [(model)]="item.lineId" placeholder="请选择"
+                     (modelChange)="dealersChange($event)">
+            <el-option *ngFor="let obj of lineList"
+                       [label]="obj.name"
+                       [value]="obj.id">
+            </el-option>
+          </el-select>
         </td>
         <td class="input2">
           <el-input [(model)]="item.lineLength" placeholder="请输入内容"></el-input>

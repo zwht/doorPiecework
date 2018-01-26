@@ -31,6 +31,8 @@ public class Ticket {
 
     private String number;
 
+    private Float pay;
+
     public String getId() {
         return id;
     }
@@ -141,5 +143,13 @@ public class Ticket {
 
     public void setNumber(String number) {
         this.number = number == null ? null : number.trim();
+    }
+
+    public Float getPay() {
+        return pay;
+    }
+
+    public void setPay(Float pay) {
+        this.pay = pay;
     }
 }

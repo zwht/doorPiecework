@@ -2014,6 +2014,76 @@ public class ProductExample {
             addCriterion("line_length not between", value1, value2, "lineLength");
             return (Criteria) this;
         }
+
+        public Criteria andTicketIdIsNull() {
+            addCriterion("ticket_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdIsNotNull() {
+            addCriterion("ticket_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdEqualTo(String value) {
+            addCriterion("ticket_id =", value, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdNotEqualTo(String value) {
+            addCriterion("ticket_id <>", value, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdGreaterThan(String value) {
+            addCriterion("ticket_id >", value, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdGreaterThanOrEqualTo(String value) {
+            addCriterion("ticket_id >=", value, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdLessThan(String value) {
+            addCriterion("ticket_id <", value, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdLessThanOrEqualTo(String value) {
+            addCriterion("ticket_id <=", value, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdLike(String value) {
+            addCriterion("ticket_id like", value, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdNotLike(String value) {
+            addCriterion("ticket_id not like", value, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdIn(List<String> values) {
+            addCriterion("ticket_id in", values, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdNotIn(List<String> values) {
+            addCriterion("ticket_id not in", values, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdBetween(String value1, String value2) {
+            addCriterion("ticket_id between", value1, value2, "ticketId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTicketIdNotBetween(String value1, String value2) {
+            addCriterion("ticket_id not between", value1, value2, "ticketId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

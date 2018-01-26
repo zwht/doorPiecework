@@ -4,15 +4,20 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {UserService} from '../../common/restService/UserService';
 import {GxService} from '../../common/restService/GxService';
 import {DoorService} from '../../common/restService/DoorService';
+import {ColorService} from '../../common/restService/ColorService';
+import {LineService} from '../../common/restService/LineService';
+import {DateSet} from '../../common/service/DateSet';
 
 @Component({
   selector: 'app-ticket-add',
   templateUrl: './ticket-add.component.html',
   styleUrls: ['./ticket-add.component.less'],
-  providers: [TicketService, UserService, GxService, DoorService]
+  providers: [TicketService, UserService, GxService, DoorService, DateSet,ColorService,LineService]
 })
 export class TicketAddComponent implements OnInit {
-
+  colorList=[];
+  lineList=[];
+  changeDate = true;
   userListObj = {3: []};
   ticket = {
     id: null,
@@ -28,11 +33,14 @@ export class TicketAddComponent implements OnInit {
     processIds: null,
     corporationId: null,
     state: 0,
-    number: 0
+    number: 0,
+    pay: null
   };
   gxList = [];
   doorList = [];
   emptyDoor = {
+    id:null,
+    ticketId:null,
     doorId: 0,
     coverWidth: 100,
     coverHeight: 180,
@@ -64,8 +72,11 @@ export class TicketAddComponent implements OnInit {
 
   constructor(private ticketService: TicketService,
               private gxService: GxService,
+              private colorService: ColorService,
               private doorService: DoorService,
+              private lineService:LineService,
               private router: Router,
+              private dateSet: DateSet,
               private userService: UserService,
               private activatedRoute: ActivatedRoute) {
   }
@@ -80,6 +91,8 @@ export class TicketAddComponent implements OnInit {
     });
     this.getUserList();
     this.getDoorList();
+    this.getColorList();
+    this.getLineList();
 
   }
 
@@ -87,7 +100,6 @@ export class TicketAddComponent implements OnInit {
     this.userListObj[3].forEach(item => {
       if (item.id === e) {
         this.ticket.address = item.address;
-        debugger
       }
     });
   }
@@ -98,11 +110,13 @@ export class TicketAddComponent implements OnInit {
   }
 
   getById() {
+    this.changeDate = false;
     (this.ticketService as any).getById({params: {id: this.ticket.id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
           this.ticket = rep.data;
+          this.changeDate = true;
         } else {
         }
       });
@@ -137,8 +151,12 @@ export class TicketAddComponent implements OnInit {
   }
 
   save() {
+    const ticket=JSON.parse(JSON.stringify(this.ticket));
+    ticket.startTime = this.dateSet.getDate(ticket.startTime);
+    ticket.endTime = this.dateSet.getDate(ticket.endTime);
+
     if (this.ticket.id) {
-      (this.ticketService as any).update(this.ticket)
+      (this.ticketService as any).update({data:ticket})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
@@ -148,10 +166,16 @@ export class TicketAddComponent implements OnInit {
           }
         });
     } else {
-      (this.ticketService as any).add(this.ticket)
+
+      (this.ticketService as any).add({data: ticket})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
+            this.productList.forEach(item=>{
+              if (!item.id){
+
+              }
+            });
             this.router.navigate(['/admin/work/ticket']);
           } else {
             console.log(response);
@@ -194,6 +218,38 @@ export class TicketAddComponent implements OnInit {
             }
           });
           this.gxList = response.data.data;
+        } else {
+          console.log(response);
+        }
+      });
+  }
+  getColorList() {
+    (this.colorService as any).list({
+      params: {
+        params2: 1,
+        params3: 1000
+      }
+    })
+      .then(response => {
+        const rep = (response as any);
+        if (rep.code === 200) {
+          this.colorList = response.data.data;
+        } else {
+          console.log(response);
+        }
+      });
+  }
+  getLineList() {
+    (this.lineService as any).list({
+      params: {
+        params2: 1,
+        params3: 1000
+      }
+    })
+      .then(response => {
+        const rep = (response as any);
+        if (rep.code === 200) {
+          this.lineList = response.data.data;
         } else {
           console.log(response);
         }

@@ -644,6 +644,216 @@ public class DoorExample {
             addCriterion("gx_values not between", value1, value2, "gxValues");
             return (Criteria) this;
         }
+
+        public Criteria andNumberIsNull() {
+            addCriterion("number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIsNotNull() {
+            addCriterion("number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberEqualTo(String value) {
+            addCriterion("number =", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotEqualTo(String value) {
+            addCriterion("number <>", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberGreaterThan(String value) {
+            addCriterion("number >", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("number >=", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLessThan(String value) {
+            addCriterion("number <", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLessThanOrEqualTo(String value) {
+            addCriterion("number <=", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberLike(String value) {
+            addCriterion("number like", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotLike(String value) {
+            addCriterion("number not like", value, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberIn(List<String> values) {
+            addCriterion("number in", values, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotIn(List<String> values) {
+            addCriterion("number not in", values, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberBetween(String value1, String value2) {
+            addCriterion("number between", value1, value2, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberNotBetween(String value1, String value2) {
+            addCriterion("number not between", value1, value2, "number");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsIsNull() {
+            addCriterion("colors is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsIsNotNull() {
+            addCriterion("colors is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsEqualTo(String value) {
+            addCriterion("colors =", value, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsNotEqualTo(String value) {
+            addCriterion("colors <>", value, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsGreaterThan(String value) {
+            addCriterion("colors >", value, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsGreaterThanOrEqualTo(String value) {
+            addCriterion("colors >=", value, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsLessThan(String value) {
+            addCriterion("colors <", value, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsLessThanOrEqualTo(String value) {
+            addCriterion("colors <=", value, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsLike(String value) {
+            addCriterion("colors like", value, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsNotLike(String value) {
+            addCriterion("colors not like", value, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsIn(List<String> values) {
+            addCriterion("colors in", values, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsNotIn(List<String> values) {
+            addCriterion("colors not in", values, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsBetween(String value1, String value2) {
+            addCriterion("colors between", value1, value2, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorsNotBetween(String value1, String value2) {
+            addCriterion("colors not between", value1, value2, "colors");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIsNull() {
+            addCriterion("line is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIsNotNull() {
+            addCriterion("line is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineEqualTo(String value) {
+            addCriterion("line =", value, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineNotEqualTo(String value) {
+            addCriterion("line <>", value, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineGreaterThan(String value) {
+            addCriterion("line >", value, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineGreaterThanOrEqualTo(String value) {
+            addCriterion("line >=", value, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineLessThan(String value) {
+            addCriterion("line <", value, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineLessThanOrEqualTo(String value) {
+            addCriterion("line <=", value, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineLike(String value) {
+            addCriterion("line like", value, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineNotLike(String value) {
+            addCriterion("line not like", value, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIn(List<String> values) {
+            addCriterion("line in", values, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineNotIn(List<String> values) {
+            addCriterion("line not in", values, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineBetween(String value1, String value2) {
+            addCriterion("line between", value1, value2, "line");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineNotBetween(String value1, String value2) {
+            addCriterion("line not between", value1, value2, "line");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
