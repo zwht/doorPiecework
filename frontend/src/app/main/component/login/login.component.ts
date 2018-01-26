@@ -17,13 +17,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    const that=this;
+    /**const that=this;
     $(document).unbind("keyup");
     $(document).keyup(function(event){
       if(event.keyCode ==13&&that.router.url==='/'){
         that.onLogin()
       }
-    });
+    });**/
   }
 
   onLogin() {
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', rep.data.token);
           this.router.navigateByUrl('/admin/user/company');
         } else {
-          console.log(data);
+
         }
       })
       .catch(err => {

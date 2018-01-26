@@ -2,14 +2,14 @@ package com.zw.cf.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.zw.cf.dao.DoorMapper;
+import com.zw.cf.dao.GxMapper;
 import com.zw.cf.model.Door;
 import com.zw.cf.model.DoorExample;
+import com.zw.cf.model.GxExample;
 import com.zw.cf.service.DoorService;
 import com.zw.cf.vo.DoorListFind;
-import com.zw.cf.vo.GxVo;
+import com.zw.cf.vo.DoorVo;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,8 @@ import java.util.*;
 public class DoorServiceImpl implements DoorService {
     @Autowired
     DoorMapper doorMapper;
+    @Autowired
+    GxMapper gxMapper;
 
     public Response add(Door door) {
         Response response = new Response();
@@ -76,12 +78,13 @@ public class DoorServiceImpl implements DoorService {
             Page page = PageHelper.startPage(pageNum, pageSize);
             List<Door> list = doorMapper.selectByExample(doorExample);
             long count = page.getTotal();
-            List<GxVo> list1 = new ArrayList<GxVo>();
-            for(Door item:list){
-                GxVo gg = new GxVo("dd",item);
-                list1.add(gg);
+            List<DoorVo> doorList = new ArrayList<DoorVo>();
+            List gxList = gxMapper.selectByExample(new GxExample());
+            for (Door item : list) {
+
+                doorList.add(new DoorVo("dd", item));
             }
-            return response.success(pageObj.init(pageNum, pageSize, count, list1));
+            return response.success(pageObj.init(pageNum, pageSize, count, doorList));
         } catch (Exception e) {
             return response.failure(400, e.getMessage());
         }
