@@ -16,6 +16,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -32,20 +33,21 @@ public class ProductServiceImpl implements ProductService {
         Response response = new Response();
         try {
             Date date = new Date();
-            ProductExample productExample=new ProductExample();
-            ProductExample.Criteria criteria=productExample.createCriteria();
+            ProductExample productExample = new ProductExample();
+            ProductExample.Criteria criteria = productExample.createCriteria();
             criteria.andNameEqualTo(product.getName());
             //使用用户名查询是否有相同用户名
+
             List<Product> products = productMapper.selectByExample(productExample);
             if (products.size() == 0) {
                 product.setId(date.getTime() + "");
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
-                Set<ConstraintViolation<Product>> constraintViolations= validator.validate(product);
+                Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
 
-                if(constraintViolations.size()!=0){
+                if (constraintViolations.size() != 0) {
                     return response.validation(constraintViolations);
-                }else {
+                } else {
                     productMapper.insert(product);
                     return response.success("添加成功");
                 }
@@ -53,6 +55,44 @@ public class ProductServiceImpl implements ProductService {
             } else {
                 return response.failure(400, "名字重复！");
             }
+        } catch (Exception e) {
+            return response.failure(400, "未知错误！");
+        }
+    }
+
+    public Response addList(List<Product> list) {
+        Response response = new Response();
+        try {
+            Date date = new Date();
+            for (Product product : list) {
+
+                if(product.getId()==null||product.getId().equals("")){
+                    product.setId(date.getTime() + "");
+                    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                    Validator validator = factory.getValidator();
+                    Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
+                    if (constraintViolations.size() != 0) {
+                        return response.validation(constraintViolations);
+                    } else {
+                        productMapper.insert(product);
+                    }
+                }else {
+                    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                    Validator validator = factory.getValidator();
+                    Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
+                    if (constraintViolations.size() != 0) {
+                        return response.validation(constraintViolations);
+                    } else {
+                        ProductExample example = new ProductExample();
+                        ProductExample.Criteria criteria1 = example.createCriteria();
+                        criteria1.andIdEqualTo(product.getId());
+                        productMapper.updateByExampleSelective(product, example);
+                    }
+                }
+
+
+            }
+            return response.success(list);
         } catch (Exception e) {
             return response.failure(400, "未知错误！");
         }
@@ -68,6 +108,11 @@ public class ProductServiceImpl implements ProductService {
         if (name == null || name.equals("")) {
         } else {
             criteria.andNameEqualTo(name);
+        }
+        String ticketId = productListFind.getTicketId();
+        if (ticketId == null || ticketId.equals("")) {
+        } else {
+            criteria.andTicketIdEqualTo(ticketId);
         }
 
         try {
@@ -92,35 +137,24 @@ public class ProductServiceImpl implements ProductService {
     public Response update(Product product) {
         Response response = new Response();
         try {
-            ProductExample productExample = new ProductExample();
-            ProductExample.Criteria criteria = productExample.createCriteria();
-            criteria.andNameEqualTo(product.getName());
-            criteria.andIdNotEqualTo(product.getId());
-            //使用用户名查询是否有相同用户名
-            List<Product> corporations = productMapper.selectByExample(productExample);
-            if (corporations.size() == 0) {
-                ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-                Validator validator = factory.getValidator();
-                Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
+            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+            Validator validator = factory.getValidator();
+            Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
 
-                if (constraintViolations.size() != 0) {
-                    return response.validation(constraintViolations);
-                } else {
-                    ProductExample example = new ProductExample();
-                    ProductExample.Criteria criteria1 = example.createCriteria();
-                    criteria1.andIdEqualTo(product.getId());
-                    productMapper.updateByExampleSelective(product, example);
-                    //corporationMapper.insert(corporation);
-                    return response.success("修改成功");
-                }
-
+            if (constraintViolations.size() != 0) {
+                return response.validation(constraintViolations);
             } else {
-                return response.failure(400, "名字重复！");
+                ProductExample example = new ProductExample();
+                ProductExample.Criteria criteria1 = example.createCriteria();
+                criteria1.andIdEqualTo(product.getId());
+                productMapper.updateByExampleSelective(product, example);
+                return response.success("修改成功");
             }
         } catch (Exception e) {
             return response.failure(400, "未知错误！");
         }
     }
+
     public Response del(String id) {
         Response response = new Response();
         try {

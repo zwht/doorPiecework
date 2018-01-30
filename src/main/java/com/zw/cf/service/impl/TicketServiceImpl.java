@@ -47,7 +47,8 @@ public class TicketServiceImpl implements TicketService {
                     return response.validation(constraintViolations);
                 }else {
                     ticketMapper.insert(ticket);
-                    return response.success("添加成功");
+                    String id= ticket.getId();
+                    return response.success(ticket);
                 }
 
             } else {

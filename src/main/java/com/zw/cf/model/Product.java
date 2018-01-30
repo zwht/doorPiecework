@@ -7,13 +7,13 @@ public class Product {
 
     private String name;
 
-    private String doorid;
+    private String doorId;
 
     private String processIds;
 
     private String img;
 
-    private String describe;
+    private String mark;
 
     private Date startTime;
 
@@ -27,7 +27,7 @@ public class Product {
 
     private Integer coverDepth;
 
-    private Integer widht;
+    private Integer width;
 
     private Integer height;
 
@@ -48,8 +48,6 @@ public class Product {
     private String productcol;
 
     private Integer type;
-
-    private Boolean isModule;
 
     private String moduleId;
 
@@ -81,12 +79,12 @@ public class Product {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDoorid() {
-        return doorid;
+    public String getDoorId() {
+        return doorId;
     }
 
-    public void setDoorid(String doorid) {
-        this.doorid = doorid == null ? null : doorid.trim();
+    public void setDoorId(String doorId) {
+        this.doorId = doorId == null ? null : doorId.trim();
     }
 
     public String getProcessIds() {
@@ -105,12 +103,12 @@ public class Product {
         this.img = img == null ? null : img.trim();
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getMark() {
+        return mark;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setMark(String mark) {
+        this.mark = mark == null ? null : mark.trim();
     }
 
     public Date getStartTime() {
@@ -161,12 +159,12 @@ public class Product {
         this.coverDepth = coverDepth;
     }
 
-    public Integer getWidht() {
-        return widht;
+    public Integer getWidth() {
+        return width;
     }
 
-    public void setWidht(Integer widht) {
-        this.widht = widht;
+    public void setWidth(Integer width) {
+        this.width = width;
     }
 
     public Integer getHeight() {
@@ -247,14 +245,6 @@ public class Product {
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public Boolean getIsModule() {
-        return isModule;
-    }
-
-    public void setIsModule(Boolean isModule) {
-        this.isModule = isModule;
     }
 
     public String getModuleId() {

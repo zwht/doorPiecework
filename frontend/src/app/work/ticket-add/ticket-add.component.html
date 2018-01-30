@@ -32,13 +32,13 @@
 
         <td>订单编号</td>
         <td colspan="5">
-          <el-input [(model)]="ticket.name" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="ticket.name" placeholder=""></el-input>
         </td>
       </tr>
       <tr>
         <td colspan="2">地址</td>
         <td colspan="3">
-          <el-input [(model)]="ticket.address" placeholder="请输入内容"></el-input>
+          <el-input [(model)]="ticket.address" placeholder=""></el-input>
         </td>
 
         <td>订货日期</td>
@@ -83,92 +83,97 @@
         </td>
       </tr>
       <tr *ngFor="let item of productList let i=index">
-        <td>1</td>
-        <td>
-          <el-select size="mini" [(model)]="item.doorId" placeholder="请选择">
+        <td>{{i+1}}</td>
+        <td class="doorName">
+          <el-select (modelChange)="doorChange($event,item)" size="mini" [(model)]="item.doorId" placeholder="请选择">
             <el-option *ngFor="let obj of doorList"
                        [label]="obj.name"
-                       [value]="obj.id">
+                       [value]="obj.id" >
             </el-option>
           </el-select>
+          <img *ngIf="item.doorImg" style="width: 50px;" [src]="item.doorImg" alt="">
         </td>
         <td class="input3">
-          <el-input [(model)]="item.coverWidth" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.coverWidth" placeholder="">
           *
-          <el-input [(model)]="item.coverHeight" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.coverHeight" placeholder="">
           *
-          <el-input [(model)]="item.coverDepth" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.coverDepth" placeholder="">
         </td>
         <td class="input3">
-          <el-input [(model)]="item.width" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.width" placeholder="">
           *
-          <el-input [(model)]="item.height" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.height" placeholder="">
           =
-          <el-input [(model)]="item.sum" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.sum" placeholder="">
         </td>
         <td class="input3">
-          <el-input [(model)]="item.lbWidth" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.lbWidth" placeholder="">
           *
-          <el-input [(model)]="item.lbHeight" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.lbHeight" placeholder="">
           =
-          <el-input [(model)]="item.lbSum" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.lbSum" placeholder="">
         </td>
         <td class="input3">
-          <el-input [(model)]="item.dbWidth" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.dbWidth" placeholder="">
           *
-          <el-input [(model)]="item.dbHeight" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.dbHeight" placeholder="">
           =
-          <el-input [(model)]="item.dbSum" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.dbSum" placeholder="">
         </td>
         <td>
           <el-select [(model)]="item.colorId" placeholder="请选择"
-                     (modelChange)="dealersChange($event)">
+                     (modelChange)="colorChange($event,item)">
             <el-option *ngFor="let obj of colorList"
                        [label]="obj.name"
                        [value]="obj.id">
             </el-option>
           </el-select>
+          <img *ngIf="item.colorImg" style="width: 50px;" [src]="item.colorImg" alt="">
         </td>
         <td>
           <el-select [(model)]="item.lineId" placeholder="请选择"
-                     (modelChange)="dealersChange($event)">
+                     (modelChange)="lineChange($event,item)">
             <el-option *ngFor="let obj of lineList"
                        [label]="obj.name"
                        [value]="obj.id">
             </el-option>
           </el-select>
+          <img *ngIf="item.lineImg" style="width: 50px;" [src]="item.lineImg" alt="">
         </td>
         <td class="input2">
-          <el-input [(model)]="item.lineLength" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.lineLength" placeholder="">
           =
-          <el-input [(model)]="item.lineSum" placeholder="请输入内容"></el-input>
+          <input type="number" [(ngModel)]="item.lineSum" placeholder="">
         </td>
         <td>
-          <el-input [(model)]="item.describe" placeholder="请输入内容"></el-input>
+          <textarea style="height: 90px; width: 100%; border: none;" [(ngModel)]="item.mark" placeholder=""></textarea>
         </td>
         <td class="operation">
           <span (click)="copyAdd(item)">复制添加</span>
-          <span (click)="delDoor(i)">删除</span>
+          <span (click)="delDoor(item,i)">删除</span>
         </td>
       </tr>
       <tr>
         <td>总计：</td>
         <td colspan="11" class="statistics">
           门扇：
-          <span>33</span>
+          <input type="number" [(ngModel)]="stat.doors" placeholder="">
           <b>个</b>
-          门套：
-          <span>33</span>
+          套板：
+          <input type="number" [(ngModel)]="stat.doorT" placeholder="">
           <b>块</b>
           线条：
-          <span>33</span>
+          <input type="number" [(ngModel)]="stat.lines" placeholder="">
           <b>支</b>
         </td>
       </tr>
     </table>
     <ul class="gxBox clear">
       <li *ngFor="let item of gxList let i=index">
-        <div>{{item.name}}</div>
+        <div>{{item.name}}
+          <span *ngIf="item.values" style="color: #c00;">{{item.values}}(元)</span>
+        </div>
         <div>
           <el-select size="mini" [(model)]="item.userId" placeholder="请选择">
             <el-option *ngFor="let obj of userListObj[item.name]"

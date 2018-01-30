@@ -7,6 +7,15 @@ public class ProductListFind {
 
 
     private String name;
+    private String ticketId;
+
+    public String getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
+    }
 
     public String getName() {
         return name;

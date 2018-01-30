@@ -6,17 +6,20 @@ import {GxService} from '../../common/restService/GxService';
 import {DoorService} from '../../common/restService/DoorService';
 import {ColorService} from '../../common/restService/ColorService';
 import {LineService} from '../../common/restService/LineService';
+import {ProductService} from '../../common/restService/ProductService';
 import {DateSet} from '../../common/service/DateSet';
 
 @Component({
   selector: 'app-ticket-add',
   templateUrl: './ticket-add.component.html',
   styleUrls: ['./ticket-add.component.less'],
-  providers: [TicketService, UserService, GxService, DoorService, DateSet,ColorService,LineService]
+  providers: [ProductService, TicketService, UserService, GxService, DoorService, DateSet, ColorService, LineService]
 })
 export class TicketAddComponent implements OnInit {
-  colorList=[];
-  lineList=[];
+  colorList = [];
+  colorListObj = {};
+  lineList = [];
+  lineListObj = {};
   changeDate = true;
   userListObj = {3: []};
   ticket = {
@@ -36,11 +39,49 @@ export class TicketAddComponent implements OnInit {
     number: 0,
     pay: null
   };
-  gxList = [];
-  doorList = [];
-  emptyDoor = {
+  emptyProduct = {
     id:null,
-    ticketId:null,
+    name:null,
+    doorId:null,
+    doorImg:null,
+    processIds:null,
+    img:null,
+    mark:null,
+    startTime:null,
+    endTime:null,
+    corporationId:null,
+    coverWidth:null,
+    coverHeight:null,
+    coverDepth:null,
+    widht:null,
+    height:null,
+    lbWidth:null,
+    lbHeight:null,
+    dbWidth:null,
+    dbHeight:null,
+    colorId:null,
+    colorImg:null,
+    lineId:null,
+    lineImg:null,
+    lineSum:null,
+    productcol:null,
+    type:null,
+    isModule:null,
+    moduleId:null,
+    state:null,
+    lbSum:null,
+    dbSum:null,
+    sum:null,
+    lineLength:null,
+    ticketId:null
+  };
+  gxList = [];
+  gxListObj = {};
+  doorList = [];
+  doorListObj = {};
+  emptyDoor = {
+    id: null,
+    ticketId: null,
     doorId: 0,
     coverWidth: 100,
     coverHeight: 180,
@@ -59,6 +100,11 @@ export class TicketAddComponent implements OnInit {
 
   };
   productList = [JSON.parse(JSON.stringify(this.emptyDoor))];
+  stat = {
+    doors: 0,
+    doorT: 0,
+    lines: 0
+  };
   brandList = [
     {
       name: '川峰门业',
@@ -69,12 +115,14 @@ export class TicketAddComponent implements OnInit {
       id: 2
     }
   ];
+  getDataKey=0;
 
   constructor(private ticketService: TicketService,
               private gxService: GxService,
               private colorService: ColorService,
               private doorService: DoorService,
-              private lineService:LineService,
+              private lineService: LineService,
+              private productService: ProductService,
               private router: Router,
               private dateSet: DateSet,
               private userService: UserService,
@@ -82,17 +130,52 @@ export class TicketAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.ticket.id = params['id'];
-      if (this.ticket.id) {
-        this.getById();
+    const thant=this;
+    function init(){
+      thant.getDataKey++;
+      if(thant.getDataKey==3){
+        thant.activatedRoute.queryParams.subscribe((params: Params) => {
+          thant.ticket.id = params['id'];
+          if (thant.ticket.id) {
+            thant.getById();
+            thant.getProductList();
+          }
+        });
       }
-
-    });
+    }
     this.getUserList();
-    this.getDoorList();
-    this.getColorList();
-    this.getLineList();
+    this.getDoorList(init);
+    this.getColorList(init);
+    this.getLineList(init);
+
+  }
+
+  doorChange(e,it) {
+    if(e&&it) it.doorImg=this.doorListObj[e].img;
+    this.gxList.forEach(item => {
+      item.values = 0;
+    });
+    this.stat = {
+      doors: 0,
+      doorT: 0,
+      lines: 0
+    };
+    setTimeout(() => {
+      this.productList.forEach(item => {
+        if (!item.doorId||item.doorId=='0') return;
+        item.doorObj = this.doorListObj[item.doorId];
+        this.stat.doors += 1;
+        this.stat.doorT += 1;
+        this.stat.lines += item.lineSum;
+        item.doorObj.gx.forEach(fuck => {
+          this.gxList.forEach(fuck1 => {
+            if (fuck.id == fuck1.id) fuck1.values += fuck.price;
+          });
+
+        })
+      });
+    }, 100);
+
 
   }
 
@@ -103,10 +186,17 @@ export class TicketAddComponent implements OnInit {
       }
     });
   }
+  colorChange(e,item){
+    item.colorImg=this.colorListObj[e].img;
+  }
+  lineChange(e,item){
+    item.lineImg=this.lineListObj[e].img;
+  }
 
   // 复制添加
   copyAdd(item) {
     this.productList.push(JSON.parse(JSON.stringify(item)));
+    this.doorChange();
   }
 
   getById() {
@@ -117,9 +207,31 @@ export class TicketAddComponent implements OnInit {
         if (rep.code === 200) {
           this.ticket = rep.data;
           this.changeDate = true;
+
         } else {
         }
       });
+
+  }
+  getProductList(){
+    this.productService['list']({
+      params: {
+        params2: 1,
+        params3: 100
+      },
+      data: {ticketId:this.ticket.id}
+    })
+      .then(rep => {
+        if(rep.data.data&&rep.data.data.length){
+          rep.data.data.forEach(item=>{
+            if(item.doorId&&item.doorId!='0')item.doorImg=this.doorListObj[item.doorId].img;
+            if(item.colorId&&item.colorId!='0')item.colorImg=this.colorListObj[item.colorId].img;
+            if(item.lineId&&item.lineId!='0')item.lineImg=this.lineListObj[item.lineId].img;
+          });
+          this.productList=rep.data.data;
+        }
+        this.doorChange();
+      })
   }
 
   getUserList() {
@@ -150,33 +262,46 @@ export class TicketAddComponent implements OnInit {
       });
   }
 
+
+  saveProduct(){
+    const that=this;
+    this.productService['addList']({
+      data: {
+        ticketId: this.ticket.id,
+        products: this.productList
+      }
+    })
+      .then(rep => {
+        that.getProductList();
+      })
+  }
   save() {
-    const ticket=JSON.parse(JSON.stringify(this.ticket));
+    const ticket = JSON.parse(JSON.stringify(this.ticket));
     ticket.startTime = this.dateSet.getDate(ticket.startTime);
     ticket.endTime = this.dateSet.getDate(ticket.endTime);
 
     if (this.ticket.id) {
-      (this.ticketService as any).update({data:ticket})
+      (this.ticketService as any).update({data: ticket})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
-            this.router.navigate(['/admin/product/ticket']);
+            this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: this.ticket.id}});
+            this.saveProduct();
           } else {
             console.log(response);
           }
         });
+
+
     } else {
 
       (this.ticketService as any).add({data: ticket})
         .then(response => {
           const rep = (response as any);
           if (rep.code === 200) {
-            this.productList.forEach(item=>{
-              if (!item.id){
-
-              }
-            });
-            this.router.navigate(['/admin/work/ticket']);
+            this.ticket = rep.data;
+            this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: this.ticket.id}});
+            this.saveProduct();
           } else {
             console.log(response);
           }
@@ -185,7 +310,7 @@ export class TicketAddComponent implements OnInit {
 
   }
 
-  getDoorList() {
+  getDoorList(callBack) {
     (this.doorService as any).list({
       params: {
         params2: 1,
@@ -196,9 +321,14 @@ export class TicketAddComponent implements OnInit {
         const rep = (response as any);
         if (rep.code === 200) {
           this.doorList = response.data.data;
+          this.doorList.forEach(item => {
+            this.doorListObj[item.id] = item;
+          })
+
         } else {
           console.log(response);
         }
+        callBack();
       });
   }
 
@@ -218,12 +348,17 @@ export class TicketAddComponent implements OnInit {
             }
           });
           this.gxList = response.data.data;
+          this.gxList.forEach(item=>{
+            this.gxListObj[item.id]=item;
+          })
+          this.doorChange();
         } else {
           console.log(response);
         }
       });
   }
-  getColorList() {
+
+  getColorList(callBack) {
     (this.colorService as any).list({
       params: {
         params2: 1,
@@ -234,12 +369,17 @@ export class TicketAddComponent implements OnInit {
         const rep = (response as any);
         if (rep.code === 200) {
           this.colorList = response.data.data;
+          this.colorList.forEach(item=>{
+            this.colorListObj[item.id]=item;
+          })
         } else {
           console.log(response);
         }
+        callBack();
       });
   }
-  getLineList() {
+
+  getLineList(callBack) {
     (this.lineService as any).list({
       params: {
         params2: 1,
@@ -250,20 +390,36 @@ export class TicketAddComponent implements OnInit {
         const rep = (response as any);
         if (rep.code === 200) {
           this.lineList = response.data.data;
+          this.lineList.forEach(item=>{
+            this.lineListObj[item.id]=item;
+          })
         } else {
           console.log(response);
         }
+        callBack();
       });
   }
 
   // 添加购买产品
   addDoor() {
-    this.productList.push(this.emptyDoor);
+    this.productList.push(JSON.parse(JSON.stringify(this.emptyDoor)));
+    this.doorChange();
   }
 
   // 删除购买产品
-  delDoor(i) {
-    this.productList.splice(i, 1);
+  delDoor(item,i) {
+
+    if(item.id){
+      this.productService['del']({
+        params:{id:item.id}
+      })
+        .then(rep => {
+          this.productList.splice(i, 1);
+        })
+    }else{
+      this.productList.splice(i, 1);
+    }
+    this.doorChange();
   }
 
 }

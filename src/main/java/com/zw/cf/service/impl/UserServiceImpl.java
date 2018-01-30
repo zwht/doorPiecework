@@ -150,6 +150,38 @@ public class UserServiceImpl implements UserService {
             return response.failure(400, "未知错误！");
         }
     }
+    public Response update(User user) {
+        Response response = new Response();
+        try {
+            UserExample userExample = new UserExample();
+            UserExample.Criteria criteria = userExample.createCriteria();
+            criteria.andNameEqualTo(user.getName());
+            criteria.andIdNotEqualTo(user.getId());
+            //使用用户名查询是否有相同用户名
+            List<User> corporations = userMapper.selectByExample(userExample);
+            if (corporations.size() == 0) {
+                ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                Validator validator = factory.getValidator();
+                Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
+
+                if (constraintViolations.size() != 0) {
+                    return response.validation(constraintViolations);
+                } else {
+                    UserExample example = new UserExample();
+                    UserExample.Criteria criteria1 = example.createCriteria();
+                    criteria1.andIdEqualTo(user.getId());
+                    userMapper.updateByExampleSelective(user, example);
+                    //corporationMapper.insert(corporation);
+                    return response.success("修改成功");
+                }
+
+            } else {
+                return response.failure(400, "名字重复！");
+            }
+        } catch (Exception e) {
+            return response.failure(400, "未知错误！");
+        }
+    }
     public Response del(String id) {
         Response response = new Response();
         try {

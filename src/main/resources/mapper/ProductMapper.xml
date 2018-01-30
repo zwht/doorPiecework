@@ -4,17 +4,17 @@
   <resultMap id="BaseResultMap" type="com.zw.cf.model.Product">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="doorId" jdbcType="VARCHAR" property="doorid" />
+    <result column="door_id" jdbcType="VARCHAR" property="doorId" />
     <result column="process_ids" jdbcType="VARCHAR" property="processIds" />
     <result column="img" jdbcType="VARCHAR" property="img" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
     <result column="cover_width" jdbcType="INTEGER" property="coverWidth" />
     <result column="cover_height" jdbcType="INTEGER" property="coverHeight" />
     <result column="cover_depth" jdbcType="INTEGER" property="coverDepth" />
-    <result column="widht" jdbcType="INTEGER" property="widht" />
+    <result column="width" jdbcType="INTEGER" property="width" />
     <result column="height" jdbcType="INTEGER" property="height" />
     <result column="lb_width" jdbcType="INTEGER" property="lbWidth" />
     <result column="lb_height" jdbcType="INTEGER" property="lbHeight" />
@@ -25,7 +25,6 @@
     <result column="line_sum" jdbcType="INTEGER" property="lineSum" />
     <result column="productcol" jdbcType="VARCHAR" property="productcol" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="is_module" jdbcType="BIT" property="isModule" />
     <result column="module_id" jdbcType="VARCHAR" property="moduleId" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="lb_sum" jdbcType="INTEGER" property="lbSum" />
@@ -93,10 +92,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, doorId, process_ids, img, describe, start_time, end_time, corporation_id, 
-    cover_width, cover_height, cover_depth, widht, height, lb_width, lb_height, db_width, 
-    db_height, color_id, line_id, line_sum, productcol, type, is_module, module_id, state, 
-    lb_sum, db_sum, sum, line_length, ticket_id
+    id, name, door_id, process_ids, img, mark, start_time, end_time, corporation_id, 
+    cover_width, cover_height, cover_depth, width, height, lb_width, lb_height, db_width, 
+    db_height, color_id, line_id, line_sum, productcol, type, module_id, state, lb_sum, 
+    db_sum, sum, line_length, ticket_id
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.ProductExample" resultMap="BaseResultMap">
     select
@@ -129,28 +128,28 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Product">
-    insert into product (id, name, doorId, 
-      process_ids, img, describe, 
+    insert into product (id, name, door_id, 
+      process_ids, img, mark, 
       start_time, end_time, corporation_id, 
       cover_width, cover_height, cover_depth, 
-      widht, height, lb_width, 
+      width, height, lb_width, 
       lb_height, db_width, db_height, 
       color_id, line_id, line_sum, 
-      productcol, type, is_module, 
-      module_id, state, lb_sum, 
-      db_sum, sum, line_length, 
-      ticket_id)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{doorid,jdbcType=VARCHAR}, 
-      #{processIds,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      productcol, type, module_id, 
+      state, lb_sum, db_sum, 
+      sum, line_length, ticket_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{doorId,jdbcType=VARCHAR}, 
+      #{processIds,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{corporationId,jdbcType=VARCHAR}, 
       #{coverWidth,jdbcType=INTEGER}, #{coverHeight,jdbcType=INTEGER}, #{coverDepth,jdbcType=INTEGER}, 
-      #{widht,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{lbWidth,jdbcType=INTEGER}, 
+      #{width,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{lbWidth,jdbcType=INTEGER}, 
       #{lbHeight,jdbcType=INTEGER}, #{dbWidth,jdbcType=INTEGER}, #{dbHeight,jdbcType=INTEGER}, 
       #{colorId,jdbcType=VARCHAR}, #{lineId,jdbcType=VARCHAR}, #{lineSum,jdbcType=INTEGER}, 
-      #{productcol,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{isModule,jdbcType=BIT}, 
-      #{moduleId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{lbSum,jdbcType=INTEGER}, 
-      #{dbSum,jdbcType=INTEGER}, #{sum,jdbcType=INTEGER}, #{lineLength,jdbcType=INTEGER}, 
-      #{ticketId,jdbcType=VARCHAR})
+      #{productcol,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{moduleId,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{lbSum,jdbcType=INTEGER}, #{dbSum,jdbcType=INTEGER}, 
+      #{sum,jdbcType=INTEGER}, #{lineLength,jdbcType=INTEGER}, #{ticketId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Product">
     insert into product
@@ -161,8 +160,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="doorid != null">
-        doorId,
+      <if test="doorId != null">
+        door_id,
       </if>
       <if test="processIds != null">
         process_ids,
@@ -170,8 +169,8 @@
       <if test="img != null">
         img,
       </if>
-      <if test="describe != null">
-        describe,
+      <if test="mark != null">
+        mark,
       </if>
       <if test="startTime != null">
         start_time,
@@ -191,8 +190,8 @@
       <if test="coverDepth != null">
         cover_depth,
       </if>
-      <if test="widht != null">
-        widht,
+      <if test="width != null">
+        width,
       </if>
       <if test="height != null">
         height,
@@ -224,9 +223,6 @@
       <if test="type != null">
         type,
       </if>
-      <if test="isModule != null">
-        is_module,
-      </if>
       <if test="moduleId != null">
         module_id,
       </if>
@@ -256,8 +252,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="doorid != null">
-        #{doorid,jdbcType=VARCHAR},
+      <if test="doorId != null">
+        #{doorId,jdbcType=VARCHAR},
       </if>
       <if test="processIds != null">
         #{processIds,jdbcType=VARCHAR},
@@ -265,8 +261,8 @@
       <if test="img != null">
         #{img,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
@@ -286,8 +282,8 @@
       <if test="coverDepth != null">
         #{coverDepth,jdbcType=INTEGER},
       </if>
-      <if test="widht != null">
-        #{widht,jdbcType=INTEGER},
+      <if test="width != null">
+        #{width,jdbcType=INTEGER},
       </if>
       <if test="height != null">
         #{height,jdbcType=INTEGER},
@@ -318,9 +314,6 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
-      </if>
-      <if test="isModule != null">
-        #{isModule,jdbcType=BIT},
       </if>
       <if test="moduleId != null">
         #{moduleId,jdbcType=VARCHAR},
@@ -360,8 +353,8 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.doorid != null">
-        doorId = #{record.doorid,jdbcType=VARCHAR},
+      <if test="record.doorId != null">
+        door_id = #{record.doorId,jdbcType=VARCHAR},
       </if>
       <if test="record.processIds != null">
         process_ids = #{record.processIds,jdbcType=VARCHAR},
@@ -369,8 +362,8 @@
       <if test="record.img != null">
         img = #{record.img,jdbcType=VARCHAR},
       </if>
-      <if test="record.describe != null">
-        describe = #{record.describe,jdbcType=VARCHAR},
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
       </if>
       <if test="record.startTime != null">
         start_time = #{record.startTime,jdbcType=TIMESTAMP},
@@ -390,8 +383,8 @@
       <if test="record.coverDepth != null">
         cover_depth = #{record.coverDepth,jdbcType=INTEGER},
       </if>
-      <if test="record.widht != null">
-        widht = #{record.widht,jdbcType=INTEGER},
+      <if test="record.width != null">
+        width = #{record.width,jdbcType=INTEGER},
       </if>
       <if test="record.height != null">
         height = #{record.height,jdbcType=INTEGER},
@@ -423,9 +416,6 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.isModule != null">
-        is_module = #{record.isModule,jdbcType=BIT},
-      </if>
       <if test="record.moduleId != null">
         module_id = #{record.moduleId,jdbcType=VARCHAR},
       </if>
@@ -456,17 +446,17 @@
     update product
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      doorId = #{record.doorid,jdbcType=VARCHAR},
+      door_id = #{record.doorId,jdbcType=VARCHAR},
       process_ids = #{record.processIds,jdbcType=VARCHAR},
       img = #{record.img,jdbcType=VARCHAR},
-      describe = #{record.describe,jdbcType=VARCHAR},
+      mark = #{record.mark,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
       corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       cover_width = #{record.coverWidth,jdbcType=INTEGER},
       cover_height = #{record.coverHeight,jdbcType=INTEGER},
       cover_depth = #{record.coverDepth,jdbcType=INTEGER},
-      widht = #{record.widht,jdbcType=INTEGER},
+      width = #{record.width,jdbcType=INTEGER},
       height = #{record.height,jdbcType=INTEGER},
       lb_width = #{record.lbWidth,jdbcType=INTEGER},
       lb_height = #{record.lbHeight,jdbcType=INTEGER},
@@ -477,7 +467,6 @@
       line_sum = #{record.lineSum,jdbcType=INTEGER},
       productcol = #{record.productcol,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
-      is_module = #{record.isModule,jdbcType=BIT},
       module_id = #{record.moduleId,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
       lb_sum = #{record.lbSum,jdbcType=INTEGER},
@@ -495,8 +484,8 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="doorid != null">
-        doorId = #{doorid,jdbcType=VARCHAR},
+      <if test="doorId != null">
+        door_id = #{doorId,jdbcType=VARCHAR},
       </if>
       <if test="processIds != null">
         process_ids = #{processIds,jdbcType=VARCHAR},
@@ -504,8 +493,8 @@
       <if test="img != null">
         img = #{img,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        describe = #{describe,jdbcType=VARCHAR},
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -525,8 +514,8 @@
       <if test="coverDepth != null">
         cover_depth = #{coverDepth,jdbcType=INTEGER},
       </if>
-      <if test="widht != null">
-        widht = #{widht,jdbcType=INTEGER},
+      <if test="width != null">
+        width = #{width,jdbcType=INTEGER},
       </if>
       <if test="height != null">
         height = #{height,jdbcType=INTEGER},
@@ -558,9 +547,6 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="isModule != null">
-        is_module = #{isModule,jdbcType=BIT},
-      </if>
       <if test="moduleId != null">
         module_id = #{moduleId,jdbcType=VARCHAR},
       </if>
@@ -588,17 +574,17 @@
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.Product">
     update product
     set name = #{name,jdbcType=VARCHAR},
-      doorId = #{doorid,jdbcType=VARCHAR},
+      door_id = #{doorId,jdbcType=VARCHAR},
       process_ids = #{processIds,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       corporation_id = #{corporationId,jdbcType=VARCHAR},
       cover_width = #{coverWidth,jdbcType=INTEGER},
       cover_height = #{coverHeight,jdbcType=INTEGER},
       cover_depth = #{coverDepth,jdbcType=INTEGER},
-      widht = #{widht,jdbcType=INTEGER},
+      width = #{width,jdbcType=INTEGER},
       height = #{height,jdbcType=INTEGER},
       lb_width = #{lbWidth,jdbcType=INTEGER},
       lb_height = #{lbHeight,jdbcType=INTEGER},
@@ -609,7 +595,6 @@
       line_sum = #{lineSum,jdbcType=INTEGER},
       productcol = #{productcol,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
-      is_module = #{isModule,jdbcType=BIT},
       module_id = #{moduleId,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       lb_sum = #{lbSum,jdbcType=INTEGER},

@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.Product;
 import com.zw.cf.model.User;
 import com.zw.cf.service.ProductService;
+import com.zw.cf.vo.AddListProductVo;
 import com.zw.cf.vo.ProductListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -47,6 +48,28 @@ public class ProductCtrl {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/addList", method = RequestMethod.POST)
+    @ApiOperation(value = "添加", httpMethod = "POST", notes = "添加")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "添加")})
+    public Response addList(
+            @ApiParam(required = true, value = "product", name = "product") @RequestBody AddListProductVo addListProductVo,
+            HttpServletRequest request
+    ) {
+        String token = request.getHeader("Authorization");
+        if (token == null) {
+            token = request.getParameter("Authorization");
+        }
+        User admin = JwtUtils.unsign(token, User.class);
+
+        List<Product> products= addListProductVo.getProducts();
+        for(Product product:products){
+            product.setCorporationId(admin.getCorporationId());
+            product.setTicketId(addListProductVo.getTicketId());
+        }
+        return productService.addList(products);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/list/{pageNum}/{pageSize}", method = RequestMethod.POST)
     @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
     public Response<PageObj<List<User>>> List(
@@ -65,7 +88,6 @@ public class ProductCtrl {
     ) {
         return productService.getById(id);
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/update", method = RequestMethod.POST)

@@ -1,6 +1,7 @@
 package com.zw.cf.controller;
 
 import com.wordnik.swagger.annotations.*;
+import com.zw.cf.model.Color;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
 import com.zw.cf.service.UtilsService;
@@ -98,6 +99,16 @@ public class UserCtrl {
             @ApiParam(required = true, value = "用户Id", name = "id") @RequestParam String id
     ) {
         return userService.getUserById(id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
+    public Response update(
+            @ApiParam(required = true, value = "color", name = "color") @RequestBody User user
+    ) {
+        return userService.update(user);
     }
 
     @ResponseBody
