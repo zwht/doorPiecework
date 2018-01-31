@@ -7,13 +7,14 @@ import {DoorService} from '../../common/restService/DoorService';
 import {ColorService} from '../../common/restService/ColorService';
 import {LineService} from '../../common/restService/LineService';
 import {ProductService} from '../../common/restService/ProductService';
+import {ProcessService} from '../../common/restService/ProcessService';
 import {DateSet} from '../../common/service/DateSet';
 
 @Component({
   selector: 'app-ticket-add',
   templateUrl: './ticket-add.component.html',
   styleUrls: ['./ticket-add.component.less'],
-  providers: [ProductService, TicketService, UserService, GxService, DoorService, DateSet, ColorService, LineService]
+  providers: [ProcessService,ProductService, TicketService, UserService, GxService, DoorService, DateSet, ColorService, LineService]
 })
 export class TicketAddComponent implements OnInit {
   colorList = [];
@@ -40,40 +41,40 @@ export class TicketAddComponent implements OnInit {
     pay: null
   };
   emptyProduct = {
-    id:null,
-    name:null,
-    doorId:null,
-    doorImg:null,
-    processIds:null,
-    img:null,
-    mark:null,
-    startTime:null,
-    endTime:null,
-    corporationId:null,
-    coverWidth:null,
-    coverHeight:null,
-    coverDepth:null,
-    widht:null,
-    height:null,
-    lbWidth:null,
-    lbHeight:null,
-    dbWidth:null,
-    dbHeight:null,
-    colorId:null,
-    colorImg:null,
-    lineId:null,
-    lineImg:null,
-    lineSum:null,
-    productcol:null,
-    type:null,
-    isModule:null,
-    moduleId:null,
-    state:null,
-    lbSum:null,
-    dbSum:null,
-    sum:null,
-    lineLength:null,
-    ticketId:null
+    id: null,
+    name: null,
+    doorId: null,
+    doorImg: null,
+    processIds: null,
+    img: null,
+    mark: null,
+    startTime: null,
+    endTime: null,
+    corporationId: null,
+    coverWidth: null,
+    coverHeight: null,
+    coverDepth: null,
+    widht: null,
+    height: null,
+    lbWidth: null,
+    lbHeight: null,
+    dbWidth: null,
+    dbHeight: null,
+    colorId: null,
+    colorImg: null,
+    lineId: null,
+    lineImg: null,
+    lineSum: null,
+    productcol: null,
+    type: null,
+    isModule: null,
+    moduleId: null,
+    state: null,
+    lbSum: null,
+    dbSum: null,
+    sum: null,
+    lineLength: null,
+    ticketId: null
   };
   gxList = [];
   gxListObj = {};
@@ -115,7 +116,7 @@ export class TicketAddComponent implements OnInit {
       id: 2
     }
   ];
-  getDataKey=0;
+  getDataKey = 0;
 
   constructor(private ticketService: TicketService,
               private gxService: GxService,
@@ -123,6 +124,7 @@ export class TicketAddComponent implements OnInit {
               private doorService: DoorService,
               private lineService: LineService,
               private productService: ProductService,
+              private processService: ProcessService,
               private router: Router,
               private dateSet: DateSet,
               private userService: UserService,
@@ -130,30 +132,38 @@ export class TicketAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    const thant=this;
-    function init(){
+    const thant = this;
+
+    function init() {
       thant.getDataKey++;
-      if(thant.getDataKey==3){
+      if (thant.getDataKey == 4) {
         thant.activatedRoute.queryParams.subscribe((params: Params) => {
           thant.ticket.id = params['id'];
           if (thant.ticket.id) {
             thant.getById();
             thant.getProductList();
+            thant.getProcessList();
           }
         });
       }
     }
-    this.getUserList();
+
+    this.getUserList(init);
     this.getDoorList(init);
     this.getColorList(init);
     this.getLineList(init);
 
   }
 
-  doorChange(e,it) {
-    if(e&&it) it.doorImg=this.doorListObj[e].img;
+  doorChange(e, it) {
+    if (e && it) it.doorImg = this.doorListObj[e].img;
+    this.calculate();
+  }
+
+  // 计算工序价格
+  calculate() {
     this.gxList.forEach(item => {
-      item.values = 0;
+      item.price = 0;
     });
     this.stat = {
       doors: 0,
@@ -162,20 +172,19 @@ export class TicketAddComponent implements OnInit {
     };
     setTimeout(() => {
       this.productList.forEach(item => {
-        if (!item.doorId||item.doorId=='0') return;
+        if (!item.doorId || item.doorId == '0') return;
         item.doorObj = this.doorListObj[item.doorId];
         this.stat.doors += 1;
         this.stat.doorT += 1;
         this.stat.lines += item.lineSum;
         item.doorObj.gx.forEach(fuck => {
           this.gxList.forEach(fuck1 => {
-            if (fuck.id == fuck1.id) fuck1.values += fuck.price;
+            if (fuck.id == fuck1.id) fuck1.price += fuck.price;
           });
 
         })
       });
     }, 100);
-
 
   }
 
@@ -186,17 +195,19 @@ export class TicketAddComponent implements OnInit {
       }
     });
   }
-  colorChange(e,item){
-    item.colorImg=this.colorListObj[e].img;
+
+  colorChange(e, item) {
+    item.colorImg = this.colorListObj[e].img;
   }
-  lineChange(e,item){
-    item.lineImg=this.lineListObj[e].img;
+
+  lineChange(e, item) {
+    item.lineImg = this.lineListObj[e].img;
   }
 
   // 复制添加
   copyAdd(item) {
     this.productList.push(JSON.parse(JSON.stringify(item)));
-    this.doorChange();
+    this.calculate();
   }
 
   getById() {
@@ -213,28 +224,50 @@ export class TicketAddComponent implements OnInit {
       });
 
   }
-  getProductList(){
+
+  getProductList() {
     this.productService['list']({
       params: {
         params2: 1,
         params3: 100
       },
-      data: {ticketId:this.ticket.id}
+      data: {ticketId: this.ticket.id}
     })
       .then(rep => {
-        if(rep.data.data&&rep.data.data.length){
-          rep.data.data.forEach(item=>{
-            if(item.doorId&&item.doorId!='0')item.doorImg=this.doorListObj[item.doorId].img;
-            if(item.colorId&&item.colorId!='0')item.colorImg=this.colorListObj[item.colorId].img;
-            if(item.lineId&&item.lineId!='0')item.lineImg=this.lineListObj[item.lineId].img;
+        if (rep.data.data && rep.data.data.length) {
+          rep.data.data.forEach(item => {
+            if (item.doorId && item.doorId != '0') item.doorImg = this.doorListObj[item.doorId].img;
+            if (item.colorId && item.colorId != '0') item.colorImg = this.colorListObj[item.colorId].img;
+            if (item.lineId && item.lineId != '0') item.lineImg = this.lineListObj[item.lineId].img;
           });
-          this.productList=rep.data.data;
+          this.productList = rep.data.data;
         }
-        this.doorChange();
+      })
+  }
+  getProcessList(){
+    this.processService['list']({
+      params: {
+        params2: 1,
+        params3: 100
+      },
+      data: {ticketId: this.ticket.id}
+    })
+      .then(rep => {
+        if (rep.data.data && rep.data.data.length) {
+          rep.data.data.forEach(item => {
+            this.gxList.forEach(obj=>{
+              if(item.gxId==obj.id){
+                obj.processId=item.id;
+                obj.price=item.price;
+                obj.userId=item.userId;
+              }
+            })
+           });
+        }
       })
   }
 
-  getUserList() {
+  getUserList(callBack) {
     (this.userService as any).list({
       params: {
         params2: 1,
@@ -255,7 +288,7 @@ export class TicketAddComponent implements OnInit {
               }
             }
           });
-          this.getGxList();
+          this.getGxList(callBack);
         } else {
           console.log(response);
         }
@@ -263,8 +296,8 @@ export class TicketAddComponent implements OnInit {
   }
 
 
-  saveProduct(){
-    const that=this;
+  saveProduct() {
+    const that = this;
     this.productService['addList']({
       data: {
         ticketId: this.ticket.id,
@@ -275,6 +308,29 @@ export class TicketAddComponent implements OnInit {
         that.getProductList();
       })
   }
+  saveProcess() {
+    let arr=[];
+    this.gxList.forEach(item=>{
+      arr.push({
+        id:item.processId||null,
+        gxId:item.id,
+        userId:item.userId,
+        price:item.price
+      })
+    });
+
+    const that = this;
+    this.processService['addList']({
+      data: {
+        ticketId: this.ticket.id,
+        processs: arr
+      }
+    })
+      .then(rep => {
+        that.getProcessList();
+      })
+  }
+
   save() {
     const ticket = JSON.parse(JSON.stringify(this.ticket));
     ticket.startTime = this.dateSet.getDate(ticket.startTime);
@@ -287,6 +343,7 @@ export class TicketAddComponent implements OnInit {
           if (rep.code === 200) {
             this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: this.ticket.id}});
             this.saveProduct();
+            this.saveProcess();
           } else {
             console.log(response);
           }
@@ -302,6 +359,7 @@ export class TicketAddComponent implements OnInit {
             this.ticket = rep.data;
             this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: this.ticket.id}});
             this.saveProduct();
+            this.saveProcess();
           } else {
             console.log(response);
           }
@@ -332,7 +390,7 @@ export class TicketAddComponent implements OnInit {
       });
   }
 
-  getGxList() {
+  getGxList(callBack) {
     (this.gxService as any).list({
       params: {
         params2: 1,
@@ -340,6 +398,7 @@ export class TicketAddComponent implements OnInit {
       }
     })
       .then(response => {
+        callBack();
         const rep = (response as any);
         if (rep.code === 200) {
           response.data.data.forEach(item => {
@@ -348,10 +407,11 @@ export class TicketAddComponent implements OnInit {
             }
           });
           this.gxList = response.data.data;
-          this.gxList.forEach(item=>{
-            this.gxListObj[item.id]=item;
-          })
-          this.doorChange();
+          this.gxList.forEach(item => {
+            item.price=0;
+            this.gxListObj[item.id] = item;
+          });
+          this.calculate();
         } else {
           console.log(response);
         }
@@ -369,8 +429,8 @@ export class TicketAddComponent implements OnInit {
         const rep = (response as any);
         if (rep.code === 200) {
           this.colorList = response.data.data;
-          this.colorList.forEach(item=>{
-            this.colorListObj[item.id]=item;
+          this.colorList.forEach(item => {
+            this.colorListObj[item.id] = item;
           })
         } else {
           console.log(response);
@@ -390,8 +450,8 @@ export class TicketAddComponent implements OnInit {
         const rep = (response as any);
         if (rep.code === 200) {
           this.lineList = response.data.data;
-          this.lineList.forEach(item=>{
-            this.lineListObj[item.id]=item;
+          this.lineList.forEach(item => {
+            this.lineListObj[item.id] = item;
           })
         } else {
           console.log(response);
@@ -403,23 +463,23 @@ export class TicketAddComponent implements OnInit {
   // 添加购买产品
   addDoor() {
     this.productList.push(JSON.parse(JSON.stringify(this.emptyDoor)));
-    this.doorChange();
+    this.calculate();
   }
 
   // 删除购买产品
-  delDoor(item,i) {
+  delDoor(item, i) {
 
-    if(item.id){
+    if (item.id) {
       this.productService['del']({
-        params:{id:item.id}
+        params: {id: item.id}
       })
         .then(rep => {
           this.productList.splice(i, 1);
         })
-    }else{
+    } else {
       this.productList.splice(i, 1);
     }
-    this.doorChange();
+    this.calculate();
   }
 
 }

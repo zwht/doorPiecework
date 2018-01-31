@@ -58,16 +58,55 @@ public class ProcessServiceImpl implements ProcessService {
         }
     }
 
+    public Response addList(List<Process> list) {
+        Response response = new Response();
+        try {
+            Date date = new Date();
+            for (int i = 0; i < list.size(); i++) {
+                Process process=list.get(i);
+                if(process.getId()==null||process.getId().equals("")){
+                    process.setId(date.getTime() +i+ "");
+                    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                    Validator validator = factory.getValidator();
+                    Set<ConstraintViolation<Process>> constraintViolations = validator.validate(process);
+                    if (constraintViolations.size() != 0) {
+                        return response.validation(constraintViolations);
+                    } else {
+                        processMapper.insert(process);
+                    }
+                }else {
+                    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                    Validator validator = factory.getValidator();
+                    Set<ConstraintViolation<Process>> constraintViolations = validator.validate(process);
+                    if (constraintViolations.size() != 0) {
+                        return response.validation(constraintViolations);
+                    } else {
+                        ProcessExample example = new ProcessExample();
+                        ProcessExample.Criteria criteria1 = example.createCriteria();
+                        criteria1.andIdEqualTo(process.getId());
+                        processMapper.updateByExampleSelective(process, example);
+                    }
+                }
+
+
+            }
+            return response.success(list);
+        } catch (Exception e) {
+            return response.failure(400, "未知错误！");
+        }
+    }
+
+
     public Response list(Integer pageNum, Integer pageSize, ProcessListFind processListFind) {
         Response response = new Response();
         PageObj pageObj = new PageObj();
         //条件查询3句话
         ProcessExample processExample = new ProcessExample();
         ProcessExample.Criteria criteria = processExample.createCriteria();
-        String name = processListFind.getName();
-        if (name == null || name.equals("")) {
+        String ticketId = processListFind.getTicketId();
+        if (ticketId == null || ticketId.equals("")) {
         } else {
-            //criteria.andNameEqualTo(name);
+            criteria.andTicketIdEqualTo(ticketId);
         }
 
         try {

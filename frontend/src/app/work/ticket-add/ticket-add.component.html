@@ -171,8 +171,11 @@
     </table>
     <ul class="gxBox clear">
       <li *ngFor="let item of gxList let i=index">
-        <div>{{item.name}}
-          <span *ngIf="item.values" style="color: #c00;">{{item.values}}(元)</span>
+        <div class="had">
+          <b>{{item.name}}</b>
+          <input type="number"
+                 [(ngModel)]="item.price" placeholder="">
+          <span>(元)</span>
         </div>
         <div>
           <el-select size="mini" [(model)]="item.userId" placeholder="请选择">

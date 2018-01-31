@@ -64,10 +64,10 @@ public class ProductServiceImpl implements ProductService {
         Response response = new Response();
         try {
             Date date = new Date();
-            for (Product product : list) {
-
-                if(product.getId()==null||product.getId().equals("")){
-                    product.setId(date.getTime() + "");
+            for (int i = 0; i < list.size(); i++) {
+                Product product = list.get(i);
+                if (product.getId() == null || product.getId().equals("")) {
+                    product.setId(date.getTime() + i + "");
                     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                     Validator validator = factory.getValidator();
                     Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
@@ -76,7 +76,7 @@ public class ProductServiceImpl implements ProductService {
                     } else {
                         productMapper.insert(product);
                     }
-                }else {
+                } else {
                     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                     Validator validator = factory.getValidator();
                     Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
@@ -104,11 +104,6 @@ public class ProductServiceImpl implements ProductService {
         //条件查询3句话
         ProductExample productExample = new ProductExample();
         ProductExample.Criteria criteria = productExample.createCriteria();
-        String name = productListFind.getName();
-        if (name == null || name.equals("")) {
-        } else {
-            criteria.andNameEqualTo(name);
-        }
         String ticketId = productListFind.getTicketId();
         if (ticketId == null || ticketId.equals("")) {
         } else {

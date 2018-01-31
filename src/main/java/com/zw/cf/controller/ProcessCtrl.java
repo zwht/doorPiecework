@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.Process;
 import com.zw.cf.model.User;
 import com.zw.cf.service.ProcessService;
+import com.zw.cf.vo.AddListProcessVo;
 import com.zw.cf.vo.ProcessListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -44,6 +45,29 @@ public class ProcessCtrl {
         User admin = JwtUtils.unsign(token, User.class);
         process.setCorporationId(admin.getCorporationId());
         return processService.add(process);
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/addList", method = RequestMethod.POST)
+    @ApiOperation(value = "添加", httpMethod = "POST", notes = "添加")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "添加")})
+    public Response addList(
+            @ApiParam(required = true, value = "process", name = "process") @RequestBody AddListProcessVo addListProcessVo,
+            HttpServletRequest request
+    ) {
+        String token = request.getHeader("Authorization");
+        if (token == null) {
+            token = request.getParameter("Authorization");
+        }
+        User admin = JwtUtils.unsign(token, User.class);
+
+        List<Process> processs= addListProcessVo.getProcesss();
+        for(Process process:processs){
+            process.setCorporationId(admin.getCorporationId());
+            process.setTicketId(addListProcessVo.getTicketId());
+        }
+        return processService.addList(processs);
     }
 
     @ResponseBody
