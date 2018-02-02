@@ -47,7 +47,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
         log.info("==============执行顺序: 1、preHandle================");
 
         String requestUri = request.getRequestURI();
-        if(requestUri.equals("/cfmy/user/login")) return true;
+        if(requestUri.indexOf("/cfmy/user/login")!=-1) return true;
         String token = request.getHeader("Authorization");
         if(token==null){
             token = request.getParameter("Authorization");
