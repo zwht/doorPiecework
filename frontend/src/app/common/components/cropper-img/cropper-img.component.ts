@@ -12,6 +12,7 @@ import {FileService} from '../../../common/restService/FileService';
 export class CropperImgComponent implements OnInit {
   private boxStyle;
   private cpImg;
+  cpImg1 =this.cpImg;
   loading = false;
   dialog = false;
   cropper = {};

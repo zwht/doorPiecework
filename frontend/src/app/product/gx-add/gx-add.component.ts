@@ -9,7 +9,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class GxAddComponent implements OnInit {
 
-
+  title:null;
   gx = {
     id: null,
     name: null,

@@ -9,7 +9,7 @@ import {GxService} from '../../common/restService/GxService';
   providers: [DoorService, GxService]
 })
 export class DoorAddComponent implements OnInit {
-
+  title:null;
   gxList = [];
   door = {
     id: null,
