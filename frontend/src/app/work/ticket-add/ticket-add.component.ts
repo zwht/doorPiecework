@@ -262,8 +262,7 @@ export class TicketAddComponent implements OnInit {
                 obj.price=item.price;
                 obj.userId=item.userId;
               }
-            })
-            debugger
+            });
            });
         }
       })
@@ -418,7 +417,7 @@ export class TicketAddComponent implements OnInit {
             item.price=0;
             this.gxListObj[item.id] = item;
           });
-          this.calculate();
+          if(!this.ticket.id) this.calculate();
         } else {
           console.log(response);
         }

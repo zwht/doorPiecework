@@ -10,9 +10,11 @@ import {DateSet} from '../../common/service/DateSet';
 })
 export class SalaryComponent implements OnInit {
   search={
-    startTime:(new Date())-86400000*30,
-    endTime:(new Date())-1,
+    startTime:(new Date()).getTime()-86400000*30,
+    endTime:(new Date()).getTime(),
   };
+  startTime=this.search.startTime;
+  endTime=this.search.endTime;
   list = [];
   total = 0;
   pageSize=20;
@@ -32,14 +34,16 @@ export class SalaryComponent implements OnInit {
 
   getList() {
     this.loading = true;
-    (this.processService as any).list({
+    this.startTime=this.dateSet.getDate1(this.search.startTime);
+    this.endTime=this.dateSet.getDate1(this.search.endTime)+86400000;
+    (this.processService as any).salary({
       params: {
         params2: this.pageNum,
         params3: this.pageSize
       },
       data:{
-        startTime:this.dateSet.getDate1(this.search.startTime),
-        endTime:this.dateSet.getDate1(this.search.endTime)+86400000
+        startTime:this.startTime,
+        endTime:this.endTime
       }
     })
       .then(response => {

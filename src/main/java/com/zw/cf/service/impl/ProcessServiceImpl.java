@@ -9,6 +9,7 @@ import com.zw.cf.model.Process;
 import com.zw.cf.service.ProcessService;
 import com.zw.cf.vo.ProcessListFind;
 import com.zw.cf.vo.ProcessVo;
+import com.zw.cf.vo.SalaryListFind;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,9 +102,30 @@ public class ProcessServiceImpl implements ProcessService {
 
     public Response list(Integer pageNum, Integer pageSize, ProcessListFind processListFind) {
         Response response = new Response();
+        PageObj pageObj = new PageObj();
+        //条件查询3句话
+        ProcessExample processExample = new ProcessExample();
+        ProcessExample.Criteria criteria = processExample.createCriteria();
+        String ticketId = processListFind.getTicketId();
+        if (ticketId == null || ticketId.equals("")) {
+        } else {
+            criteria.andTicketIdEqualTo(ticketId);
+        }
+        try {
+            Page page = PageHelper.startPage(pageNum, pageSize);
+            List list = processMapper.selectByExample(processExample);
+            long count = page.getTotal();
+            return response.success(pageObj.init(pageNum, pageSize, count, list));
+        } catch (Exception e) {
+            return response.failure(400, e.getMessage());
+        }
+    }
 
-        Date startDate = new Date(processListFind.getStartTime());
-        Date endDate = new Date(processListFind.getEndTime());
+    public Response salary(Integer pageNum, Integer pageSize, SalaryListFind salaryListFind) {
+        Response response = new Response();
+
+        Date startDate = new Date(salaryListFind.getStartTime());
+        Date endDate = new Date(salaryListFind.getEndTime());
         //条件查询3句话
         ProcessExample processExample = new ProcessExample();
         ProcessExample.Criteria criteria = processExample.createCriteria();
@@ -148,7 +170,6 @@ public class ProcessServiceImpl implements ProcessService {
             return response.failure(400, e.getMessage());
         }
     }
-
     public Response getById(String id) {
         Response response = new Response();
         try {

@@ -2,7 +2,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {TicketListComponent} from './ticket-list/ticket-list.component';
 import {TicketAddComponent} from './ticket-add/ticket-add.component';
-import {DoorComponent} from './door/door.component';
 const routes: Routes = [
   {
     path: '',
@@ -10,14 +9,6 @@ const routes: Routes = [
       name: '工单管理'
     },
     children: [
-      {
-        path: 'door',
-        component: DoorComponent,
-        data: {
-          name: '门列表',
-          menu: true
-        }
-      },
       {
         path: 'ticket',
         component: TicketListComponent,
@@ -45,5 +36,5 @@ const routes: Routes = [
 
 export class WorkRoutes {
 }
-export const WorkComponents = [DoorComponent, TicketListComponent, TicketAddComponent];
+export const WorkComponents = [TicketListComponent, TicketAddComponent];
 export const WorkList = routes;

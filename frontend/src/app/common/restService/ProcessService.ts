@@ -20,6 +20,12 @@ export class ProcessService {
         params1: 'addList'
       }
     },
+    salary:{
+      method: 'post',
+      params: {
+        params1: 'salary'
+      }
+    },
     list: {
       method: 'post',
       params: {

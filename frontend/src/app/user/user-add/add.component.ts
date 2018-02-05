@@ -9,6 +9,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
   providers: [UserService, GxService]
 })
 export class AddComponent implements OnInit {
+  title='';
   gxList = [];
   user = {
     id: null,

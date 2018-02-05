@@ -6,6 +6,7 @@ import com.zw.cf.model.User;
 import com.zw.cf.service.ProcessService;
 import com.zw.cf.vo.AddListProcessVo;
 import com.zw.cf.vo.ProcessListFind;
+import com.zw.cf.vo.SalaryListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
@@ -80,6 +81,17 @@ public class ProcessCtrl {
     ) {
         return processService.list(pageNum, pageSize, processListFind);
     }
+    @ResponseBody
+    @RequestMapping(value = "/salary/{pageNum}/{pageSize}", method = RequestMethod.POST)
+    @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
+    public Response<PageObj<List<User>>> Salary(
+            @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
+            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
+            @ApiParam(required = true, value = "processListFind", name = "processListFind") @RequestBody SalaryListFind salaryListFind
+    ) {
+        return processService.salary(pageNum, pageSize, salaryListFind);
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/getById", method = RequestMethod.GET)
