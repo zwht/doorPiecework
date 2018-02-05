@@ -3,10 +3,12 @@ package com.zw.cf.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zw.cf.dao.ProcessMapper;
+import com.zw.cf.dao.UserMapper;
+import com.zw.cf.model.*;
 import com.zw.cf.model.Process;
-import com.zw.cf.model.ProcessExample;
 import com.zw.cf.service.ProcessService;
 import com.zw.cf.vo.ProcessListFind;
+import com.zw.cf.vo.ProcessVo;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by zhaowei on 2017/8/17.
@@ -27,6 +27,8 @@ import java.util.Set;
 public class ProcessServiceImpl implements ProcessService {
     @Autowired
     ProcessMapper processMapper;
+    @Autowired
+    UserMapper userMapper;
 
     public Response add(Process process) {
         Response response = new Response();
@@ -99,21 +101,49 @@ public class ProcessServiceImpl implements ProcessService {
 
     public Response list(Integer pageNum, Integer pageSize, ProcessListFind processListFind) {
         Response response = new Response();
-        PageObj pageObj = new PageObj();
+
+        Date startDate = new Date(processListFind.getStartTime());
+        Date endDate = new Date(processListFind.getEndTime());
         //条件查询3句话
         ProcessExample processExample = new ProcessExample();
         ProcessExample.Criteria criteria = processExample.createCriteria();
-        String ticketId = processListFind.getTicketId();
-        if (ticketId == null || ticketId.equals("")) {
-        } else {
-            criteria.andTicketIdEqualTo(ticketId);
+        criteria.andEndTimeBetween(startDate, endDate);
+        criteria.andStateEqualTo(2);
+        List<Process> processList = processMapper.selectByExample(processExample);
+
+        Map<String, Process> processMap = new HashMap();
+
+        for (Process process : processList) {
+            String id = process.getUserId();
+            if (processMap.containsKey(id)) {
+                Process p = processMap.get(id);
+                p.setPrice(p.getPrice()+process.getPrice());
+            }else{
+                processMap.put(id,process);
+            }
         }
 
+
         try {
+            PageObj pageObj = new PageObj();
+            UserExample userExample = new UserExample();
+            UserExample.Criteria userCriteria = userExample.createCriteria();
+            userCriteria.andRolesEqualTo("2");
             Page page = PageHelper.startPage(pageNum, pageSize);
-            List list = processMapper.selectByExample(processExample);
+            List<User> userList = userMapper.selectByExample(userExample);
             long count = page.getTotal();
-            return response.success(pageObj.init(pageNum, pageSize, count, list));
+
+            List<ProcessVo> processVos= new ArrayList<ProcessVo>();
+            for( User user: userList){
+                Gx gx = new Gx();
+                if(processMap.containsKey(user.getId())){
+                    Process process=processMap.get(user.getId());
+                    processVos.add(new ProcessVo(gx,user,process));
+                }
+            }
+
+
+            return response.success(pageObj.init(pageNum, pageSize, count, processVos));
         } catch (Exception e) {
             return response.failure(400, e.getMessage());
         }

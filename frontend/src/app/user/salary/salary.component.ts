@@ -1,21 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import {CorporationService} from '../../common/restService/CorporationService';
+import {ProcessService} from '../../common/restService/ProcessService';
 import {Router} from '@angular/router';
+import {DateSet} from '../../common/service/DateSet';
 @Component({
   selector: 'app-salary',
   templateUrl: './salary.component.html',
   styleUrls: ['./salary.component.less'],
-  providers: [CorporationService]
+  providers: [ProcessService]
 })
 export class SalaryComponent implements OnInit {
-
+  search={
+    startTime:(new Date())-86400000*30,
+    endTime:(new Date())-1,
+  };
   list = [];
   total = 0;
+  pageSize=20;
   pageNum = 1;
   loading = false;
 
-  constructor(private corporationService: CorporationService,
-              private router: Router) {
+
+  constructor(private processService: ProcessService,
+              private router: Router,
+              private dateSet: DateSet
+  ) {
   }
 
   ngOnInit() {
@@ -24,10 +32,14 @@ export class SalaryComponent implements OnInit {
 
   getList() {
     this.loading = true;
-    (this.corporationService as any).list({
+    (this.processService as any).list({
       params: {
         params2: this.pageNum,
-        params3: 10
+        params3: this.pageSize
+      },
+      data:{
+        startTime:this.dateSet.getDate1(this.search.startTime),
+        endTime:this.dateSet.getDate1(this.search.endTime)+86400000
       }
     })
       .then(response => {
@@ -44,23 +56,6 @@ export class SalaryComponent implements OnInit {
 
   add(item) {
     this.router.navigate(['/admin/user/company/add'], {queryParams: {id: item ? item.id : ''}});
-  }
-
-  updateState(item, k) {
-    (this.corporationService as any).updateState({
-      data: {
-        id: item.id,
-        state: k
-      }
-    })
-      .then(response => {
-        const rep = (response as any);
-        if (rep.code === 200) {
-          this.getList();
-        } else {
-          console.log(response);
-        }
-      });
   }
 
 

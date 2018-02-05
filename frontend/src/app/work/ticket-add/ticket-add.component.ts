@@ -263,6 +263,7 @@ export class TicketAddComponent implements OnInit {
                 obj.userId=item.userId;
               }
             })
+            debugger
            });
         }
       })

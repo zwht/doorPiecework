@@ -6,22 +6,22 @@ package com.zw.cf.vo;
 public class ProcessListFind {
 
 
-    private String name;
-    private String ticketId;
+    private long endTime;
+    private long startTime;
 
-    public String getTicketId() {
-        return ticketId;
+    public long getEndTime() {
+        return endTime;
     }
 
-    public void setTicketId(String ticketId) {
-        this.ticketId = ticketId;
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 
-    public String getName() {
-        return name;
+    public long getStartTime() {
+        return startTime;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 }
