@@ -12,7 +12,9 @@
         <th>经销商</th>
         <th>订货日期</th>
         <th>交货日期</th>
+        <th>生产完成时间</th>
         <th>交货地址</th>
+        <th>状态</th>
         <th>操作</th>
       </tr>
       <tr *ngFor="let item of list let i=index">
@@ -21,7 +23,12 @@
         <td>{{item.dealersId}}</td>
         <td>{{item.startTime| date:'yyyy年MM月dd日'}}</td>
         <td>{{item.endTime| date:'yyyy年MM月dd日'}}</td>
+        <td>{{item.overTime| date:'yyyy年MM月dd日'}}</td>
         <td>{{item.address}}</td>
+        <td class="el-tag-box">
+          <el-tag *ngIf="item.state==2" type="success">已完成</el-tag>
+          <el-tag *ngIf="item.state!=2" type="warning">生产中</el-tag>
+        </td>
         <td style="width: 180px; text-align: center;">
           <el-button (click)="del(item.id)" size="mini" type="warning" icon="delete" [plain]="true">删除</el-button>
           <el-button (click)="add(item)" size="mini" type="success" icon="edit" [plain]="true">编辑</el-button>

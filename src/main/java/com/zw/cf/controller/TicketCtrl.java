@@ -78,6 +78,16 @@ public class TicketCtrl {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/updateState", method = RequestMethod.GET)
+    @ApiOperation(value = "更新状态", httpMethod = "get", notes = "更新状态")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "更新状态")})
+    public Response updateState(
+            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
+    ) {
+        return ticketService.updateState(id);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/del", method = RequestMethod.GET)
     @ApiOperation(value = "根据id删除", httpMethod = "GET", notes = "删除")
     public Response<User> del(

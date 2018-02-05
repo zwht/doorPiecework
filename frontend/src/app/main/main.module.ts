@@ -7,7 +7,6 @@ import { ElModule } from 'element-angular';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../common/shared.module';
 
-
 import {AppComponent} from './component/app/app.component';
 import {LoginComponent} from './component/login/login.component';
 import {NotFoundComponent} from './component/not-found/not-found.component';
@@ -46,6 +45,11 @@ import {MenuComponent} from './component/menu/menu.component';
             loadChildren: 'app/product/product.module#ProductModule',
             data: {name: '产品管理', menu: true}
           },
+          /*{
+            path: 'other',
+            loadChildren: 'app/other/other.module#OtherModule',
+            data: {name: '其他', menu: true}
+          },*/
         ]
       },
       {

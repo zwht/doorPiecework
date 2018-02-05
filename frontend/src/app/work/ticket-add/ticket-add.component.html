@@ -2,8 +2,7 @@
   <div class="zwSearch">
     <div class="right">
       <el-button (click)="save()" size="mini" type="primary">保存</el-button>
-      <el-button (click)="save()" size="mini" type="primary">生产完成</el-button>
-      <el-button (click)="save()" size="mini" type="primary">确定交货</el-button>
+      <el-button (click)="toggle=true" size="mini" type="primary">生产完成</el-button>
     </div>
   </div>
   <div class="tableBox viewMain">
@@ -189,6 +188,17 @@
     </ul>
   </div>
 
-
+  <el-dialog [(visible)]="toggle" custom-class="tagBox"
+             [center]="true" [show-close]="false" [width]="'300px'">
+    <ng-template #title style="padding-top: 10px;">
+      <span class="el-icon-warning"></span>
+      <span>确定完成</span>
+    </ng-template>
+    <div>确定完成后不可修改，是否确定？</div>
+    <ng-template #footer style="padding-bottom: 10px;">
+      <el-button (click)="toggle=false" [plain]="true" type="info" size="small">取&nbsp;&nbsp;&nbsp;&nbsp;消</el-button>
+      <el-button (click)="saveState()" [plain]="true" type="success" size="small">确&nbsp;&nbsp;&nbsp;&nbsp;定</el-button>
+    </ng-template>
+  </el-dialog>
 
 </div>

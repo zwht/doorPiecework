@@ -1,11 +1,11 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
-import {CorporationListComponent} from './component/corporation-list/corporation-list.component';
-import {CorporationAddComponent} from './component/corporation-add/corporation-add.component';
-import {ListComponent} from './component/user-list/list.component';
-import {AddComponent} from './component/user-add/add.component';
-
+import {CorporationListComponent} from './corporation-list/corporation-list.component';
+import {CorporationAddComponent} from './corporation-add/corporation-add.component';
+import {ListComponent} from './user-list/list.component';
+import {AddComponent} from './user-add/add.component';
+import {SalaryComponent} from './salary/salary.component';
 export const routes: Routes = [
   {
     path: '',
@@ -42,7 +42,16 @@ export const routes: Routes = [
         data: {
           name: '添加用户'
         }
-      }
+      },
+      {
+        path: 'salary',
+        component: SalaryComponent,
+        data: {
+          name: '工资计算',
+          menu: true
+        }
+
+      },
     ]
   }
 ];
@@ -60,6 +69,7 @@ export const UserComponents = [
   CorporationListComponent,
   CorporationAddComponent,
   ListComponent,
-  AddComponent
+  AddComponent,
+  SalaryComponent
 ];
 export const UserList = routes;

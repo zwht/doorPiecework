@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../common/restService/UserService';
 import {Router} from '@angular/router';
-import {TicketService} from '../../common/restService/TicketService';
 @Component({
-  selector: 'app-ticket-list',
-  templateUrl: './ticket-list.component.html',
-  styleUrls: ['./ticket-list.component.css'],
-  providers: [TicketService]
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css'],
+  providers: [UserService]
 })
-export class TicketListComponent implements OnInit {
-  loading = false;
+export class ListComponent implements OnInit {
   list = [];
   total = 0;
   pageNum = 1;
+  loading = false;
 
-  constructor(private ticketService: TicketService,
+  constructor(private userService: UserService,
               private router: Router) {
   }
 
@@ -21,9 +21,13 @@ export class TicketListComponent implements OnInit {
     this.getList();
   }
 
+  add(item) {
+    this.router.navigate(['/admin/user/add'], {queryParams: {id: item ? item.id : ''}});
+  }
+
   getList() {
     this.loading = true;
-    (this.ticketService as any).list({
+    (this.userService as any).list({
       params: {
         params2: this.pageNum,
         params3: 10
@@ -33,9 +37,6 @@ export class TicketListComponent implements OnInit {
         this.loading = false;
         const rep = (response as any);
         if (rep.code === 200) {
-          response.data.data.sort((o,n)=>{
-            return o.state-n.state;
-          });
           this.total = response.data.pageCount;
           this.list = response.data.data;
         } else {
@@ -44,12 +45,8 @@ export class TicketListComponent implements OnInit {
       });
   }
 
-  add(item) {
-    this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: item ? item.id : ''}});
-  }
-
   del(id) {
-    (this.ticketService as any).del({params: {id}})
+    (this.userService as any).del({params: {id}})
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {

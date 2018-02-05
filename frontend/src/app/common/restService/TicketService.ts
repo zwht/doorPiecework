@@ -32,6 +32,12 @@ export class TicketService {
         params1: 'update'
       }
     },
+    updateState: {
+      method: 'get',
+      params: {
+        params1: 'updateState'
+      }
+    },
     del: {
       method: 'get',
       params: {

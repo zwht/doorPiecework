@@ -12,5 +12,6 @@ public interface TicketService {
     Response list(Integer pageNum, Integer pageSize, TicketListFind ticketListFind);
     Response getById(String id);
     Response update(Ticket ticket);
+    Response updateState(String id);
     Response del(String id);
 }

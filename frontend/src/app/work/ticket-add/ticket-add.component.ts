@@ -17,6 +17,7 @@ import {DateSet} from '../../common/service/DateSet';
   providers: [ProcessService,ProductService, TicketService, UserService, GxService, DoorService, DateSet, ColorService, LineService]
 })
 export class TicketAddComponent implements OnInit {
+  toggle=false;
   colorList = [];
   colorListObj = {};
   lineList = [];
@@ -367,7 +368,12 @@ export class TicketAddComponent implements OnInit {
     }
 
   }
-
+  saveState(){
+    this.ticketService['updateState']({params:{id:this.ticket.id}})
+      .then(response=>{
+        this.toggle=false;
+      })
+  }
   getDoorList(callBack) {
     (this.doorService as any).list({
       params: {

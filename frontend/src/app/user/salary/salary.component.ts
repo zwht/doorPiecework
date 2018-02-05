@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {CorporationService} from '../../common/restService/CorporationService';
 import {Router} from '@angular/router';
-import {TicketService} from '../../common/restService/TicketService';
 @Component({
-  selector: 'app-ticket-list',
-  templateUrl: './ticket-list.component.html',
-  styleUrls: ['./ticket-list.component.css'],
-  providers: [TicketService]
+  selector: 'app-salary',
+  templateUrl: './salary.component.html',
+  styleUrls: ['./salary.component.less'],
+  providers: [CorporationService]
 })
-export class TicketListComponent implements OnInit {
-  loading = false;
+export class SalaryComponent implements OnInit {
+
   list = [];
   total = 0;
   pageNum = 1;
+  loading = false;
 
-  constructor(private ticketService: TicketService,
+  constructor(private corporationService: CorporationService,
               private router: Router) {
   }
 
@@ -23,7 +24,7 @@ export class TicketListComponent implements OnInit {
 
   getList() {
     this.loading = true;
-    (this.ticketService as any).list({
+    (this.corporationService as any).list({
       params: {
         params2: this.pageNum,
         params3: 10
@@ -33,9 +34,6 @@ export class TicketListComponent implements OnInit {
         this.loading = false;
         const rep = (response as any);
         if (rep.code === 200) {
-          response.data.data.sort((o,n)=>{
-            return o.state-n.state;
-          });
           this.total = response.data.pageCount;
           this.list = response.data.data;
         } else {
@@ -45,11 +43,16 @@ export class TicketListComponent implements OnInit {
   }
 
   add(item) {
-    this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: item ? item.id : ''}});
+    this.router.navigate(['/admin/user/company/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
-  del(id) {
-    (this.ticketService as any).del({params: {id}})
+  updateState(item, k) {
+    (this.corporationService as any).updateState({
+      data: {
+        id: item.id,
+        state: k
+      }
+    })
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -59,5 +62,6 @@ export class TicketListComponent implements OnInit {
         }
       });
   }
+
 
 }

@@ -2,7 +2,10 @@ package com.zw.cf.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.zw.cf.dao.ProcessMapper;
 import com.zw.cf.dao.TicketMapper;
+import com.zw.cf.model.Process;
+import com.zw.cf.model.ProcessExample;
 import com.zw.cf.model.Ticket;
 import com.zw.cf.model.TicketExample;
 import com.zw.cf.service.TicketService;
@@ -27,13 +30,15 @@ import java.util.Set;
 public class TicketServiceImpl implements TicketService {
     @Autowired
     TicketMapper ticketMapper;
+    @Autowired
+    ProcessMapper processMapper;
 
     public Response add(Ticket ticket) {
         Response response = new Response();
         try {
             Date date = new Date();
-            TicketExample ticketExample=new TicketExample();
-            TicketExample.Criteria criteria=ticketExample.createCriteria();
+            TicketExample ticketExample = new TicketExample();
+            TicketExample.Criteria criteria = ticketExample.createCriteria();
             criteria.andNameEqualTo(ticket.getName());
             //使用用户名查询是否有相同用户名
             List<Ticket> tickets = ticketMapper.selectByExample(ticketExample);
@@ -41,13 +46,13 @@ public class TicketServiceImpl implements TicketService {
                 ticket.setId(date.getTime() + "");
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
-                Set<ConstraintViolation<Ticket>> constraintViolations= validator.validate(ticket);
+                Set<ConstraintViolation<Ticket>> constraintViolations = validator.validate(ticket);
 
-                if(constraintViolations.size()!=0){
+                if (constraintViolations.size() != 0) {
                     return response.validation(constraintViolations);
-                }else {
+                } else {
                     ticketMapper.insert(ticket);
-                    String id= ticket.getId();
+                    String id = ticket.getId();
                     return response.success(ticket);
                 }
 
@@ -122,6 +127,41 @@ public class TicketServiceImpl implements TicketService {
             return response.failure(400, "未知错误！");
         }
     }
+
+    public Response updateState(String id) {
+        Response response = new Response();
+        try {
+            TicketExample example = new TicketExample();
+            TicketExample.Criteria criteria = example.createCriteria();
+            criteria.andIdEqualTo(id);
+
+            Date date = new Date();
+            Ticket ticket = new Ticket();
+            ticket.setId(id);
+            ticket.setState(2);
+            ticket.setOverTime(date);
+            ticketMapper.updateByExampleSelective(ticket, example);
+
+            //条件查询3句话
+            ProcessExample processExample = new ProcessExample();
+            ProcessExample.Criteria criteria1 = processExample.createCriteria();
+            criteria1.andTicketIdEqualTo(id);
+            List<Process> processList = processMapper.selectByExample(processExample);
+            for (Process process : processList) {
+                ProcessExample example1 = new ProcessExample();
+                ProcessExample.Criteria criteria2 = example1.createCriteria();
+                criteria2.andIdEqualTo(process.getId());
+                process.setEndTime(date);
+                process.setState(2);
+                processMapper.updateByExampleSelective(process, example1);
+            }
+
+            return response.success("修改成功");
+        } catch (Exception e) {
+            return response.failure(400, "未知错误！");
+        }
+    }
+
     public Response del(String id) {
         Response response = new Response();
         try {
