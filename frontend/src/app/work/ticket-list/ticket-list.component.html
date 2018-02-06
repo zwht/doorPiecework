@@ -47,6 +47,18 @@
       </el-pagination>
     </div>
   </div>
+  <el-dialog [(visible)]="toggle" custom-class="tagBox"
+             [center]="true" [show-close]="false" [width]="'300px'">
+    <ng-template #title style="padding-top: 10px;">
+      <span class="el-icon-warning"></span>
+      <span>确定删除</span>
+    </ng-template>
+    <div>删除不可回退，是否确定？</div>
+    <ng-template #footer style="padding-bottom: 10px;">
+      <el-button (click)="toggle=false" [plain]="true" type="info" size="small">取&nbsp;&nbsp;&nbsp;&nbsp;消</el-button>
+      <el-button (click)="delQd()" [plain]="true" type="success" size="small">确&nbsp;&nbsp;&nbsp;&nbsp;定</el-button>
+    </ng-template>
+  </el-dialog>
 </div>
 
 

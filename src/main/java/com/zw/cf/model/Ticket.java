@@ -33,6 +33,12 @@ public class Ticket {
 
     private Float pay;
 
+    private Float sumDoor;
+
+    private Float sumTaoban;
+
+    private Float sumLine;
+
     public String getId() {
         return id;
     }
@@ -151,5 +157,29 @@ public class Ticket {
 
     public void setPay(Float pay) {
         this.pay = pay;
+    }
+
+    public Float getSumDoor() {
+        return sumDoor;
+    }
+
+    public void setSumDoor(Float sumDoor) {
+        this.sumDoor = sumDoor;
+    }
+
+    public Float getSumTaoban() {
+        return sumTaoban;
+    }
+
+    public void setSumTaoban(Float sumTaoban) {
+        this.sumTaoban = sumTaoban;
+    }
+
+    public Float getSumLine() {
+        return sumLine;
+    }
+
+    public void setSumLine(Float sumLine) {
+        this.sumLine = sumLine;
     }
 }

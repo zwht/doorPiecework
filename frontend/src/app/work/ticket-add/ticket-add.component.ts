@@ -281,7 +281,7 @@ export class TicketAddComponent implements OnInit {
           response.data.data.forEach(item => {
             if (item.roles === '3') {
               this.userListObj['3'].push(item);
-            } else if (item.roles === '2') {
+            } else if (item.roles === '4') {
               if (!this.userListObj[item.type]) {
                 this.userListObj[item.type] = [item];
               } else {
@@ -412,6 +412,7 @@ export class TicketAddComponent implements OnInit {
               item.userId = this.userListObj[item.name][0].id;
             }
           });
+
           this.gxList = response.data.data;
           this.gxList.forEach(item => {
             item.price=0;

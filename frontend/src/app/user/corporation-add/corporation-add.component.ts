@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CorporationService} from '../../common/restService/CorporationService';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import { ElMessageService } from 'element-angular'
 @Component({
   selector: 'app-corporation-add',
   templateUrl: './corporation-add.component.html',
@@ -13,11 +14,13 @@ export class CorporationAddComponent implements OnInit {
     id: null,
     name: null,
     address: null,
-    state: 1
+    state: 1,
+    img:null
   };
 
   constructor(private corporationService: CorporationService,
               private router: Router,
+              private message: ElMessageService,
               private activatedRoute: ActivatedRoute) {
   }
 
@@ -29,6 +32,9 @@ export class CorporationAddComponent implements OnInit {
       }
 
     });
+  }
+  imageChange(data) {
+    this.component.img = data.url;
   }
 
   getById() {
@@ -47,20 +53,22 @@ export class CorporationAddComponent implements OnInit {
       (this.corporationService as any).update({data: this.component})
         .then(response => {
           const rep = (response as any);
-          if (rep.code === 200) {
-            this.router.navigate(['/admin/user/company']);
+          if (rep.code == 200) {
+            this.message.success(rep.data);
+            window.history.back()
           } else {
-            console.log(response);
+            this.message.error(rep.message);
           }
         });
     } else {
       (this.corporationService as any).add({data: this.component})
         .then(response => {
           const rep = (response as any);
-          if (rep.code === 200) {
-            this.router.navigate(['/admin/user/company']);
+          if (rep.code == 200) {
+            this.message.success(rep.data);
+            window.history.back()
           } else {
-            console.log(response);
+            this.message.error(rep.message);
           }
         });
     }

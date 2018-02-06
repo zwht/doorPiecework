@@ -6,6 +6,7 @@ import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.User;
 import com.zw.cf.model.UserExample;
 import com.zw.cf.service.UserService;
+import com.zw.cf.vo.ResetPasswordVo;
 import com.zw.cf.vo.UserListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -66,6 +67,8 @@ public class UserServiceImpl implements UserService {
 
                 String token = JwtUtils.sign(users.get(0), 30L * 24L * 3600L * 1000L);
                 userOne.setToken(token);
+
+
                 return response.success(userOne);
             } else {
                 return response.failure(400, "密码错误！");
@@ -127,7 +130,7 @@ public class UserServiceImpl implements UserService {
             Date date = new Date();
             UserExample userExample=new UserExample();
             UserExample.Criteria criteria=userExample.createCriteria();
-            criteria.andNameEqualTo(user.getName());
+            criteria.andLoginNameEqualTo(user.getLoginName());
             //使用用户名查询是否有相同用户名
             List<User> users = userMapper.selectByExample(userExample);
             if (users.size() == 0) {
@@ -157,7 +160,7 @@ public class UserServiceImpl implements UserService {
         try {
             UserExample userExample = new UserExample();
             UserExample.Criteria criteria = userExample.createCriteria();
-            criteria.andNameEqualTo(user.getName());
+            criteria.andLoginNameEqualTo(user.getLoginName());
             criteria.andIdNotEqualTo(user.getId());
             //使用用户名查询是否有相同用户名
             List<User> corporations = userMapper.selectByExample(userExample);
@@ -179,6 +182,36 @@ public class UserServiceImpl implements UserService {
 
             } else {
                 return response.failure(400, "名字重复！");
+            }
+        } catch (Exception e) {
+            return response.failure(400, "未知错误！");
+        }
+    }
+    public Response resetPassword(ResetPasswordVo resetPasswordVo){
+        Response response = new Response();
+        try {
+            UserExample userExample = new UserExample();
+            UserExample.Criteria criteria = userExample.createCriteria();
+            criteria.andIdEqualTo(resetPasswordVo.getUserId());
+            //使用用户名查询是否有相同用户名
+            List<User> users = userMapper.selectByExample(userExample);
+            User user=new User();
+            if(!users.isEmpty()){
+                user= users.get(0);
+            }else{
+                return response.failure(401,"用户不存在");
+            }
+            ZwUtil zwUtil=new ZwUtil();
+            if(user.getPassword().equals(zwUtil.EncoderByMd5(resetPasswordVo.getOldPwd()))){
+
+                UserExample example = new UserExample();
+                UserExample.Criteria criteria1 = example.createCriteria();
+                criteria1.andIdEqualTo(user.getId());
+                user.setPassword(zwUtil.EncoderByMd5(resetPasswordVo.getNewPwd()));
+                userMapper.updateByExampleSelective(user, example);
+                return response.success("修改成功");
+            }else{
+                return response.failure(401,"密码错误");
             }
         } catch (Exception e) {
             return response.failure(400, "未知错误！");

@@ -33,17 +33,29 @@ import {MenuComponent} from './component/menu/menu.component';
           {
             path: 'user',
             loadChildren: 'app/user/user.module#UserModule',
-            data: {name: '用户管理', menu: true}
+            data: {
+              name: '用户管理',
+              type: [0,1],
+              menu: true
+            }
           },
           {
             path: 'work',
             loadChildren: 'app/work/work.module#WorkModule',
-            data: {name: '工单管理', menu: true}
+            data: {
+              name: '工单管理',
+              type: [0,1,2],
+              menu: true
+            }
           },
           {
             path: 'product',
             loadChildren: 'app/product/product.module#ProductModule',
-            data: {name: '产品管理', menu: true}
+            data: {
+              name: '产品管理',
+              type: [0,1],
+              menu: true
+            }
           },
           /*{
             path: 'other',

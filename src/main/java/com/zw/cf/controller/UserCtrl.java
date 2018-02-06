@@ -6,6 +6,7 @@ import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
 import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.LoginVo;
+import com.zw.cf.vo.ResetPasswordVo;
 import com.zw.cf.vo.UserListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -100,6 +101,13 @@ public class UserCtrl {
     ) {
         return userService.getUserById(id);
     }
+    @ResponseBody
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
+    public Response<User> detail(HttpServletRequest request) {
+        User user = utilsService.getUser(request);
+        return userService.getUserById(user.getId());
+    }
 
     @ResponseBody
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -110,6 +118,17 @@ public class UserCtrl {
     ) {
         return userService.update(user);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+    @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
+    public Response resetPassword(
+            @ApiParam(required = true, value = "color", name = "color") @RequestBody ResetPasswordVo resetPasswordVo
+    ) {
+        return userService.resetPassword(resetPasswordVo);
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/del", method = RequestMethod.GET)

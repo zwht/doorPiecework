@@ -16,7 +16,11 @@
         <span>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
         <el-input [(ngModel)]="component.address" placeholder="请输入"></el-input>
       </div>
-
+      <div>
+        <span>添加logo：</span>
+        <app-cropper-img [cpImg]="component.img" [boxStyle]="{width:400,height:100}"
+                         (saveEnd)="imageChange($event)"></app-cropper-img>
+      </div>
       <br>
       <el-button (click)="save()" [plain]="true" type="success">保存</el-button>
     </div>

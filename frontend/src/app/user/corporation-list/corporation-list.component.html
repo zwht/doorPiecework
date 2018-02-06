@@ -13,6 +13,7 @@
         <th>名称</th>
         <th>老板</th>
         <th>电话</th>
+        <th>logo</th>
         <th>地址</th>
         <th>操作</th>
       </tr>
@@ -20,6 +21,9 @@
         <td>{{item.name}}</td>
         <td>{{item.boss}}</td>
         <td>{{item.phone}}</td>
+        <th>
+          <img width="100"  [src]="item.img" alt="">
+        </th>
         <td>{{item.address}}</td>
         <td style="width: 280px; text-align: center;">
           <el-button (click)="add(item)" size="mini" type="success" icon="edit" [plain]="true">查看用户</el-button>

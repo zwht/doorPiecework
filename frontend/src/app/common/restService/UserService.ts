@@ -37,9 +37,22 @@ export class UserService {
       params: {
         params1: 'del'
       }
-    }
+    },
+    detail: {
+      method: 'get',
+      params: {
+        params1: 'detail'
+      }
+    },
+    resetPassword: {
+      method: 'post',
+      params: {
+        params1: 'resetPassword'
+      }
+    },
   };
-  constructor( httpServer: HttpServer) {
+
+  constructor(httpServer: HttpServer) {
     httpServer.S(this);
   }
 

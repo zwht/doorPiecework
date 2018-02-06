@@ -17,6 +17,9 @@
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="number" jdbcType="VARCHAR" property="number" />
     <result column="pay" jdbcType="REAL" property="pay" />
+    <result column="sum_door" jdbcType="REAL" property="sumDoor" />
+    <result column="sum_taoban" jdbcType="REAL" property="sumTaoban" />
+    <result column="sum_line" jdbcType="REAL" property="sumLine" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +81,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, name, dealers_id, brand_id, odd, address, start_time, end_time, create_time, 
-    over_time, product_ids, corporation_id, state, number, pay
+    over_time, product_ids, corporation_id, state, number, pay, sum_door, sum_taoban, 
+    sum_line
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.TicketExample" resultMap="BaseResultMap">
     select
@@ -115,12 +119,14 @@
       brand_id, odd, address, 
       start_time, end_time, create_time, 
       over_time, product_ids, corporation_id, 
-      state, number, pay)
+      state, number, pay, sum_door, 
+      sum_taoban, sum_line)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{dealersId,jdbcType=VARCHAR}, 
       #{brandId,jdbcType=VARCHAR}, #{odd,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{overTime,jdbcType=TIMESTAMP}, #{productIds,jdbcType=VARCHAR}, #{corporationId,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{pay,jdbcType=REAL})
+      #{state,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{pay,jdbcType=REAL}, #{sumDoor,jdbcType=REAL}, 
+      #{sumTaoban,jdbcType=REAL}, #{sumLine,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Ticket">
     insert into ticket
@@ -170,6 +176,15 @@
       <if test="pay != null">
         pay,
       </if>
+      <if test="sumDoor != null">
+        sum_door,
+      </if>
+      <if test="sumTaoban != null">
+        sum_taoban,
+      </if>
+      <if test="sumLine != null">
+        sum_line,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -216,6 +231,15 @@
       </if>
       <if test="pay != null">
         #{pay,jdbcType=REAL},
+      </if>
+      <if test="sumDoor != null">
+        #{sumDoor,jdbcType=REAL},
+      </if>
+      <if test="sumTaoban != null">
+        #{sumTaoban,jdbcType=REAL},
+      </if>
+      <if test="sumLine != null">
+        #{sumLine,jdbcType=REAL},
       </if>
     </trim>
   </insert>
@@ -273,6 +297,15 @@
       <if test="record.pay != null">
         pay = #{record.pay,jdbcType=REAL},
       </if>
+      <if test="record.sumDoor != null">
+        sum_door = #{record.sumDoor,jdbcType=REAL},
+      </if>
+      <if test="record.sumTaoban != null">
+        sum_taoban = #{record.sumTaoban,jdbcType=REAL},
+      </if>
+      <if test="record.sumLine != null">
+        sum_line = #{record.sumLine,jdbcType=REAL},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -294,7 +327,10 @@
       corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
       number = #{record.number,jdbcType=VARCHAR},
-      pay = #{record.pay,jdbcType=REAL}
+      pay = #{record.pay,jdbcType=REAL},
+      sum_door = #{record.sumDoor,jdbcType=REAL},
+      sum_taoban = #{record.sumTaoban,jdbcType=REAL},
+      sum_line = #{record.sumLine,jdbcType=REAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -344,6 +380,15 @@
       <if test="pay != null">
         pay = #{pay,jdbcType=REAL},
       </if>
+      <if test="sumDoor != null">
+        sum_door = #{sumDoor,jdbcType=REAL},
+      </if>
+      <if test="sumTaoban != null">
+        sum_taoban = #{sumTaoban,jdbcType=REAL},
+      </if>
+      <if test="sumLine != null">
+        sum_line = #{sumLine,jdbcType=REAL},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -362,7 +407,10 @@
       corporation_id = #{corporationId,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       number = #{number,jdbcType=VARCHAR},
-      pay = #{pay,jdbcType=REAL}
+      pay = #{pay,jdbcType=REAL},
+      sum_door = #{sumDoor,jdbcType=REAL},
+      sum_taoban = #{sumTaoban,jdbcType=REAL},
+      sum_line = #{sumLine,jdbcType=REAL}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

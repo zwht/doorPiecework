@@ -1094,6 +1094,186 @@ public class TicketExample {
             addCriterion("pay not between", value1, value2, "pay");
             return (Criteria) this;
         }
+
+        public Criteria andSumDoorIsNull() {
+            addCriterion("sum_door is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorIsNotNull() {
+            addCriterion("sum_door is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorEqualTo(Float value) {
+            addCriterion("sum_door =", value, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorNotEqualTo(Float value) {
+            addCriterion("sum_door <>", value, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorGreaterThan(Float value) {
+            addCriterion("sum_door >", value, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorGreaterThanOrEqualTo(Float value) {
+            addCriterion("sum_door >=", value, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorLessThan(Float value) {
+            addCriterion("sum_door <", value, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorLessThanOrEqualTo(Float value) {
+            addCriterion("sum_door <=", value, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorIn(List<Float> values) {
+            addCriterion("sum_door in", values, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorNotIn(List<Float> values) {
+            addCriterion("sum_door not in", values, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorBetween(Float value1, Float value2) {
+            addCriterion("sum_door between", value1, value2, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumDoorNotBetween(Float value1, Float value2) {
+            addCriterion("sum_door not between", value1, value2, "sumDoor");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanIsNull() {
+            addCriterion("sum_taoban is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanIsNotNull() {
+            addCriterion("sum_taoban is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanEqualTo(Float value) {
+            addCriterion("sum_taoban =", value, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanNotEqualTo(Float value) {
+            addCriterion("sum_taoban <>", value, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanGreaterThan(Float value) {
+            addCriterion("sum_taoban >", value, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanGreaterThanOrEqualTo(Float value) {
+            addCriterion("sum_taoban >=", value, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanLessThan(Float value) {
+            addCriterion("sum_taoban <", value, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanLessThanOrEqualTo(Float value) {
+            addCriterion("sum_taoban <=", value, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanIn(List<Float> values) {
+            addCriterion("sum_taoban in", values, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanNotIn(List<Float> values) {
+            addCriterion("sum_taoban not in", values, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanBetween(Float value1, Float value2) {
+            addCriterion("sum_taoban between", value1, value2, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumTaobanNotBetween(Float value1, Float value2) {
+            addCriterion("sum_taoban not between", value1, value2, "sumTaoban");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineIsNull() {
+            addCriterion("sum_line is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineIsNotNull() {
+            addCriterion("sum_line is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineEqualTo(Float value) {
+            addCriterion("sum_line =", value, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineNotEqualTo(Float value) {
+            addCriterion("sum_line <>", value, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineGreaterThan(Float value) {
+            addCriterion("sum_line >", value, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineGreaterThanOrEqualTo(Float value) {
+            addCriterion("sum_line >=", value, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineLessThan(Float value) {
+            addCriterion("sum_line <", value, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineLessThanOrEqualTo(Float value) {
+            addCriterion("sum_line <=", value, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineIn(List<Float> values) {
+            addCriterion("sum_line in", values, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineNotIn(List<Float> values) {
+            addCriterion("sum_line not in", values, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineBetween(Float value1, Float value2) {
+            addCriterion("sum_line between", value1, value2, "sumLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andSumLineNotBetween(Float value1, Float value2) {
+            addCriterion("sum_line not between", value1, value2, "sumLine");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

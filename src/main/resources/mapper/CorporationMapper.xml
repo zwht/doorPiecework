@@ -8,6 +8,7 @@
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="boss" jdbcType="VARCHAR" property="boss" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, address, state, boss, phone
+    id, name, address, state, boss, phone, img
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.CorporationExample" resultMap="BaseResultMap">
     select
@@ -102,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Corporation">
     insert into corporation (id, name, address, 
-      state, boss, phone)
+      state, boss, phone, 
+      img)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{boss,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})
+      #{state,jdbcType=INTEGER}, #{boss,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Corporation">
     insert into corporation
@@ -127,6 +130,9 @@
       <if test="phone != null">
         phone,
       </if>
+      <if test="img != null">
+        img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -146,6 +152,9 @@
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,6 +185,9 @@
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -188,7 +200,8 @@
       address = #{record.address,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
       boss = #{record.boss,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR}
+      phone = #{record.phone,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,6 +224,9 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -220,7 +236,8 @@
       address = #{address,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       boss = #{boss,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR}
+      phone = #{phone,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

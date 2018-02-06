@@ -3,11 +3,10 @@ package com.zw.cf.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zw.cf.dao.ProcessMapper;
+import com.zw.cf.dao.ProductMapper;
 import com.zw.cf.dao.TicketMapper;
+import com.zw.cf.model.*;
 import com.zw.cf.model.Process;
-import com.zw.cf.model.ProcessExample;
-import com.zw.cf.model.Ticket;
-import com.zw.cf.model.TicketExample;
 import com.zw.cf.service.TicketService;
 import com.zw.cf.vo.TicketListFind;
 import com.zw.plug.PageObj;
@@ -32,6 +31,8 @@ public class TicketServiceImpl implements TicketService {
     TicketMapper ticketMapper;
     @Autowired
     ProcessMapper processMapper;
+    @Autowired
+    ProductMapper productMapper;
 
     public Response add(Ticket ticket) {
         Response response = new Response();
@@ -166,7 +167,19 @@ public class TicketServiceImpl implements TicketService {
     public Response del(String id) {
         Response response = new Response();
         try {
+
+            ProcessExample processExample = new ProcessExample();
+            ProcessExample.Criteria processCriteria = processExample.createCriteria();
+            processCriteria.andTicketIdEqualTo(id);
+            processMapper.deleteByExample(processExample);
+
+            ProductExample productExample = new ProductExample();
+            ProductExample.Criteria productCriteria = productExample.createCriteria();
+            productCriteria.andTicketIdEqualTo(id);
+            productMapper.deleteByExample(productExample);
+
             return response.success(ticketMapper.deleteByPrimaryKey(id));
+
         } catch (Exception e) {
             return response.failure(501, e.getMessage());
         }

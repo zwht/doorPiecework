@@ -1,6 +1,7 @@
 package com.zw.cf.service;
 
 import com.zw.cf.model.User;
+import com.zw.cf.vo.ResetPasswordVo;
 import com.zw.cf.vo.UserListFind;
 import com.zw.plug.Response;
 
@@ -15,5 +16,6 @@ public interface UserService {
     Response addUser(User user);
     Response update(User user);
     Response del(String id);
+    Response resetPassword(ResetPasswordVo resetPasswordVo);
 
 }

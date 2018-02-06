@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../common/restService/UserService';
 import {GxService} from '../../common/restService/GxService';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Md5} from "ts-md5/dist/md5";
+import { ElMessageService } from 'element-angular'
 @Component({
   selector: 'app-dealers-add',
   templateUrl: './dealers-add.component.html',
@@ -26,6 +28,7 @@ export class DealersAddComponent implements OnInit {
   constructor(private userService: UserService,
               private gxService: GxService,
               private router: Router,
+              private message: ElMessageService,
               private activatedRoute: ActivatedRoute) {
   }
 
@@ -74,25 +77,29 @@ export class DealersAddComponent implements OnInit {
   }
 
   save() {
-    if (this.user.id) {
-      this.user.password=null;
-      (this.userService as any).update({data: this.user})
+    let user=JSON.parse(JSON.stringify(this.user));
+    user.password=Md5.hashStr(this.user.password);
+    if (user.id) {
+      user.password=null;
+      (this.userService as any).update({data: user})
         .then(response => {
           const rep = (response as any);
-          if (rep.code === 200) {
-            this.router.navigate(['/admin/user/list']);
+          if (rep.code == 200) {
+            this.message.success(rep.data);
+            window.history.back()
           } else {
-            console.log(response);
+            this.message.error(rep.message);
           }
         });
     } else {
-      (this.userService as any).add({data: this.user})
+      (this.userService as any).add({data: user})
         .then(response => {
           const rep = (response as any);
-          if (rep.code === 200) {
-            this.router.navigate(['/admin/user/list']);
+          if (rep.code == 200) {
+            this.message.success(rep.data);
+            window.history.back()
           } else {
-            console.log(response);
+            this.message.error(rep.message);
           }
         });
     }

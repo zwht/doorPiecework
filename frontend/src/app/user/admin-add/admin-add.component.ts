@@ -5,12 +5,12 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Md5} from "ts-md5/dist/md5";
 import { ElMessageService } from 'element-angular'
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.css'],
+  selector: 'app-admin-add',
+  templateUrl: './admin-add.component.html',
+  styleUrls: ['./admin-add.component.less'],
   providers: [UserService, GxService]
 })
-export class AddComponent implements OnInit {
+export class AdminAddComponent implements OnInit {
   title='';
   gxList = [];
   user = {
@@ -19,8 +19,8 @@ export class AddComponent implements OnInit {
     password: null,
     phone: null,
     loginName: null,
-    type: '',
-    roles: 4,
+    type: '0',
+    roles: '2',
     state: 1,
     address: null
   };
@@ -92,6 +92,7 @@ export class AddComponent implements OnInit {
           }
         });
     } else {
+      user.id=null;
       (this.userService as any).add({data: user})
         .then(response => {
           const rep = (response as any);
@@ -104,6 +105,5 @@ export class AddComponent implements OnInit {
         });
     }
   }
-
 
 }

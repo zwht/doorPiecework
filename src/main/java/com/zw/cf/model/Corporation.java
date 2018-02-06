@@ -13,6 +13,8 @@ public class Corporation {
 
     private String phone;
 
+    private String img;
+
     public String getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class Corporation {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
     }
 }
