@@ -5,17 +5,15 @@ package com.zw.cf.vo;
  */
 public class LoginVo {
 
-    private String name;
-
+    private String loginName;
     private String password;
 
-
-    public String getName() {
-        return name;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 
     public String getPassword() {
@@ -23,8 +21,6 @@ public class LoginVo {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
-
-
 }

@@ -6,6 +6,9 @@ import {CorporationAddComponent} from './corporation-add/corporation-add.compone
 import {ListComponent} from './user-list/list.component';
 import {AddComponent} from './user-add/add.component';
 import {SalaryComponent} from './salary/salary.component';
+import {DealersListComponent} from './dealers-list/dealers-list.component';
+import {DealersAddComponent} from './dealers-add/dealers-add.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -18,6 +21,7 @@ export const routes: Routes = [
         component: CorporationListComponent,
         data: {
           name: '企业列表',
+          type: [0],
           menu: true
         }
       },
@@ -32,7 +36,7 @@ export const routes: Routes = [
         path: 'list',
         component: ListComponent,
         data: {
-          name: '用户列表',
+          name: '员工管理',
           menu: true
         }
       },
@@ -43,6 +47,22 @@ export const routes: Routes = [
           name: '添加用户'
         }
       },
+      {
+        path: 'dealers',
+        component: DealersListComponent,
+        data: {
+          name: '经销商管理',
+          menu: true
+        }
+      },
+      {
+        path: 'dealers/add',
+        component: DealersAddComponent,
+        data: {
+          name: '添加经销商用户'
+        }
+      },
+
       {
         path: 'salary',
         component: SalaryComponent,
@@ -66,6 +86,8 @@ export class UserRoutes {
 }
 
 export const UserComponents = [
+  DealersAddComponent,
+  DealersListComponent,
   CorporationListComponent,
   CorporationAddComponent,
   ListComponent,

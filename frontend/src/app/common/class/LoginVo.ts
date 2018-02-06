@@ -2,10 +2,10 @@
  * Created by zhaowei on 2017/10/17.
  */
 export class LoginVo {
-  name: string;
+  loginName: string;
   password: string;
-  constructor(name: string, password: string) {
-    this.name = name;
+  constructor(loginName: string, password: string) {
+    this.loginName = loginName;
     this.password = password;
   }
 }

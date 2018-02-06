@@ -37,25 +37,25 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public Response login(String name, String password) {
+    public Response login(String loginName, String password) {
         Response<User> response = new Response();
         try {
-            if (name == null || name == "") {
-                throw new Exception("用户名不能为空!");
+            if (loginName == null || loginName == "") {
+                throw new Exception("登录名不能为空!");
             }
             if (password == null || password == "") {
                 throw new Exception("密码不能为空!");
             }
             UserExample userExample=new UserExample();
             UserExample.Criteria criteria=userExample.createCriteria();
-            criteria.andNameEqualTo(name);
-            //使用用户名查询是否有相同用户名
+            criteria.andLoginNameEqualTo(loginName);
+            //使用登录名查询是否有相同用户名
             List<User> users = userMapper.selectByExample(userExample);
 
 
             ZwUtil zwUtil=new ZwUtil();
             if(users.size() == 0){
-                return response.failure(400, "用户名不存在！");
+                return response.failure(400, "登录名或者密码错误！");
             }else if (users.get(0).getPassword().equals(zwUtil.EncoderByMd5(password))) {
                 User userOne=users.get(0);
                 long currentTime = System.currentTimeMillis();
@@ -109,6 +109,8 @@ public class UserServiceImpl implements UserService {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andCorporationIdEqualTo(userListFind.getCorporationId());
+        criteria.andRolesEqualTo(userListFind.getRoles());
+
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
             List list = userMapper.selectByExample(example);

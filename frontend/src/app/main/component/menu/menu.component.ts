@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userType = localStorage.getItem('userType');
+    const userType = localStorage.getItem('roles');
     this.router.config[1].children.forEach(item => {
 
       if (item.data.type) {
@@ -46,6 +46,16 @@ export class MenuComponent implements OnInit {
           if ((item.data as any).name === subItem.data['name']) {
             (subItem  as any).children.forEach(subSubItem => {
               if (subSubItem.data && subSubItem.data.menu) {
+
+                if (subSubItem.data.type) {
+                  let key = false;
+                  subSubItem.data.type.forEach(ob1 => {
+                    if (ob1 == userType) {
+                      key = true;
+                    }
+                  });
+                  if (!key) return;
+                }
                 itemMenu.children.push({
                   path: item.path + '/' + subSubItem.path,
                   name: subSubItem.data.name

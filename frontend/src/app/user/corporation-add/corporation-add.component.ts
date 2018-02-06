@@ -8,6 +8,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
   providers: [CorporationService]
 })
 export class CorporationAddComponent implements OnInit {
+  title='';
   component = {
     id: null,
     name: null,

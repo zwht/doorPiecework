@@ -1,14 +1,25 @@
-<div>
-  <div>
-    <label>
-      <span>公司名称：</span>
-      <input [(ngModel)]="component.name" placeholder="请输入" type="text" >
-    </label>
-    <label>
-      <span>地址：</span>
-      <input [(ngModel)]="component.address"  placeholder="请输入" type="text">
-    </label>
+<div class="addDoor viewBox">
+  <div class="zwSearch">
+    <div class="left">
+      <span>{{title}}</span>
+    </div>
+    <div class="right">
+    </div>
+  </div>
+  <div class="viewMain">
+    <div class="addFrom">
+      <div>
+        <span>公司名称：</span>
+        <el-input [(ngModel)]="component.name" placeholder="请输入"></el-input>
+      </div>
+      <div>
+        <span>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
+        <el-input [(ngModel)]="component.address" placeholder="请输入"></el-input>
+      </div>
 
-    <button (click)="save()" type="info" style="width: 100%; margin-top: 30px;">保存</button>
+      <br>
+      <el-button (click)="save()" [plain]="true" type="success">保存</el-button>
+    </div>
   </div>
 </div>
+

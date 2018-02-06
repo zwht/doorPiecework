@@ -3,12 +3,12 @@ import {UserService} from '../../common/restService/UserService';
 import {GxService} from '../../common/restService/GxService';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.css'],
+  selector: 'app-dealers-add',
+  templateUrl: './dealers-add.component.html',
+  styleUrls: ['./dealers-add.component.less'],
   providers: [UserService, GxService]
 })
-export class AddComponent implements OnInit {
+export class DealersAddComponent implements OnInit {
   title='';
   gxList = [];
   user = {
@@ -17,8 +17,8 @@ export class AddComponent implements OnInit {
     password: null,
     phone: null,
     loginName: null,
-    type: '',
-    roles: 4,
+    type: null,
+    roles: 3,
     state: 1,
     address: null
   };
@@ -97,6 +97,5 @@ export class AddComponent implements OnInit {
         });
     }
   }
-
 
 }

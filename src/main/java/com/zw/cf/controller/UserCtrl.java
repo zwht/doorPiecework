@@ -75,7 +75,7 @@ public class UserCtrl {
     public Response<User> login(
             @ApiParam(required = true, value = "用户名密码", name = "LoginVo") @RequestBody LoginVo loginVo
     ) {
-        return userService.login(loginVo.getName(), loginVo.getPassword());
+        return userService.login(loginVo.getLoginName(), loginVo.getPassword());
     }
 
     @ResponseBody

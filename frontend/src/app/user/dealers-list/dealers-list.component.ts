@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../common/restService/UserService';
 import {Router} from '@angular/router';
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  selector: 'app-dealers-list',
+  templateUrl: './dealers-list.component.html',
+  styleUrls: ['./dealers-list.component.less'],
   providers: [UserService]
 })
-export class ListComponent implements OnInit {
+export class DealersListComponent implements OnInit {
   list = [];
   total = 0;
   pageNum = 1;
@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
   }
 
   add(item) {
-    this.router.navigate(['/admin/user/add'], {queryParams: {id: item ? item.id : ''}});
+    this.router.navigate(['/admin/user/dealers/add'], {queryParams: {id: item ? item.id : ''}});
   }
 
   getList() {
@@ -33,7 +33,7 @@ export class ListComponent implements OnInit {
         params3: 10
       },
       data:{
-        roles:4
+        roles:3
       }
     })
       .then(response => {
