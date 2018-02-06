@@ -74,6 +74,7 @@ public class DoorServiceImpl implements DoorService {
         } else {
             criteria.andNameEqualTo(name);
         }
+        criteria.andCorporationIdEqualTo(doorListFind.getCorporationId());
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);

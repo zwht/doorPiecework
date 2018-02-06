@@ -69,6 +69,7 @@ public class GxServiceImpl implements GxService {
         } else {
             criteria.andNameEqualTo(name);
         }
+        criteria.andCorporationIdEqualTo(gxListFind.getCorporationId());
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);

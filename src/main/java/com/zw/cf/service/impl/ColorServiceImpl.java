@@ -69,6 +69,7 @@ public class ColorServiceImpl implements ColorService {
         } else {
             criteria.andNameEqualTo(name);
         }
+        criteria.andCorporationIdEqualTo(colorListFind.getCorporationId());
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);

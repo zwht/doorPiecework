@@ -20,7 +20,7 @@ const routes: Routes = [
         path: 'door',
         component: DoorComponent,
         data: {
-          name: 'door列表',
+          name: '门列表',
           menu: true
         }
       },
@@ -35,7 +35,7 @@ const routes: Routes = [
         path: 'color',
         component: ColorListComponent,
         data: {
-          name: 'color列表',
+          name: '颜色列表',
           menu: true
         }
       },

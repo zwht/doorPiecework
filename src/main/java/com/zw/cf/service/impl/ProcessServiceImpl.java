@@ -131,6 +131,7 @@ public class ProcessServiceImpl implements ProcessService {
         ProcessExample.Criteria criteria = processExample.createCriteria();
         criteria.andEndTimeBetween(startDate, endDate);
         criteria.andStateEqualTo(2);
+        criteria.andCorporationIdEqualTo(salaryListFind.getCorporationId());
         List<Process> processList = processMapper.selectByExample(processExample);
 
         Map<String, Process> processMap = new HashMap();
@@ -150,7 +151,8 @@ public class ProcessServiceImpl implements ProcessService {
             PageObj pageObj = new PageObj();
             UserExample userExample = new UserExample();
             UserExample.Criteria userCriteria = userExample.createCriteria();
-            userCriteria.andRolesEqualTo("2");
+            userCriteria.andRolesEqualTo("4");
+            userCriteria.andCorporationIdEqualTo(salaryListFind.getCorporationId());
             Page page = PageHelper.startPage(pageNum, pageSize);
             List<User> userList = userMapper.selectByExample(userExample);
             long count = page.getTotal();

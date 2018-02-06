@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.Gx;
 import com.zw.cf.model.User;
 import com.zw.cf.service.GxService;
+import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.GxListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -27,6 +28,8 @@ public class GxCtrl {
 
     @Autowired
     GxService gxService;
+    @Autowired
+    UtilsService utilsService;
 
 
     @ResponseBody
@@ -52,8 +55,11 @@ public class GxCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "gxListFind", name = "gxListFind") @RequestBody GxListFind gxListFind
-    ) {
+            @ApiParam(required = true, value = "gxListFind", name = "gxListFind") @RequestBody GxListFind gxListFind,
+            HttpServletRequest request) {
+        User user = utilsService.getUser(request);
+        String corporationId = user.getCorporationId();
+        gxListFind.setCorporationId(corporationId);
         return gxService.list(pageNum, pageSize, gxListFind);
     }
 

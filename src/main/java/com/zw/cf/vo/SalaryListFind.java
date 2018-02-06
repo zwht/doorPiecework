@@ -5,7 +5,15 @@ package com.zw.cf.vo;
  */
 public class SalaryListFind {
 
+    public String getCorporationId() {
+        return corporationId;
+    }
 
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId;
+    }
+
+    private String corporationId;
     private long endTime;
     private long startTime;
 

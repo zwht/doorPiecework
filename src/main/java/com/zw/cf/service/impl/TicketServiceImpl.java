@@ -75,6 +75,7 @@ public class TicketServiceImpl implements TicketService {
         } else {
             criteria.andNameEqualTo(name);
         }
+        criteria.andCorporationIdEqualTo(ticketListFind.getCorporationId());
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);

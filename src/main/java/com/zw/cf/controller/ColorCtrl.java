@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.Color;
 import com.zw.cf.model.User;
 import com.zw.cf.service.ColorService;
+import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.ColorListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -27,7 +28,8 @@ public class ColorCtrl {
 
     @Autowired
     ColorService colorService;
-
+    @Autowired
+    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -52,8 +54,11 @@ public class ColorCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "colorListFind", name = "colorListFind") @RequestBody ColorListFind colorListFind
-    ) {
+            @ApiParam(required = true, value = "colorListFind", name = "colorListFind") @RequestBody ColorListFind colorListFind,
+            HttpServletRequest request) {
+        User user = utilsService.getUser(request);
+        String corporationId = user.getCorporationId();
+        colorListFind.setCorporationId(corporationId);
         return colorService.list(pageNum, pageSize, colorListFind);
     }
 

@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.Line;
 import com.zw.cf.model.User;
 import com.zw.cf.service.LineService;
+import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.LineListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -27,6 +28,8 @@ public class LineCtrl {
 
     @Autowired
     LineService lineService;
+    @Autowired
+    UtilsService utilsService;
 
 
     @ResponseBody
@@ -52,8 +55,11 @@ public class LineCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "lineListFind", name = "lineListFind") @RequestBody LineListFind lineListFind
-    ) {
+            @ApiParam(required = true, value = "lineListFind", name = "lineListFind") @RequestBody LineListFind lineListFind,
+            HttpServletRequest request) {
+        User user = utilsService.getUser(request);
+        String corporationId = user.getCorporationId();
+        lineListFind.setCorporationId(corporationId);
         return lineService.list(pageNum, pageSize, lineListFind);
     }
 

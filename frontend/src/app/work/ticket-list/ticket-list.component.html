@@ -5,6 +5,9 @@
     </div>
   </div>
   <div class="viewMain" [el-loading]="loading" [text]="'拼命加载中'">
+    <div class="noData" *ngIf="!list.length">
+      <span>没有数据...</span>
+    </div>
     <table class="zwTable">
       <tr>
         <th>品牌</th>

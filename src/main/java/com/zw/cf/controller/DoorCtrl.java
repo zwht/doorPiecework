@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.Door;
 import com.zw.cf.model.User;
 import com.zw.cf.service.DoorService;
+import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.DoorListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -27,7 +28,8 @@ public class DoorCtrl {
 
     @Autowired
     DoorService doorService;
-
+    @Autowired
+    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -52,8 +54,11 @@ public class DoorCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "doorListFind", name = "doorListFind") @RequestBody DoorListFind doorListFind
-    ) {
+            @ApiParam(required = true, value = "doorListFind", name = "doorListFind") @RequestBody DoorListFind doorListFind,
+            HttpServletRequest request) {
+        User user = utilsService.getUser(request);
+        String corporationId = user.getCorporationId();
+        doorListFind.setCorporationId(corporationId);
         return doorService.list(pageNum, pageSize, doorListFind);
     }
 

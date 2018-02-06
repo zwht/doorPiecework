@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.Process;
 import com.zw.cf.model.User;
 import com.zw.cf.service.ProcessService;
+import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.AddListProcessVo;
 import com.zw.cf.vo.ProcessListFind;
 import com.zw.cf.vo.SalaryListFind;
@@ -29,7 +30,8 @@ public class ProcessCtrl {
 
     @Autowired
     ProcessService processService;
-
+    @Autowired
+    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -79,6 +81,7 @@ public class ProcessCtrl {
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
             @ApiParam(required = true, value = "processListFind", name = "processListFind") @RequestBody ProcessListFind processListFind
     ) {
+
         return processService.list(pageNum, pageSize, processListFind);
     }
     @ResponseBody
@@ -87,8 +90,12 @@ public class ProcessCtrl {
     public Response<PageObj<List<User>>> Salary(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "processListFind", name = "processListFind") @RequestBody SalaryListFind salaryListFind
+            @ApiParam(required = true, value = "processListFind", name = "processListFind") @RequestBody SalaryListFind salaryListFind,
+            HttpServletRequest request
     ) {
+        User user = utilsService.getUser(request);
+        String corporationId = user.getCorporationId();
+        salaryListFind.setCorporationId(corporationId);
         return processService.salary(pageNum, pageSize, salaryListFind);
     }
 

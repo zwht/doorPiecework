@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.*;
 import com.zw.cf.model.Ticket;
 import com.zw.cf.model.User;
 import com.zw.cf.service.TicketService;
+import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.TicketListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -27,6 +28,8 @@ public class TicketCtrl {
 
     @Autowired
     TicketService ticketService;
+    @Autowired
+    UtilsService utilsService;
 
 
     @ResponseBody
@@ -52,8 +55,12 @@ public class TicketCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "ticketListFind", name = "ticketListFind") @RequestBody TicketListFind ticketListFind
+            @ApiParam(required = true, value = "ticketListFind", name = "ticketListFind") @RequestBody TicketListFind ticketListFind,
+                    HttpServletRequest request
     ) {
+        User user = utilsService.getUser(request);
+        String corporationId = user.getCorporationId();
+        ticketListFind.setCorporationId(corporationId);
         return ticketService.list(pageNum, pageSize, ticketListFind);
     }
 

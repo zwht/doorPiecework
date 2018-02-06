@@ -6,7 +6,16 @@ package com.zw.cf.vo;
 public class DoorListFind {
 
 
+    private String corporationId;
     private String name;
+
+    public String getCorporationId() {
+        return corporationId;
+    }
+
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId;
+    }
 
     public String getName() {
         return name;

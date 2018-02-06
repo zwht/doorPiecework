@@ -6,6 +6,16 @@ package com.zw.cf.vo;
 public class TicketListFind {
 
 
+    private String corporationId;
+
+    public String getCorporationId() {
+        return corporationId;
+    }
+
+    public void setCorporationId(String corporationId) {
+        this.corporationId = corporationId;
+    }
+
     private String name;
 
     public String getName() {

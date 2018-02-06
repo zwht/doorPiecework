@@ -69,6 +69,7 @@ public class LineServiceImpl implements LineService {
         } else {
             criteria.andNameEqualTo(name);
         }
+        criteria.andCorporationIdEqualTo(lineListFind.getCorporationId());
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);

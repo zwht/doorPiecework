@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andCorporationIdEqualTo(userListFind.getCorporationId());
-        criteria.andRolesEqualTo(userListFind.getRoles());
+        if(userListFind.getRoles()!=null&&!"".equals(userListFind.getRoles())) criteria.andRolesEqualTo(userListFind.getRoles());
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
