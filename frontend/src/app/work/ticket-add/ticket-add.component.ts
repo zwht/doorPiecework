@@ -39,7 +39,10 @@ export class TicketAddComponent implements OnInit {
     corporationId: null,
     state: 0,
     number: 0,
-    pay: null
+    pay: null,
+    sumDoor:null,
+    sumTaoban:null,
+    sumLine:null
   };
   emptyProduct = {
     id: null,
