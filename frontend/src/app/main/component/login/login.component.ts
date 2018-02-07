@@ -13,6 +13,7 @@ import { ElMessageService } from 'element-angular'
 })
 
 export class LoginComponent implements OnInit {
+  loading=false;
   login = new LoginVo();
   roles = '';
   logoImg = localStorage.getItem('logoUrl')||'./assets/images/logo/logo.png';
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
       });
   }
   onLogin() {
+    this.loading=true;
     this.authService['login']({data: {
       password:Md5.hashStr(this.login.password).toString(),
       loginName:this.login.loginName
@@ -69,8 +71,10 @@ export class LoginComponent implements OnInit {
         } else {
 
         }
+        this.loading=false;
       })
       .catch(err => {
+        this.loading=false;
       });
   }
 

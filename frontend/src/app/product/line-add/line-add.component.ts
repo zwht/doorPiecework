@@ -9,7 +9,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class LineAddComponent implements OnInit {
 
-
+  title='';
   line = {
     id: null,
     name: null,

@@ -9,7 +9,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class ColorAddComponent implements OnInit {
 
-
+  title='';
   color = {
     id: null,
     name: null,

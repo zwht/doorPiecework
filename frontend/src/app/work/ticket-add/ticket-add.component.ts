@@ -9,6 +9,7 @@ import {LineService} from '../../common/restService/LineService';
 import {ProductService} from '../../common/restService/ProductService';
 import {ProcessService} from '../../common/restService/ProcessService';
 import {DateSet} from '../../common/service/DateSet';
+import { ElMessageService } from 'element-angular'
 
 @Component({
   selector: 'app-ticket-add',
@@ -105,11 +106,7 @@ export class TicketAddComponent implements OnInit {
 
   };
   productList = [JSON.parse(JSON.stringify(this.emptyDoor))];
-  stat = {
-    doors: 0,
-    doorT: 0,
-    lines: 0
-  };
+
   brandList = [
     {
       name: '川峰门业',
@@ -130,6 +127,7 @@ export class TicketAddComponent implements OnInit {
               private productService: ProductService,
               private processService: ProcessService,
               private router: Router,
+              private message: ElMessageService,
               private dateSet: DateSet,
               private userService: UserService,
               private activatedRoute: ActivatedRoute) {
@@ -169,18 +167,16 @@ export class TicketAddComponent implements OnInit {
     this.gxList.forEach(item => {
       item.price = 0;
     });
-    this.stat = {
-      doors: 0,
-      doorT: 0,
-      lines: 0
-    };
+    this.ticket.sumDoor=0;
+    this.ticket.sumTaoban=0;
+    this.ticket.sumLine=0;
     setTimeout(() => {
       this.productList.forEach(item => {
         if (!item.doorId || item.doorId == '0') return;
         item.doorObj = this.doorListObj[item.doorId];
-        this.stat.doors += 1;
-        this.stat.doorT += 1;
-        this.stat.lines += item.lineSum;
+        this.ticket.sumDoor += 1;
+        this.ticket.sumTaoban += (item.lbSum+item.dbSum);
+        this.ticket.sumLine += item.lineSum;
         item.doorObj.gx.forEach(fuck => {
           this.gxList.forEach(fuck1 => {
             if (fuck.id == fuck1.id) fuck1.price += fuck.price;
@@ -348,8 +344,9 @@ export class TicketAddComponent implements OnInit {
             this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: this.ticket.id}});
             this.saveProduct();
             this.saveProcess();
+            this.message.success(rep.data);
           } else {
-            console.log(response);
+            this.message.error(rep.message);
           }
         });
 
@@ -364,8 +361,9 @@ export class TicketAddComponent implements OnInit {
             this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: this.ticket.id}});
             this.saveProduct();
             this.saveProcess();
+            this.message.success(rep.data);
           } else {
-            console.log(response);
+            this.message.error(rep.message);
           }
         });
     }
