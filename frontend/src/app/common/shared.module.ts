@@ -7,6 +7,7 @@ import {ZwHttpInterceptor} from './service/ZwHttpInterceptor';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpServer} from './service/HttpServer';
 import {DateSet} from './service/DateSet';
+import {EssenceNg2PrintModule} from "essence-ng2-print";
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +15,7 @@ import {DateSet} from './service/DateSet';
     ElModule.forRoot()
   ],
   declarations: [CropperImgComponent],
-  exports: [CropperImgComponent],
+  exports: [CropperImgComponent,EssenceNg2PrintModule],
   providers: [
     DateSet,
     HttpServer,

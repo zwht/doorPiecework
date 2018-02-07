@@ -12,12 +12,27 @@ import {DateSet} from '../../common/service/DateSet';
 import { ElMessageService } from 'element-angular'
 
 @Component({
-  selector: 'app-ticket-add',
-  templateUrl: './ticket-add.component.html',
-  styleUrls: ['./ticket-add.component.less'],
+  selector: 'app-ticket-print',
+  templateUrl: './ticket-print.component.html',
+  styleUrls: ['./ticket-print.component.less'],
   providers: [ProcessService,ProductService, TicketService, UserService, GxService, DoorService, DateSet, ColorService, LineService]
 })
-export class TicketAddComponent implements OnInit {
+export class TicketPrintComponent implements OnInit {
+  printCSS: string[];
+  printStyle: string;
+  printBtnBoolean = true;
+  printItem = {
+    id:null,
+    contact:null,
+    address:null,
+    idcard:null,
+    contacttel:null,
+    licenseplate:null,
+    cartype:null
+
+  };
+
+
   toggle=false;
   colorList = [];
   colorListObj = {};
@@ -44,42 +59,6 @@ export class TicketAddComponent implements OnInit {
     sumDoor:null,
     sumTaoban:null,
     sumLine:null
-  };
-  emptyProduct = {
-    id: null,
-    name: null,
-    doorId: null,
-    doorImg: null,
-    processIds: null,
-    img: null,
-    mark: null,
-    startTime: null,
-    endTime: null,
-    corporationId: null,
-    coverWidth: null,
-    coverHeight: null,
-    coverDepth: null,
-    widht: null,
-    height: null,
-    lbWidth: null,
-    lbHeight: null,
-    dbWidth: null,
-    dbHeight: null,
-    colorId: null,
-    colorImg: null,
-    lineId: null,
-    lineImg: null,
-    lineSum: null,
-    productcol: null,
-    type: null,
-    isModule: null,
-    moduleId: null,
-    state: null,
-    lbSum: null,
-    dbSum: null,
-    sum: null,
-    lineLength: null,
-    ticketId: null
   };
   gxList = [];
   gxListObj = {};
@@ -157,58 +136,16 @@ export class TicketAddComponent implements OnInit {
 
   }
 
-  doorChange(e, it) {
-    if (e && it) it.doorImg = this.doorListObj[e].img;
-    this.calculate();
+  printComplete() {
+
+    this.printBtnBoolean = true;
   }
 
-  // 计算工序价格
-  calculate() {
-    this.gxList.forEach(item => {
-      item.price = 0;
-    });
-    this.ticket.sumDoor=0;
-    this.ticket.sumTaoban=0;
-    this.ticket.sumLine=0;
-    setTimeout(() => {
-      this.productList.forEach(item => {
-        if (!item.doorId || item.doorId == '0') return;
-        item.doorObj = this.doorListObj[item.doorId];
-        this.ticket.sumDoor += 1;
-        this.ticket.sumTaoban += (item.lbSum+item.dbSum);
-        this.ticket.sumLine += item.lineSum;
-        item.doorObj.gx.forEach(fuck => {
-          this.gxList.forEach(fuck1 => {
-            if (fuck.id == fuck1.id) fuck1.price += fuck.price;
-          });
-
-        })
-      });
-    }, 100);
-
+  beforePrint(item) {
+    this.printItem=item;
+    this.printBtnBoolean = false;
   }
 
-  dealersChange(e) {
-    this.userListObj[3].forEach(item => {
-      if (item.id === e) {
-        this.ticket.address = item.address;
-      }
-    });
-  }
-
-  colorChange(e, item) {
-    item.colorImg = this.colorListObj[e].img;
-  }
-
-  lineChange(e, item) {
-    item.lineImg = this.lineListObj[e].img;
-  }
-
-  // 复制添加
-  copyAdd(item) {
-    this.productList.push(JSON.parse(JSON.stringify(item)));
-    this.calculate();
-  }
 
   getById() {
     this.changeDate = false;
@@ -262,7 +199,7 @@ export class TicketAddComponent implements OnInit {
                 obj.userId=item.userId;
               }
             });
-           });
+          });
         }
       })
   }
@@ -295,86 +232,6 @@ export class TicketAddComponent implements OnInit {
       });
   }
 
-
-  saveProduct() {
-    const that = this;
-    this.productService['addList']({
-      data: {
-        ticketId: this.ticket.id,
-        products: this.productList
-      }
-    })
-      .then(rep => {
-        that.getProductList();
-      })
-  }
-  saveProcess() {
-    let arr=[];
-    this.gxList.forEach(item=>{
-      arr.push({
-        id:item.processId||null,
-        gxId:item.id,
-        userId:item.userId,
-        price:item.price
-      })
-    });
-
-    const that = this;
-    this.processService['addList']({
-      data: {
-        ticketId: this.ticket.id,
-        processs: arr
-      }
-    })
-      .then(rep => {
-        that.getProcessList();
-      })
-  }
-
-  save() {
-    const ticket = JSON.parse(JSON.stringify(this.ticket));
-    ticket.startTime = this.dateSet.getDate(ticket.startTime);
-    ticket.endTime = this.dateSet.getDate(ticket.endTime);
-
-    if (this.ticket.id) {
-      (this.ticketService as any).update({data: ticket})
-        .then(response => {
-          const rep = (response as any);
-          if (rep.code === 200) {
-            this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: this.ticket.id}});
-            this.saveProduct();
-            this.saveProcess();
-            this.message.success(rep.data);
-          } else {
-            this.message.error(rep.message);
-          }
-        });
-
-
-    } else {
-
-      (this.ticketService as any).add({data: ticket})
-        .then(response => {
-          const rep = (response as any);
-          if (rep.code === 200) {
-            this.ticket = rep.data;
-            this.router.navigate(['/admin/work/ticket/add'], {queryParams: {id: this.ticket.id}});
-            this.saveProduct();
-            this.saveProcess();
-            this.message.success(rep.data);
-          } else {
-            this.message.error(rep.message);
-          }
-        });
-    }
-
-  }
-  saveState(){
-    this.ticketService['updateState']({params:{id:this.ticket.id}})
-      .then(response=>{
-        this.toggle=false;
-      })
-  }
   getDoorList(callBack) {
     (this.doorService as any).list({
       params: {
@@ -419,7 +276,6 @@ export class TicketAddComponent implements OnInit {
             item.price=0;
             this.gxListObj[item.id] = item;
           });
-          if(!this.ticket.id) this.calculate();
         } else {
           console.log(response);
         }
@@ -468,27 +324,6 @@ export class TicketAddComponent implements OnInit {
       });
   }
 
-  // 添加购买产品
-  addDoor() {
-    this.productList.push(JSON.parse(JSON.stringify(this.emptyDoor)));
-    this.calculate();
-  }
-
-  // 删除购买产品
-  delDoor(item, i) {
-
-    if (item.id) {
-      this.productService['del']({
-        params: {id: item.id}
-      })
-        .then(rep => {
-          this.productList.splice(i, 1);
-        })
-    } else {
-      this.productList.splice(i, 1);
-    }
-    this.calculate();
-  }
   print(){
     this.router.navigate(['/admin/work/ticket/print'], {queryParams: {id: this.ticket.id}});
   }
