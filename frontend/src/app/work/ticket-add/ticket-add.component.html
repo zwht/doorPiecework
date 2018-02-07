@@ -91,7 +91,7 @@
                        [value]="obj.id" >
             </el-option>
           </el-select>
-          <img *ngIf="item.doorImg" style="width: 50px;" [src]="item.doorImg" alt="">
+          <img *ngIf="item.doorImg&&showImg" style="width: 50px;" [src]="item.doorImg" alt="">
         </td>
         <td class="input3">
           <input type="number" [(ngModel)]="item.coverWidth" placeholder="">
@@ -129,7 +129,7 @@
                        [value]="obj.id">
             </el-option>
           </el-select>
-          <img *ngIf="item.colorImg" style="width: 50px;" [src]="item.colorImg" alt="">
+          <img *ngIf="item.colorImg&&showImg" style="width: 50px;" [src]="item.colorImg" alt="">
         </td>
         <td>
           <el-select [(model)]="item.lineId" placeholder="请选择"
@@ -139,7 +139,7 @@
                        [value]="obj.id">
             </el-option>
           </el-select>
-          <img *ngIf="item.lineImg" style="width: 50px;" [src]="item.lineImg" alt="">
+          <img *ngIf="item.lineImg&&showImg" style="width: 50px;" [src]="item.lineImg" alt="">
         </td>
         <td class="input2">
           <input type="number" [(ngModel)]="item.lineLength" placeholder="">
@@ -147,7 +147,7 @@
           <input type="number" [(ngModel)]="item.lineSum" placeholder="">
         </td>
         <td>
-          <textarea style="height: 90px; width: 100%; border: none;" [(ngModel)]="item.mark" placeholder=""></textarea>
+          <textarea style="width: 100%; border: none;" [(ngModel)]="item.mark" placeholder=""></textarea>
         </td>
         <td class="operation">
           <span (click)="copyAdd(item)">复制添加</span>

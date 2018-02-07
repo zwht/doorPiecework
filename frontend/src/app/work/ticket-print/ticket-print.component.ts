@@ -19,7 +19,12 @@ import { ElMessageService } from 'element-angular'
 })
 export class TicketPrintComponent implements OnInit {
   printCSS: string[];
-  printStyle: string;
+  printStyle=
+  `.tableBox{display: block;}
+      table{border-collapse: collapse; border: 1px solid #000; width: 100%;}
+      th{text-align: center; font-weight: bold; background: #fff;}
+      td{ padding: 6px;border:1px solid #000;}
+      `;
   printBtnBoolean = true;
   printItem = {
     id:null,
@@ -33,13 +38,13 @@ export class TicketPrintComponent implements OnInit {
   };
 
 
-  toggle=false;
+
   colorList = [];
   colorListObj = {};
   lineList = [];
   lineListObj = {};
   changeDate = true;
-  userListObj = {3: []};
+  userObj={};
   ticket = {
     id: null,
     name: null,
@@ -137,12 +142,10 @@ export class TicketPrintComponent implements OnInit {
   }
 
   printComplete() {
-
     this.printBtnBoolean = true;
   }
 
-  beforePrint(item) {
-    this.printItem=item;
+  beforePrint() {
     this.printBtnBoolean = false;
   }
 
@@ -153,6 +156,7 @@ export class TicketPrintComponent implements OnInit {
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
+          rep.data.dealersId=this.userObj[rep.data.dealersId]
           this.ticket = rep.data;
           this.changeDate = true;
 
@@ -173,10 +177,12 @@ export class TicketPrintComponent implements OnInit {
       .then(rep => {
         if (rep.data.data && rep.data.data.length) {
           rep.data.data.forEach(item => {
-            if (item.doorId && item.doorId != '0') item.doorImg = this.doorListObj[item.doorId].img;
-            if (item.colorId && item.colorId != '0') item.colorImg = this.colorListObj[item.colorId].img;
-            if (item.lineId && item.lineId != '0') item.lineImg = this.lineListObj[item.lineId].img;
+            if (item.doorId && item.doorId != '0') item.doorId = this.doorListObj[item.doorId].name;
+            if (item.colorId && item.colorId != '0') item.colorId = this.colorListObj[item.colorId].name;
+            if (item.lineId && item.lineId != '0') item.lineId = this.lineListObj[item.lineId].name;
           });
+
+
           this.productList = rep.data.data;
         }
       })
@@ -192,13 +198,17 @@ export class TicketPrintComponent implements OnInit {
       .then(rep => {
         if (rep.data.data && rep.data.data.length) {
           rep.data.data.forEach(item => {
-            this.gxList.forEach(obj=>{
-              if(item.gxId==obj.id){
-                obj.processId=item.id;
-                obj.price=item.price;
-                obj.userId=item.userId;
-              }
+            this.gxList.forEach(item1=>{
+              item1.forEach(obj=>{
+                if(item.gxId==obj.id){
+                  obj.processId=item.id;
+                  obj.price=item.price;
+                  obj.userId=this.userObj[item.userId];
+                }
+              })
             });
+
+
           });
         }
       })
@@ -215,15 +225,7 @@ export class TicketPrintComponent implements OnInit {
         const rep = (response as any);
         if (rep.code === 200) {
           response.data.data.forEach(item => {
-            if (item.roles === '3') {
-              this.userListObj['3'].push(item);
-            } else if (item.roles === '4') {
-              if (!this.userListObj[item.type]) {
-                this.userListObj[item.type] = [item];
-              } else {
-                this.userListObj[item.type].push(item);
-              }
-            }
+            this.userObj[item.id]=item.name;
           });
           this.getGxList(callBack);
         } else {
@@ -265,17 +267,12 @@ export class TicketPrintComponent implements OnInit {
         callBack();
         const rep = (response as any);
         if (rep.code === 200) {
-          response.data.data.forEach(item => {
-            if (this.userListObj[item.name]) {
-              item.userId = this.userListObj[item.name][0].id;
-            }
-          });
 
-          this.gxList = response.data.data;
-          this.gxList.forEach(item => {
-            item.price=0;
-            this.gxListObj[item.id] = item;
-          });
+          let result=[];
+          for(var i=0,len=response.data.data.length;i<len;i+=9){
+            result.push(response.data.data.slice(i,i+9));
+          };
+          this.gxList = result;
         } else {
           console.log(response);
         }

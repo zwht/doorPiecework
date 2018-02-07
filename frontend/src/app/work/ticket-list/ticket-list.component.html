@@ -32,9 +32,10 @@
           <el-tag *ngIf="item.state==2" type="success">已完成</el-tag>
           <el-tag *ngIf="item.state!=2" type="warning">生产中</el-tag>
         </td>
-        <td style="width: 180px; text-align: center;">
+        <td style="width: 260px; text-align: center;">
           <el-button (click)="del(item.id)" size="mini" type="warning" icon="delete" [plain]="true">删除</el-button>
           <el-button (click)="add(item)" size="mini" type="success" icon="edit" [plain]="true">编辑</el-button>
+          <el-button (click)="print(item)" size="mini" type="info"  [plain]="true">打印</el-button>
         </td>
       </tr>
     </table>

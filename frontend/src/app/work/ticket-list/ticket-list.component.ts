@@ -54,6 +54,9 @@ export class TicketListComponent implements OnInit {
     this.delId=id;
     this.toggle=true;
   }
+  print(item){
+    this.router.navigate(['/admin/work/ticket/print'], {queryParams: {id: item.id}});
+  }
   delQd(){
     (this.ticketService as any).del({params: {id:this.delId}})
       .then(response => {

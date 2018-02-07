@@ -18,6 +18,7 @@ import { ElMessageService } from 'element-angular'
   providers: [ProcessService,ProductService, TicketService, UserService, GxService, DoorService, DateSet, ColorService, LineService]
 })
 export class TicketAddComponent implements OnInit {
+  showImg=false;
   toggle=false;
   colorList = [];
   colorListObj = {};
@@ -206,7 +207,9 @@ export class TicketAddComponent implements OnInit {
 
   // 复制添加
   copyAdd(item) {
-    this.productList.push(JSON.parse(JSON.stringify(item)));
+    let obj=JSON.parse(JSON.stringify(item));
+    obj.id=null;
+    this.productList.push(obj);
     this.calculate();
   }
 
