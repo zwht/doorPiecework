@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
+import {Component,Input, OnInit, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import Cropper from 'cropperjs';
 import {FileService} from '../../../common/restService/FileService';
 
@@ -6,17 +6,19 @@ import {FileService} from '../../../common/restService/FileService';
   selector: 'app-cropper-img',
   templateUrl: './cropper-img.component.html',
   styleUrls: ['./cropper-img.component.less'],
-  providers: [FileService],
-  inputs: ['boxStyle', 'cpImg']
+  providers: [FileService]
 })
 export class CropperImgComponent implements OnInit {
-  private boxStyle;
-  private cpImg;
-  cpImg1 =this.cpImg;
+
   loading = false;
   dialog = false;
   cropper = {};
   contentDialogStyle = {};
+
+  @Input()
+  boxStyle;
+  @Input()
+  cpImg;
   @ViewChild('image')
   image: ElementRef;
   @ViewChild('inputImage')
@@ -28,6 +30,7 @@ export class CropperImgComponent implements OnInit {
 
 
   constructor(private fileService: FileService) {
+
   }
 
   ngOnInit() {
@@ -52,13 +55,6 @@ export class CropperImgComponent implements OnInit {
       cropBoxResizable: false,
       cropBoxMovable: false,
       crop: function (e) {
-        /*console.log(e.detail.x);
-         console.log(e.detail.y);
-         console.log(e.detail.width);
-         console.log(e.detail.height);
-         console.log(e.detail.rotate);
-         console.log(e.detail.scaleX);
-         console.log(e.detail.scaleY);*/
       }
     });
     // Import image
