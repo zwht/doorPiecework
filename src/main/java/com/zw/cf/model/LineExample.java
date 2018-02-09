@@ -453,6 +453,146 @@ public class LineExample {
             addCriterion("value not between", value1, value2, "value");
             return (Criteria) this;
         }
+
+        public Criteria andGxIdsIsNull() {
+            addCriterion("gx_ids is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsIsNotNull() {
+            addCriterion("gx_ids is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsEqualTo(String value) {
+            addCriterion("gx_ids =", value, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsNotEqualTo(String value) {
+            addCriterion("gx_ids <>", value, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsGreaterThan(String value) {
+            addCriterion("gx_ids >", value, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsGreaterThanOrEqualTo(String value) {
+            addCriterion("gx_ids >=", value, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsLessThan(String value) {
+            addCriterion("gx_ids <", value, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsLessThanOrEqualTo(String value) {
+            addCriterion("gx_ids <=", value, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsLike(String value) {
+            addCriterion("gx_ids like", value, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsNotLike(String value) {
+            addCriterion("gx_ids not like", value, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsIn(List<String> values) {
+            addCriterion("gx_ids in", values, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsNotIn(List<String> values) {
+            addCriterion("gx_ids not in", values, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsBetween(String value1, String value2) {
+            addCriterion("gx_ids between", value1, value2, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxIdsNotBetween(String value1, String value2) {
+            addCriterion("gx_ids not between", value1, value2, "gxIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesIsNull() {
+            addCriterion("gx_values is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesIsNotNull() {
+            addCriterion("gx_values is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesEqualTo(String value) {
+            addCriterion("gx_values =", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesNotEqualTo(String value) {
+            addCriterion("gx_values <>", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesGreaterThan(String value) {
+            addCriterion("gx_values >", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesGreaterThanOrEqualTo(String value) {
+            addCriterion("gx_values >=", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesLessThan(String value) {
+            addCriterion("gx_values <", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesLessThanOrEqualTo(String value) {
+            addCriterion("gx_values <=", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesLike(String value) {
+            addCriterion("gx_values like", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesNotLike(String value) {
+            addCriterion("gx_values not like", value, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesIn(List<String> values) {
+            addCriterion("gx_values in", values, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesNotIn(List<String> values) {
+            addCriterion("gx_values not in", values, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesBetween(String value1, String value2) {
+            addCriterion("gx_values between", value1, value2, "gxValues");
+            return (Criteria) this;
+        }
+
+        public Criteria andGxValuesNotBetween(String value1, String value2) {
+            addCriterion("gx_values not between", value1, value2, "gxValues");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -11,6 +11,10 @@ public class Line {
 
     private String value;
 
+    private String gxIds;
+
+    private String gxValues;
+
     public String getId() {
         return id;
     }
@@ -49,5 +53,21 @@ public class Line {
 
     public void setValue(String value) {
         this.value = value == null ? null : value.trim();
+    }
+
+    public String getGxIds() {
+        return gxIds;
+    }
+
+    public void setGxIds(String gxIds) {
+        this.gxIds = gxIds == null ? null : gxIds.trim();
+    }
+
+    public String getGxValues() {
+        return gxValues;
+    }
+
+    public void setGxValues(String gxValues) {
+        this.gxValues = gxValues == null ? null : gxValues.trim();
     }
 }

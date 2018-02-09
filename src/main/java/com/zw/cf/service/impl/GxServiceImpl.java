@@ -65,10 +65,16 @@ public class GxServiceImpl implements GxService {
         GxExample gxExample = new GxExample();
         GxExample.Criteria criteria = gxExample.createCriteria();
         String name = gxListFind.getName();
+        Integer type = gxListFind.getType();
         if (name == null || name.equals("")) {
         } else {
             criteria.andNameEqualTo(name);
         }
+        if (type == null || type.equals("")) {
+        } else {
+            criteria.andTypeEqualTo(type);
+        }
+
         criteria.andCorporationIdEqualTo(gxListFind.getCorporationId());
 
         try {

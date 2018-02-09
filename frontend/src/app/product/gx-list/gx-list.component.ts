@@ -12,6 +12,7 @@ export class GxListComponent implements OnInit {
   list = [];
   total = 0;
   pageNum = 1;
+  pageSize =10;
 
   constructor(private gxService: GxService,
               private router: Router) {
@@ -26,7 +27,7 @@ export class GxListComponent implements OnInit {
     (this.gxService as any).list({
       params: {
         params2: this.pageNum,
-        params3: 10
+        params3: this.pageSize
       }
     }, {})
       .then(response => {

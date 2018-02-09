@@ -7,6 +7,16 @@ public class GxListFind {
 
     private String corporationId;
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    private Integer type;
+
     public String getCorporationId() {
         return corporationId;
     }

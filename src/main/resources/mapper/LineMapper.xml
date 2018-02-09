@@ -7,6 +7,8 @@
     <result column="corporation_id" jdbcType="VARCHAR" property="corporationId" />
     <result column="img" jdbcType="VARCHAR" property="img" />
     <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="gx_ids" jdbcType="VARCHAR" property="gxIds" />
+    <result column="gx_values" jdbcType="VARCHAR" property="gxValues" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, corporation_id, img, value
+    id, name, corporation_id, img, value, gx_ids, gx_values
   </sql>
   <select id="selectByExample" parameterType="com.zw.cf.model.LineExample" resultMap="BaseResultMap">
     select
@@ -101,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.zw.cf.model.Line">
     insert into line (id, name, corporation_id, 
-      img, value)
+      img, value, gx_ids, 
+      gx_values)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{corporationId,jdbcType=VARCHAR}, 
-      #{img,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
+      #{img,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{gxIds,jdbcType=VARCHAR}, 
+      #{gxValues,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.Line">
     insert into line
@@ -123,6 +127,12 @@
       <if test="value != null">
         value,
       </if>
+      <if test="gxIds != null">
+        gx_ids,
+      </if>
+      <if test="gxValues != null">
+        gx_values,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -139,6 +149,12 @@
       </if>
       <if test="value != null">
         #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="gxIds != null">
+        #{gxIds,jdbcType=VARCHAR},
+      </if>
+      <if test="gxValues != null">
+        #{gxValues,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +182,12 @@
       <if test="record.value != null">
         value = #{record.value,jdbcType=VARCHAR},
       </if>
+      <if test="record.gxIds != null">
+        gx_ids = #{record.gxIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gxValues != null">
+        gx_values = #{record.gxValues,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +199,9 @@
       name = #{record.name,jdbcType=VARCHAR},
       corporation_id = #{record.corporationId,jdbcType=VARCHAR},
       img = #{record.img,jdbcType=VARCHAR},
-      value = #{record.value,jdbcType=VARCHAR}
+      value = #{record.value,jdbcType=VARCHAR},
+      gx_ids = #{record.gxIds,jdbcType=VARCHAR},
+      gx_values = #{record.gxValues,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +221,12 @@
       <if test="value != null">
         value = #{value,jdbcType=VARCHAR},
       </if>
+      <if test="gxIds != null">
+        gx_ids = #{gxIds,jdbcType=VARCHAR},
+      </if>
+      <if test="gxValues != null">
+        gx_values = #{gxValues,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -205,7 +235,9 @@
     set name = #{name,jdbcType=VARCHAR},
       corporation_id = #{corporationId,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
-      value = #{value,jdbcType=VARCHAR}
+      value = #{value,jdbcType=VARCHAR},
+      gx_ids = #{gxIds,jdbcType=VARCHAR},
+      gx_values = #{gxValues,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

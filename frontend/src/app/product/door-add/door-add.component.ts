@@ -45,8 +45,11 @@ export class DoorAddComponent implements OnInit {
       params: {
         params2: 1,
         params3: 1000
-      }
-    }, {})
+      },
+      data:{ type:1}
+    }, {
+
+    })
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
@@ -84,8 +87,8 @@ export class DoorAddComponent implements OnInit {
       .then(response => {
         const rep = (response as any);
         if (rep.code === 200) {
-          rep.data.gxIds = rep.data.gxIds.split(",");
-          rep.data.gxValues = rep.data.gxValues.split(",");
+          if(rep.data.gxIds)rep.data.gxIds = rep.data.gxIds.split(",");
+          if(rep.data.gxValues)rep.data.gxValues = rep.data.gxValues.split(",");
           this.door = rep.data;
           this.getGxList();
         } else {
@@ -99,7 +102,7 @@ export class DoorAddComponent implements OnInit {
     this.gxList.forEach(item => {
       if (item.active) {
         this.door.gxIds += item.id + ',';
-        this.door.gxValues += item.id + ',';
+        this.door.gxValues += item.price + ',';
       }
     });
     if (this.door.gxIds) {
@@ -117,7 +120,6 @@ export class DoorAddComponent implements OnInit {
           }
         });
     } else {
-      debugger;
       (this.doorService as any).add({data: this.door})
         .then(response => {
           const rep = (response as any);

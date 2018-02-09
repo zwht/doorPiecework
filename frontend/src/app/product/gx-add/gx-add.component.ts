@@ -18,6 +18,16 @@ export class GxAddComponent implements OnInit {
     serial: null,
     state: 0
   };
+  gxTypes=[
+    {
+      name:'门工序',
+      id:1
+    },
+    {
+      name:'线条工序',
+      id:2
+    }
+  ];
 
   constructor(private gxService: GxService,
               private router: Router,

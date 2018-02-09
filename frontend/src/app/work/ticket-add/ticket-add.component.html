@@ -112,14 +112,14 @@
           *
           <input type="number" [(ngModel)]="item.lbHeight" placeholder="">
           =
-          <input type="number" [(ngModel)]="item.lbSum" placeholder="">
+          <input type="number" [(ngModel)]="item.lbSum" (ngModelChange)="sumChange()" placeholder="">
         </td>
         <td class="input3">
           <input type="number" [(ngModel)]="item.dbWidth" placeholder="">
           *
           <input type="number" [(ngModel)]="item.dbHeight" placeholder="">
           =
-          <input type="number" [(ngModel)]="item.dbSum" placeholder="">
+          <input type="number" [(ngModel)]="item.dbSum" (ngModelChange)="sumChange()" placeholder="">
         </td>
         <td>
           <el-select [(model)]="item.colorId" placeholder="请选择"
@@ -144,7 +144,7 @@
         <td class="input2">
           <input type="number" [(ngModel)]="item.lineLength" placeholder="">
           =
-          <input type="number" [(ngModel)]="item.lineSum" placeholder="">
+          <input type="number"  [(ngModel)]="item.lineSum" (ngModelChange)="sumChange()" placeholder="">
         </td>
         <td>
           <textarea style="width: 100%; border: none;" [(ngModel)]="item.mark" placeholder=""></textarea>
@@ -169,7 +169,7 @@
         </td>
       </tr>
     </table>
-    <ul class="gxBox clear">
+    <ul class="gxBox clear2">
       <li *ngFor="let item of gxList let i=index">
         <div class="had">
           <b>{{item.name}}</b>

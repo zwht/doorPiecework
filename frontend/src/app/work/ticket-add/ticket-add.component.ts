@@ -189,6 +189,9 @@ export class TicketAddComponent implements OnInit {
 
   }
 
+  sumChange(){
+    this.calculate();
+  }
   dealersChange(e) {
     this.userListObj[3].forEach(item => {
       if (item.id === e) {
@@ -239,9 +242,9 @@ export class TicketAddComponent implements OnInit {
       .then(rep => {
         if (rep.data.data && rep.data.data.length) {
           rep.data.data.forEach(item => {
-            if (item.doorId && item.doorId != '0') item.doorImg = this.doorListObj[item.doorId].img;
-            if (item.colorId && item.colorId != '0') item.colorImg = this.colorListObj[item.colorId].img;
-            if (item.lineId && item.lineId != '0') item.lineImg = this.lineListObj[item.lineId].img;
+            if (item.doorId && item.doorId != '0'&&this.doorListObj[item.doorId]) item.doorImg = this.doorListObj[item.doorId].img;
+            if (item.colorId && item.colorId != '0'&&this.colorListObj[item.colorId]) item.colorImg = this.colorListObj[item.colorId].img;
+            if (item.lineId && item.lineId != '0'&&this.lineListObj[item.lineId]) item.lineImg = this.lineListObj[item.lineId].img;
           });
           this.productList = rep.data.data;
         }
