@@ -54,10 +54,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
         }
 
         if(token!=null){
-            User user = JwtUtils.unsign(token, User.class);
-            Date newDate=new Date();
-            Date date=user.getTokenTime();
-            if(newDate.getTime()<date.getTime()){
+            if(TokenUtil.getToken(token)){
                 return true;
             }
         }

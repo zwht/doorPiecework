@@ -14,7 +14,7 @@ import com.zw.plug.Response;
 import com.zw.plug.ZwUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.zw.plug.TokenUtil;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -65,9 +65,9 @@ public class UserServiceImpl implements UserService {
                     userOne.setTokenTime(date);
                 userOne.setPassword("");
 
-                String token = JwtUtils.sign(users.get(0), 30L * 24L * 3600L * 1000L);
+                String token = JwtUtils.sign(userOne, 30L * 24L * 3600L * 1000L);
                 userOne.setToken(token);
-
+                TokenUtil.setToken(userOne.getId(),token);
 
                 return response.success(userOne);
             } else {
