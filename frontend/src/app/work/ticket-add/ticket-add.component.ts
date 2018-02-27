@@ -178,6 +178,7 @@ export class TicketAddComponent implements OnInit {
         this.ticket.sumDoor += 1;
         this.ticket.sumTaoban += (item.lbSum+item.dbSum);
         this.ticket.sumLine += item.lineSum;
+
         item.doorObj.gx.forEach(fuck => {
           this.gxList.forEach(fuck1 => {
             if (fuck.id == fuck1.id) fuck1.price += fuck.price;

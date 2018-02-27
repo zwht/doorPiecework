@@ -14,7 +14,7 @@ export class GxAddComponent implements OnInit {
     id: null,
     name: null,
     price: null,
-    type: null,
+    type: 1,
     serial: null,
     state: 0
   };

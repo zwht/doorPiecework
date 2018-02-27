@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LineService} from '../../common/restService/LineService';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {GxService} from '../../common/restService/GxService';
+import {debug} from "util";
 @Component({
   selector: 'app-line-add',
   templateUrl: './line-add.component.html',
@@ -61,7 +62,7 @@ export class LineAddComponent implements OnInit {
         params2: 1,
         params3: 1000
       },
-      data: {type: 2}
+      data: {}
     }, {})
       .then(response => {
         const rep = (response as any);
@@ -75,7 +76,7 @@ export class LineAddComponent implements OnInit {
                 this.line.gxIds.forEach((obj, i) => {
                   if (obj == item.id) {
                     item.active = true;
-                    item.value = this.line.gxValues[i];
+                    item.price = this.line.gxValues[i];
                   }
                 })
               }

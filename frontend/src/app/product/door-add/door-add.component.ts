@@ -46,7 +46,7 @@ export class DoorAddComponent implements OnInit {
         params2: 1,
         params3: 1000
       },
-      data:{ type:1}
+      data:{ }
     }, {
 
     })
@@ -62,7 +62,7 @@ export class DoorAddComponent implements OnInit {
                 this.door.gxIds.forEach((obj,i) => {
                   if (obj == item.id){
                     item.active = true;
-                    item.value = this.door.gxValues[i];
+                    item.price = this.door.gxValues[i];
                   }
                 })
               }

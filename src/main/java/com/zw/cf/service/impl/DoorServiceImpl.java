@@ -79,6 +79,7 @@ public class DoorServiceImpl implements DoorService {
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
             List<Door> list = doorMapper.selectByExample(doorExample);
+
             long count = page.getTotal();
             List<DoorVo> doorList = new ArrayList<DoorVo>();
 
@@ -90,9 +91,16 @@ public class DoorServiceImpl implements DoorService {
             for (Door item : list) {
                 List<Gx> gxListObj1 = new ArrayList<Gx>();
                 String[] ss = item.getGxIds().split(",");
-                for (String a : ss) {
-                    gxListObj1.add(gxListObj.get(a));
+                String[] ss1 = item.getGxValues().split(",");
+                for(int i = 0; i < ss.length; i++){
+                    Gx gx1=new Gx();
+                    gx1.setId(gxListObj.get(ss[i]).getId());
+                    gx1.setCorporationId(gxListObj.get(ss[i]).getCorporationId());
+                    gx1.setName(gxListObj.get(ss[i]).getName());
+                    gx1.setPrice(Integer.valueOf(ss1[i]).intValue());
+                    gxListObj1.add(gx1);
                 }
+
                 doorList.add(new DoorVo(gxListObj1, item));
             }
             return response.success(pageObj.init(pageNum, pageSize, count, doorList));
