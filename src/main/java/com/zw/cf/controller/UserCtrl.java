@@ -1,18 +1,22 @@
 package com.zw.cf.controller;
 
 import com.wordnik.swagger.annotations.*;
+import com.zw.cf.model.Color;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
+import com.zw.cf.service.UtilsService;
+import com.zw.cf.vo.LoginVo;
+import com.zw.cf.vo.ResetPasswordVo;
+import com.zw.cf.vo.UserListFind;
+import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -22,12 +26,13 @@ import java.util.List;
 @Api("user")
 @Controller("userAction")
 @Scope("prototype")
-@RequestMapping("/rest/user")
+@RequestMapping("/cfmy/user")
 
 public class UserCtrl {
     @Autowired
     UserService userService;
-
+    @Autowired
+    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -37,40 +42,100 @@ public class UserCtrl {
             @ApiResponse(code = 202, message = "(系统错误)", response = String.class)})
 
     public Response add(
-            @ApiParam(required = true, value = "用户名", name = "userName") @RequestParam String userName,
-            @ApiParam(required = true, value = "密码", name = "passWord") @RequestParam String passWord
+            @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody User user,
+            HttpServletRequest request
     ) {
-        return userService.addUser(userName,passWord);
+        String token = request.getHeader("Authorization");
+        if (token == null) {
+            token = request.getParameter("Authorization");
+        }
+        User admin = JwtUtils.unsign(token, User.class);
+        String corporationid = admin.getCorporationId();
+        user.setCorporationId(corporationid);
+        return userService.addUser(user);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
+    @RequestMapping(value = "/list/{pageNum}/{pageSize}", method = RequestMethod.POST)
     @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
     public Response<PageObj<List<User>>> getUserList(
-            @ApiParam(required = true, value = "当前页面", name = "pageNum") @RequestParam Integer pageNum,
-            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @RequestParam Integer pageSize
+            @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
+            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
+            @ApiParam(required = true, value = "userListFind", name = "userListFind") @RequestBody UserListFind userListFind,
+            HttpServletRequest request
     ) {
-        return userService.getUserList(pageNum,pageSize);
+        User user = utilsService.getUser(request);
+        String corporationid = user.getCorporationId();
+        userListFind.setCorporationId(corporationid);
+        return userService.getUserList(pageNum, pageSize, userListFind);
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录接口", httpMethod = "POST", notes = "登录")
     public Response<User> login(
-            @ApiParam(required = true, value = "用户名", name = "userName") @RequestParam String userName,
-            @ApiParam(required = true, value = "密码", name = "passWord") @RequestParam String passWord
+            @ApiParam(required = true, value = "用户名密码", name = "LoginVo") @RequestBody LoginVo loginVo
     ) {
-        return userService.login(userName,passWord);
+        return userService.login(loginVo.getLoginName(), loginVo.getPassword());
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/refreshToken", method = RequestMethod.POST)
+    @ApiOperation(value = "更新token", httpMethod = "POST", notes = "更新token")
+    public Response<User> login(HttpServletRequest request,
+                                @ApiParam(required = true, value = "旧token", name = "token") @RequestParam String token) {
+
+        String token1 = request.getHeader("access_token");
+        if (token1 == null) {
+            token1 = request.getParameter("access_token");
+        }
+        return userService.refreshToken(token, token1);
     }
 
 
     @ResponseBody
-    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/getById", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
     public Response<User> selectByPrimaryKey(
-            @ApiParam(required = true, value = "用户Id", name = "userId") @RequestParam String userId
+            @ApiParam(required = true, value = "用户Id", name = "id") @RequestParam String id
     ) {
-        return userService.getUserById(userId);
+        return userService.getUserById(id);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
+    public Response<User> detail(HttpServletRequest request) {
+        User user = utilsService.getUser(request);
+        return userService.getUserById(user.getId());
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
+    public Response update(
+            @ApiParam(required = true, value = "color", name = "color") @RequestBody User user
+    ) {
+        return userService.update(user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+    @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
+    public Response resetPassword(
+            @ApiParam(required = true, value = "color", name = "color") @RequestBody ResetPasswordVo resetPasswordVo
+    ) {
+        return userService.resetPassword(resetPasswordVo);
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/del", method = RequestMethod.GET)
+    @ApiOperation(value = "根据id删除", httpMethod = "GET", notes = "删除")
+    public Response<User> del(
+            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
+    ) {
+        return userService.del(id);
     }
 }

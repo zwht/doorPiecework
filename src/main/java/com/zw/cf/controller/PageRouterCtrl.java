@@ -17,7 +17,7 @@ public class PageRouterCtrl {
     public String index(HttpServletResponse response){
         response.setContentType("text/html;charset=utf-8");
         response.setCharacterEncoding("utf-8");
-        return "login";
+        return "frontend/index";
     }
     @RequestMapping("/userlist")
     public String userlist(HttpServletResponse response){

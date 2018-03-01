@@ -3,10 +3,16 @@ package com.zw.plug;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zw.cf.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import java.io.PrintWriter;
+import java.util.Date;
 
 
 /**
@@ -31,6 +37,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
      *    接着再从最后一个拦截器往回执行所有的afterCompletion()
      */
     @Override
+    @ResponseBody
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         if ("GET".equalsIgnoreCase(request.getMethod())) {
@@ -38,23 +45,31 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
             //RequestUtil.saveRequest();
         }
         log.info("==============执行顺序: 1、preHandle================");
+
         String requestUri = request.getRequestURI();
-        String contextPath = request.getContextPath();
-        String url = requestUri.substring(contextPath.length());
+        if(requestUri.indexOf("/cfmy/user/login")!=-1) return true;
+        String token = request.getHeader("Authorization");
+        if(token==null){
+            token = request.getParameter("Authorization");
+        }
 
-        log.info("requestUri:"+requestUri);
-        log.info("contextPath:"+contextPath);
-        log.info("url:"+url);
+        if(token!=null){
+            if(TokenUtil.getToken(token)){
+                return true;
+            }
+        }
 
-        String username =  (String)request.getSession().getAttribute("user");
-        if(username != null){
-            //log.info("Interceptor：跳转到login页面！");
-            request.getRequestDispatcher("/app.jsp").forward(request, response);
-            return false;
-        }else
-            return true;
+        Response response1=new Response();
+        response1.failure(412, "没有权限，请登录");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String userJsonStr = objectMapper.writeValueAsString(response1);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.print(userJsonStr);
+        return false;
+
     }
-
     /**
      * 在业务处理器处理请求执行完成后,生成视图之前执行的动作
      * 可在modelAndView中加入数据，比如当前时间

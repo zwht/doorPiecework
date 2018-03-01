@@ -18,7 +18,7 @@
         </commentGenerator>
         <!-- 配置数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/zwDatabalse?characterEncoding=utf8"
+                        connectionURL="jdbc:mysql://localhost:3306/cfmy?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="zw200813" />
 
@@ -40,8 +40,17 @@
         </javaClientGenerator>
 
         <!-- table表生成对应的DoaminObject -->
+        <table tableName="code" domainObjectName="Code"></table>
         <table tableName="users" domainObjectName="User"></table>
-
+        <table tableName="token" domainObjectName="Token"></table>
+        <table tableName="color" domainObjectName="Color"></table>
+        <table tableName="corporation" domainObjectName="Corporation"></table>
+        <table tableName="door" domainObjectName="Door"></table>
+        <table tableName="gx" domainObjectName="Gx"></table>
+        <table tableName="process" domainObjectName="Process"></table>
+        <table tableName="product" domainObjectName="Product"></table>
+        <table tableName="ticket" domainObjectName="Ticket"></table>
+        <table tableName="line" domainObjectName="Line"></table>
     </context>
 
 </generatorConfiguration>
