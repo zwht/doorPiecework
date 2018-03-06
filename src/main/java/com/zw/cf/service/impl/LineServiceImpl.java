@@ -2,11 +2,15 @@ package com.zw.cf.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.zw.cf.dao.GxMapper;
 import com.zw.cf.dao.LineMapper;
+import com.zw.cf.model.Gx;
+import com.zw.cf.model.GxExample;
 import com.zw.cf.model.Line;
 import com.zw.cf.model.LineExample;
 import com.zw.cf.service.LineService;
 import com.zw.cf.vo.LineListFind;
+import com.zw.cf.vo.LineVo;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +20,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by zhaowei on 2017/8/17.
@@ -27,6 +29,9 @@ import java.util.Set;
 public class LineServiceImpl implements LineService {
     @Autowired
     LineMapper lineMapper;
+    @Autowired
+    GxMapper gxMapper;
+
 
     public Response add(Line line) {
         Response response = new Response();
@@ -73,9 +78,34 @@ public class LineServiceImpl implements LineService {
 
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
-            List list = lineMapper.selectByExample(lineExample);
+            List<Line> list = lineMapper.selectByExample(lineExample);
             long count = page.getTotal();
-            return response.success(pageObj.init(pageNum, pageSize, count, list));
+
+
+            List<LineVo> lineList = new ArrayList<LineVo>();
+
+            List<Gx> gxList = gxMapper.selectByExample(new GxExample());
+            Map<String, Gx> gxListObj = new HashMap<String, Gx>();
+            for (Gx gx : gxList) {
+                gxListObj.put(gx.getId(), gx);
+            }
+            for (Line item : list) {
+                List<Gx> gxListObj1 = new ArrayList<Gx>();
+                String[] ss = item.getGxIds().split(",");
+                String[] ss1 = item.getGxValues().split(",");
+                for(int i = 0; i < ss.length; i++){
+                    Gx gx1=new Gx();
+                    gx1.setId(gxListObj.get(ss[i]).getId());
+                    gx1.setCorporationId(gxListObj.get(ss[i]).getCorporationId());
+                    gx1.setName(gxListObj.get(ss[i]).getName());
+                    gx1.setPrice(Integer.valueOf(ss1[i]).intValue());
+                    gxListObj1.add(gx1);
+                }
+
+                lineList.add(new LineVo(gxListObj1, item));
+            }
+            return response.success(pageObj.init(pageNum, pageSize, count, lineList));
+
         } catch (Exception e) {
             return response.failure(400, e.getMessage());
         }
