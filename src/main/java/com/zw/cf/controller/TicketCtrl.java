@@ -61,6 +61,11 @@ public class TicketCtrl {
         User user = utilsService.getUser(request);
         String corporationId = user.getCorporationId();
         ticketListFind.setCorporationId(corporationId);
+        String roles=user.getRoles();
+        if(roles.equals("3")){
+            ticketListFind.setDealersId(user.getId());
+        }
+
         return ticketService.list(pageNum, pageSize, ticketListFind);
     }
 
@@ -89,9 +94,13 @@ public class TicketCtrl {
     @ApiOperation(value = "更新状态", httpMethod = "get", notes = "更新状态")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "更新状态")})
     public Response updateState(
-            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
-    ) {
-        return ticketService.updateState(id);
+            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id,
+            @ApiParam(required = true, value = "state", name = "state") @RequestParam Integer state,
+            HttpServletRequest request) {
+        User user = utilsService.getUser(request);
+        String roles=user.getRoles();
+
+        return ticketService.updateState(id,state);
     }
 
     @ResponseBody
