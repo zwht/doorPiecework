@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
                 return response.failure(400, "已经有此用户名！");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
     public Response update(User user) {
@@ -184,7 +184,7 @@ public class UserServiceImpl implements UserService {
                 return response.failure(400, "名字重复！");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
     public Response resetPassword(ResetPasswordVo resetPasswordVo){
@@ -214,7 +214,7 @@ public class UserServiceImpl implements UserService {
                 return response.failure(401,"密码错误");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
     public Response del(String id) {

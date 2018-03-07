@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
                 return response.failure(400, "名字重复！");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
 
@@ -94,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
             }
             return response.success(list);
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
 
@@ -146,7 +146,7 @@ public class ProductServiceImpl implements ProductService {
                 return response.success("修改成功");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
 

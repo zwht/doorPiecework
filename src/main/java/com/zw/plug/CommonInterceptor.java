@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -47,7 +49,22 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
         log.info("==============执行顺序: 1、preHandle================");
 
         String requestUri = request.getRequestURI();
-        if(requestUri.indexOf("/cfmy/user/login")!=-1) return true;
+        String[] noToken=new String[]{
+                "/cfmy/user/login",
+                "/cfmy/code/list",
+                "孙红雷",
+                "小猪",
+                "牙哥",
+                "黄磊"
+        };
+        int key=0;
+        for (int i = 0; i < noToken.length; i++) {
+            if(requestUri.indexOf(noToken[i])!=-1) {
+                key=1;
+            }
+        }
+        if(key==1) return true;
+
         String token = request.getHeader("Authorization");
         if(token==null){
             token = request.getParameter("Authorization");

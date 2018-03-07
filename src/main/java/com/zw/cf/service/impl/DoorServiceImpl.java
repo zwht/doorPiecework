@@ -59,7 +59,7 @@ public class DoorServiceImpl implements DoorService {
                 return response.failure(400, "名字重复！");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
 
@@ -147,7 +147,7 @@ public class DoorServiceImpl implements DoorService {
                 return response.failure(400, "名字重复！");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
 

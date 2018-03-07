@@ -64,7 +64,7 @@ public class CorporationServiceImp implements CorporationService {
                 return response.failure(400, "已经有相同名字公司！");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
 
@@ -97,7 +97,7 @@ public class CorporationServiceImp implements CorporationService {
                 return response.failure(400, "已经有相同名字公司！");
             }
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
 
@@ -110,7 +110,7 @@ public class CorporationServiceImp implements CorporationService {
             corporationMapper.updateByExampleSelective(corporation, example);
             return response.success("修改成功");
         } catch (Exception e) {
-            return response.failure(400, "未知错误！");
+            return response.failure(400, e.toString());
         }
     }
 
