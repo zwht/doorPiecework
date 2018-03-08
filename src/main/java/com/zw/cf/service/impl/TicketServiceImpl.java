@@ -156,11 +156,11 @@ public class TicketServiceImpl implements TicketService {
             Ticket ticket = new Ticket();
             ticket.setId(id);
             ticket.setState(state);
-            if (state.equals(830)) ticket.setOverTime(date);
+            if (state.equals(1050)) ticket.setOverTime(date);
             ticketMapper.updateByExampleSelective(ticket, example);
 
             //如果状态为800，生产完成，应修改进程状态计算工资
-            if (state.equals(800)) {
+            if (state.equals(1050)) {
                 //条件查询3句话
                 ProcessExample processExample = new ProcessExample();
                 ProcessExample.Criteria criteria1 = processExample.createCriteria();
