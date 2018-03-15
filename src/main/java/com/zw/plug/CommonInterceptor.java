@@ -52,10 +52,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
         String[] noToken=new String[]{
                 "/cfmy/user/login",
                 "/cfmy/code/list",
-                "孙红雷",
-                "小猪",
-                "牙哥",
-                "黄磊"
+                "/cfmy/file/upToken"
         };
         int key=0;
         for (int i = 0; i < noToken.length; i++) {
