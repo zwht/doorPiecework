@@ -39,6 +39,8 @@ public class Ticket {
 
     private Float sumLine;
 
+    private String userId;
+
     public String getId() {
         return id;
     }
@@ -181,5 +183,13 @@ public class Ticket {
 
     public void setSumLine(Float sumLine) {
         this.sumLine = sumLine;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 }
