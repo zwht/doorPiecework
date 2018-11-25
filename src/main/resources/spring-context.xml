@@ -34,6 +34,7 @@
         <!-- 自动扫描mapping.xml文件 -->
         <property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
         <property name="typeAliasesPackage" value="com.isea533.mybatis.model"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor">

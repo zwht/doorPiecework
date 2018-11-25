@@ -16,7 +16,7 @@ public class RedisUtil {
     // Redis的端口号
     private static int PORT = 6379;
     // 访问密码
-    private static String AUTH = "123456";
+    private static String AUTH = "";
 
     /**
      * 初始化Redis连接池

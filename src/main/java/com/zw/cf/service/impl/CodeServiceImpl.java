@@ -39,6 +39,7 @@ public class CodeServiceImpl implements CodeService {
             List<Code> codes = codeMapper.selectByExample(codeExample);
             if (codes.size() == 0) {
                 code.setId(date.getTime() + "");
+                // 验证字段，防止插入脏数据
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
                 Set<ConstraintViolation<Code>> constraintViolations= validator.validate(code);
