@@ -1,4 +1,4 @@
-package com.zw.cf.swagger;
+package com.zw.config;
 
 /**
  * Created by zhaowei on 2017/8/15.

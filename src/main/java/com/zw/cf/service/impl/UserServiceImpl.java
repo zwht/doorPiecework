@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    public Response getUserById(String id) {
-        Response response = new Response();
+    public Response<User> getUserById(String id) {
+        Response<User> response = new Response<User>();
         try {
             return response.success(userMapper.selectByPrimaryKey(id));
         } catch (Exception e) {

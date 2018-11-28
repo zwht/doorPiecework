@@ -19,8 +19,6 @@
     <context:component-scan base-package="com.zw"></context:component-scan>
 
     <!-- 静态资源文件，不会被Spring MVC拦截 -->
-
-
     <mvc:resources location="/swagger/" mapping="/swagger/**" />
     <mvc:resources location="/frontend/assets/" mapping="/assets/**" />
     <mvc:resources location="/frontend/" mapping="/frontend/**"/>
@@ -30,7 +28,7 @@
     <!-- 将 springSwaggerConfig加载到spring容器 -->
     <bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
     <!-- 将自定义的swagger配置类加载到spring容器 -->
-    <bean id="documentationConfig" class="com.zw.cf.swagger.SwaggerConfig" />
+    <bean id="documentationConfig" class="com.zw.config.SwaggerConfig" />
 
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->

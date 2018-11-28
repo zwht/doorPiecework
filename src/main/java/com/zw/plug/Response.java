@@ -10,68 +10,83 @@ public class Response<D> {
     private static final String OK = "ok";
     private static final String ERROR = "error";
 
-    private Integer code;
+    private Integer code = 200;
     private D data;
     private String message;
-    private List messageObj;
+    private List<Map<String, String>> messageObj;
+
 
     public Response success() {
-        meta(true, OK);
+        this.setMessage(OK);
         return this;
     }
 
     public Response success(D data) {
-        meta(true, OK);
-        this.data = data;
+        this.setMessage(OK);
+        this.setData(data);
         return this;
     }
 
     public Response failure(Integer code) {
-        meta(false, ERROR);
-        this.code=code;
+        this.setMessage(ERROR);
+        this.setCode(code);
         return this;
     }
 
-    public Response failure(Integer code,String message) {
-        meta(false, message);
-        this.code=code;
-        return this;
-    }
-    public Response failure(Integer code,List messageObj) {
-        meta(false,"验证错误");
-        this.messageObj=messageObj;
-        this.code=code;
+    public Response failure(Integer code, String message) {
+        this.setMessage(message);
+        this.setCode(code);
         return this;
     }
 
-    public Response validation(Set<ConstraintViolation> constraintViolations){
-        List<Map> list = new ArrayList<Map>();
+    public Response failure(Integer code, List messageObj) {
+        this.setMessage("验证错误");
+        this.setMessageObj(messageObj);
+        this.setCode(code);
+        return this;
+    }
+
+    public Response validation(Set<ConstraintViolation> constraintViolations) {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         for (ConstraintViolation constraintViolation : constraintViolations) {
-            Map<String,String> violatorList=new HashMap<String, String>();
-            violatorList.put("key",constraintViolation.getPropertyPath().toString());
-            violatorList.put("msg",constraintViolation.getMessage());
+            Map<String, String> violatorList = new HashMap<String, String>();
+            violatorList.put("key", constraintViolation.getPropertyPath().toString());
+            violatorList.put("msg", constraintViolation.getMessage());
+            violatorList.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
             list.add(violatorList);
         }
-        return this.failure(401,list);
+        return this.failure(401, list);
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public D getData() {
-        return this.data;
+        return data;
     }
+
+    public void setData(D data) {
+        this.data = data;
+    }
+
     public String getMessage() {
-        return this.message;
-    }
-    public Integer getCode() {
-        return this.code;
-    }
-    public List getMessageObj() {
-        return this.messageObj;
+        return message;
     }
 
-    public void meta(boolean success, String message) {
+    public void setMessage(String message) {
         this.message = message;
-        this.code=200;
     }
 
+    public List<Map<String, String>> getMessageObj() {
+        return messageObj;
+    }
 
+    public void setMessageObj(List<Map<String, String>> messageObj) {
+        this.messageObj = messageObj;
+    }
 }

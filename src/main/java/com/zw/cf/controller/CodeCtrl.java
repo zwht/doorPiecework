@@ -39,8 +39,6 @@ public class CodeCtrl {
             @ApiParam(required = true, value = "code", name = "code") @RequestBody Code code,
             HttpServletRequest request
     ) {
-
-
         return codeService.add(code);
     }
 
