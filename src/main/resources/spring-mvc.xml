@@ -12,24 +12,19 @@
 
 
     <!-- 启用MVC注解 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
     <!--打开spring的annotation支持-->
     <context:annotation-config></context:annotation-config>
     <!--设置Spring去那些包中找annotation-->
     <context:component-scan base-package="com.zw"></context:component-scan>
 
     <!-- 静态资源文件，不会被Spring MVC拦截 -->
-    <mvc:resources location="/swagger/" mapping="/swagger/**" />
-    <mvc:resources location="/frontend/assets/" mapping="/assets/**" />
+    <mvc:resources location="/frontend/assets/" mapping="/assets/**"/>
     <mvc:resources location="/frontend/" mapping="/frontend/**"/>
-    <mvc:resources location="/frontend/" mapping="/**"/>
 
     <!-- swagger接口api生成，的配置文件 -->
-    <!-- 将 springSwaggerConfig加载到spring容器 -->
-    <bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
-    <!-- 将自定义的swagger配置类加载到spring容器 -->
-    <bean id="documentationConfig" class="com.zw.config.SwaggerConfig" />
-
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -72,7 +67,7 @@
     <bean id="validator"
           class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <!-- 校验器-->
-        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
         <!-- 指定校验使用的资源文件，在文件中配置校验的错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties -->
         <!--<property name="validationMessageSource" ref="messageSource" />-->
     </bean>
@@ -80,16 +75,16 @@
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <!-- 资源文件名-->
-        <property name="basenames">
-            <list>
-                <!-- 这里支持多种寻址方式：classpath和file -->
-                <value>classpath:ValidationMessages.properties</value>
-            </list>
-        </property>
+        <!--<property name="basenames">-->
+        <!--<list>-->
+        <!--&lt;!&ndash; 这里支持多种寻址方式：classpath和file &ndash;&gt;-->
+        <!--<value>classpath:ValidationMessages.properties</value>-->
+        <!--</list>-->
+        <!--</property>-->
         <!-- 资源文件编码格式 -->
-        <property name="fileEncodings" value="utf-8" />
+        <property name="fileEncodings" value="utf-8"/>
         <!-- 对资源文件内容缓存时间，单位秒 -->
-        <property name="cacheSeconds" value="120" />
+        <property name="cacheSeconds" value="120"/>
     </bean>
     <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

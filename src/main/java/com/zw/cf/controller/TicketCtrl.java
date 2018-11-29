@@ -1,6 +1,6 @@
 package com.zw.cf.controller;
 
-import com.wordnik.swagger.annotations.*;
+import io.swagger.annotations.*;
 import com.zw.cf.model.Ticket;
 import com.zw.cf.model.User;
 import com.zw.cf.service.TicketService;

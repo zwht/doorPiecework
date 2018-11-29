@@ -49,10 +49,10 @@
     <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <!--欢迎界面-->
-  <welcome-file-list>
-    <welcome-file>/index.html</welcome-file>
-  </welcome-file-list>
+  <!--欢迎界面，没有用，只能在com.zw.cf.controller  PageRouterCtrl里配置一个路由来搞首页-->
+  <!--<welcome-file-list>-->
+    <!--<welcome-file>/frontend/index.html</welcome-file>-->
+  <!--</welcome-file-list>-->
 
   <!--　该servlet为tomcat,jetty等容器提供,将静态资源映射从/改为/static/目录，
   如原来访问　http://localhost/foo.css　,现在http://localhost/static/foo.css　-->

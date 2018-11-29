@@ -4,7 +4,7 @@ package com.zw.cf.controller;
  * Created by zhaowei on 2017/11/20.
  */
 
-import com.wordnik.swagger.annotations.*;
+import io.swagger.annotations.*;
 import com.zw.cf.model.User;
 import com.zw.cf.service.FileService;
 import com.zw.cf.service.UtilsService;

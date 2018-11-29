@@ -4,51 +4,37 @@ package com.zw.config;
  * Created by zhaowei on 2017/8/15.
  */
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.models.dto.ApiInfo;
-import com.mangofactory.swagger.plugin.EnableSwagger;
-import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
-
-@EnableSwagger
+@Configuration
+@EnableSwagger2
 public class SwaggerConfig {
 
-    private SpringSwaggerConfig springSwaggerConfig;
-
-    /**
-     * Required to autowire SpringSwaggerConfig
-     */
-    @Autowired
-    public void setSpringSwaggerConfig(SpringSwaggerConfig springSwaggerConfig)
-    {
-        this.springSwaggerConfig = springSwaggerConfig;
-    }
-
-    /**
-     * Every SwaggerSpringMvcPlugin bean is picked up by the swagger-mvc
-     * framework - allowing for multiple swagger groups i.e. same code base
-     * multiple swagger resource listings.
-     */
     @Bean
-    public SwaggerSpringMvcPlugin customImplementation()
-    {
-        return new SwaggerSpringMvcPlugin(this.springSwaggerConfig)
-                .apiInfo(apiInfo())
-                .includePatterns(".*?");
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .build()
+                .apiInfo(apiInfo());
     }
 
-    private ApiInfo apiInfo()
-    {
-        ApiInfo apiInfo = new ApiInfo(
-                "springmvc搭建swagger",
-                "spring-API swagger测试",
-                "My Apps API terms of service",
-                "1512763623@qq.com",
-                "web app",
-                "My Apps API License URL");
-        return apiInfo;
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("木门计价系统接口API 文档")
+                .description("重庆川峰门业公司旗下系统，HTTP对外开放接口")
+                .version("1.0.0")
+                .termsOfServiceUrl("http://xxx.xxx.com")
+                .license("LICENSE")
+                .licenseUrl("http://xxx.xxx.com")
+                .build();
     }
+
 }
