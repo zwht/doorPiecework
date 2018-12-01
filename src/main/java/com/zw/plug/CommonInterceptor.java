@@ -43,9 +43,15 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         if ("GET".equalsIgnoreCase(request.getMethod())) {
-
             //RequestUtil.saveRequest();
         }
+        // 跨越代码===start====
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Credentials", "true");
+        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, HEAD");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.addHeader("Access-Control-Max-Age", "3600");
+        // 跨越代码===end====
         log.info("==============执行顺序: 1、preHandle================");
 
         String requestUri = request.getRequestURI();
