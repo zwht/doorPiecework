@@ -12,36 +12,36 @@ public class Response<D> {
 
     private Integer code = 200;
     private D data;
-    private String message;
-    private List<Map<String, String>> messageObj;
+    private String msg;
+    private List<Map<String, String>> msgObj;
 
 
     public Response success() {
-        this.setMessage(OK);
+        this.setMsg(OK);
         return this;
     }
 
     public Response success(D data) {
-        this.setMessage(OK);
+        this.setMsg(OK);
         this.setData(data);
         return this;
     }
 
     public Response failure(Integer code) {
-        this.setMessage(ERROR);
+        this.setMsg(ERROR);
         this.setCode(code);
         return this;
     }
 
-    public Response failure(Integer code, String message) {
-        this.setMessage(message);
+    public Response failure(Integer code, String msg) {
+        this.setMsg(msg);
         this.setCode(code);
         return this;
     }
 
-    public Response failure(Integer code, List messageObj) {
-        this.setMessage("验证错误");
-        this.setMessageObj(messageObj);
+    public Response failure(Integer code, List msgObj) {
+        this.setMsg("验证错误");
+        this.setMsgObj(msgObj);
         this.setCode(code);
         return this;
     }
@@ -74,19 +74,19 @@ public class Response<D> {
         this.data = data;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public List<Map<String, String>> getMessageObj() {
-        return messageObj;
+    public List<Map<String, String>> getMsgObj() {
+        return msgObj;
     }
 
-    public void setMessageObj(List<Map<String, String>> messageObj) {
-        this.messageObj = messageObj;
+    public void setMsgObj(List<Map<String, String>> msgObj) {
+        this.msgObj = msgObj;
     }
 }

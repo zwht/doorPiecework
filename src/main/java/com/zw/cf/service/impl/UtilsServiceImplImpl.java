@@ -14,9 +14,9 @@ import java.io.InputStream;
 public class UtilsServiceImplImpl implements UtilsService {
 
     public User getUser(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         if (token == null) {
-            token = request.getParameter("Authorization");
+            token = request.getParameter("token");
         }
         User user = JwtUtils.unsign(token, User.class);
         return user;

@@ -56,11 +56,11 @@ public class UserCtrl {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/list/{pageNum}/{pageSize}", method = RequestMethod.POST)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
     public Response<PageObj<List<User>>> getUserList(
-            @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
-            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
+            @ApiParam(required = true, value = "当前页面", name = "pageNum") @RequestParam Integer pageNum,
+            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @RequestParam Integer pageSize,
             @ApiParam(required = true, value = "userListFind", name = "userListFind") @RequestBody UserListFind userListFind,
             HttpServletRequest request
     ) {
