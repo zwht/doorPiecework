@@ -6,8 +6,16 @@ package com.zw.cf.vo;
 public class UserListFind {
     private String corporationId;
     private String roles;
-
     private String name;
+    private String loginName;
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
 
     public String getRoles() {
         return roles;

@@ -1,9 +1,8 @@
 package com.zw.plug;
 
-import com.zw.cf.model.User;
+import com.zw.cf.vo.TokenVo;
 import redis.clients.jedis.Jedis;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,10 +10,14 @@ import java.util.List;
  */
 public class TokenUtil {
 
-    public static void setToken(String id, String token) {
+    public static void setToken(String id, String token, int ...args) {
         Jedis jedis = RedisUtil.getJedis();
         try {
             jedis.lpush(id, token);
+            if(args.length>0){
+                jedis.expire(id,args[0]);
+            }
+
         } catch (Exception e) {
             RedisUtil.close(jedis);
         } finally {
@@ -23,25 +26,21 @@ public class TokenUtil {
     }
 
     public static boolean getToken(String token) {
-        User user = JwtUtils.unsign(token, User.class);
+        TokenVo tokenVo = JwtUtils.unsign(token, TokenVo.class);
         Boolean key = false;
         Jedis jedis = RedisUtil.getJedis();
         try {
-            List<String> list = jedis.lrange(user.getId(), 0, 10);
+            List<String> list = jedis.lrange(tokenVo.getId(), 0, 10);
             for (int i = 0; i < list.size(); i++) {
-                User user1 = JwtUtils.unsign(list.get(i), User.class);
-                if (user1 == null) {
+                TokenVo tokenVo1 = JwtUtils.unsign(list.get(i), TokenVo.class);
+                if (tokenVo1 == null) {
                     continue;
                 }
-                Date newDate = new Date();
-                Date date = user1.getTokenTime();
-                if (newDate.getTime() < date.getTime()) {
-                    if (token.equals(list.get(i))) {
-                        key = true;
-                    }
-                } else {
-                    jedis.lrem(user.getId(), 0, list.get(i));
+                if (token.equals(list.get(i))) {
+                    key = true;
+                    break;
                 }
+                // jedis.lrem(user.getId(), 0, list.get(i));
             }
             RedisUtil.close(jedis);
             return key;

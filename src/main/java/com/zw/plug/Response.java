@@ -10,8 +10,8 @@ public class Response<D> {
     private static final String OK = "ok";
     private static final String ERROR = "error";
 
-    private Integer code = 200;
-    private D data;
+    private Integer status = 200;
+    private D response;
     private String msg;
     private List<Map<String, String>> msgObj;
 
@@ -21,28 +21,28 @@ public class Response<D> {
         return this;
     }
 
-    public Response success(D data) {
+    public Response success(D response) {
         this.setMsg(OK);
-        this.setData(data);
+        this.setResponse(response);
         return this;
     }
 
-    public Response failure(Integer code) {
+    public Response failure(Integer status) {
         this.setMsg(ERROR);
-        this.setCode(code);
+        this.setStatus(status);
         return this;
     }
 
-    public Response failure(Integer code, String msg) {
+    public Response failure(Integer status, String msg) {
         this.setMsg(msg);
-        this.setCode(code);
+        this.setStatus(status);
         return this;
     }
 
-    public Response failure(Integer code, List msgObj) {
+    public Response failure(Integer status, List msgObj) {
         this.setMsg("验证错误");
         this.setMsgObj(msgObj);
-        this.setCode(code);
+        this.setStatus(status);
         return this;
     }
 
@@ -55,23 +55,23 @@ public class Response<D> {
             violatorList.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
             list.add(violatorList);
         }
-        return this.failure(401, list);
+        return this.failure(400, list);
     }
 
-    public Integer getCode() {
-        return code;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public D getData() {
-        return data;
+    public D getResponse() {
+        return response;
     }
 
-    public void setData(D data) {
-        this.data = data;
+    public void setResponse(D response) {
+        this.response = response;
     }
 
     public String getMsg() {
