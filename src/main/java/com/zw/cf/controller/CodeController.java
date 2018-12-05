@@ -1,12 +1,11 @@
 package com.zw.cf.controller;
 
 import io.swagger.annotations.*;
-import com.zw.cf.model.Ticket;
+import com.zw.cf.model.Code;
 import com.zw.cf.model.User;
-import com.zw.cf.service.TicketService;
+import com.zw.cf.service.CodeService;
 import com.zw.cf.service.UtilsService;
-import com.zw.cf.vo.TicketListFind;
-import com.zw.plug.JwtUtils;
+import com.zw.cf.vo.CodeListFind;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,33 +19,26 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/12/11.
  */
-@Api("ticket")
-@Controller("ticketAction")
+@Api(value = "code", description = "码表")
+@Controller("codeAction")
 @Scope("prototype")
-@RequestMapping("/cfmy/ticket")
-public class TicketCtrl {
+@RequestMapping("/cfmy/code")
+public class CodeController {
 
     @Autowired
-    TicketService ticketService;
+    CodeService codeService;
     @Autowired
     UtilsService utilsService;
-
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加", httpMethod = "POST", notes = "添加")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "添加")})
     public Response add(
-            @ApiParam(required = true, value = "ticket", name = "ticket") @RequestBody Ticket ticket,
+            @ApiParam(required = true, value = "code", name = "code") @RequestBody Code code,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("Authorization");
-        if (token == null) {
-            token = request.getParameter("Authorization");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        ticket.setCorporationId(admin.getCorporationId());
-        return ticketService.add(ticket);
+        return codeService.add(code);
     }
 
     @ResponseBody
@@ -55,18 +47,10 @@ public class TicketCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "ticketListFind", name = "ticketListFind") @RequestBody TicketListFind ticketListFind,
-                    HttpServletRequest request
-    ) {
-        User user = utilsService.getUser(request);
-        String corporationId = user.getCorporationId();
-        ticketListFind.setCorporationId(corporationId);
-        String roles=user.getRoles();
-        if(roles.equals("3")){
-            ticketListFind.setDealersId(user.getId());
-        }
+            @ApiParam(required = true, value = "codeListFind", name = "codeListFind") @RequestBody CodeListFind codeListFind,
+            HttpServletRequest request) {
 
-        return ticketService.list(pageNum, pageSize, ticketListFind);
+        return codeService.list(pageNum, pageSize, codeListFind);
     }
 
     @ResponseBody
@@ -75,7 +59,7 @@ public class TicketCtrl {
     public Response<User> getById(
             @ApiParam(required = true, value = "Id", name = "Id") @RequestParam String id
     ) {
-        return ticketService.getById(id);
+        return codeService.getById(id);
     }
 
 
@@ -84,23 +68,9 @@ public class TicketCtrl {
     @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
     public Response update(
-            @ApiParam(required = true, value = "ticket", name = "ticket") @RequestBody Ticket ticket
+            @ApiParam(required = true, value = "code", name = "code") @RequestBody Code code
     ) {
-        return ticketService.update(ticket);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/updateState", method = RequestMethod.GET)
-    @ApiOperation(value = "更新状态", httpMethod = "get", notes = "更新状态")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "更新状态")})
-    public Response updateState(
-            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id,
-            @ApiParam(required = true, value = "state", name = "state") @RequestParam Integer state,
-            HttpServletRequest request) {
-        User user = utilsService.getUser(request);
-        String roles=user.getRoles();
-
-        return ticketService.updateState(id,state);
+        return codeService.update(code);
     }
 
     @ResponseBody
@@ -109,6 +79,6 @@ public class TicketCtrl {
     public Response<User> del(
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
     ) {
-        return ticketService.del(id);
+        return codeService.del(id);
     }
 }

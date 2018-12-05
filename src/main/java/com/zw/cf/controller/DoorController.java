@@ -1,11 +1,11 @@
 package com.zw.cf.controller;
 
 import io.swagger.annotations.*;
-import com.zw.cf.model.Gx;
+import com.zw.cf.model.Door;
 import com.zw.cf.model.User;
-import com.zw.cf.service.GxService;
+import com.zw.cf.service.DoorService;
 import com.zw.cf.service.UtilsService;
-import com.zw.cf.vo.GxListFind;
+import com.zw.cf.vo.DoorListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
@@ -20,33 +20,32 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/12/11.
  */
-@Api("gx")
-@Controller("gxAction")
+@Api(value = "door", description = "门")
+@Controller("doorAction")
 @Scope("prototype")
-@RequestMapping("/cfmy/gx")
-public class GxCtrl {
+@RequestMapping("/cfmy/door")
+public class DoorController {
 
     @Autowired
-    GxService gxService;
+    DoorService doorService;
     @Autowired
     UtilsService utilsService;
-
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加", httpMethod = "POST", notes = "添加")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "添加")})
     public Response add(
-            @ApiParam(required = true, value = "gx", name = "gx") @RequestBody Gx gx,
+            @ApiParam(required = true, value = "door", name = "door") @RequestBody Door door,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         if (token == null) {
-            token = request.getParameter("Authorization");
+            token = request.getParameter("token");
         }
         User admin = JwtUtils.unsign(token, User.class);
-        gx.setCorporationId(admin.getCorporationId());
-        return gxService.add(gx);
+        door.setCorporationId(admin.getCorporationId());
+        return doorService.add(door);
     }
 
     @ResponseBody
@@ -55,12 +54,12 @@ public class GxCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "gxListFind", name = "gxListFind") @RequestBody GxListFind gxListFind,
+            @ApiParam(required = true, value = "doorListFind", name = "doorListFind") @RequestBody DoorListFind doorListFind,
             HttpServletRequest request) {
         User user = utilsService.getUser(request);
         String corporationId = user.getCorporationId();
-        gxListFind.setCorporationId(corporationId);
-        return gxService.list(pageNum, pageSize, gxListFind);
+        doorListFind.setCorporationId(corporationId);
+        return doorService.list(pageNum, pageSize, doorListFind);
     }
 
     @ResponseBody
@@ -69,7 +68,7 @@ public class GxCtrl {
     public Response<User> getById(
             @ApiParam(required = true, value = "Id", name = "Id") @RequestParam String id
     ) {
-        return gxService.getById(id);
+        return doorService.getById(id);
     }
 
 
@@ -78,9 +77,9 @@ public class GxCtrl {
     @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
     public Response update(
-            @ApiParam(required = true, value = "gx", name = "gx") @RequestBody Gx gx
+            @ApiParam(required = true, value = "door", name = "door") @RequestBody Door door
     ) {
-        return gxService.update(gx);
+        return doorService.update(door);
     }
 
     @ResponseBody
@@ -89,6 +88,6 @@ public class GxCtrl {
     public Response<User> del(
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
     ) {
-        return gxService.del(id);
+        return doorService.del(id);
     }
 }

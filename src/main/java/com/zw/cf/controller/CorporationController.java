@@ -19,11 +19,11 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/10/23.
  */
-@Api("corporation")
+@Api(value = "corporation", description = "公司")
 @Controller("corporationAction")
 @Scope("prototype")
 @RequestMapping("/cfmy/corporation")
-public class CorporationCtrl {
+public class CorporationController {
 
     @Autowired
     CorporationService corporationService;

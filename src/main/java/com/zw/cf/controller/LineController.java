@@ -1,11 +1,11 @@
 package com.zw.cf.controller;
 
 import io.swagger.annotations.*;
-import com.zw.cf.model.Door;
+import com.zw.cf.model.Line;
 import com.zw.cf.model.User;
-import com.zw.cf.service.DoorService;
+import com.zw.cf.service.LineService;
 import com.zw.cf.service.UtilsService;
-import com.zw.cf.vo.DoorListFind;
+import com.zw.cf.vo.LineListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
@@ -20,32 +20,33 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/12/11.
  */
-@Api("door")
-@Controller("doorAction")
+@Api(value = "line", description = "线条")
+@Controller("lineAction")
 @Scope("prototype")
-@RequestMapping("/cfmy/door")
-public class DoorCtrl {
+@RequestMapping("/cfmy/line")
+public class LineController {
 
     @Autowired
-    DoorService doorService;
+    LineService lineService;
     @Autowired
     UtilsService utilsService;
+
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加", httpMethod = "POST", notes = "添加")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "添加")})
     public Response add(
-            @ApiParam(required = true, value = "door", name = "door") @RequestBody Door door,
+            @ApiParam(required = true, value = "line", name = "line") @RequestBody Line line,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         if (token == null) {
-            token = request.getParameter("Authorization");
+            token = request.getParameter("token");
         }
         User admin = JwtUtils.unsign(token, User.class);
-        door.setCorporationId(admin.getCorporationId());
-        return doorService.add(door);
+        line.setCorporationId(admin.getCorporationId());
+        return lineService.add(line);
     }
 
     @ResponseBody
@@ -54,12 +55,12 @@ public class DoorCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "doorListFind", name = "doorListFind") @RequestBody DoorListFind doorListFind,
+            @ApiParam(required = true, value = "lineListFind", name = "lineListFind") @RequestBody LineListFind lineListFind,
             HttpServletRequest request) {
         User user = utilsService.getUser(request);
         String corporationId = user.getCorporationId();
-        doorListFind.setCorporationId(corporationId);
-        return doorService.list(pageNum, pageSize, doorListFind);
+        lineListFind.setCorporationId(corporationId);
+        return lineService.list(pageNum, pageSize, lineListFind);
     }
 
     @ResponseBody
@@ -68,7 +69,7 @@ public class DoorCtrl {
     public Response<User> getById(
             @ApiParam(required = true, value = "Id", name = "Id") @RequestParam String id
     ) {
-        return doorService.getById(id);
+        return lineService.getById(id);
     }
 
 
@@ -77,9 +78,9 @@ public class DoorCtrl {
     @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
     public Response update(
-            @ApiParam(required = true, value = "door", name = "door") @RequestBody Door door
+            @ApiParam(required = true, value = "line", name = "line") @RequestBody Line line
     ) {
-        return doorService.update(door);
+        return lineService.update(line);
     }
 
     @ResponseBody
@@ -88,6 +89,6 @@ public class DoorCtrl {
     public Response<User> del(
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
     ) {
-        return doorService.del(id);
+        return lineService.del(id);
     }
 }

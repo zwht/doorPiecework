@@ -20,11 +20,11 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/12/11.
  */
-@Api("color")
+@Api(value = "color", description = "颜色")
 @Controller("colorAction")
 @Scope("prototype")
 @RequestMapping("/cfmy/color")
-public class ColorCtrl {
+public class ColorController {
 
     @Autowired
     ColorService colorService;
@@ -39,9 +39,9 @@ public class ColorCtrl {
             @ApiParam(required = true, value = "color", name = "color") @RequestBody Color color,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         if (token == null) {
-            token = request.getParameter("Authorization");
+            token = request.getParameter("token");
         }
         User admin = JwtUtils.unsign(token, User.class);
         color.setCorporationId(admin.getCorporationId());

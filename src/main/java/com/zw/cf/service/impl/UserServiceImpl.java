@@ -6,6 +6,7 @@ import com.zw.cf.dao.UserMapper;
 import com.zw.cf.model.User;
 import com.zw.cf.model.UserExample;
 import com.zw.cf.service.UserService;
+import com.zw.cf.vo.responseVo.ResLoginVo;
 import com.zw.cf.vo.ResetPasswordVo;
 import com.zw.cf.vo.TokenVo;
 import com.zw.cf.vo.UserListFind;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public Response login(String loginName, String password) {
-        Response<TokenVo> response = new Response();
+        Response<ResLoginVo> response = new Response();
         try {
             if (loginName == null || loginName == "") {
                 throw new Exception("登录名不能为空!");
@@ -67,18 +68,17 @@ public class UserServiceImpl implements UserService {
                 // 把user对象属性赋值给tokenVo对象
                 BeanUtils.copyProperties(userOne, tokenVo);
                 // 设置jwt过期时间为2小时
-                String token = JwtUtils.sign(tokenVo, 1000 * 60 * 60 * 2);
+                String token = JwtUtils.sign(tokenVo, 1000 * 60 * 60 * 2*100000);
                 // 设置redas存token为2小时
                 TokenUtil.setToken(tokenVo.getId(), token, 60 * 60 * 2);
+                // 使用ZwUtil.objectToMap把user对象转为map对象，然后map添加token返回
+                // Map<String, Object> userJson = ZwUtil.objectToMap(userOne);
+                // userJson.put("token", token);
+                ResLoginVo resLoginVo=new ResLoginVo();
+                BeanUtils.copyProperties(userOne, resLoginVo);
+                resLoginVo.setToken(token);
 
-//                Map<String, Object> userJson = new HashMap<String, Object>();
-//                userJson.put("token", token);
-//                userJson.put("name", userOne.getName());
-//                userJson.put("avatar", userOne.getAvatar());
-//                userJson.put("id", userOne.getId());
-//                userJson.put("state", userOne.getState());
-
-                return response.success(tokenVo);
+                return response.success(resLoginVo);
             } else {
                 return response.failure(400, "密码错误！");
             }

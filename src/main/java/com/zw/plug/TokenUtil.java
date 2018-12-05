@@ -25,7 +25,7 @@ public class TokenUtil {
         }
     }
 
-    public static boolean getToken(String token) {
+    public static boolean isAuth(String token) {
         TokenVo tokenVo = JwtUtils.unsign(token, TokenVo.class);
         Boolean key = false;
         Jedis jedis = RedisUtil.getJedis();
@@ -42,6 +42,8 @@ public class TokenUtil {
                 }
                 // jedis.lrem(user.getId(), 0, list.get(i));
             }
+
+
             RedisUtil.close(jedis);
             return key;
         } catch (Exception e) {

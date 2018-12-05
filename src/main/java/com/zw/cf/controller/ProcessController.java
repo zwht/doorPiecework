@@ -1,11 +1,13 @@
 package com.zw.cf.controller;
 
 import io.swagger.annotations.*;
-import com.zw.cf.model.Product;
+import com.zw.cf.model.Process;
 import com.zw.cf.model.User;
-import com.zw.cf.service.ProductService;
-import com.zw.cf.vo.AddListProductVo;
-import com.zw.cf.vo.ProductListFind;
+import com.zw.cf.service.ProcessService;
+import com.zw.cf.service.UtilsService;
+import com.zw.cf.vo.AddListProcessVo;
+import com.zw.cf.vo.ProcessListFind;
+import com.zw.cf.vo.SalaryListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
@@ -20,53 +22,55 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/12/11.
  */
-@Api("product")
-@Controller("productAction")
+@Api(value = "process", description = "任务进程")
+@Controller("processAction")
 @Scope("prototype")
-@RequestMapping("/cfmy/product")
-public class ProductCtrl {
+@RequestMapping("/cfmy/process")
+public class ProcessController {
 
     @Autowired
-    ProductService productService;
-
+    ProcessService processService;
+    @Autowired
+    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加", httpMethod = "POST", notes = "添加")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "添加")})
     public Response add(
-            @ApiParam(required = true, value = "product", name = "product") @RequestBody Product product,
+            @ApiParam(required = true, value = "process", name = "process") @RequestBody Process process,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         if (token == null) {
-            token = request.getParameter("Authorization");
+            token = request.getParameter("token");
         }
         User admin = JwtUtils.unsign(token, User.class);
-        product.setCorporationId(admin.getCorporationId());
-        return productService.add(product);
+        process.setCorporationId(admin.getCorporationId());
+        return processService.add(process);
     }
+
 
     @ResponseBody
     @RequestMapping(value = "/addList", method = RequestMethod.POST)
     @ApiOperation(value = "添加", httpMethod = "POST", notes = "添加")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "添加")})
     public Response addList(
-            @ApiParam(required = true, value = "product", name = "product") @RequestBody AddListProductVo addListProductVo,
+            @ApiParam(required = true, value = "process", name = "process") @RequestBody AddListProcessVo addListProcessVo,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         if (token == null) {
-            token = request.getParameter("Authorization");
+            token = request.getParameter("token");
         }
         User admin = JwtUtils.unsign(token, User.class);
 
-        List<Product> products= addListProductVo.getProducts();
-        for(Product product:products){
-            product.setCorporationId(admin.getCorporationId());
-            product.setTicketId(addListProductVo.getTicketId());
+        List<Process> processs= addListProcessVo.getProcesss();
+        for(Process process:processs){
+            process.setCorporationId(admin.getCorporationId());
+            process.setTicketId(addListProcessVo.getTicketId());
         }
-        return productService.addList(products);
+        return processService.addList(processs);
     }
 
     @ResponseBody
@@ -75,10 +79,26 @@ public class ProductCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "productListFind", name = "productListFind") @RequestBody ProductListFind productListFind
+            @ApiParam(required = true, value = "processListFind", name = "processListFind") @RequestBody ProcessListFind processListFind
     ) {
-        return productService.list(pageNum, pageSize, productListFind);
+
+        return processService.list(pageNum, pageSize, processListFind);
     }
+    @ResponseBody
+    @RequestMapping(value = "/salary/{pageNum}/{pageSize}", method = RequestMethod.POST)
+    @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
+    public Response<PageObj<List<User>>> Salary(
+            @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
+            @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
+            @ApiParam(required = true, value = "processListFind", name = "processListFind") @RequestBody SalaryListFind salaryListFind,
+            HttpServletRequest request
+    ) {
+        User user = utilsService.getUser(request);
+        String corporationId = user.getCorporationId();
+        salaryListFind.setCorporationId(corporationId);
+        return processService.salary(pageNum, pageSize, salaryListFind);
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/getById", method = RequestMethod.GET)
@@ -86,17 +106,18 @@ public class ProductCtrl {
     public Response<User> getById(
             @ApiParam(required = true, value = "Id", name = "Id") @RequestParam String id
     ) {
-        return productService.getById(id);
+        return processService.getById(id);
     }
+
 
     @ResponseBody
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
     public Response update(
-            @ApiParam(required = true, value = "product", name = "product") @RequestBody Product product
+            @ApiParam(required = true, value = "process", name = "process") @RequestBody Process process
     ) {
-        return productService.update(product);
+        return processService.update(process);
     }
 
     @ResponseBody
@@ -105,6 +126,6 @@ public class ProductCtrl {
     public Response<User> del(
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
     ) {
-        return productService.del(id);
+        return processService.del(id);
     }
 }

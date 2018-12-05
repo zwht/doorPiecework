@@ -1,6 +1,5 @@
 package com.zw.cf.vo;
 
-import com.google.gson.JsonArray;
 
 import java.util.List;
 

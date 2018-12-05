@@ -76,7 +76,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
         }
 
         if (token != null) {
-            if (TokenUtil.getToken(token)) {
+            if (TokenUtil.isAuth(token)) {
                 return true;
             }
         }

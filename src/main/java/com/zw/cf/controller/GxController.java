@@ -1,11 +1,12 @@
 package com.zw.cf.controller;
 
 import io.swagger.annotations.*;
-import com.zw.cf.model.Code;
+import com.zw.cf.model.Gx;
 import com.zw.cf.model.User;
-import com.zw.cf.service.CodeService;
+import com.zw.cf.service.GxService;
 import com.zw.cf.service.UtilsService;
-import com.zw.cf.vo.CodeListFind;
+import com.zw.cf.vo.GxListFind;
+import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +20,33 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/12/11.
  */
-@Api("code")
-@Controller("codeAction")
+@Api(value = "gx", description = "工序")
+@Controller("gxAction")
 @Scope("prototype")
-@RequestMapping("/cfmy/code")
-public class CodeCtrl {
+@RequestMapping("/cfmy/gx")
+public class GxController {
 
     @Autowired
-    CodeService codeService;
+    GxService gxService;
     @Autowired
     UtilsService utilsService;
+
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加", httpMethod = "POST", notes = "添加")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "添加")})
     public Response add(
-            @ApiParam(required = true, value = "code", name = "code") @RequestBody Code code,
+            @ApiParam(required = true, value = "gx", name = "gx") @RequestBody Gx gx,
             HttpServletRequest request
     ) {
-        return codeService.add(code);
+        String token = request.getHeader("token");
+        if (token == null) {
+            token = request.getParameter("token");
+        }
+        User admin = JwtUtils.unsign(token, User.class);
+        gx.setCorporationId(admin.getCorporationId());
+        return gxService.add(gx);
     }
 
     @ResponseBody
@@ -47,10 +55,12 @@ public class CodeCtrl {
     public Response<PageObj<List<User>>> List(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @PathVariable Integer pageNum,
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
-            @ApiParam(required = true, value = "codeListFind", name = "codeListFind") @RequestBody CodeListFind codeListFind,
+            @ApiParam(required = true, value = "gxListFind", name = "gxListFind") @RequestBody GxListFind gxListFind,
             HttpServletRequest request) {
-
-        return codeService.list(pageNum, pageSize, codeListFind);
+        User user = utilsService.getUser(request);
+        String corporationId = user.getCorporationId();
+        gxListFind.setCorporationId(corporationId);
+        return gxService.list(pageNum, pageSize, gxListFind);
     }
 
     @ResponseBody
@@ -59,7 +69,7 @@ public class CodeCtrl {
     public Response<User> getById(
             @ApiParam(required = true, value = "Id", name = "Id") @RequestParam String id
     ) {
-        return codeService.getById(id);
+        return gxService.getById(id);
     }
 
 
@@ -68,9 +78,9 @@ public class CodeCtrl {
     @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
     public Response update(
-            @ApiParam(required = true, value = "code", name = "code") @RequestBody Code code
+            @ApiParam(required = true, value = "gx", name = "gx") @RequestBody Gx gx
     ) {
-        return codeService.update(code);
+        return gxService.update(gx);
     }
 
     @ResponseBody
@@ -79,6 +89,6 @@ public class CodeCtrl {
     public Response<User> del(
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
     ) {
-        return codeService.del(id);
+        return gxService.del(id);
     }
 }

@@ -1,11 +1,11 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.requestVo.ReqLoginVo;
+import com.zw.cf.vo.responseVo.ResLoginVo;
 import io.swagger.annotations.*;
-import com.zw.cf.model.Color;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
 import com.zw.cf.service.UtilsService;
-import com.zw.cf.vo.LoginVo;
 import com.zw.cf.vo.ResetPasswordVo;
 import com.zw.cf.vo.UserListFind;
 import com.zw.plug.JwtUtils;
@@ -23,12 +23,12 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/6/24.
  */
-@Api("user")
+@Api(value = "user", description = "用户")
 @Controller("userAction")
 @Scope("prototype")
 @RequestMapping("/cfmy/user")
 
-public class UserCtrl {
+public class UserController {
     @Autowired
     UserService userService;
     @Autowired
@@ -45,9 +45,9 @@ public class UserCtrl {
             @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody User user,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         if (token == null) {
-            token = request.getParameter("Authorization");
+            token = request.getParameter("token");
         }
         User admin = JwtUtils.unsign(token, User.class);
         String corporationid = admin.getCorporationId();
@@ -73,10 +73,10 @@ public class UserCtrl {
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录接口", httpMethod = "POST", notes = "登录")
-    public Response<User> login(
-            @ApiParam(required = true, value = "用户名密码", name = "LoginVo") @RequestBody LoginVo loginVo
+    public Response<ResLoginVo> login(
+            @ApiParam(required = true, value = "用户名密码", name = "LoginVo") @RequestBody ReqLoginVo reqLoginVo
     ) {
-        return userService.login(loginVo.getLoginName(), loginVo.getPassword());
+        return userService.login(reqLoginVo.getLoginName(), reqLoginVo.getPassword());
     }
 
     @ResponseBody
@@ -97,7 +97,7 @@ public class UserCtrl {
     @RequestMapping(value = "/getById", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
     public Response<User> selectByPrimaryKey(
-            @ApiParam(required = true, value = "用户Id", name = "id") @RequestParam String id
+            @ApiParam(required = true, value = "用户Id", name = "id", defaultValue = "121") @RequestParam String id
     ) {
         return userService.getUserById(id);
     }
@@ -133,7 +133,7 @@ public class UserCtrl {
     @ResponseBody
     @RequestMapping(value = "/del", method = RequestMethod.GET)
     @ApiOperation(value = "根据id删除", httpMethod = "GET", notes = "删除")
-    public Response<User> del(
+    public Response del(
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
     ) {
         return userService.del(id);

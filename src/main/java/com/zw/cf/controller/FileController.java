@@ -24,13 +24,13 @@ import java.net.URLDecoder;
 /**
  * Created by zhaowei on 2017/6/24.
  */
-@Api("file")
+@Api(value = "file", description = "文件管理")
 @Controller("fileAction")
 @Scope("prototype")
 @RequestMapping("/cfmy/file")
 
 
-public class FileCtrl {
+public class FileController {
     @Autowired
     FileService fileService;
     @Autowired
