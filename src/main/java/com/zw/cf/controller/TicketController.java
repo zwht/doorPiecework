@@ -1,10 +1,10 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.TokenVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.Ticket;
 import com.zw.cf.model.User;
 import com.zw.cf.service.TicketService;
-import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.TicketListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -28,8 +28,6 @@ public class TicketController {
 
     @Autowired
     TicketService ticketService;
-    @Autowired
-    UtilsService utilsService;
 
 
     @ResponseBody
@@ -40,12 +38,8 @@ public class TicketController {
             @ApiParam(required = true, value = "ticket", name = "ticket") @RequestBody Ticket ticket,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        ticket.setCorporationId(admin.getCorporationId());
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        ticket.setCorporationId(tokenVo.getCorporationId());
         return ticketService.add(ticket);
     }
 
@@ -58,12 +52,11 @@ public class TicketController {
             @ApiParam(required = true, value = "ticketListFind", name = "ticketListFind") @RequestBody TicketListFind ticketListFind,
                     HttpServletRequest request
     ) {
-        User user = utilsService.getUser(request);
-        String corporationId = user.getCorporationId();
-        ticketListFind.setCorporationId(corporationId);
-        String roles=user.getRoles();
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        ticketListFind.setCorporationId(tokenVo.getCorporationId());
+        String roles=tokenVo.getRoles();
         if(roles.equals("3")){
-            ticketListFind.setDealersId(user.getId());
+            ticketListFind.setDealersId(tokenVo.getId());
         }
 
         return ticketService.list(pageNum, pageSize, ticketListFind);
@@ -97,9 +90,8 @@ public class TicketController {
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id,
             @ApiParam(required = true, value = "state", name = "state") @RequestParam Integer state,
             HttpServletRequest request) {
-        User user = utilsService.getUser(request);
-        String roles=user.getRoles();
-
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        String roles=tokenVo.getRoles();
         return ticketService.updateState(id,state);
     }
 

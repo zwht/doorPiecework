@@ -25,30 +25,26 @@ public class TokenUtil {
         }
     }
 
-    public static boolean isAuth(String token) {
+    public static TokenVo getTokenVo(String token) {
         TokenVo tokenVo = JwtUtils.unsign(token, TokenVo.class);
-        Boolean key = false;
         Jedis jedis = RedisUtil.getJedis();
         try {
             List<String> list = jedis.lrange(tokenVo.getId(), 0, 10);
             for (int i = 0; i < list.size(); i++) {
-                TokenVo tokenVo1 = JwtUtils.unsign(list.get(i), TokenVo.class);
-                if (tokenVo1 == null) {
+                if (JwtUtils.unsign(list.get(i), TokenVo.class) == null) {
                     continue;
                 }
                 if (token.equals(list.get(i))) {
-                    key = true;
-                    break;
+                    RedisUtil.close(jedis);
+                    return tokenVo;
                 }
                 // jedis.lrem(user.getId(), 0, list.get(i));
             }
-
-
             RedisUtil.close(jedis);
-            return key;
+            return null;
         } catch (Exception e) {
             RedisUtil.close(jedis);
-            return false;
+            return null;
         }
     }
 }

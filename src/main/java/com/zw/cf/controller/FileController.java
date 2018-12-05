@@ -4,22 +4,21 @@ package com.zw.cf.controller;
  * Created by zhaowei on 2017/11/20.
  */
 
+import com.zw.cf.vo.TokenVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.User;
 import com.zw.cf.service.FileService;
-import com.zw.cf.service.UtilsService;
-import com.zw.cf.vo.FileAddBase64;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import sun.misc.BASE64Decoder;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.net.URLDecoder;
+
 
 /**
  * Created by zhaowei on 2017/6/24.
@@ -27,31 +26,28 @@ import java.net.URLDecoder;
 @Api(value = "file", description = "文件管理")
 @Controller("fileAction")
 @Scope("prototype")
-@RequestMapping("/cfmy/file")
+@RequestMapping("/cfmy")
 
 
 public class FileController {
     @Autowired
     FileService fileService;
-    @Autowired
-    UtilsService utilsService;
 
     /*
      * 通过流的方式上传文件
      * @RequestParam("file") 将name=file控件得到的文件封装成CommonsMultipartFile 对象
      */
     @ResponseBody
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/file/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加用户", httpMethod = "POST", notes = "添加用户")
     public Response add(@RequestParam("file") CommonsMultipartFile file,
                         @ApiParam(required = true, value = "产品ID", name = "id") @RequestParam String id,
                         HttpServletRequest request) throws IOException {
 
-        User user = utilsService.getUser(request);
-        String corporationid = user.getCorporationId();
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
         //获取输入流 CommonsMultipartFile 中可以直接得到文件的流
         InputStream is = file.getInputStream();
-        Response response = fileService.add(is, id, corporationid);
+        Response response = fileService.add(is, id, tokenVo.getCorporationId());
         is.close();
         return response;
     }
@@ -60,7 +56,7 @@ public class FileController {
      * 获取upToken
      */
     @ResponseBody
-    @RequestMapping(value = "/upToken", method = RequestMethod.GET)
+    @RequestMapping(value = "/public/file/upToken", method = RequestMethod.GET)
     @ApiOperation(value = "upToken", httpMethod = "GET", notes = "upToken")
     public Response upToken() throws IOException {
         return fileService.upToken();
@@ -70,7 +66,7 @@ public class FileController {
      * 删除图片
      */
     @ResponseBody
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/file/delete", method = RequestMethod.GET)
     @ApiOperation(value = "delete", httpMethod = "GET", notes = "delete")
     public Response delete(
             @ApiParam(required = true, value = "key", name = "key") @RequestParam String key

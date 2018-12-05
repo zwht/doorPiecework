@@ -1,5 +1,6 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.TokenVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.Product;
 import com.zw.cf.model.User;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by zhaowei on 2017/12/11.
  */
-@Api(value = "product", description = "生产产品")
+@Api(value = "product", tags = "生产产品")
 @Controller("productAction")
 @Scope("prototype")
 @RequestMapping("/cfmy/product")
@@ -38,12 +39,8 @@ public class ProductController {
             @ApiParam(required = true, value = "product", name = "product") @RequestBody Product product,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        product.setCorporationId(admin.getCorporationId());
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        product.setCorporationId(tokenVo.getCorporationId());
         return productService.add(product);
     }
 
@@ -55,9 +52,9 @@ public class ProductController {
             @ApiParam(required = true, value = "product", name = "product") @RequestBody AddListProductVo addListProductVo,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
+        String token = request.getHeader("Authorization");
         if (token == null) {
-            token = request.getParameter("token");
+            token = request.getParameter("Authorization");
         }
         User admin = JwtUtils.unsign(token, User.class);
 

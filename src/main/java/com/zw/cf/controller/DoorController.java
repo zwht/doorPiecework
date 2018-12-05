@@ -1,10 +1,10 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.TokenVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.Door;
 import com.zw.cf.model.User;
 import com.zw.cf.service.DoorService;
-import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.DoorListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -28,8 +28,6 @@ public class DoorController {
 
     @Autowired
     DoorService doorService;
-    @Autowired
-    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -39,12 +37,8 @@ public class DoorController {
             @ApiParam(required = true, value = "door", name = "door") @RequestBody Door door,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        door.setCorporationId(admin.getCorporationId());
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        door.setCorporationId(tokenVo.getCorporationId());
         return doorService.add(door);
     }
 
@@ -56,9 +50,8 @@ public class DoorController {
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
             @ApiParam(required = true, value = "doorListFind", name = "doorListFind") @RequestBody DoorListFind doorListFind,
             HttpServletRequest request) {
-        User user = utilsService.getUser(request);
-        String corporationId = user.getCorporationId();
-        doorListFind.setCorporationId(corporationId);
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        doorListFind.setCorporationId(tokenVo.getCorporationId());
         return doorService.list(pageNum, pageSize, doorListFind);
     }
 

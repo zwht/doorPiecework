@@ -1,10 +1,10 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.TokenVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.Process;
 import com.zw.cf.model.User;
 import com.zw.cf.service.ProcessService;
-import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.AddListProcessVo;
 import com.zw.cf.vo.ProcessListFind;
 import com.zw.cf.vo.SalaryListFind;
@@ -30,8 +30,6 @@ public class ProcessController {
 
     @Autowired
     ProcessService processService;
-    @Autowired
-    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -41,12 +39,8 @@ public class ProcessController {
             @ApiParam(required = true, value = "process", name = "process") @RequestBody Process process,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        process.setCorporationId(admin.getCorporationId());
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        process.setCorporationId(tokenVo.getCorporationId());
         return processService.add(process);
     }
 
@@ -59,15 +53,11 @@ public class ProcessController {
             @ApiParam(required = true, value = "process", name = "process") @RequestBody AddListProcessVo addListProcessVo,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
 
         List<Process> processs= addListProcessVo.getProcesss();
         for(Process process:processs){
-            process.setCorporationId(admin.getCorporationId());
+            process.setCorporationId(tokenVo.getCorporationId());
             process.setTicketId(addListProcessVo.getTicketId());
         }
         return processService.addList(processs);
@@ -93,9 +83,8 @@ public class ProcessController {
             @ApiParam(required = true, value = "processListFind", name = "processListFind") @RequestBody SalaryListFind salaryListFind,
             HttpServletRequest request
     ) {
-        User user = utilsService.getUser(request);
-        String corporationId = user.getCorporationId();
-        salaryListFind.setCorporationId(corporationId);
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        salaryListFind.setCorporationId(tokenVo.getCorporationId());
         return processService.salary(pageNum, pageSize, salaryListFind);
     }
 

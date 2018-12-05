@@ -1,10 +1,10 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.TokenVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.Color;
 import com.zw.cf.model.User;
 import com.zw.cf.service.ColorService;
-import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.ColorListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -28,8 +28,6 @@ public class ColorController {
 
     @Autowired
     ColorService colorService;
-    @Autowired
-    UtilsService utilsService;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -39,12 +37,8 @@ public class ColorController {
             @ApiParam(required = true, value = "color", name = "color") @RequestBody Color color,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        color.setCorporationId(admin.getCorporationId());
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        color.setCorporationId(tokenVo.getCorporationId());
         return colorService.add(color);
     }
 
@@ -56,9 +50,8 @@ public class ColorController {
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
             @ApiParam(required = true, value = "colorListFind", name = "colorListFind") @RequestBody ColorListFind colorListFind,
             HttpServletRequest request) {
-        User user = utilsService.getUser(request);
-        String corporationId = user.getCorporationId();
-        colorListFind.setCorporationId(corporationId);
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        colorListFind.setCorporationId(tokenVo.getCorporationId());
         return colorService.list(pageNum, pageSize, colorListFind);
     }
 

@@ -10,7 +10,7 @@ import com.zw.cf.model.Gx;
 import com.zw.cf.model.GxExample;
 import com.zw.cf.service.DoorService;
 import com.zw.cf.vo.DoorListFind;
-import com.zw.cf.vo.DoorVo;
+import com.zw.cf.vo.requestVo.ReqDoorVo;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +81,7 @@ public class DoorServiceImpl implements DoorService {
             List<Door> list = doorMapper.selectByExample(doorExample);
 
             long count = page.getTotal();
-            List<DoorVo> doorList = new ArrayList<DoorVo>();
+            List<ReqDoorVo> doorList = new ArrayList<ReqDoorVo>();
 
             List<Gx> gxList = gxMapper.selectByExample(new GxExample());
             Map<String, Gx> gxListObj = new HashMap<String, Gx>();
@@ -101,7 +101,7 @@ public class DoorServiceImpl implements DoorService {
                     gxListObj1.add(gx1);
                 }
 
-                doorList.add(new DoorVo(gxListObj1, item));
+                doorList.add(new ReqDoorVo(gxListObj1, item));
             }
             return response.success(pageObj.init(pageNum, pageSize, count, doorList));
         } catch (Exception e) {

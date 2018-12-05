@@ -1,29 +1,19 @@
 package com.zw.plug;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zw.cf.model.User;
+import com.zw.cf.vo.TokenVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 
 /**
  * Created by zhaowei on 2017/6/29.
- */
-
-/**
- * @author tfj
- *         2014-8-1
  */
 public class CommonInterceptor extends HandlerInterceptorAdapter {
     private final Logger log = LoggerFactory.getLogger(CommonInterceptor.class);
@@ -54,33 +44,33 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
         response.addHeader("Access-Control-Allow-Headers", "Content-Type, token");
         response.addHeader("Access-Control-Max-Age", "3600");
         // 跨越代码===end====
-        log.info("==============执行顺序: 1、preHandle================");
 
+        // 如果请求url包含/cfmy/public/，不需要token验证，直接通过拦截
         String requestUri = request.getRequestURI();
-        String[] noToken = new String[]{
-                "/cfmy/user/login",
-                "/cfmy/code/list",
-                "/cfmy/file/upToken"
-        };
-        int key = 0;
-        for (int i = 0; i < noToken.length; i++) {
-            if (requestUri.indexOf(noToken[i]) != -1) {
-                key = 1;
-            }
+        if(requestUri.indexOf("/cfmy/public/") != -1){
+            return true;
         }
-        if (key == 1) return true;
 
+        // 默认token从http请求头里拿
         String token = request.getHeader("token");
+        // 如果http请求头里没有，使用url参数名字为token的值
         if (token == null) {
             token = request.getParameter("token");
         }
 
-        if (token != null) {
-            if (TokenUtil.isAuth(token)) {
+        if(token!=null){
+            // 根据token字符串，获取tokenVo，如果返回不为null，验证通过
+            TokenVo tokenVo = TokenUtil.getTokenVo(token);
+            if ( tokenVo!= null) {
+                // 设置request属性tokenVo，在Controller里调用
+                // 使用方法如下：
+                // TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+                request.setAttribute("tokenVo",tokenVo);
                 return true;
             }
         }
 
+        // 上面未返回true，返回401
         Response response1 = new Response();
         response1.failure(401, "未经授权,服务器拒绝响应。");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -90,7 +80,6 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
         PrintWriter out = response.getWriter();
         out.print(userJsonStr);
         return false;
-
     }
 
     /**
@@ -101,7 +90,6 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        log.info("==============执行顺序: 2、postHandle================");
         if (modelAndView != null) {  //加入当前时间
             modelAndView.addObject("var", "测试postHandle");
         }
@@ -116,7 +104,6 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
     public void afterCompletion(HttpServletRequest request,
                                 HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        log.info("==============执行顺序: 3、afterCompletion================");
     }
 
 }

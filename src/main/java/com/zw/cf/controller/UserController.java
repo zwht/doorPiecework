@@ -1,11 +1,11 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.TokenVo;
 import com.zw.cf.vo.requestVo.ReqLoginVo;
 import com.zw.cf.vo.responseVo.ResLoginVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.User;
 import com.zw.cf.service.UserService;
-import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.ResetPasswordVo;
 import com.zw.cf.vo.UserListFind;
 import com.zw.plug.JwtUtils;
@@ -26,16 +26,14 @@ import java.util.List;
 @Api(value = "user", description = "用户")
 @Controller("userAction")
 @Scope("prototype")
-@RequestMapping("/cfmy/user")
+@RequestMapping("/cfmy")
 
 public class UserController {
     @Autowired
     UserService userService;
-    @Autowired
-    UtilsService utilsService;
 
     @ResponseBody
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     @ApiOperation(value = "添加用户", httpMethod = "POST", notes = "添加用户")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "商品信息"),
             @ApiResponse(code = 201, message = "(token验证失败)", response = String.class),
@@ -45,18 +43,14 @@ public class UserController {
             @ApiParam(required = true, value = "corporationListFind", name = "corporationListFind") @RequestBody User user,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        String corporationid = admin.getCorporationId();
-        user.setCorporationId(corporationid);
+
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        user.setCorporationId(tokenVo.getCorporationId());
         return userService.addUser(user);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/list", method = RequestMethod.POST)
     @ApiOperation(value = "获取所有用户列表", httpMethod = "POST", notes = "获取用户")
     public Response<PageObj<List<User>>> getUserList(
             @ApiParam(required = true, value = "当前页面", name = "pageNum") @RequestParam Integer pageNum,
@@ -64,14 +58,13 @@ public class UserController {
             @ApiParam(required = true, value = "userListFind", name = "userListFind") @RequestBody UserListFind userListFind,
             HttpServletRequest request
     ) {
-        User user = utilsService.getUser(request);
-        String corporationid = user.getCorporationId();
-        userListFind.setCorporationId(corporationid);
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        userListFind.setCorporationId(tokenVo.getCorporationId());
         return userService.getUserList(pageNum, pageSize, userListFind);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/public/user/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录接口", httpMethod = "POST", notes = "登录")
     public Response<ResLoginVo> login(
             @ApiParam(required = true, value = "用户名密码", name = "LoginVo") @RequestBody ReqLoginVo reqLoginVo
@@ -80,21 +73,21 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/refreshToken", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/refreshToken", method = RequestMethod.POST)
     @ApiOperation(value = "更新token", httpMethod = "POST", notes = "更新token")
     public Response<User> login(HttpServletRequest request,
                                 @ApiParam(required = true, value = "旧token", name = "token") @RequestParam String token) {
 
-        String token1 = request.getHeader("access_token");
+        String token1 = request.getHeader("token");
         if (token1 == null) {
-            token1 = request.getParameter("access_token");
+            token1 = request.getParameter("token");
         }
         return userService.refreshToken(token, token1);
     }
 
 
     @ResponseBody
-    @RequestMapping(value = "/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/getById", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
     public Response<User> selectByPrimaryKey(
             @ApiParam(required = true, value = "用户Id", name = "id", defaultValue = "121") @RequestParam String id
@@ -102,15 +95,15 @@ public class UserController {
         return userService.getUserById(id);
     }
     @ResponseBody
-    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/detail", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
     public Response<User> detail(HttpServletRequest request) {
-        User user = utilsService.getUser(request);
-        return userService.getUserById(user.getId());
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        return userService.getUserById(tokenVo.getId());
     }
 
     @ResponseBody
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
     @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
     public Response update(
@@ -120,7 +113,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
     @ApiOperation(value = "更新", httpMethod = "POST", notes = "更新")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "更新")})
     public Response resetPassword(
@@ -131,7 +124,7 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/del", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/del", method = RequestMethod.GET)
     @ApiOperation(value = "根据id删除", httpMethod = "GET", notes = "删除")
     public Response del(
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id

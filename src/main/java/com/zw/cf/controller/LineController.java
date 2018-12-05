@@ -1,10 +1,10 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.TokenVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.Line;
 import com.zw.cf.model.User;
 import com.zw.cf.service.LineService;
-import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.LineListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -28,8 +28,6 @@ public class LineController {
 
     @Autowired
     LineService lineService;
-    @Autowired
-    UtilsService utilsService;
 
 
     @ResponseBody
@@ -40,12 +38,8 @@ public class LineController {
             @ApiParam(required = true, value = "line", name = "line") @RequestBody Line line,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        line.setCorporationId(admin.getCorporationId());
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        line.setCorporationId(tokenVo.getCorporationId());
         return lineService.add(line);
     }
 
@@ -57,9 +51,8 @@ public class LineController {
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
             @ApiParam(required = true, value = "lineListFind", name = "lineListFind") @RequestBody LineListFind lineListFind,
             HttpServletRequest request) {
-        User user = utilsService.getUser(request);
-        String corporationId = user.getCorporationId();
-        lineListFind.setCorporationId(corporationId);
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        lineListFind.setCorporationId(tokenVo.getCorporationId());
         return lineService.list(pageNum, pageSize, lineListFind);
     }
 

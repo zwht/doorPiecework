@@ -1,10 +1,10 @@
 package com.zw.cf.controller;
 
+import com.zw.cf.vo.TokenVo;
 import io.swagger.annotations.*;
 import com.zw.cf.model.Gx;
 import com.zw.cf.model.User;
 import com.zw.cf.service.GxService;
-import com.zw.cf.service.UtilsService;
 import com.zw.cf.vo.GxListFind;
 import com.zw.plug.JwtUtils;
 import com.zw.plug.PageObj;
@@ -28,8 +28,6 @@ public class GxController {
 
     @Autowired
     GxService gxService;
-    @Autowired
-    UtilsService utilsService;
 
 
     @ResponseBody
@@ -40,12 +38,8 @@ public class GxController {
             @ApiParam(required = true, value = "gx", name = "gx") @RequestBody Gx gx,
             HttpServletRequest request
     ) {
-        String token = request.getHeader("token");
-        if (token == null) {
-            token = request.getParameter("token");
-        }
-        User admin = JwtUtils.unsign(token, User.class);
-        gx.setCorporationId(admin.getCorporationId());
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        gx.setCorporationId(tokenVo.getCorporationId());
         return gxService.add(gx);
     }
 
@@ -57,9 +51,8 @@ public class GxController {
             @ApiParam(required = true, value = "每页显示条数", name = "pageSize") @PathVariable Integer pageSize,
             @ApiParam(required = true, value = "gxListFind", name = "gxListFind") @RequestBody GxListFind gxListFind,
             HttpServletRequest request) {
-        User user = utilsService.getUser(request);
-        String corporationId = user.getCorporationId();
-        gxListFind.setCorporationId(corporationId);
+        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        gxListFind.setCorporationId(tokenVo.getCorporationId());
         return gxService.list(pageNum, pageSize, gxListFind);
     }
 
