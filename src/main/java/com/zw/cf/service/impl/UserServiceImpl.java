@@ -68,12 +68,9 @@ public class UserServiceImpl implements UserService {
                 // 把user对象属性赋值给tokenVo对象
                 BeanUtils.copyProperties(userOne, tokenVo);
                 // 设置jwt过期时间为2小时
-                String token = JwtUtils.sign(tokenVo, 1000 * 60 * 60 * 2*100000);
+                String token = JwtUtils.sign(tokenVo, 1000 * 60 * 60 * 2);
                 // 设置redas存token为2小时
                 TokenUtil.setToken(tokenVo.getId(), token, 60 * 60 * 2);
-                // 使用ZwUtil.objectToMap把user对象转为map对象，然后map添加token返回
-                // Map<String, Object> userJson = ZwUtil.objectToMap(userOne);
-                // userJson.put("token", token);
                 ResLoginVo resLoginVo=new ResLoginVo();
                 BeanUtils.copyProperties(userOne, resLoginVo);
                 resLoginVo.setToken(token);
