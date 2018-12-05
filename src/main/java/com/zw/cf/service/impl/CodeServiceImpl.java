@@ -6,7 +6,7 @@ import com.zw.cf.dao.CodeMapper;
 import com.zw.cf.model.Code;
 import com.zw.cf.model.CodeExample;
 import com.zw.cf.service.CodeService;
-import com.zw.cf.vo.CodeListFind;
+import com.zw.cf.vo.requestVo.ReqCodeVo;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class CodeServiceImpl implements CodeService {
         }
     }
 
-    public Response list(Integer pageNum, Integer pageSize, CodeListFind codeListFind) {
+    public Response list(Integer pageNum, Integer pageSize, ReqCodeVo codeListFind) {
         Response response = new Response();
         PageObj pageObj = new PageObj();
         //条件查询3句话
@@ -68,7 +68,7 @@ public class CodeServiceImpl implements CodeService {
         String name = codeListFind.getName();
         if (name == null || name.equals("")) {
         } else {
-            criteria.andNameEqualTo(name);
+            criteria.andNameLike(name);
         }
 
         try {

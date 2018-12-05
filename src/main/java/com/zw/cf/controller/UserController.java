@@ -44,7 +44,7 @@ public class UserController {
             HttpServletRequest request
     ) {
 
-        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        TokenVo tokenVo = (TokenVo) request.getAttribute("tokenVo");
         user.setCorporationId(tokenVo.getCorporationId());
         return userService.addUser(user);
     }
@@ -58,7 +58,7 @@ public class UserController {
             @ApiParam(required = true, value = "userListFind", name = "userListFind") @RequestBody UserListFind userListFind,
             HttpServletRequest request
     ) {
-        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        TokenVo tokenVo = (TokenVo) request.getAttribute("tokenVo");
         userListFind.setCorporationId(tokenVo.getCorporationId());
         return userService.getUserList(pageNum, pageSize, userListFind);
     }
@@ -94,11 +94,12 @@ public class UserController {
     ) {
         return userService.getUserById(id);
     }
+
     @ResponseBody
     @RequestMapping(value = "/user/detail", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
     public Response<User> detail(HttpServletRequest request) {
-        TokenVo tokenVo= (TokenVo) request.getAttribute("tokenVo");
+        TokenVo tokenVo = (TokenVo) request.getAttribute("tokenVo");
         return userService.getUserById(tokenVo.getId());
     }
 

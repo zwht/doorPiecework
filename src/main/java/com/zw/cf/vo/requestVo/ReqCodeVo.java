@@ -1,9 +1,9 @@
-package com.zw.cf.vo;
+package com.zw.cf.vo.requestVo;
 
 /**
  * Created by zhaowei on 2017/10/22.
  */
-public class CodeListFind {
+public class ReqCodeVo {
 
     private String name;
 
