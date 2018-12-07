@@ -11,6 +11,7 @@ import com.zw.plug.PageObj;
 import com.zw.plug.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -65,12 +66,11 @@ public class CodeServiceImpl implements CodeService {
         //条件查询3句话
         CodeExample codeExample = new CodeExample();
         CodeExample.Criteria criteria = codeExample.createCriteria();
-        String name = codeListFind.getName();
-        if (name == null || name.equals("")) {
-        } else {
-            criteria.andNameLike(name);
-        }
 
+        String name = codeListFind.getName();
+        String type = codeListFind.getType();
+        if (!StringUtils.isEmpty(name)) criteria.andNameLike(name);
+        if (!StringUtils.isEmpty(type)) criteria.andTypeLike(type);
         try {
             Page page = PageHelper.startPage(pageNum, pageSize);
             List list = codeMapper.selectByExample(codeExample);
