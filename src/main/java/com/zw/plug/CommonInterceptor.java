@@ -1,7 +1,8 @@
 package com.zw.plug;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.alibaba.fastjson.JSON;
 import com.zw.cf.vo.TokenVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,12 +74,10 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
         // 上面未返回true，返回401
         Response response1 = new Response();
         response1.failure(401, "未经授权,服务器拒绝响应。");
-        ObjectMapper objectMapper = new ObjectMapper();
-        String userJsonStr = objectMapper.writeValueAsString(response1);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
         PrintWriter out = response.getWriter();
-        out.print(userJsonStr);
+        out.print(JSON.toJSONString(response1));
         return false;
     }
 

@@ -10,7 +10,7 @@ public interface CodeMapper {
 
     int deleteByExample(CodeExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Code record);
 
@@ -18,7 +18,7 @@ public interface CodeMapper {
 
     List<Code> selectByExample(CodeExample example);
 
-    Code selectByPrimaryKey(String id);
+    Code selectByPrimaryKey(long id);
 
     int updateByExampleSelective(@Param("record") Code record, @Param("example") CodeExample example);
 

@@ -60,7 +60,7 @@ public class ZwUtil {
     /**
      * objectToMap
      *
-     * @param Object
+     * @param
      * @return map
      */
     public static Map<String, Object> objectToMap(Object obj) throws Exception {

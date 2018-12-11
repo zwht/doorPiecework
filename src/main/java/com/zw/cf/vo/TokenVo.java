@@ -4,17 +4,17 @@ package com.zw.cf.vo;
  * Created by zhaowei on 2018/12/4.
  */
 public class TokenVo {
-    private String id;
+    private Long id;
     private String loginName;
     private String ability;
     private String roles;
     private String corporationId;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

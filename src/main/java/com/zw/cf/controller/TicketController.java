@@ -56,7 +56,7 @@ public class TicketController {
         ticketListFind.setCorporationId(tokenVo.getCorporationId());
         String roles=tokenVo.getRoles();
         if(roles.equals("3")){
-            ticketListFind.setDealersId(tokenVo.getId());
+            ticketListFind.setDealersId(String.valueOf(tokenVo.getId()));
         }
 
         return ticketService.list(pageNum, pageSize, ticketListFind);

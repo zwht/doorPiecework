@@ -9,6 +9,7 @@ import com.zw.cf.service.CodeService;
 import com.zw.cf.vo.requestVo.ReqCodeVo;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
+import com.zw.plug.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -32,14 +33,13 @@ public class CodeServiceImpl implements CodeService {
     public Response add(Code code) {
         Response response = new Response();
         try {
-            Date date = new Date();
             CodeExample codeExample=new CodeExample();
             CodeExample.Criteria criteria=codeExample.createCriteria();
             criteria.andNameEqualTo(code.getName());
             //使用用户名查询是否有相同用户名
             List<Code> codes = codeMapper.selectByExample(codeExample);
             if (codes.size() == 0) {
-                code.setId(date.getTime() + "");
+                code.setId(new SnowFlake(1,1).nextId());
                 // 验证字段，防止插入脏数据
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
@@ -84,7 +84,7 @@ public class CodeServiceImpl implements CodeService {
     public Response getById(String id) {
         Response response = new Response();
         try {
-            return response.success(codeMapper.selectByPrimaryKey(id));
+            return response.success(codeMapper.selectByPrimaryKey(Long.valueOf(id)));
         } catch (Exception e) {
             return response.failure(501, e.getMessage());
         }
@@ -126,7 +126,7 @@ public class CodeServiceImpl implements CodeService {
     public Response del(String id) {
         Response response = new Response();
         try {
-            return response.success(codeMapper.deleteByPrimaryKey(id));
+            return response.success(codeMapper.deleteByPrimaryKey(Long.valueOf(id)));
         } catch (Exception e) {
             return response.failure(501, e.getMessage());
         }

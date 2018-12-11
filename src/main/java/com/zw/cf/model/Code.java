@@ -1,7 +1,7 @@
 package com.zw.cf.model;
 
 public class Code {
-    private String id;
+    private Long id;
 
     private Integer value;
 
@@ -9,12 +9,12 @@ public class Code {
 
     private String name;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getValue() {

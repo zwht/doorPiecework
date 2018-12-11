@@ -10,12 +10,12 @@ import java.util.List;
  */
 public class TokenUtil {
 
-    public static void setToken(String id, String token, int ...args) {
+    public static void setToken(Long id, String token, int ...args) {
         Jedis jedis = RedisUtil.getJedis();
         try {
-            jedis.lpush(id, token);
+            jedis.lpush(String.valueOf(id), token);
             if(args.length>0){
-                jedis.expire(id,args[0]);
+                jedis.expire(String.valueOf(id),args[0]);
             }
 
         } catch (Exception e) {
@@ -29,7 +29,7 @@ public class TokenUtil {
         TokenVo tokenVo = JwtUtils.unsign(token, TokenVo.class);
         Jedis jedis = RedisUtil.getJedis();
         try {
-            List<String> list = jedis.lrange(tokenVo.getId(), 0, 10);
+            List<String> list = jedis.lrange(String.valueOf(tokenVo.getId()), 0, 10);
             for (int i = 0; i < list.size(); i++) {
                 if (JwtUtils.unsign(list.get(i), TokenVo.class) == null) {
                     continue;

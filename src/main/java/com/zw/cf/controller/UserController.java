@@ -90,7 +90,7 @@ public class UserController {
     @RequestMapping(value = "/user/getById", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户userId获取用户信息", httpMethod = "GET", notes = "获取用户")
     public Response<User> selectByPrimaryKey(
-            @ApiParam(required = true, value = "用户Id", name = "id", defaultValue = "121") @RequestParam String id
+            @ApiParam(required = true, value = "用户Id", name = "id", defaultValue = "121") @RequestParam Long id
     ) {
         return userService.getUserById(id);
     }
@@ -128,7 +128,7 @@ public class UserController {
     @RequestMapping(value = "/user/del", method = RequestMethod.GET)
     @ApiOperation(value = "根据id删除", httpMethod = "GET", notes = "删除")
     public Response del(
-            @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
+            @ApiParam(required = true, value = "id", name = "id") @RequestParam Long id
     ) {
         return userService.del(id);
     }

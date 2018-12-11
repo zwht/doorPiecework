@@ -8,13 +8,13 @@ import org.springframework.beans.BeanUtils;
  */
 public class ResetPasswordVo extends Door {
 
-    private String userId;
+    private Long userId;
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

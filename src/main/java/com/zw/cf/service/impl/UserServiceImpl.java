@@ -10,14 +10,10 @@ import com.zw.cf.vo.responseVo.ResLoginVo;
 import com.zw.cf.vo.ResetPasswordVo;
 import com.zw.cf.vo.TokenVo;
 import com.zw.cf.vo.UserListFind;
-import com.zw.plug.JwtUtils;
-import com.zw.plug.PageObj;
-import com.zw.plug.Response;
-import com.zw.plug.ZwUtil;
+import com.zw.plug.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.zw.plug.TokenUtil;
 import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintViolation;
@@ -34,10 +30,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    public Response<User> getUserById(String id) {
+    public Response<User> getUserById(Long id) {
         Response<User> response = new Response<User>();
         try {
-            return response.success(userMapper.selectByPrimaryKey(id));
+            return response.success(userMapper.selectByPrimaryKey(Long.valueOf(id)));
         } catch (Exception e) {
             return response.failure(501, e.getMessage());
         }
@@ -147,7 +143,7 @@ public class UserServiceImpl implements UserService {
             //使用用户名查询是否有相同用户名
             List<User> users = userMapper.selectByExample(userExample);
             if (users.size() == 0) {
-                user.setId(date.getTime() + "");
+                user.setId(new SnowFlake(1,1).nextId());
                 ZwUtil zwUtil = new ZwUtil();
                 user.setPassword(zwUtil.EncoderByMd5(user.getPassword()));
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -233,10 +229,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public Response del(String id) {
+    public Response del(Long id) {
         Response response = new Response();
         try {
-            return response.success(userMapper.deleteByPrimaryKey(id));
+            return response.success(userMapper.deleteByPrimaryKey(Long.valueOf(id)));
         } catch (Exception e) {
             return response.failure(501, e.getMessage());
         }
