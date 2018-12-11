@@ -9,7 +9,7 @@ public class User {
 
     private Integer state;
 
-    private String type;
+    private String ability;
 
     private String roles;
 
@@ -59,12 +59,12 @@ public class User {
         this.state = state;
     }
 
-    public String getType() {
-        return type;
+    public String getAbility() {
+        return ability;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setAbility(String ability) {
+        this.ability = ability == null ? null : ability.trim();
     }
 
     public String getRoles() {

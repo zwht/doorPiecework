@@ -374,73 +374,73 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypeIsNull() {
-            addCriterion("type is null");
+        public Criteria andAbilityIsNull() {
+            addCriterion("ability is null");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIsNotNull() {
-            addCriterion("type is not null");
+        public Criteria andAbilityIsNotNull() {
+            addCriterion("ability is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(String value) {
-            addCriterion("type =", value, "type");
+        public Criteria andAbilityEqualTo(String value) {
+            addCriterion("ability =", value, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(String value) {
-            addCriterion("type <>", value, "type");
+        public Criteria andAbilityNotEqualTo(String value) {
+            addCriterion("ability <>", value, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(String value) {
-            addCriterion("type >", value, "type");
+        public Criteria andAbilityGreaterThan(String value) {
+            addCriterion("ability >", value, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("type >=", value, "type");
+        public Criteria andAbilityGreaterThanOrEqualTo(String value) {
+            addCriterion("ability >=", value, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(String value) {
-            addCriterion("type <", value, "type");
+        public Criteria andAbilityLessThan(String value) {
+            addCriterion("ability <", value, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(String value) {
-            addCriterion("type <=", value, "type");
+        public Criteria andAbilityLessThanOrEqualTo(String value) {
+            addCriterion("ability <=", value, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLike(String value) {
-            addCriterion("type like", value, "type");
+        public Criteria andAbilityLike(String value) {
+            addCriterion("ability like", value, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotLike(String value) {
-            addCriterion("type not like", value, "type");
+        public Criteria andAbilityNotLike(String value) {
+            addCriterion("ability not like", value, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<String> values) {
-            addCriterion("type in", values, "type");
+        public Criteria andAbilityIn(List<String> values) {
+            addCriterion("ability in", values, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<String> values) {
-            addCriterion("type not in", values, "type");
+        public Criteria andAbilityNotIn(List<String> values) {
+            addCriterion("ability not in", values, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(String value1, String value2) {
-            addCriterion("type between", value1, value2, "type");
+        public Criteria andAbilityBetween(String value1, String value2) {
+            addCriterion("ability between", value1, value2, "ability");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(String value1, String value2) {
-            addCriterion("type not between", value1, value2, "type");
+        public Criteria andAbilityNotBetween(String value1, String value2) {
+            addCriterion("ability not between", value1, value2, "ability");
             return (Criteria) this;
         }
 

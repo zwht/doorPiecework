@@ -6,7 +6,7 @@ package com.zw.cf.vo;
 public class TokenVo {
     private String id;
     private String loginName;
-    private String type;
+    private String ability;
     private String roles;
     private String corporationId;
 
@@ -26,12 +26,12 @@ public class TokenVo {
         this.loginName = loginName;
     }
 
-    public String getType() {
-        return type;
+    public String getAbility() {
+        return ability;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setAbility(String ability) {
+        this.ability = ability;
     }
 
     public String getRoles() {
