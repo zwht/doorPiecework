@@ -10,7 +10,7 @@ public interface ErrCodeMapper {
 
     int deleteByExample(ErrCodeExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(ErrCode record);
 
@@ -18,7 +18,7 @@ public interface ErrCodeMapper {
 
     List<ErrCode> selectByExample(ErrCodeExample example);
 
-    ErrCode selectByPrimaryKey(String id);
+    ErrCode selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") ErrCode record, @Param("example") ErrCodeExample example);
 

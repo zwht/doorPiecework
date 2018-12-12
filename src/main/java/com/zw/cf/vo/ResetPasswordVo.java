@@ -1,12 +1,10 @@
 package com.zw.cf.vo;
 
-import com.zw.cf.model.Door;
-import org.springframework.beans.BeanUtils;
 
 /**
  * Created by zhaowei on 2017/9/18.
  */
-public class ResetPasswordVo extends Door {
+public class ResetPasswordVo{
 
     private Long userId;
 

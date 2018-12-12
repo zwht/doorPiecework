@@ -18,7 +18,7 @@ public interface CodeMapper {
 
     List<Code> selectByExample(CodeExample example);
 
-    Code selectByPrimaryKey(long id);
+    Code selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Code record, @Param("example") CodeExample example);
 

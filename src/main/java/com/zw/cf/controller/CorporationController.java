@@ -64,7 +64,7 @@ public class CorporationController {
     public Response<User> getById(
             @ApiParam(required = true, value = "Id", name = "Id") @RequestParam String id
     ) {
-        return corporationService.getById(id);
+        return corporationService.getById(Long.valueOf(id));
     }
 
     @ResponseBody
@@ -86,7 +86,7 @@ public class CorporationController {
     public Response<User> del(
             @ApiParam(required = true, value = "id", name = "id") @RequestParam String id
     ) {
-        return corporationService.del(id);
+        return corporationService.del(Long.valueOf(id));
     }
 
 }

@@ -10,7 +10,7 @@ public interface CorporationMapper {
 
     int deleteByExample(CorporationExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Corporation record);
 
@@ -18,7 +18,7 @@ public interface CorporationMapper {
 
     List<Corporation> selectByExample(CorporationExample example);
 
-    Corporation selectByPrimaryKey(String id);
+    Corporation selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Corporation record, @Param("example") CorporationExample example);
 

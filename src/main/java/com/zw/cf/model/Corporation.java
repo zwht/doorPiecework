@@ -1,7 +1,7 @@
 package com.zw.cf.model;
 
 public class Corporation {
-    private String id;
+    private Long id;
 
     private String name;
 
@@ -15,12 +15,12 @@ public class Corporation {
 
     private String img;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

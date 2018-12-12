@@ -9,7 +9,7 @@ import com.zw.cf.service.CorporationService;
 import com.zw.cf.vo.CorporationListFind;
 import com.zw.plug.PageObj;
 import com.zw.plug.Response;
-import com.zw.plug.ZwUtil;
+import com.zw.plug.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ public class CorporationServiceImp implements CorporationService {
     @Autowired
     CorporationMapper corporationMapper;
 
-    public Response getById(String id) {
+    public Response getById(Long id) {
         Response response = new Response();
         try {
             return response.success(corporationMapper.selectByPrimaryKey(id));
@@ -48,7 +48,7 @@ public class CorporationServiceImp implements CorporationService {
             //使用用户名查询是否有相同用户名
             List<Corporation> corporations = corporationMapper.selectByExample(corporationExample);
             if (corporations.size() == 0) {
-                corporation.setId(date.getTime() + "");
+                corporation.setId(new SnowFlake(1,1).nextId());
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
                 Set<ConstraintViolation<Corporation>> constraintViolations = validator.validate(corporation);
@@ -136,7 +136,7 @@ public class CorporationServiceImp implements CorporationService {
         }
     }
 
-    public Response del(String id) {
+    public Response del(Long id) {
         Response response = new Response();
         try {
             return response.success(corporationMapper.deleteByPrimaryKey(id));

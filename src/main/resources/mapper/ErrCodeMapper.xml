@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zw.cf.dao.ErrCodeMapper">
   <resultMap id="BaseResultMap" type="com.zw.cf.model.ErrCode">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="value" jdbcType="INTEGER" property="value" />
     <result column="label" jdbcType="VARCHAR" property="label" />
   </resultMap>
@@ -81,15 +81,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from errCode
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from errCode
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.zw.cf.model.ErrCodeExample">
     delete from errCode
@@ -100,7 +100,7 @@
   <insert id="insert" parameterType="com.zw.cf.model.ErrCode">
     insert into errCode (id, value, label
       )
-    values (#{id,jdbcType=VARCHAR}, #{value,jdbcType=INTEGER}, #{label,jdbcType=VARCHAR}
+    values (#{id,jdbcType=BIGINT}, #{value,jdbcType=INTEGER}, #{label,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zw.cf.model.ErrCode">
@@ -118,7 +118,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="value != null">
         #{value,jdbcType=INTEGER},
@@ -138,7 +138,7 @@
     update errCode
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.value != null">
         value = #{record.value,jdbcType=INTEGER},
@@ -153,7 +153,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update errCode
-    set id = #{record.id,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=BIGINT},
       value = #{record.value,jdbcType=INTEGER},
       label = #{record.label,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -170,12 +170,12 @@
         label = #{label,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zw.cf.model.ErrCode">
     update errCode
     set value = #{value,jdbcType=INTEGER},
       label = #{label,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
