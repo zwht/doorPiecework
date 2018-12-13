@@ -2,6 +2,10 @@
 
 @delon/abc/table
 
+@delon/abc/footer-toolbar
+
+@delon/abc/error-collect
+
 @angular/cdk
 MIT
 The MIT License
@@ -590,9 +594,6 @@ Apache-2.0
    limitations under the License.
 
 
-ng-zorro-antd
-MIT
-
 @delon/util
 MIT
 MIT License
@@ -644,6 +645,9 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+
+ng-zorro-antd
+MIT
 
 @delon/abc
 MIT
@@ -916,7 +920,3 @@ THE SOFTWARE.
 
 
 @delon/abc/view
-
-@delon/abc/error-collect
-
-@delon/abc/footer-toolbar
